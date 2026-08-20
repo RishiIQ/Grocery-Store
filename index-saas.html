@@ -13,7 +13,9 @@
       theme: {
         extend: {
           colors: {
-            'nixon-red': '#E31837',
+            'sage-accent': '#6A8071',
+            'sage-dark': '#24302A',
+            'cream-bg': '#F7F6F2',
           }
         }
       }
@@ -21,7 +23,6 @@
   </script>
   <script>
   (function() {
-    // Instant Theme Init
     const savedTheme = localStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
@@ -29,8 +30,6 @@
     } else {
       document.documentElement.classList.remove('dark');
     }
-
-    // Instant Direction Init
     const savedDir = localStorage.getItem('dir') || 'ltr';
     document.documentElement.setAttribute('dir', savedDir);
   })();
@@ -38,14 +37,16 @@
   <!-- Styles -->
   <link rel="stylesheet" href="css/style.css">
   
+  <!-- Lenis Smooth Slow Scroll Library -->
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  
   <style>
     /* ============================================
-       NIXON-STYLE ENTERPRISE PAGE
+       SAGE & EARTH-TONE ENTERPRISE PAGE
        ============================================ */
     
-    /* Hero with grid pattern */
     .enterprise-hero {
-      background: #000000;
+      background: #24302A;
       position: relative;
       overflow: hidden;
     }
@@ -55,16 +56,10 @@
       position: absolute;
       inset: 0;
       background-image: 
-        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-      background-size: 50px 50px;
-      pointer-events: none;
-    }
-    
-    .dark .enterprise-hero::before {
-      background-image: 
         linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      pointer-events: none;
     }
     
     /* Hero glow orbs */
@@ -77,15 +72,15 @@
     }
     
     @keyframes orbFloatSlow {
-      0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
-      33% { transform: translate(50px, -30px) scale(1.1); opacity: 0.5; }
-      66% { transform: translate(-30px, 40px) scale(0.9); opacity: 0.4; }
+      0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.2; }
+      33% { transform: translate(50px, -30px) scale(1.1); opacity: 0.4; }
+      66% { transform: translate(-30px, 40px) scale(0.9); opacity: 0.3; }
     }
     
     .orb-enterprise-1 {
       width: 600px;
       height: 600px;
-      background: rgba(227, 24, 55, 0.08);
+      background: rgba(106, 128, 113, 0.15);
       top: -200px;
       right: -200px;
       animation: orbFloatSlow 10s ease-in-out infinite;
@@ -94,37 +89,31 @@
     .orb-enterprise-2 {
       width: 400px;
       height: 400px;
-      background: rgba(227, 24, 55, 0.05);
+      background: rgba(106, 128, 113, 0.1);
       bottom: -100px;
       left: -100px;
       animation: orbFloatSlow 12s ease-in-out infinite reverse;
     }
     
-    /* Nixon typography */
-    .nixon-heading {
-      font-family: 'Arial Black', 'Impact', sans-serif;
+    .enterprise-heading {
+      font-weight: 800;
       text-transform: uppercase;
       letter-spacing: -0.02em;
       line-height: 0.95;
     }
     
-    .nixon-subheading {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
+    .enterprise-subheading {
       text-transform: uppercase;
       font-size: 0.7rem;
       letter-spacing: 0.2em;
       font-weight: 700;
+      color: #6A8071;
     }
     
-    .nixon-body {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 0.9rem;
+    .enterprise-body {
+      font-size: 0.95rem;
       line-height: 1.7;
-      color: #8A8A8A;
-    }
-    
-    .dark .nixon-body {
-      color: #8A8A8A;
+      color: #94A3B8;
     }
     
     /* Feature cards with 3D tilt */
@@ -135,18 +124,19 @@
     
     .feature-card-3d .card-inner {
       background: #FFFFFF;
-      border: 1px solid #E5E5E5;
+      border: 1px solid #E2E8F0;
       padding: 32px;
       transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
       transform: rotateX(0) rotateY(0) translateZ(0);
       will-change: transform;
       position: relative;
       overflow: hidden;
+      border-radius: 0px;
     }
     
     .dark .feature-card-3d .card-inner {
-      background: #1A1A1A;
-      border-color: #333333;
+      background: #18221D;
+      border-color: #2D3E35;
     }
     
     .feature-card-3d .card-inner::before {
@@ -156,7 +146,7 @@
       left: 0;
       right: 0;
       height: 3px;
-      background: #E31837;
+      background: #6A8071;
       transform: scaleX(0);
       transform-origin: left;
       transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -168,118 +158,80 @@
     
     .feature-card-3d:hover .card-inner {
       transform: rotateX(3deg) rotateY(3deg) translateZ(10px);
-      border-color: #E31837;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-    }
-    
-    .dark .feature-card-3d:hover .card-inner {
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      border-color: #6A8071;
+      box-shadow: 0 20px 60px rgba(106, 128, 113, 0.15);
     }
     
     .feature-card-3d .card-number {
-      font-family: 'Arial Black', 'Impact', sans-serif;
+      font-weight: 800;
       font-size: 3rem;
-      color: #E31837;
+      color: #6A8071;
       opacity: 0.2;
       transition: opacity 0.4s ease;
     }
     
     .feature-card-3d:hover .card-number {
-      opacity: 0.5;
+      opacity: 0.6;
     }
     
-    /* Code block with glow */
+    /* Code block */
     .code-block {
-      background: #0A0A0A;
-      border: 1px solid #222222;
+      background: #18221D;
+      border: 1px solid #2D3E35;
       padding: 24px;
       font-family: 'Courier New', monospace;
       font-size: 0.75rem;
       line-height: 1.8;
-      color: #E31837;
+      color: #8FA89B;
       overflow-x: auto;
       position: relative;
       transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    
-    .dark .code-block {
-      background: #111111;
-      border-color: #333333;
+      border-radius: 0px;
     }
     
     .code-block:hover {
-      border-color: #E31837;
-      box-shadow: 0 0 40px rgba(227, 24, 55, 0.1);
+      border-color: #6A8071;
+      box-shadow: 0 0 40px rgba(106, 128, 113, 0.15);
     }
     
-    .code-block .comment {
-      color: #666666;
-    }
-    .code-block .keyword {
-      color: #FFFFFF;
-    }
-    .code-block .string {
-      color: #F5A623;
-    }
-    .code-block .function {
-      color: #4FC3F7;
-    }
+    .code-block .comment { color: #64748B; }
+    .code-block .keyword { color: #F1F5F9; }
+    .code-block .string { color: #E2B714; }
+    .code-block .function { color: #7DD3FC; }
     
-    /* Health bars with glow */
+    /* Health bars */
     .health-bar-track {
       width: 100%;
       height: 4px;
-      background: #E5E5E5;
+      background: #E2E8F0;
       overflow: hidden;
       position: relative;
     }
     
     .dark .health-bar-track {
-      background: #333333;
+      background: #2D3E35;
     }
     
     .health-bar-fill {
       height: 100%;
-      background: #E31837;
+      background: #6A8071;
       transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
       position: relative;
     }
     
-    .health-bar-fill::after {
-      content: '';
-      position: absolute;
-      right: 0;
-      top: 0;
-      width: 20px;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3));
-      animation: shimmer 2s infinite;
-    }
-    
-    @keyframes shimmer {
-      0% { transform: translateX(-100%); }
-      100% { transform: translateX(100%); }
-    }
-    
-    /* Stats ticker with roll effect */
+    /* Stats ticker */
     .stat-number {
-      font-family: 'Arial Black', 'Impact', sans-serif;
+      font-weight: 800;
       font-size: 3rem;
       color: #FFFFFF;
       display: inline-block;
-      transition: all 0.3s ease;
-    }
-    
-    .dark .stat-number {
-      color: #FFFFFF;
     }
     
     .stat-label {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
       text-transform: uppercase;
       font-size: 0.6rem;
       letter-spacing: 0.2em;
-      color: #8A8A8A;
+      color: #94A3B8;
       font-weight: 700;
     }
     
@@ -298,123 +250,75 @@
     .reveal-on-scroll.delay-1 { transition-delay: 0.1s; }
     .reveal-on-scroll.delay-2 { transition-delay: 0.2s; }
     .reveal-on-scroll.delay-3 { transition-delay: 0.3s; }
-    .reveal-on-scroll.delay-4 { transition-delay: 0.4s; }
     
-    /* Nixon button */
-    .nixon-btn {
+    /* Sage button */
+    .sage-btn {
       display: inline-block;
       padding: 16px 40px;
-      background: #E31837;
+      background: #6A8071;
       color: #FFFFFF;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
       text-transform: uppercase;
       font-size: 0.7rem;
       font-weight: 700;
       letter-spacing: 0.15em;
       border: none;
+      border-radius: 0px;
       cursor: pointer;
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       text-align: center;
       text-decoration: none;
-      position: relative;
-      overflow: hidden;
     }
     
-    .nixon-btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-      transition: left 0.6s ease;
-    }
-    
-    .nixon-btn:hover::before {
-      left: 100%;
-    }
-    
-    .nixon-btn:hover {
-      background: #C41230;
+    .sage-btn:hover {
+      background: #576B5D;
       transform: scale(1.02);
     }
     
-    .nixon-btn-outline {
+    .sage-btn-outline {
       display: inline-block;
       padding: 15px 38px;
       background: transparent;
       color: #FFFFFF;
       border: 2px solid #FFFFFF;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
       text-transform: uppercase;
       font-size: 0.7rem;
       font-weight: 700;
       letter-spacing: 0.15em;
+      border-radius: 0px;
       cursor: pointer;
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       text-align: center;
       text-decoration: none;
     }
     
-    .nixon-btn-outline:hover {
+    .sage-btn-outline:hover {
       background: #FFFFFF;
-      color: #000000;
+      color: #24302A;
       transform: scale(1.02);
     }
-    
-    /* Responsive */
-    @media (max-width: 768px) {
-      .stat-number {
-        font-size: 2.2rem;
-      }
-      .feature-card-3d .card-inner {
-        padding: 24px;
-      }
-      .code-block {
-        font-size: 0.65rem;
-        padding: 16px;
-      }
-    }
-    
-    @media (max-width: 480px) {
-      .stat-number {
-        font-size: 1.8rem;
-      }
-      .feature-card-3d .card-inner {
-        padding: 20px;
-      }
-    }
-    
-    /* Reduced motion */
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
-      }
-      .feature-card-3d:hover .card-inner {
-        transform: none !important;
-      }
+
+    .market-toast {
+      background: #24302A;
+      color: #FFFFFF;
+      padding: 14px 24px;
+      border-radius: 0px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      border-left: 4px solid #6A8071;
     }
   </style>
 </head>
-<body>
+<body class="bg-cream-bg dark:bg-[#111814] text-slate-900 dark:text-slate-100 antialiased">
 
-  <!-- ============================================ -->
-  <!-- HEADER INJECTED BY layout.js -->
-  <!-- ============================================ -->
-
-  <!-- ============================================ -->
-  <!-- MAIN CONTENT -->
-  <!-- ============================================ -->
   <main style="padding-top: 70px;">
 
     <!-- ========================================== -->
     <!-- ENTERPRISE HERO -->
     <!-- ========================================== -->
-    <section class="enterprise-hero min-h-[90vh] flex items-center relative">
+    <section class="enterprise-hero min-h-[90vh] flex items-center relative text-white">
       
       <!-- Glow Orbs -->
       <div class="hero-orb orb-enterprise-1"></div>
@@ -425,26 +329,26 @@
           
           <!-- Left Content -->
           <div class="lg:col-span-7 space-y-8">
-            <div class="inline-flex items-center gap-3 bg-[#E31837] text-white px-4 py-2">
-              <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
-              <span class="text-xs font-bold tracking-[0.2em] uppercase">⚡ Enterprise Telemetry API v4.2</span>
+            <div class="inline-flex items-center gap-3 bg-[#6A8071] text-white px-4 py-2">
+              <span class="w-2 h-2 bg-white animate-pulse"></span>
+              <span class="text-xs font-bold tracking-[0.2em] uppercase">🌿 Enterprise Telemetry API v4.2</span>
             </div>
             
-            <h1 class="nixon-heading text-white text-5xl sm:text-6xl lg:text-7xl xl:text-8xl">
+            <h1 class="enterprise-heading text-5xl sm:text-6xl lg:text-7xl xl:text-8xl">
               Autonomous<br>
-              <span class="text-[#E31837]">Logistics</span>
+              <span class="text-[#8FA89B]">Logistics API</span>
             </h1>
             
-            <p class="nixon-body text-white/70 max-w-xl">
-              Scale your grocery supply network with decentralized micro-fulfillment routing, 
+            <p class="enterprise-body max-w-xl">
+              Scale your organic grocery supply network with decentralized micro-fulfillment routing, 
               thermal IoT tracking, and sub-15-minute dispatch engines designed for high-throughput enterprises.
             </p>
 
             <div class="flex flex-wrap items-center gap-4">
-              <a href="pricing.html" class="nixon-btn">
+              <a href="pricing.html" class="sage-btn">
                 Deploy API Nodes →
               </a>
-              <a href="services.html" class="nixon-btn-outline">
+              <a href="services.html" class="sage-btn-outline">
                 Explore Architecture
               </a>
             </div>
@@ -452,87 +356,79 @@
             <!-- Trust badges -->
             <div class="flex flex-wrap items-center gap-6 pt-4 border-t border-white/10">
               <div class="flex items-center gap-2">
-                <svg class="w-5 h-5 text-[#E31837]" fill="currentColor" viewBox="0 0 20 20">
+                <svg class="w-5 h-5 text-[#8FA89B]" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
                 </svg>
-                <span class="text-xs font-bold tracking-wider text-white/60 uppercase">SOC2 Type II</span>
+                <span class="text-xs font-bold tracking-wider text-slate-300 uppercase">SOC2 Type II</span>
               </div>
               <div class="w-px h-6 bg-white/20"></div>
               <div class="flex items-center gap-2">
-                <svg class="w-5 h-5 text-[#E31837]" fill="currentColor" viewBox="0 0 20 20">
+                <svg class="w-5 h-5 text-[#8FA89B]" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                 </svg>
-                <span class="text-xs font-bold tracking-wider text-white/60 uppercase">256-Bit TLS</span>
+                <span class="text-xs font-bold tracking-wider text-slate-300 uppercase">256-Bit TLS</span>
               </div>
               <div class="w-px h-6 bg-white/20"></div>
               <div class="flex items-center gap-2">
-                <svg class="w-5 h-5 text-[#E31837]" fill="currentColor" viewBox="0 0 20 20">
+                <svg class="w-5 h-5 text-[#8FA89B]" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M10 2a8 8 0 100 16 8 8 0 000-16zm0 14a6 6 0 110-12 6 6 0 010 12zm0-10a1 1 0 011 1v3.586l2.707 2.707a1 1 0 01-1.414 1.414l-3-3A1 1 0 019 10V7a1 1 0 011-1z" clip-rule="evenodd"/>
                 </svg>
-                <span class="text-xs font-bold tracking-wider text-white/60 uppercase">99.99% Uptime</span>
+                <span class="text-xs font-bold tracking-wider text-slate-300 uppercase">99.99% Uptime</span>
               </div>
             </div>
           </div>
 
           <!-- Right - Live Telemetry Preview -->
           <div class="lg:col-span-5 reveal-on-scroll">
-            <div class="bg-white dark:bg-[#1A1A1A] border border-[#E5E5E5] dark:border-[#333333] p-6 shadow-2xl">
-              <div class="flex items-center justify-between border-b border-[#E5E5E5] dark:border-[#333333] pb-4">
-                <span class="text-xs font-bold tracking-[0.2em] uppercase text-[#E31837]">Live Cold-Chain Stream</span>
-                <span class="w-3 h-3 rounded-full bg-[#E31837] animate-pulse"></span>
+            <div class="bg-white dark:bg-[#18221D] border border-slate-200 dark:border-[#2D3E35] p-6 shadow-2xl text-slate-900 dark:text-slate-100">
+              <div class="flex items-center justify-between border-b border-slate-200 dark:border-[#2D3E35] pb-4">
+                <span class="text-xs font-bold tracking-[0.2em] uppercase text-[#6A8071]">Live Cold-Chain Stream</span>
+                <span class="w-3 h-3 bg-[#6A8071] animate-pulse"></span>
               </div>
               <div class="space-y-4 mt-4">
-                <div class="flex justify-between items-center p-4 border border-[#E5E5E5] dark:border-[#333333] hover:border-[#E31837] transition-all">
+                <div class="flex justify-between items-center p-4 border border-slate-200 dark:border-[#2D3E35] hover:border-[#6A8071] transition-all">
                   <span class="text-xs font-bold tracking-[0.1em] uppercase">Node_Paris_Central</span>
-                  <span class="text-xs font-bold text-[#E31837]">2.3°C ✓</span>
+                  <span class="text-xs font-bold text-[#6A8071]">2.3°C ✓</span>
                 </div>
-                <div class="flex justify-between items-center p-4 border border-[#E5E5E5] dark:border-[#333333] hover:border-[#E31837] transition-all">
+                <div class="flex justify-between items-center p-4 border border-slate-200 dark:border-[#2D3E35] hover:border-[#6A8071] transition-all">
                   <span class="text-xs font-bold tracking-[0.1em] uppercase">Node_Tokyo_Hub</span>
-                  <span class="text-xs font-bold text-[#E31837]">1.8°C ✓</span>
+                  <span class="text-xs font-bold text-[#6A8071]">1.8°C ✓</span>
                 </div>
-                <div class="flex justify-between items-center p-4 border border-[#E5E5E5] dark:border-[#333333] hover:border-[#E31837] transition-all">
+                <div class="flex justify-between items-center p-4 border border-slate-200 dark:border-[#2D3E35] hover:border-[#6A8071] transition-all">
                   <span class="text-xs font-bold tracking-[0.1em] uppercase">Node_NewYork_East</span>
-                  <span class="text-xs font-bold text-[#E31837]">2.5°C ✓</span>
+                  <span class="text-xs font-bold text-[#6A8071]">2.5°C ✓</span>
                 </div>
               </div>
-              <div class="pt-4 mt-4 border-t border-[#E5E5E5] dark:border-[#333333] text-center">
-                <span class="text-[0.55rem] font-bold tracking-[0.2em] uppercase text-[#8A8A8A]">Zero Thermal Fluctuation • 48h Guarantee</span>
+              <div class="pt-4 mt-4 border-t border-slate-200 dark:border-[#2D3E35] text-center">
+                <span class="text-[0.55rem] font-bold tracking-[0.2em] uppercase text-slate-400">Zero Thermal Fluctuation • 48h Guarantee</span>
               </div>
             </div>
           </div>
 
         </div>
       </div>
-
-      <!-- Scroll indicator -->
-      <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/30 scroll-indicator hidden sm:block">
-        <svg class="w-6 h-6 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
-        </svg>
-      </div>
-
     </section>
 
     <!-- ========================================== -->
     <!-- STATS TICKER -->
     <!-- ========================================== -->
-    <section class="bg-black border-y border-[#222222] py-16">
+    <section class="bg-[#1A231F] text-white border-y border-[#2D3E35] py-16">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
           <div class="text-center">
-            <div class="stat-number">99.99%</div>
+            <div class="stat-number text-[#8FA89B]">99.99%</div>
             <div class="stat-label mt-1">API Uptime SLA</div>
           </div>
           <div class="text-center">
-            <div class="stat-number">&lt;12ms</div>
+            <div class="stat-number text-[#8FA89B]">&lt;12ms</div>
             <div class="stat-label mt-1">Global Routing Latency</div>
           </div>
           <div class="text-center">
-            <div class="stat-number">450K+</div>
+            <div class="stat-number text-[#8FA89B]">450K+</div>
             <div class="stat-label mt-1">Daily Dispatches</div>
           </div>
           <div class="text-center">
-            <div class="stat-number">256-Bit</div>
+            <div class="stat-number text-[#8FA89B]">256-Bit</div>
             <div class="stat-label mt-1">TLS Encrypted</div>
           </div>
         </div>
@@ -544,11 +440,11 @@
     <!-- ========================================== -->
     <section class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       
-      <div class="text-center mb-16">
-        <p class="nixon-subheading text-[#E31837]">Enterprise Engine</p>
-        <h2 class="nixon-heading text-3xl sm:text-4xl lg:text-5xl mt-2">Built for Scale</h2>
-        <div class="w-12 h-0.5 bg-[#E31837] mx-auto mt-4"></div>
-        <p class="nixon-body max-w-2xl mx-auto mt-4">Modular infrastructure designed to integrate seamlessly into legacy retail supply stacks.</p>
+      <div class="text-center mb-16 reveal-on-scroll">
+        <p class="enterprise-subheading">Enterprise Engine</p>
+        <h2 class="enterprise-heading text-3xl sm:text-4xl lg:text-5xl mt-2">Built for Scale</h2>
+        <div class="w-12 h-0.5 bg-[#6A8071] mx-auto mt-4"></div>
+        <p class="enterprise-body max-w-2xl mx-auto mt-4">Modular infrastructure designed to integrate seamlessly into legacy retail supply stacks.</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -557,10 +453,10 @@
         <div class="feature-card-3d reveal-on-scroll delay-1">
           <div class="card-inner h-full flex flex-col">
             <div class="card-number">01</div>
-            <h3 class="nixon-heading text-xl mt-2">Algorithmic Routing</h3>
-            <p class="nixon-body text-sm mt-3 flex-1">Dynamic graph algorithms calculate the fastest micro-fulfillment paths based on real-time traffic and warehouse inventory load.</p>
-            <div class="mt-4 pt-4 border-t border-[#E5E5E5] dark:border-[#333333]">
-              <span class="text-xs font-bold tracking-[0.1em] uppercase text-[#E31837]">→ Dispatch Engine</span>
+            <h3 class="enterprise-heading text-xl mt-2">Algorithmic Routing</h3>
+            <p class="enterprise-body text-sm mt-3 flex-1">Dynamic graph algorithms calculate the fastest micro-fulfillment paths based on real-time traffic and warehouse inventory load.</p>
+            <div class="mt-4 pt-4 border-t border-slate-200 dark:border-[#2D3E35]">
+              <span class="text-xs font-bold tracking-[0.1em] uppercase text-[#6A8071]">→ Dispatch Engine</span>
             </div>
           </div>
         </div>
@@ -569,10 +465,10 @@
         <div class="feature-card-3d reveal-on-scroll delay-2">
           <div class="card-inner h-full flex flex-col">
             <div class="card-number">02</div>
-            <h3 class="nixon-heading text-xl mt-2">IoT Cold-Chain Sensors</h3>
-            <p class="nixon-body text-sm mt-3 flex-1">Continuous hardware logging ensures perishables never deviate outside strict temperature bounds during final-mile transit.</p>
-            <div class="mt-4 pt-4 border-t border-[#E5E5E5] dark:border-[#333333]">
-              <span class="text-xs font-bold tracking-[0.1em] uppercase text-[#E31837]">→ Telemetry Hub</span>
+            <h3 class="enterprise-heading text-xl mt-2">IoT Cold-Chain Sensors</h3>
+            <p class="enterprise-body text-sm mt-3 flex-1">Continuous hardware logging ensures perishables never deviate outside strict temperature bounds during final-mile transit.</p>
+            <div class="mt-4 pt-4 border-t border-slate-200 dark:border-[#2D3E35]">
+              <span class="text-xs font-bold tracking-[0.1em] uppercase text-[#6A8071]">→ Telemetry Hub</span>
             </div>
           </div>
         </div>
@@ -581,10 +477,10 @@
         <div class="feature-card-3d reveal-on-scroll delay-3">
           <div class="card-inner h-full flex flex-col">
             <div class="card-number">03</div>
-            <h3 class="nixon-heading text-xl mt-2">Predictive Stock Sync</h3>
-            <p class="nixon-body text-sm mt-3 flex-1">Machine learning pipelines forecast regional demand spikes to pre-position organic produce at neighborhood nodes.</p>
-            <div class="mt-4 pt-4 border-t border-[#E5E5E5] dark:border-[#333333]">
-              <span class="text-xs font-bold tracking-[0.1em] uppercase text-[#E31837]">→ ML Pipeline</span>
+            <h3 class="enterprise-heading text-xl mt-2">Predictive Stock Sync</h3>
+            <p class="enterprise-body text-sm mt-3 flex-1">Machine learning pipelines forecast regional demand spikes to pre-position organic produce at neighborhood nodes.</p>
+            <div class="mt-4 pt-4 border-t border-slate-200 dark:border-[#2D3E35]">
+              <span class="text-xs font-bold tracking-[0.1em] uppercase text-[#6A8071]">→ ML Pipeline</span>
             </div>
           </div>
         </div>
@@ -595,28 +491,28 @@
     <!-- ========================================== -->
     <!-- DEVELOPER SDK WITH CODE BLOCK -->
     <!-- ========================================== -->
-    <section class="py-20 px-4 sm:px-6 lg:px-8 border-y border-[#E5E5E5] dark:border-[#222222] bg-[#F5F5F5] dark:bg-[#0A0A0A]">
+    <section class="py-20 px-4 sm:px-6 lg:px-8 border-y border-[#E2E8F0] dark:border-[#2D3E35] bg-white dark:bg-[#18221D]">
       <div class="max-w-7xl mx-auto">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           
           <div class="reveal-on-scroll">
-            <p class="nixon-subheading text-[#E31837]">Developer Experience</p>
-            <h2 class="nixon-heading text-3xl sm:text-4xl lg:text-5xl mt-2">Integrate in Minutes</h2>
-            <div class="w-12 h-0.5 bg-[#E31837] mt-4"></div>
-            <p class="nixon-body mt-6">
+            <p class="enterprise-subheading">Developer Experience</p>
+            <h2 class="enterprise-heading text-3xl sm:text-4xl lg:text-5xl mt-2">Integrate in Minutes</h2>
+            <div class="w-12 h-0.5 bg-[#6A8071] mt-4"></div>
+            <p class="enterprise-body mt-6">
               Our robust REST and GraphQL endpoints allow your engineering teams to spin up micro-fulfillment dispatch webhooks with zero friction.
             </p>
             <ul class="space-y-4 mt-6">
               <li class="flex items-center gap-3">
-                <span class="w-2 h-2 rounded-full bg-[#E31837]"></span>
+                <span class="w-2 h-2 bg-[#6A8071]"></span>
                 <span class="text-xs font-bold tracking-[0.1em] uppercase">Native Python, Node.js, Go SDKs</span>
               </li>
               <li class="flex items-center gap-3">
-                <span class="w-2 h-2 rounded-full bg-[#E31837]"></span>
+                <span class="w-2 h-2 bg-[#6A8071]"></span>
                 <span class="text-xs font-bold tracking-[0.1em] uppercase">Automated Webhook Retries</span>
               </li>
               <li class="flex items-center gap-3">
-                <span class="w-2 h-2 rounded-full bg-[#E31837]"></span>
+                <span class="w-2 h-2 bg-[#6A8071]"></span>
                 <span class="text-xs font-bold tracking-[0.1em] uppercase">Real-time WebSocket Feeds</span>
               </li>
             </ul>
@@ -624,7 +520,7 @@
 
           <div class="reveal-on-scroll delay-2">
             <div class="code-block">
-              <div class="flex items-center justify-between pb-3 border-b border-[#222222] text-[0.55rem] text-[#666666] uppercase tracking-wider">
+              <div class="flex items-center justify-between pb-3 border-b border-[#2D3E35] text-[0.55rem] text-slate-400 uppercase tracking-wider">
                 <span>node_dispatch_hook.js</span>
                 <button onclick="copyCode()" class="hover:text-white transition-colors cursor-pointer">Copy →</button>
               </div>
@@ -662,33 +558,33 @@
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         
         <div class="reveal-on-scroll">
-          <p class="nixon-subheading text-[#E31837]">Trust & Compliance</p>
-          <h2 class="nixon-heading text-3xl sm:text-4xl lg:text-5xl mt-2">Enterprise-Grade Security</h2>
-          <div class="w-12 h-0.5 bg-[#E31837] mt-4"></div>
-          <p class="nixon-body mt-6">
+          <p class="enterprise-subheading">Trust & Compliance</p>
+          <h2 class="enterprise-heading text-3xl sm:text-4xl lg:text-5xl mt-2">Enterprise-Grade Security</h2>
+          <div class="w-12 h-0.5 bg-[#6A8071] mt-4"></div>
+          <p class="enterprise-body mt-6">
             We adhere to strict international data privacy and food supply regulations. All telemetry streams are encrypted end-to-end with automated SOC2 compliance auditing.
           </p>
           <div class="grid grid-cols-2 gap-4 mt-8">
-            <div class="p-6 border border-[#E5E5E5] dark:border-[#333333]">
-              <h4 class="text-xs font-bold tracking-[0.15em] uppercase text-[#E31837]">SOC2 Type II</h4>
-              <p class="text-xs text-[#8A8A8A] mt-1">Audited annual security controls</p>
+            <div class="p-6 border border-slate-200 dark:border-[#2D3E35]">
+              <h4 class="text-xs font-bold tracking-[0.15em] uppercase text-[#6A8071]">SOC2 Type II</h4>
+              <p class="text-xs text-slate-500 mt-1">Audited annual security controls</p>
             </div>
-            <div class="p-6 border border-[#E5E5E5] dark:border-[#333333]">
-              <h4 class="text-xs font-bold tracking-[0.15em] uppercase text-[#E31837]">GDPR & CCPA</h4>
-              <p class="text-xs text-[#8A8A8A] mt-1">Absolute data sovereignty</p>
+            <div class="p-6 border border-slate-200 dark:border-[#2D3E35]">
+              <h4 class="text-xs font-bold tracking-[0.15em] uppercase text-[#6A8071]">GDPR & CCPA</h4>
+              <p class="text-xs text-slate-500 mt-1">Absolute data sovereignty</p>
             </div>
           </div>
         </div>
 
         <div class="reveal-on-scroll delay-2">
-          <div class="bg-white dark:bg-[#1A1A1A] border border-[#E5E5E5] dark:border-[#333333] p-8">
-            <h3 class="nixon-heading text-xl">System Telemetry Health</h3>
+          <div class="bg-white dark:bg-[#18221D] border border-slate-200 dark:border-[#2D3E35] p-8">
+            <h3 class="enterprise-heading text-xl">System Telemetry Health</h3>
             
             <div class="space-y-6 mt-6">
               <div>
                 <div class="flex justify-between text-xs font-bold tracking-[0.1em] uppercase">
-                  <span class="text-[#8A8A8A]">Database Cluster Latency</span>
-                  <span class="text-[#E31837]">3.2ms</span>
+                  <span class="text-slate-500">Database Cluster Latency</span>
+                  <span class="text-[#6A8071]">3.2ms</span>
                 </div>
                 <div class="health-bar-track mt-2">
                   <div class="health-bar-fill" style="width: 95%;"></div>
@@ -697,8 +593,8 @@
 
               <div>
                 <div class="flex justify-between text-xs font-bold tracking-[0.1em] uppercase">
-                  <span class="text-[#8A8A8A]">IoT Sensor Packet Delivery</span>
-                  <span class="text-[#E31837]">99.99%</span>
+                  <span class="text-slate-500">IoT Sensor Packet Delivery</span>
+                  <span class="text-[#6A8071]">99.99%</span>
                 </div>
                 <div class="health-bar-track mt-2">
                   <div class="health-bar-fill" style="width: 99.9%;"></div>
@@ -707,8 +603,8 @@
 
               <div>
                 <div class="flex justify-between text-xs font-bold tracking-[0.1em] uppercase">
-                  <span class="text-[#8A8A8A]">Cold-Chain Thermal Variance</span>
-                  <span class="text-[#E31837]">0.00%</span>
+                  <span class="text-slate-500">Cold-Chain Thermal Variance</span>
+                  <span class="text-[#6A8071]">0.00%</span>
                 </div>
                 <div class="health-bar-track mt-2">
                   <div class="health-bar-fill" style="width: 100%;"></div>
@@ -716,8 +612,8 @@
               </div>
             </div>
 
-            <div class="mt-6 pt-6 border-t border-[#E5E5E5] dark:border-[#333333] text-center">
-              <span class="text-[0.55rem] font-bold tracking-[0.2em] uppercase text-[#8A8A8A]">All Systems Operational • 99.99% Uptime</span>
+            <div class="mt-6 pt-6 border-t border-slate-200 dark:border-[#2D3E35] text-center">
+              <span class="text-[0.55rem] font-bold tracking-[0.2em] uppercase text-slate-400">All Systems Operational • 99.99% Uptime</span>
             </div>
           </div>
         </div>
@@ -728,20 +624,20 @@
     <!-- ========================================== -->
     <!-- CTA BANNER -->
     <!-- ========================================== -->
-    <section class="bg-black border-y border-[#222222] py-20 px-4 sm:px-6 lg:px-8">
+    <section class="bg-sage-dark border-y border-[#2D3E35] py-20 px-4 sm:px-6 lg:px-8 text-white">
       <div class="max-w-4xl mx-auto text-center">
-        <h2 class="nixon-heading text-white text-3xl sm:text-4xl lg:text-5xl">
+        <h2 class="enterprise-heading text-3xl sm:text-4xl lg:text-5xl">
           Ready to Scale<br>
-          <span class="text-[#E31837]">Your Infrastructure?</span>
+          <span class="text-[#8FA89B]">Your Infrastructure?</span>
         </h2>
-        <p class="nixon-body text-white/60 mt-4 max-w-xl mx-auto">
+        <p class="enterprise-body text-slate-300 mt-4 max-w-xl mx-auto">
           Join 450K+ daily dispatches powered by autonomous cold-chain telemetry.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center mt-8">
-          <a href="pricing.html" class="nixon-btn">
+          <a href="pricing.html" class="sage-btn">
             View Pricing →
           </a>
-          <a href="contact.html" class="nixon-btn-outline">
+          <a href="contact.html" class="sage-btn-outline">
             Contact Sales
           </a>
         </div>
@@ -751,20 +647,29 @@
   </main>
 
   <!-- ============================================ -->
-  <!-- FOOTER INJECTED BY layout.js -->
-  <!-- ============================================ -->
-
-  <!-- ============================================ -->
   <!-- SCRIPTS -->
-  <!-- ============================================ -->
+  // ============================================
   <script src="js/db.js"></script>
   <script src="js/layout.js"></script>
 
   <script>
-    // ==========================================
-    // 1. SCROLL REVEAL
-    // ==========================================
     document.addEventListener('DOMContentLoaded', () => {
+      // 1. Initialize Lenis Slow Smooth Scrolling
+      const lenis = new Lenis({
+        duration: 2.0,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        direction: 'vertical',
+        smooth: true,
+        mouseMultiplier: 0.75,
+      });
+
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
+
+      // 2. Scroll Reveal
       const revealElements = document.querySelectorAll('.reveal-on-scroll');
       
       const revealObserver = new IntersectionObserver((entries) => {
@@ -781,9 +686,7 @@
       revealElements.forEach(el => revealObserver.observe(el));
     });
 
-    // ==========================================
-    // 2. COPY CODE FUNCTION
-    // ==========================================
+    // 3. Copy Code Function
     window.copyCode = function() {
       const codeBlock = document.querySelector('.code-block pre');
       if (codeBlock) {
@@ -791,7 +694,6 @@
         navigator.clipboard.writeText(text).then(() => {
           showToast('✓ SDK snippet copied');
         }).catch(() => {
-          // Fallback
           const textarea = document.createElement('textarea');
           textarea.value = text;
           document.body.appendChild(textarea);
@@ -803,9 +705,7 @@
       }
     };
 
-    // ==========================================
-    // 3. TOAST NOTIFICATION
-    // ==========================================
+    // 4. Toast Notification
     function showToast(message) {
       let container = document.getElementById('toast-container');
       if (!container) {
@@ -816,7 +716,7 @@
       }
       
       const toast = document.createElement('div');
-      toast.className = 'pointer-events-auto bg-black text-white dark:bg-white dark:text-black px-6 py-4 text-sm font-bold tracking-[0.15em] uppercase shadow-2xl border border-[#333333] dark:border-[#E5E5E5] transform translate-y-4 opacity-0 transition-all duration-300';
+      toast.className = 'market-toast pointer-events-auto transform translate-y-4 opacity-0 transition-all duration-300';
       toast.textContent = message;
       container.appendChild(toast);
       

@@ -20,7 +20,7 @@
     })();
   </script>
 
-  <title>Terms of Service — FreshCart Pro</title>
+  <title>Terms of Service — FreshCart Botanical Studio</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -28,7 +28,9 @@
       theme: {
         extend: {
           colors: {
-            'nixon-red': '#E31837',
+            'sage-accent': '#6A8071',
+            'sage-dark': '#24302A',
+            'cream-bg': '#F7F6F2',
           }
         }
       }
@@ -36,37 +38,37 @@
   </script>
   <link rel="stylesheet" href="css/style.css">
   <style>
-    /* Nixon Typography & Card UI */
-    .nixon-heading {
-      font-family: 'Arial Black', 'Impact', sans-serif;
+    /* Sage & Earth-Tone Typography & Card UI */
+    .dashboard-heading {
+      font-weight: 800;
       text-transform: uppercase;
       letter-spacing: -0.02em;
     }
-    .nixon-subheading {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
+    .dashboard-subheading {
       text-transform: uppercase;
       font-size: 0.7rem;
       letter-spacing: 0.2em;
       font-weight: 700;
+      color: #6A8071;
     }
-    .nixon-card {
+    .market-card {
       background: #FFFFFF;
-      border: 1px solid #E5E5E5;
+      border: 1px solid #E2E8F0;
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      border-radius: 0px;
     }
-    .dark .nixon-card {
-      background: #1A1A1A;
-      border-color: #333333;
+    .dark .market-card {
+      background: #18221D;
+      border-color: #2D3E35;
     }
     /* Legal Text Formatting */
     .legal-text {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
       font-size: 0.95rem;
       line-height: 1.8;
-      color: #333333;
+      color: #334155;
     }
     .dark .legal-text {
-      color: #CCCCCC;
+      color: #94A3B8;
     }
     .legal-list li {
       margin-bottom: 0.75rem;
@@ -77,13 +79,13 @@
       content: '■';
       position: absolute;
       left: 0;
-      color: #E31837;
+      color: #6A8071;
       font-size: 0.6rem;
       top: 0.3rem;
     }
   </style>
 </head>
-<body class="bg-white dark:bg-[#0A0A0A] text-slate-900 dark:text-white antialiased transition-colors duration-500">
+<body class="bg-cream-bg dark:bg-[#111814] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-500">
 
   <!-- Shared Layout Scripts (Injects Header & Footer) -->
   <script src="js/db.js"></script>
@@ -93,14 +95,14 @@
   <main class="pt-40 pb-36 px-4 sm:px-6 lg:px-12 max-w-4xl mx-auto space-y-16">
     
     <!-- Page Header -->
-    <div class="border-b border-[#E5E5E5] dark:border-[#222222] pb-8">
-      <p class="nixon-subheading text-[#E31837]">( Protocol Agreement )</p>
-      <h1 class="nixon-heading text-4xl sm:text-6xl mt-2">Terms of Service.</h1>
+    <div class="border-b border-slate-200 dark:border-[#2D3E35] pb-8">
+      <p class="dashboard-subheading">( Protocol Agreement )</p>
+      <h1 class="dashboard-heading text-4xl sm:text-6xl mt-2">Terms of Service.</h1>
       <div class="mt-6 flex items-center gap-4">
-        <span class="px-3 py-1.5 border border-[#E5E5E5] dark:border-[#333333] font-['Helvetica_Neue'] text-[0.6rem] font-bold uppercase tracking-[0.2em] text-[#8A8A8A]">
+        <span class="px-3 py-1.5 border border-slate-200 dark:border-[#2D3E35] text-[0.6rem] font-bold uppercase tracking-[0.2em] text-slate-500">
           Effective Date: August 20, 2026
         </span>
-        <span class="px-3 py-1.5 bg-[#E31837] text-white font-['Helvetica_Neue'] text-[0.6rem] font-bold uppercase tracking-[0.2em]">
+        <span class="px-3 py-1.5 bg-[#6A8071] text-white text-[0.6rem] font-bold uppercase tracking-[0.2em]">
           Standard Node v3.1
         </span>
       </div>
@@ -111,18 +113,18 @@
       
       <!-- Section 01 -->
       <section class="space-y-4">
-        <h2 class="nixon-heading text-2xl">01. Acceptance of Terms</h2>
+        <h2 class="dashboard-heading text-2xl">01. Acceptance of Terms</h2>
         <p class="legal-text">
-          By accessing or utilizing the FreshCart Pro network, marketplace applications, and 15-minute express delivery infrastructure, you agree to be bound by these Terms of Service. If you do not accept these operational parameters, you must immediately disconnect from our platform and terminate your user session.
+          By accessing or utilizing the FreshCart network, marketplace applications, and 15-minute express delivery infrastructure, you agree to be bound by these Terms of Service. If you do not accept these operational parameters, you must immediately disconnect from our platform and terminate your user session.
         </p>
       </section>
 
       <!-- Divider -->
-      <hr class="border-[#E5E5E5] dark:border-[#333333]">
+      <hr class="border-slate-200 dark:border-[#2D3E35]">
 
       <!-- Section 02 -->
       <section class="space-y-4">
-        <h2 class="nixon-heading text-2xl">02. Account Obligations & Security</h2>
+        <h2 class="dashboard-heading text-2xl">02. Account Obligations & Security</h2>
         <p class="legal-text">
           Users are solely responsible for maintaining the confidentiality of their portal authentication credentials. You agree to:
         </p>
@@ -135,9 +137,9 @@
 
       <!-- Section 03 -->
       <section class="space-y-4">
-        <h2 class="nixon-heading text-2xl">03. Fulfillment & Express Delivery</h2>
-        <div class="nixon-card p-6 mt-4">
-          <p class="font-['Helvetica_Neue'] text-sm uppercase font-bold tracking-widest text-[#E31837] mb-2">15-Minute SLA Policy</p>
+        <h2 class="dashboard-heading text-2xl">03. Fulfillment & Express Delivery</h2>
+        <div class="market-card p-6 mt-4">
+          <p class="text-sm uppercase font-bold tracking-widest text-[#6A8071] mb-2">15-Minute SLA Policy</p>
           <p class="legal-text">
             Our zero-emission courier fleet endeavors to satisfy all localized express dispatches within a 15-minute window from payment confirmation. However, extreme weather anomalies, municipal transit blockades, or inaccurate geolocational data may force an extension of the dispatch window. FreshCart holds no liability for minor logistical delays outside algorithmic control.
           </p>
@@ -145,11 +147,11 @@
       </section>
 
       <!-- Divider -->
-      <hr class="border-[#E5E5E5] dark:border-[#333333]">
+      <hr class="border-slate-200 dark:border-[#2D3E35]">
 
       <!-- Section 04 -->
       <section class="space-y-4">
-        <h2 class="nixon-heading text-2xl">04. Pricing & Transactions</h2>
+        <h2 class="dashboard-heading text-2xl">04. Pricing & Transactions</h2>
         <p class="legal-text">
           All financial transactions are processed securely through TLS-encrypted payment gateways. Prices for organic provisions, artisanal goods, and cold-chain delivery fees are subject to fluctuation based on regional hub availability. Refunds or credits for damaged stock must be filed via your dashboard within 2 hours of physical receipt.
         </p>
@@ -157,12 +159,12 @@
 
       <!-- Contact block -->
       <section class="pt-8">
-        <div class="p-8 border-l-4 border-[#E31837] bg-slate-50 dark:bg-[#111111]">
-          <p class="nixon-subheading text-[#8A8A8A] mb-2">Legal Support Node</p>
-          <p class="legal-text font-bold text-black dark:text-white">
+        <div class="p-8 border-l-4 border-[#6A8071] bg-white dark:bg-[#18221D]">
+          <p class="dashboard-subheading mb-2">Legal Support Node</p>
+          <p class="legal-text font-bold text-slate-900 dark:text-white">
             For contractual queries or arbitration requests, reach out directly to:
           </p>
-          <a href="mailto:legal@freshcart.pro" class="inline-block mt-2 font-['Arial_Black'] text-lg hover:text-[#E31837] transition-colors">legal@freshcart.pro</a>
+          <a href="mailto:legal@freshcart.pro" class="inline-block mt-2 font-extrabold text-lg hover:text-[#6A8071] transition-colors">legal@freshcart.pro</a>
         </div>
       </section>
 

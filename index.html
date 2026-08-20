@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FreshCart — Premium Grocery Marketplace</title>
+  <title>FreshCart — Organic & Artisanal Marketplace</title>
   <link rel="icon" type="image/png" href="assets/images/grossary-logo.png">
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -13,7 +13,9 @@
       theme: {
         extend: {
           colors: {
-            'nixon-red': '#E31837',
+            'sage-accent': '#6A8071',
+            'sage-dark': '#24302A',
+            'cream-bg': '#F7F6F2',
           }
         }
       }
@@ -21,7 +23,6 @@
   </script>
   <script>
   (function() {
-    // Instant Theme Init
     const savedTheme = localStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
@@ -29,262 +30,252 @@
     } else {
       document.documentElement.classList.remove('dark');
     }
-
-    // Instant Direction Init
     const savedDir = localStorage.getItem('dir') || 'ltr';
     document.documentElement.setAttribute('dir', savedDir);
   })();
 </script>
   
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
-  
-  <!-- Styles -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   
+  <!-- Lenis Smooth Slow Scroll Library -->
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
   <style>
-    /* Nixon Hero Overlay */
-    .nixon-hero-overlay {
-      background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.4) 100%);
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .hero-overlay {
+      background: linear-gradient(135deg, rgba(36, 48, 42, 0.95) 0%, rgba(36, 48, 42, 0.7) 60%, rgba(36, 48, 42, 0.4) 100%);
+    }
+
+    /* ============================================
+       SCROLL REVEAL & TEXT ANIMATION ENGINE
+       ============================================ */
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+
+    .reveal-on-scroll.is-revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.15s; }
+    .reveal-delay-2 { transition-delay: 0.3s; }
+    .reveal-delay-3 { transition-delay: 0.45s; }
+
+    .reveal-text {
+      overflow: hidden;
+      display: inline-block;
     }
     
-    /* Product Card Hover */
-    .product-card-hover {
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    .reveal-text span {
+      display: inline-block;
+      transform: translateY(110%);
+      transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .product-card-hover:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+
+    .is-revealed .reveal-text span {
+      transform: translateY(0);
     }
-    .dark .product-card-hover:hover {
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+
+    /* Sharp Editorial Product Cards with Blur Grid Effect */
+    #productsGrid:hover > .motion-card:not(:hover) {
+      filter: blur(6px);
+      opacity: 0.35;
+      transform: translate3d(0, 0, 0) scale(0.96);
+      transition: filter 0.5s ease, opacity 0.5s ease, transform 0.5s ease;
     }
-    
-    /* Product Image Zoom */
-    .product-image-wrap {
+
+    .motion-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 0px;
+      position: relative;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      perspective: 1400px;
+      backface-visibility: hidden;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease, border-color 0.5s ease;
+      will-change: transform, box-shadow;
+      transform: translate3d(0, 0, 0);
+    }
+
+    .dark .motion-card {
+      background: #18221D;
+      border-color: #2D3E35;
+    }
+
+    .motion-card:hover {
+      border-color: #6A8071;
+      z-index: 60;
+      box-shadow: 0 45px 90px rgba(106, 128, 113, 0.25);
+      transform: translate3d(0, -12px, 40px) scale(1.04);
+    }
+
+    .motion-image-wrap {
       overflow: hidden;
       position: relative;
+      border-radius: 0px;
     }
-    .product-image-wrap img {
-      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    .motion-image-wrap img {
+      transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .product-card-hover:hover .product-image-wrap img {
-      transform: scale(1.08);
+    .motion-card:hover .motion-image-wrap img {
+      transform: scale(1.12);
     }
-    
-    /* Badge */
-    .product-badge {
+
+    .motion-badge {
       position: absolute;
       top: 12px;
       left: 12px;
-      background: #E31837;
+      background: #6A8071;
       color: #FFFFFF;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
       font-size: 0.55rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      padding: 4px 12px;
-      border-radius: 2px;
+      padding: 5px 12px;
+      border-radius: 0px;
+      z-index: 10;
     }
     
-    /* Section Title */
     .section-title {
-      font-family: 'Arial Black', 'Impact', sans-serif;
+      font-weight: 800;
       text-transform: uppercase;
       letter-spacing: -0.02em;
       line-height: 1.05;
     }
     
     .section-subtitle {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
       text-transform: uppercase;
       font-size: 0.7rem;
       letter-spacing: 0.2em;
-      color: #8A8A8A;
+      color: #6A8071;
       font-weight: 700;
     }
     
-    /* Category Pills */
     .category-pill {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
       text-transform: uppercase;
-      font-size: 0.6rem;
+      font-size: 0.65rem;
       letter-spacing: 0.1em;
       font-weight: 700;
-      padding: 6px 16px;
-      border: 1px solid #E5E5E5;
-      border-radius: 20px;
+      padding: 10px 22px;
+      border: 1px solid #CBD5E1;
+      border-radius: 0px;
       transition: all 0.3s ease;
       cursor: pointer;
       background: transparent;
-      color: #666666;
+      color: #475569;
     }
     .category-pill:hover,
     .category-pill.active {
-      border-color: #E31837;
-      color: #E31837;
-      background: rgba(227, 24, 55, 0.05);
+      border-color: #6A8071;
+      color: #6A8071;
+      background: rgba(106, 128, 113, 0.08);
     }
     .dark .category-pill {
-      border-color: #333333;
-      color: #8A8A8A;
+      border-color: #2D3E35;
+      color: #94A3B8;
     }
     .dark .category-pill:hover,
     .dark .category-pill.active {
-      border-color: #E31837;
-      color: #E31837;
-      background: rgba(227, 24, 55, 0.1);
+      border-color: #6A8071;
+      color: #6A8071;
+      background: rgba(106, 128, 113, 0.15);
     }
-    
-    /* Scroll Indicator */
-    @keyframes scrollBounce {
-      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-      40% { transform: translateY(-16px); }
-      60% { transform: translateY(-8px); }
-    }
-    .scroll-indicator {
-      animation: scrollBounce 2.5s infinite;
-    }
-    
-    /* Toast override for Nixon style */
-    .nixon-toast {
-      background: rgba(0, 0, 0, 0.95);
-      backdrop-filter: blur(10px);
-      border: 1px solid #333333;
+
+    .market-toast {
+      background: #24302A;
       color: #FFFFFF;
       padding: 14px 24px;
-      border-radius: 4px;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
+      border-radius: 0px;
       font-size: 0.75rem;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-    }
-    .dark .nixon-toast {
-      background: rgba(255, 255, 255, 0.95);
-      color: #000000;
-      border-color: #E5E5E5;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      border-left: 4px solid #6A8071;
     }
   </style>
 </head>
-<body>
+<body class="bg-cream-bg dark:bg-[#111814] text-slate-900 dark:text-slate-100 antialiased">
 
-  <!-- ============================================ -->
-  <!-- HEADER INJECTED BY layout.js -->
-  <!-- ============================================ -->
-
-  <!-- ============================================ -->
-  <!-- MAIN CONTENT (padding-top: 70px for header) -->
-  <!-- ============================================ -->
   <main style="padding-top: 70px;">
 
     <!-- ========================================== -->
-    <!-- HERO SECTION - NIXON STYLE -->
+    <!-- HERO SECTION -->
     <!-- ========================================== -->
-    <section class="relative min-h-[90vh] flex items-center" style="background: #000000;">
-      <!-- Background Image -->
+    <section class="relative min-h-[90vh] flex items-center overflow-hidden bg-sage-dark">
       <div class="absolute inset-0">
         <img 
-          src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1920" 
-          alt="Fresh groceries" 
-          class="w-full h-full object-cover opacity-40"
+          src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=1920" 
+          alt="Organic harvest" 
+          class="w-full h-full object-cover opacity-30"
           loading="lazy"
         >
-        <div class="nixon-hero-overlay absolute inset-0"></div>
+        <div class="hero-overlay absolute inset-0"></div>
       </div>
 
-      <!-- Hero Content -->
-      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-20">
-        <div class="max-w-3xl">
-          <!-- Badge -->
-          <div class="inline-flex items-center gap-2 bg-[#E31837] text-white px-4 py-2 mb-6">
-            <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
-            <span class="text-xs font-bold tracking-[0.2em] uppercase">⚡ 15-Minute Dispatch</span>
+      <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-20">
+        <div class="max-w-3xl space-y-6">
+          <div class="inline-flex items-center gap-2 bg-[#6A8071] text-white px-4 py-2 reveal-on-scroll">
+            <span class="w-2 h-2 bg-white animate-pulse"></span>
+            <span class="text-xs font-bold tracking-[0.2em] uppercase">🌿 Certified Organic Harvest</span>
           </div>
           
-          <!-- Heading -->
-          <h1 class="text-white text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-['Arial_Black'] uppercase leading-[0.95] tracking-[-0.02em]">
-            Farm to Door
+          <h1 class="text-white text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold uppercase leading-[0.95] tracking-[-0.02em] reveal-on-scroll reveal-delay-1">
+            <span class="reveal-text"><span>Pure Provisions</span></span>
             <br>
-            <span class="text-[#E31837]">In 15 Minutes</span>
+            <span class="text-[#8FA89B] reveal-text"><span>Direct To Door</span></span>
           </h1>
           
-          <!-- Description -->
-          <p class="text-gray-300 text-base sm:text-lg mt-6 max-w-xl font-light leading-relaxed">
-            Zero-fluctuation cold-chain telemetry. Regenerative agriculture. 
-            Autonomous micro-fulfillment networks powered by IoT.
+          <p class="text-slate-300 text-base sm:text-lg max-w-xl font-light leading-relaxed reveal-on-scroll reveal-delay-2">
+            Regenerative agriculture. Zero-fluctuation cold-chain logistics. 
+            Handpicked harvest delivered with absolute botanical integrity.
           </p>
           
-          <!-- CTA Buttons -->
-          <div class="flex flex-col sm:flex-row gap-4 mt-8">
-            <a href="shop.html" class="inline-flex items-center justify-center px-8 py-4 bg-[#E31837] text-white font-['Helvetica_Neue'] text-sm font-bold tracking-[0.15em] uppercase hover:bg-[#C41230] transition-all hover:scale-[1.02]">
-              Shop Now
+          <div class="flex flex-col sm:flex-row gap-4 pt-4 reveal-on-scroll reveal-delay-3">
+            <a href="shop.html" class="inline-flex items-center justify-center px-8 py-4 bg-[#6A8071] text-white text-sm font-bold tracking-[0.15em] uppercase hover:bg-[#576B5D] transition-all hover:scale-[1.02]">
+              Explore Market
               <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
               </svg>
             </a>
-            <a href="services.html" class="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white font-['Helvetica_Neue'] text-sm font-bold tracking-[0.15em] uppercase hover:bg-white hover:text-black transition-all hover:scale-[1.02]">
-              Learn More
+            <a href="services.html" class="inline-flex items-center justify-center px-8 py-4 border-2 border-white/80 text-white text-sm font-bold tracking-[0.15em] uppercase hover:bg-white hover:text-slate-900 transition-all hover:scale-[1.02]">
+              Our Farmers
             </a>
           </div>
-
-          <!-- Trust Indicators -->
-          <div class="flex flex-wrap items-center gap-6 mt-10 pt-6 border-t border-white/10">
-            <div class="flex items-center gap-2">
-              <svg class="w-5 h-5 text-[#E31837]" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-              </svg>
-              <span class="text-xs font-bold tracking-wider text-white/60 uppercase">4.9/5 Rating</span>
-            </div>
-            <div class="w-px h-6 bg-white/20"></div>
-            <div class="flex items-center gap-2">
-              <svg class="w-5 h-5 text-[#E31837]" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-              </svg>
-              <span class="text-xs font-bold tracking-wider text-white/60 uppercase">100% Carbon Neutral</span>
-            </div>
-            <div class="w-px h-6 bg-white/20"></div>
-            <div class="flex items-center gap-2">
-              <svg class="w-5 h-5 text-[#E31837]" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 2a8 8 0 100 16 8 8 0 000-16zm0 14a6 6 0 110-12 6 6 0 010 12zm0-10a1 1 0 011 1v3.586l2.707 2.707a1 1 0 01-1.414 1.414l-3-3A1 1 0 019 10V7a1 1 0 011-1z" clip-rule="evenodd"/>
-              </svg>
-              <span class="text-xs font-bold tracking-wider text-white/60 uppercase">99.99% Uptime</span>
-            </div>
-          </div>
         </div>
-      </div>
-
-      <!-- Scroll Indicator -->
-      <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/40 scroll-indicator hidden sm:block">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
-        </svg>
       </div>
     </section>
 
     <!-- ========================================== -->
-    <!-- STATS BAR - NIXON STYLE -->
+    <!-- STATS BAR -->
     <!-- ========================================== -->
-    <section class="bg-black border-y border-[#222222] py-12">
+    <section class="bg-[#1A231F] text-white border-y border-[#2D3E35] py-12 reveal-on-scroll">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
           <div class="text-center">
-            <div class="font-['Arial_Black'] text-3xl sm:text-4xl text-[#E31837]">99.99%</div>
-            <div class="text-xs font-bold tracking-[0.2em] uppercase text-[#8A8A8A] mt-1">API Uptime</div>
+            <div class="font-extrabold text-3xl sm:text-4xl text-[#8FA89B]">100%</div>
+            <div class="text-xs font-bold tracking-[0.2em] uppercase text-slate-400 mt-1">Regenerative</div>
           </div>
           <div class="text-center">
-            <div class="font-['Arial_Black'] text-3xl sm:text-4xl text-[#E31837]">&lt;12ms</div>
-            <div class="text-xs font-bold tracking-[0.2em] uppercase text-[#8A8A8A] mt-1">Global Latency</div>
+            <div class="font-extrabold text-3xl sm:text-4xl text-[#8FA89B]">2.4°C</div>
+            <div class="text-xs font-bold tracking-[0.2em] uppercase text-slate-400 mt-1">Cold-Chain SLA</div>
           </div>
           <div class="text-center">
-            <div class="font-['Arial_Black'] text-3xl sm:text-4xl text-[#E31837]">450K+</div>
-            <div class="text-xs font-bold tracking-[0.2em] uppercase text-[#8A8A8A] mt-1">Daily Dispatches</div>
+            <div class="font-extrabold text-3xl sm:text-4xl text-[#8FA89B]">15 Min</div>
+            <div class="text-xs font-bold tracking-[0.2em] uppercase text-slate-400 mt-1">Rapid Dispatch</div>
           </div>
           <div class="text-center">
-            <div class="font-['Arial_Black'] text-3xl sm:text-4xl text-[#E31837]">140+</div>
-            <div class="text-xs font-bold tracking-[0.2em] uppercase text-[#8A8A8A] mt-1">Farm Partners</div>
+            <div class="font-extrabold text-3xl sm:text-4xl text-[#8FA89B]">140+</div>
+            <div class="text-xs font-bold tracking-[0.2em] uppercase text-slate-400 mt-1">Co-op Partners</div>
           </div>
         </div>
       </div>
@@ -293,22 +284,17 @@
     <!-- ========================================== -->
     <!-- FEATURED PRODUCTS -->
     <!-- ========================================== -->
-    <section class="py-16 sm:py-20 bg-white dark:bg-[#0A0A0A]">
+    <section class="py-20 bg-cream-bg dark:bg-[#111814]">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <!-- Section Header -->
-        <div class="text-center mb-12">
-          <p class="section-subtitle text-[#E31837]">Premium Selection</p>
-          <h2 class="section-title text-3xl sm:text-4xl lg:text-5xl mt-2">Featured Provisions</h2>
-          <div class="w-12 h-0.5 bg-[#E31837] mx-auto mt-4"></div>
-          <p class="text-[#8A8A8A] text-sm mt-4 max-w-2xl mx-auto">
-            Farm-fresh organic produce, artisanal baked goods, and premium pantry staples
-          </p>
+        <div class="text-center mb-12 reveal-on-scroll">
+          <p class="section-subtitle">Curated Harvest</p>
+          <h2 class="section-title text-3xl sm:text-4xl lg:text-5xl mt-2 reveal-text"><span>Featured Provisions</span></h2>
+          <div class="w-12 h-0.5 bg-[#6A8071] mx-auto mt-4"></div>
         </div>
 
-        <!-- Category Filters -->
-        <div class="flex flex-wrap justify-center gap-3 mb-10">
-          <button class="category-pill active" data-category="all">All</button>
+        <div class="flex flex-wrap justify-center gap-3 mb-12 reveal-on-scroll">
+          <button class="category-pill active" data-category="all">All Harvest</button>
           <button class="category-pill" data-category="produce">Produce</button>
           <button class="category-pill" data-category="bakery">Bakery</button>
           <button class="category-pill" data-category="dairy">Dairy</button>
@@ -316,15 +302,13 @@
           <button class="category-pill" data-category="pantry">Pantry</button>
         </div>
 
-        <!-- Products Grid -->
-        <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          <!-- Products injected by JavaScript -->
+        <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 reveal-on-scroll">
+          <!-- Injected via JS -->
         </div>
 
-        <!-- View All Button -->
-        <div class="text-center mt-12">
-          <a href="shop.html" class="inline-flex items-center gap-2 text-sm font-bold tracking-[0.15em] uppercase text-[#E31837] hover:underline">
-            View All Products
+        <div class="text-center mt-12 reveal-on-scroll">
+          <a href="shop.html" class="inline-flex items-center gap-2 text-sm font-bold tracking-[0.15em] uppercase text-[#6A8071] hover:underline">
+            View Full Marketplace
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
             </svg>
@@ -335,183 +319,147 @@
     </section>
 
     <!-- ========================================== -->
-    <!-- VALUE PROPOSITION - HORIZONTAL SCROLL -->
+    <!-- VALUE PROPOSITION -->
     <!-- ========================================== -->
-    <section class="py-16 sm:py-20 bg-[#F5F5F5] dark:bg-[#111111] border-y border-[#E5E5E5] dark:border-[#222222]">
+    <section class="py-24 bg-white dark:bg-[#18221D] border-y border-[#E2E8F0] dark:border-[#2D3E35]">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <div class="text-center mb-12">
-          <p class="section-subtitle text-[#E31837]">Why FreshCart</p>
-          <h2 class="section-title text-3xl sm:text-4xl lg:text-5xl">Built Different</h2>
-          <div class="w-12 h-0.5 bg-[#E31837] mx-auto mt-4"></div>
+        <div class="text-center mb-16 reveal-on-scroll">
+          <p class="section-subtitle">The FreshCart Standard</p>
+          <h2 class="section-title text-3xl sm:text-4xl lg:text-5xl mt-2">Rooted in Integrity</h2>
+          <div class="w-12 h-0.5 bg-[#6A8071] mx-auto mt-4"></div>
         </div>
 
-        <!-- Horizontal Scroll -->
-        <div class="flex overflow-x-auto gap-6 pb-6 -mx-4 px-4 sm:mx-0 sm:px-0 scroll-smooth" style="scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;">
-          
-          <div class="flex-none w-[280px] sm:w-[320px] bg-white dark:bg-[#1A1A1A] p-8 border border-[#E5E5E5] dark:border-[#333333] rounded-none" style="scroll-snap-align: start;">
-            <div class="text-5xl font-['Arial_Black'] text-[#E31837]">01</div>
-            <h3 class="font-['Arial_Black'] text-xl uppercase mt-4">Regenerative Co-ops</h3>
-            <p class="text-sm text-[#666666] dark:text-[#8A8A8A] mt-2 leading-relaxed">Partnering with agrarian cooperatives restoring soil microbiomes while yielding nutrient-dense harvests.</p>
-            <a href="about.html" class="inline-block mt-4 text-xs font-bold tracking-[0.15em] uppercase text-[#E31837] hover:underline">Learn More →</a>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="bg-cream-bg dark:bg-[#111814] p-8 border border-[#E2E8F0] dark:border-[#2D3E35] space-y-4 reveal-on-scroll reveal-delay-1">
+            <div class="w-12 h-12 bg-[#6A8071]/10 text-[#6A8071] flex items-center justify-center font-bold text-xl">01</div>
+            <h3 class="font-extrabold text-xl uppercase">Soil Regeneration</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Partnering exclusively with family farms practicing regenerative crop rotation to enrich soil microbiomes.</p>
           </div>
 
-          <div class="flex-none w-[280px] sm:w-[320px] bg-white dark:bg-[#1A1A1A] p-8 border border-[#E5E5E5] dark:border-[#333333] rounded-none" style="scroll-snap-align: start;">
-            <div class="text-5xl font-['Arial_Black'] text-[#E31837]">02</div>
-            <h3 class="font-['Arial_Black'] text-xl uppercase mt-4">Cold-Chain SLA</h3>
-            <p class="text-sm text-[#666666] dark:text-[#8A8A8A] mt-2 leading-relaxed">Continuous BLE hardware logging ensures strict 2.4°C thermal integrity for all perishable provisions.</p>
-            <a href="services.html" class="inline-block mt-4 text-xs font-bold tracking-[0.15em] uppercase text-[#E31837] hover:underline">View Telemetry →</a>
+          <div class="bg-cream-bg dark:bg-[#111814] p-8 border border-[#E2E8F0] dark:border-[#2D3E35] space-y-4 reveal-on-scroll reveal-delay-2">
+            <div class="w-12 h-12 bg-[#6A8071]/10 text-[#6A8071] flex items-center justify-center font-bold text-xl">02</div>
+            <h3 class="font-extrabold text-xl uppercase">Thermal Telemetry</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Continuous sensor tracking ensures zero thermal deviation from farm gate to your household refrigerator.</p>
           </div>
 
-          <div class="flex-none w-[280px] sm:w-[320px] bg-white dark:bg-[#1A1A1A] p-8 border border-[#E5E5E5] dark:border-[#333333] rounded-none" style="scroll-snap-align: start;">
-            <div class="text-5xl font-['Arial_Black'] text-[#E31837]">03</div>
-            <h3 class="font-['Arial_Black'] text-xl uppercase mt-4">15-Min Delivery</h3>
-            <p class="text-sm text-[#666666] dark:text-[#8A8A8A] mt-2 leading-relaxed">Algorithmic micro-warehousing paired with electric vans for zero-emission door-to-door drops.</p>
-            <a href="services.html" class="inline-block mt-4 text-xs font-bold tracking-[0.15em] uppercase text-[#E31837] hover:underline">View Fleet →</a>
+          <div class="bg-cream-bg dark:bg-[#111814] p-8 border border-[#E2E8F0] dark:border-[#2D3E35] space-y-4 reveal-on-scroll reveal-delay-3">
+            <div class="w-12 h-12 bg-[#6A8071]/10 text-[#6A8071] flex items-center justify-center font-bold text-xl">03</div>
+            <h3 class="font-extrabold text-xl uppercase">Zero-Emission Fleet</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Rapid urban dispatch powered entirely by 100% electric micro-warehousing and delivery vans.</p>
           </div>
-
-          <div class="flex-none w-[280px] sm:w-[320px] bg-white dark:bg-[#1A1A1A] p-8 border border-[#E5E5E5] dark:border-[#333333] rounded-none" style="scroll-snap-align: start;">
-            <div class="text-5xl font-['Arial_Black'] text-[#E31837]">04</div>
-            <h3 class="font-['Arial_Black'] text-xl uppercase mt-4">Enterprise API</h3>
-            <p class="text-sm text-[#666666] dark:text-[#8A8A8A] mt-2 leading-relaxed">99.99% uptime, SOC2 Type II compliance, and SDKs for Python, Node.js, and Go.</p>
-            <a href="index-saas.html" class="inline-block mt-4 text-xs font-bold tracking-[0.15em] uppercase text-[#E31837] hover:underline">View Docs →</a>
-          </div>
-
-          <div class="flex-none w-[280px] sm:w-[320px] bg-white dark:bg-[#1A1A1A] p-8 border border-[#E5E5E5] dark:border-[#333333] rounded-none" style="scroll-snap-align: start;">
-            <div class="text-5xl font-['Arial_Black'] text-[#E31837]">05</div>
-            <h3 class="font-['Arial_Black'] text-xl uppercase mt-4">Zero Waste</h3>
-            <p class="text-sm text-[#666666] dark:text-[#8A8A8A] mt-2 leading-relaxed">Predictive inventory matching prevents food spoilage with 98.7% reduction in waste.</p>
-            <a href="about.html" class="inline-block mt-4 text-xs font-bold tracking-[0.15em] uppercase text-[#E31837] hover:underline">Learn More →</a>
-          </div>
-
         </div>
       </div>
     </section>
 
     <!-- ========================================== -->
-    <!-- FEATURED BLOG POSTS -->
+    <!-- CUSTOMER TESTIMONIALS -->
     <!-- ========================================== -->
-    <section class="py-16 sm:py-20 bg-white dark:bg-[#0A0A0A]">
+    <section class="py-24 bg-cream-bg dark:bg-[#111814]">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <div class="text-center mb-12">
-          <p class="section-subtitle text-[#E31837]">From The Journal</p>
-          <h2 class="section-title text-3xl sm:text-4xl lg:text-5xl">Latest Insights</h2>
-          <div class="w-12 h-0.5 bg-[#E31837] mx-auto mt-4"></div>
+        <div class="text-center mb-16 reveal-on-scroll">
+          <p class="section-subtitle">Community Feedback</p>
+          <h2 class="section-title text-3xl sm:text-4xl lg:text-5xl mt-2">Trusted By Chefs & Families</h2>
+          <div class="w-12 h-0.5 bg-[#6A8071] mx-auto mt-4"></div>
         </div>
 
-        <div id="blogGrid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <!-- Blog posts injected by JavaScript -->
-        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="p-8 bg-white dark:bg-[#18221D] border border-[#E2E8F0] dark:border-[#2D3E35] space-y-4 reveal-on-scroll reveal-delay-1">
+            <div class="text-[#6A8071] font-bold text-sm">★★★★★</div>
+            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">"The botanical freshness of the produce is unmatched. You can truly taste the difference of regenerative farming in every bite."</p>
+            <div>
+              <p class="font-bold text-sm uppercase">Elena Rostova</p>
+              <p class="text-xs text-slate-500">Executive Chef, Botanica</p>
+            </div>
+          </div>
 
-        <div class="text-center mt-12">
-          <a href="blog.html" class="inline-flex items-center gap-2 text-sm font-bold tracking-[0.15em] uppercase text-[#E31837] hover:underline">
-            Read All Articles
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-            </svg>
-          </a>
-        </div>
+          <div class="p-8 bg-white dark:bg-[#18221D] border border-[#E2E8F0] dark:border-[#2D3E35] space-y-4 reveal-on-scroll reveal-delay-2">
+            <div class="text-[#6A8071] font-bold text-sm">★★★★★</div>
+            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">"Ordering is effortless and delivery is astonishingly fast. It has completely transformed how our household sources weekly groceries."</p>
+            <div>
+              <p class="font-bold text-sm uppercase">Marcus Vance</p>
+              <p class="text-xs text-slate-500">Verified Subscriber</p>
+            </div>
+          </div>
 
-      </div>
-    </section>
-
-    <!-- ========================================== -->
-    <!-- CTA BANNER - NIXON STYLE -->
-    <!-- ========================================== -->
-    <section class="bg-black border-y border-[#222222] py-16 sm:py-20">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-white text-3xl sm:text-4xl lg:text-5xl font-['Arial_Black'] uppercase leading-[1.05]">
-          Ready to Transform
-          <br>
-          <span class="text-[#E31837]">Your Supply Chain?</span>
-        </h2>
-        <p class="text-[#8A8A8A] mt-4 max-w-xl mx-auto">
-          Join 450K+ daily dispatches powered by autonomous cold-chain telemetry.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center mt-8">
-          <a href="pricing.html" class="inline-flex items-center justify-center px-8 py-4 bg-[#E31837] text-white font-['Helvetica_Neue'] text-sm font-bold tracking-[0.15em] uppercase hover:bg-[#C41230] transition-all hover:scale-[1.02]">
-            View Pricing
-            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-            </svg>
-          </a>
-          <a href="contact.html" class="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white font-['Helvetica_Neue'] text-sm font-bold tracking-[0.15em] uppercase hover:bg-white hover:text-black transition-all hover:scale-[1.02]">
-            Contact Sales
-          </a>
+          <div class="p-8 bg-white dark:bg-[#18221D] border border-[#E2E8F0] dark:border-[#2D3E35] space-y-4 reveal-on-scroll reveal-delay-3">
+            <div class="text-[#6A8071] font-bold text-sm">★★★★★</div>
+            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">"Knowing exactly which co-op harvested our vegetables brings incredible peace of mind. Exceptional service and quality."</p>
+            <div>
+              <p class="font-bold text-sm uppercase">Sarah Jenkins</p>
+              <p class="text-xs text-slate-500">Verified Subscriber</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
   </main>
 
-  <!-- ============================================ -->
-  <!-- FOOTER INJECTED BY layout.js -->
-  <!-- ============================================ -->
-
-  <!-- ============================================ -->
   <!-- SCRIPTS -->
-  <!-- ============================================ -->
   <script src="js/db.js"></script>
   <script src="js/layout.js"></script>
 
   <script>
-    (function() {
-      'use strict';
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Initialize Lenis Slow Smooth Scrolling
+      const lenis = new Lenis({
+        duration: 2.0,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        direction: 'vertical',
+        smooth: true,
+        mouseMultiplier: 0.75,
+      });
 
-      // ==========================================
-      // 1. RENDER PRODUCTS
-      // ==========================================
-      function renderProducts(category = 'all') {
-        const grid = document.getElementById('productsGrid');
-        if (!grid) return;
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
 
-        // Get products from db.js
-        const products = window.FreshCartDB ? window.FreshCartDB.products : [];
+      // 2. Initialize Scroll Reveal Intersection Observer
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px 0px -100px 0px',
+        threshold: 0.15
+      };
+
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.reveal-on-scroll, .reveal-text').forEach(el => {
+        revealObserver.observe(el);
+      });
+
+      // 3. Render Products & Bind Interaction
+      const standardGrid = document.getElementById('productsGrid');
+      const products = window.FreshCartDB ? window.FreshCartDB.products : [];
+
+      function renderGrid(cat) {
+        if (!standardGrid) return;
+        const filtered = cat === 'all' ? products : products.filter(p => p.category === cat);
         
-        // Filter by category
-        const filtered = category === 'all' 
-          ? products 
-          : products.filter(p => p.category === category);
-
-        if (filtered.length === 0) {
-          grid.innerHTML = `
-            <div class="col-span-full text-center py-12">
-              <p class="text-[#8A8A8A]">No products found in this category.</p>
+        standardGrid.innerHTML = filtered.slice(0, 8).map(p => `
+          <div class="motion-card p-5">
+            <div class="motion-image-wrap relative aspect-square mb-4">
+              <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover" loading="lazy">
+              <span class="motion-badge">${p.badge || 'Fresh'}</span>
             </div>
-          `;
-          return;
-        }
-
-        // Render products (show first 8)
-        const displayProducts = filtered.slice(0, 8);
-        
-        grid.innerHTML = displayProducts.map(product => `
-          <div class="product-card-hover bg-white dark:bg-[#1A1A1A] border border-[#E5E5E5] dark:border-[#333333]">
-            <div class="product-image-wrap relative aspect-square">
-              <img 
-                src="${product.image}" 
-                alt="${product.name}" 
-                class="w-full h-full object-cover"
-                loading="lazy"
-              >
-              <span class="product-badge">${product.badge || 'Fresh'}</span>
-            </div>
-            <div class="p-4">
+            <div class="space-y-3">
               <div class="flex items-start justify-between gap-2">
                 <div>
-                  <h3 class="font-['Helvetica_Neue'] text-sm font-bold uppercase tracking-wide">${product.name}</h3>
-                  <p class="text-xs text-[#8A8A8A] uppercase tracking-wider mt-0.5">${product.category}</p>
+                  <h3 class="font-bold text-sm uppercase tracking-wide">${p.name}</h3>
+                  <p class="text-xs text-slate-500 uppercase tracking-wider mt-0.5">${p.category}</p>
                 </div>
                 <div class="text-right flex-shrink-0">
-                  <span class="font-['Helvetica_Neue'] text-lg font-bold">$${product.price.toFixed(2)}</span>
-                  ${product.oldPrice ? `<span class="text-xs text-[#8A8A8A] line-through block">$${product.oldPrice.toFixed(2)}</span>` : ''}
+                  <span class="text-lg font-extrabold">$${p.price.toFixed(2)}</span>
                 </div>
               </div>
-              <button 
-                onclick="handleAddToCart('${product.id}')" 
-                class="w-full mt-3 py-2.5 bg-black text-white dark:bg-white dark:text-black font-['Helvetica_Neue'] text-xs font-bold tracking-[0.15em] uppercase hover:bg-[#E31837] hover:text-white transition-all"
-              >
+              <button onclick="handleAddToCart('${p.id}')" class="w-full py-3 bg-[#24302A] text-white dark:bg-white dark:text-[#24302A] text-xs font-bold tracking-[0.15em] uppercase hover:bg-[#6A8071] dark:hover:bg-[#6A8071] dark:hover:text-white transition-all cursor-pointer">
                 Add to Bag
               </button>
             </div>
@@ -519,79 +467,31 @@
         `).join('');
       }
 
-      // ==========================================
-      // 2. RENDER BLOG POSTS
-      // ==========================================
-      function renderBlogPosts() {
-        const grid = document.getElementById('blogGrid');
-        if (!grid) return;
+      const checkDB = setInterval(() => {
+        if (window.FreshCartDB) {
+          clearInterval(checkDB);
+          renderGrid('all');
+        }
+      }, 50);
 
-        const posts = window.FreshCartDB ? window.FreshCartDB.blogPosts : [];
-        const displayPosts = posts.slice(0, 3);
-
-        grid.innerHTML = displayPosts.map(post => `
-          <a href="blog-detail.html?slug=${post.slug}" class="group block bg-white dark:bg-[#1A1A1A] border border-[#E5E5E5] dark:border-[#333333] hover:border-[#E31837] transition-all">
-            <div class="aspect-[16/9] overflow-hidden">
-              <img 
-                src="${post.image}" 
-                alt="${post.title}" 
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-600"
-                loading="lazy"
-              >
-            </div>
-            <div class="p-6">
-              <div class="flex items-center gap-3 text-xs text-[#8A8A8A] uppercase tracking-wider">
-                <span class="text-[#E31837] font-bold">${post.category}</span>
-                <span>•</span>
-                <span>${post.date}</span>
-              </div>
-              <h3 class="font-['Arial_Black'] text-lg uppercase mt-2 group-hover:text-[#E31837] transition-colors">
-                ${post.title}
-              </h3>
-              <p class="text-sm text-[#666666] dark:text-[#8A8A8A] mt-2 line-clamp-2">${post.excerpt}</p>
-              <span class="inline-block mt-4 text-xs font-bold tracking-[0.15em] uppercase text-[#E31837] group-hover:underline">
-                Read Article →
-              </span>
-            </div>
-          </a>
-        `).join('');
-      }
-
-      // ==========================================
-      // 3. CATEGORY FILTERS
-      // ==========================================
-      function initCategoryFilters() {
-        const pills = document.querySelectorAll('.category-pill');
-        pills.forEach(pill => {
-          pill.addEventListener('click', function() {
-            // Update active state
-            pills.forEach(p => p.classList.remove('active'));
-            this.classList.add('active');
-            
-            // Filter products
-            const category = this.dataset.category;
-            renderProducts(category);
-          });
+      document.querySelectorAll('.category-pill').forEach(pill => {
+        pill.addEventListener('click', function() {
+          document.querySelectorAll('.category-pill').forEach(p => p.classList.remove('active'));
+          this.classList.add('active');
+          renderGrid(this.dataset.category);
         });
-      }
+      });
 
-      // ==========================================
-      // 4. ADD TO CART
-      // ==========================================
       window.handleAddToCart = function(productId) {
         if (window.FreshCartDB) {
           window.FreshCartDB.addToCart(productId);
-          // Update cart badge via layout.js
           if (window.NixonLayout && window.NixonLayout.updateCartBadge) {
             window.NixonLayout.updateCartBadge();
           }
-          showToast('✓ Added to bag');
+          showToast('✓ Added to harvest bag');
         }
       };
 
-      // ==========================================
-      // 5. TOAST NOTIFICATION
-      // ==========================================
       function showToast(message) {
         let container = document.getElementById('toast-container');
         if (!container) {
@@ -600,41 +500,17 @@
           container.className = 'fixed bottom-8 right-8 z-50 flex flex-col gap-3 pointer-events-none';
           document.body.appendChild(container);
         }
-        
         const toast = document.createElement('div');
-        toast.className = 'nixon-toast pointer-events-auto transform translate-y-4 opacity-0 transition-all duration-300';
+        toast.className = 'market-toast pointer-events-auto transform translate-y-4 opacity-0 transition-all duration-300';
         toast.textContent = message;
         container.appendChild(toast);
-        
-        requestAnimationFrame(() => {
-          toast.classList.remove('translate-y-4', 'opacity-0');
-        });
-        
+        requestAnimationFrame(() => toast.classList.remove('translate-y-4', 'opacity-0'));
         setTimeout(() => {
           toast.classList.add('translate-y-4', 'opacity-0');
           setTimeout(() => toast.remove(), 400);
         }, 2500);
       }
-
-      // ==========================================
-      // 6. INITIALIZE
-      // ==========================================
-      document.addEventListener('DOMContentLoaded', function() {
-        // Wait for db.js to load
-        const checkDB = setInterval(() => {
-          if (window.FreshCartDB) {
-            clearInterval(checkDB);
-            renderProducts('all');
-            renderBlogPosts();
-            initCategoryFilters();
-          }
-        }, 50);
-
-        // Safety timeout
-        setTimeout(() => clearInterval(checkDB), 3000);
-      });
-
-    })();
+    });
   </script>
 
 </body>

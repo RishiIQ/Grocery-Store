@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Customer Dashboard — FreshCart Pro</title>
+  <title>Customer Dashboard — FreshCart Botanical Studio</title>
   <link rel="icon" type="image/png" href="assets/images/grossary-logo.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -12,16 +12,21 @@
       theme: {
         extend: {
           colors: {
-            'nixon-red': '#E31837',
+            'sage-accent': '#6A8071',
+            'sage-dark': '#24302A',
+            'cream-bg': '#F7F6F2',
           }
         }
       }
     }
   </script>
   <link rel="stylesheet" href="css/style.css">
+  
+  <!-- Lenis Smooth Slow Scroll Library -->
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
   <script>
   (function() {
-    // Instant Theme Init
     const savedTheme = localStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
@@ -30,106 +35,116 @@
       document.documentElement.classList.remove('dark');
     }
 
-    // Instant Direction Init
     const savedDir = localStorage.getItem('dir') || 'ltr';
     document.documentElement.setAttribute('dir', savedDir);
   })();
 </script>
   <style>
-    /* Nixon Aesthetic Overrides */
-    .nixon-heading {
-      font-family: 'Arial Black', 'Impact', sans-serif;
+    /* Sage & Earth-Tone Aesthetic Overrides */
+    .dashboard-heading {
+      font-weight: 800;
       text-transform: uppercase;
       letter-spacing: -0.02em;
     }
-    .nixon-subheading {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
+    .dashboard-subheading {
       text-transform: uppercase;
       font-size: 0.7rem;
       letter-spacing: 0.2em;
       font-weight: 700;
+      color: #6A8071;
     }
-    .nixon-card {
+    .market-card {
       background: #FFFFFF;
-      border: 1px solid #E5E5E5;
+      border: 1px solid #E2E8F0;
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      border-radius: 0px;
     }
-    .dark .nixon-card {
-      background: #1A1A1A;
-      border-color: #333333;
+    .dark .market-card {
+      background: #18221D;
+      border-color: #2D3E35;
     }
-    .nixon-card:hover {
-      border-color: #E31837;
-      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.08);
+    .market-card:hover {
+      border-color: #6A8071;
+      box-shadow: 0 16px 48px rgba(106, 128, 113, 0.15);
     }
-    .dark .nixon-card:hover {
-      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
-    }
-    .nixon-btn {
+    .sage-btn {
       display: inline-block;
       padding: 16px 32px;
-      background: #E31837;
+      background: #6A8071;
       color: #FFFFFF;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
       text-transform: uppercase;
       font-size: 0.7rem;
       font-weight: 700;
       letter-spacing: 0.15em;
       border: none;
+      border-radius: 0px;
       cursor: pointer;
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       text-align: center;
       text-decoration: none;
     }
-    .nixon-btn:hover {
-      background: #C41230;
+    .sage-btn:hover {
+      background: #576B5D;
       transform: scale(1.02);
     }
     .theme-toggle-btn {
       width: 36px;
       height: 36px;
-      border: 1px solid #E5E5E5;
+      border: 1px solid #E2E8F0;
       background: transparent;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #000000;
+      color: #24302A;
       transition: all 0.3s ease;
-      border-radius: 50%;
+      border-radius: 0px;
     }
     .dark .theme-toggle-btn {
-      border-color: #333333;
+      border-color: #2D3E35;
       color: #FFFFFF;
     }
     .theme-toggle-btn:hover {
-      border-color: #E31837;
-      color: #E31837;
+      border-color: #6A8071;
+      color: #6A8071;
+    }
+
+    .market-toast {
+      background: #24302A;
+      color: #FFFFFF;
+      padding: 14px 24px;
+      border-radius: 0px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      border-left: 4px solid #6A8071;
     }
   </style>
 </head>
-<body class="bg-white dark:bg-[#0A0A0A] text-slate-900 dark:text-white antialiased transition-colors duration-500 min-h-screen flex flex-col justify-between selection:bg-[#E31837] selection:text-white">
+<body class="bg-cream-bg dark:bg-[#111814] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-500 min-h-screen flex flex-col justify-between selection:bg-[#6A8071] selection:text-white">
 
   <!-- Shared DB Script for Cart & Toast notifications -->
   <script src="js/db.js"></script>
 
   <!-- Dedicated Dashboard Header Bar -->
-  <header class="fixed top-0 left-0 w-full z-50 bg-white/95 dark:bg-black/95 border-b border-[#E5E5E5] dark:border-[#222222] backdrop-blur-md h-[70px] flex items-center px-6 lg:px-12">
+  <header class="fixed top-0 left-0 w-full z-50 bg-[#F7F6F2]/95 dark:bg-[#111814]/95 border-b border-slate-200 dark:border-[#2D3E35] backdrop-blur-md h-[70px] flex items-center px-6 lg:px-12">
     <div class="max-w-7xl mx-auto w-full flex items-center justify-between">
       
       <!-- Brand Logo -->
-      <a href="index.html" class="font-['Arial_Black'] text-lg uppercase tracking-tight text-black dark:text-white">
-        Fresh<span class="text-[#E31837]">Cart</span>
-        <span class="text-[0.5rem] font-['Helvetica_Neue'] font-bold tracking-[0.15em] px-2 py-0.5 border border-[#E5E5E5] dark:border-[#333333] ml-2 text-[#8A8A8A]">PORTAL</span>
+      <a href="index.html" class="font-extrabold text-lg uppercase tracking-tight text-slate-900 dark:text-white">
+        Fresh<span class="text-[#6A8071]">Cart</span>
+        <span class="text-[0.5rem] font-bold tracking-[0.15em] px-2 py-0.5 border border-slate-200 dark:border-[#2D3E35] ml-2 text-slate-500">PORTAL</span>
       </a>
 
       <!-- Controls: Clean Text-Direction Icon, Theme Toggle, & Sign Out -->
       <div class="flex items-center gap-3">
         <button id="rtlToggle" class="theme-toggle-btn" title="Toggle Text Direction">
-  <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path id="nixonRTLIconPath" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 6h12M6 12h8M6 18h10"/>
-  </svg>
-</button>
+          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path id="nixonRTLIconPath" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 6h12M6 12h8M6 18h10"/>
+          </svg>
+        </button>
         <button id="themeToggle" class="theme-toggle-btn" title="Toggle Theme">
           <svg class="dark:hidden" width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
@@ -138,7 +153,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
           </svg>
         </button>
-        <button onclick="logoutCustomer()" class="px-4 py-2 border border-[#E5E5E5] dark:border-[#333333] font-['Helvetica_Neue'] text-[0.6rem] font-bold uppercase tracking-[0.15em] hover:border-[#E31837] hover:text-[#E31837] transition-all">
+        <button onclick="logoutCustomer()" class="px-4 py-2 border border-slate-200 dark:border-[#2D3E35] text-[0.6rem] font-bold uppercase tracking-[0.15em] hover:border-[#6A8071] hover:text-[#6A8071] transition-all">
           Sign Out
         </button>
       </div>
@@ -150,36 +165,36 @@
   <main class="py-24 px-4 sm:px-6 lg:px-12 max-w-7xl mx-auto w-full space-y-12 flex-1" style="padding-top: 110px;">
     
     <!-- Welcome Header & Quick Stats -->
-    <div class="flex flex-col md:flex-row justify-between items-start md:items-end border-b border-[#E5E5E5] dark:border-[#222222] pb-8 gap-6 pt-8">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-end border-b border-slate-200 dark:border-[#2D3E35] pb-8 gap-6 pt-8">
       <div>
-        <p class="nixon-subheading text-[#E31837]">( Secure Client Portal )</p>
-        <h1 id="welcomeUserTitle" class="nixon-heading text-4xl sm:text-6xl mt-2">Dashboard.</h1>
+        <p class="dashboard-subheading">( Secure Client Portal )</p>
+        <h1 id="welcomeUserTitle" class="dashboard-heading text-4xl sm:text-6xl mt-2">Dashboard.</h1>
       </div>
-      <div class="flex items-center gap-3 font-['Helvetica_Neue'] text-xs font-bold uppercase tracking-[0.15em] text-[#8A8A8A]">
-        <span class="px-4 py-2.5 nixon-card">Active Dispatches: <span class="text-[#E31837]">1 Node</span></span>
+      <div class="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.15em] text-slate-500">
+        <span class="px-4 py-2.5 market-card">Active Dispatches: <span class="text-[#6A8071]">1 Node</span></span>
       </div>
     </div>
 
     <!-- Dashboard Navigation Tabs -->
-    <div class="flex flex-wrap gap-3 font-['Helvetica_Neue'] text-xs font-bold uppercase tracking-[0.15em] border-b border-[#E5E5E5] dark:border-[#222222] pb-6">
-      <button onclick="switchTab('catalog')" id="tab-catalog" class="dash-tab px-6 py-3.5 bg-black text-white dark:bg-white dark:text-black transition-all shadow-md">Market Catalog</button>
-      <button onclick="switchTab('tracking')" id="tab-tracking" class="dash-tab px-6 py-3.5 nixon-card hover:border-[#E31837] transition-all">Live Telemetry Tracking</button>
-      <button onclick="switchTab('reorders')" id="tab-reorders" class="dash-tab px-6 py-3.5 nixon-card hover:border-[#E31837] transition-all">Saved Reorders</button>
-      <button onclick="switchTab('history')" id="tab-history" class="dash-tab px-6 py-3.5 nixon-card hover:border-[#E31837] transition-all">Order History & Bills</button>
+    <div class="flex flex-wrap gap-3 text-xs font-bold uppercase tracking-[0.15em] border-b border-slate-200 dark:border-[#2D3E35] pb-6">
+      <button onclick="switchTab('catalog')" id="tab-catalog" class="dash-tab px-6 py-3.5 bg-[#24302A] text-white dark:bg-white dark:text-[#24302A] transition-all shadow-md">Market Catalog</button>
+      <button onclick="switchTab('tracking')" id="tab-tracking" class="dash-tab px-6 py-3.5 market-card hover:border-[#6A8071] transition-all">Live Telemetry Tracking</button>
+      <button onclick="switchTab('reorders')" id="tab-reorders" class="dash-tab px-6 py-3.5 market-card hover:border-[#6A8071] transition-all">Saved Reorders</button>
+      <button onclick="switchTab('history')" id="tab-history" class="dash-tab px-6 py-3.5 market-card hover:border-[#6A8071] transition-all">Order History & Bills</button>
     </div>
 
     <!-- TAB CONTENT 1: MARKET CATALOG & ORDER PLACEMENT -->
     <div id="content-catalog" class="dash-content space-y-8">
       <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <p class="nixon-subheading text-[#E31837]">Instant Fulfillment</p>
-          <h2 class="nixon-heading text-2xl sm:text-3xl mt-1">Browse & Order Provisions</h2>
+          <p class="dashboard-subheading">Instant Fulfillment</p>
+          <h2 class="dashboard-heading text-2xl sm:text-3xl mt-1">Browse & Order Provisions</h2>
         </div>
-        <div class="flex items-center gap-3 font-['Helvetica_Neue'] text-xs uppercase font-bold tracking-wider">
-          <span class="text-[#8A8A8A]">Dispatch Window:</span>
-          <select id="fulfillmentMethod" class="px-4 py-2.5 bg-transparent border border-[#E5E5E5] dark:border-[#333333] font-mono text-xs uppercase outline-none focus:border-[#E31837]">
-            <option value="delivery" class="bg-white dark:bg-[#1A1A1A]">Home Delivery (15-Min Express)</option>
-            <option value="pickup" class="bg-white dark:bg-[#1A1A1A]">Hub Store Pickup</option>
+        <div class="flex items-center gap-3 text-xs uppercase font-bold tracking-wider">
+          <span class="text-slate-500">Dispatch Window:</span>
+          <select id="fulfillmentMethod" class="px-4 py-2.5 bg-transparent border border-slate-200 dark:border-[#2D3E35] font-mono text-xs uppercase outline-none focus:border-[#6A8071]">
+            <option value="delivery" class="bg-white dark:bg-[#18221D]">Home Delivery (15-Min Express)</option>
+            <option value="pickup" class="bg-white dark:bg-[#18221D]">Hub Store Pickup</option>
           </select>
         </div>
       </div>
@@ -188,41 +203,41 @@
 
     <!-- TAB CONTENT 2: LIVE ORDER TRACKING -->
     <div id="content-tracking" class="dash-content hidden space-y-8">
-      <div class="nixon-card p-8 lg:p-12 space-y-8">
-        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-[#E5E5E5] dark:border-[#333333] pb-6 gap-4">
+      <div class="market-card p-8 lg:p-12 space-y-8">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-200 dark:border-[#2D3E35] pb-6 gap-4">
           <div>
-            <span class="text-xs font-mono text-[#E31837] uppercase tracking-widest">Order ID: #FC-8942-EU</span>
-            <h2 class="nixon-heading text-2xl mt-1">Real-Time Telemetry Tracking</h2>
+            <span class="text-xs font-mono text-[#6A8071] uppercase tracking-widest">Order ID: #FC-8942-EU</span>
+            <h2 class="dashboard-heading text-2xl mt-1">Real-Time Telemetry Tracking</h2>
           </div>
-          <span class="px-4 py-1.5 bg-[#E31837]/10 text-[#E31837] font-['Helvetica_Neue'] text-xs uppercase font-bold tracking-[0.15em] border border-[#E31837]/30 animate-pulse">Status: Out for Delivery</span>
+          <span class="px-4 py-1.5 bg-[#6A8071]/10 text-[#6A8071] text-xs uppercase font-bold tracking-[0.15em] border border-[#6A8071]/30 animate-pulse">Status: Out for Delivery</span>
         </div>
 
         <!-- Progress Timeline Steps -->
-        <div class="grid grid-cols-1 sm:grid-cols-4 gap-6 font-['Helvetica_Neue'] text-xs uppercase tracking-[0.15em]">
-          <div class="p-6 bg-[#E31837] text-white font-bold space-y-2 shadow-lg">
+        <div class="grid grid-cols-1 sm:grid-cols-4 gap-6 text-xs uppercase tracking-[0.15em]">
+          <div class="p-6 bg-[#6A8071] text-white font-bold space-y-2 shadow-lg">
             <span>01 / 04</span>
-            <p class="text-sm font-['Arial_Black']">Order Confirmed</p>
+            <p class="text-sm font-extrabold">Order Confirmed</p>
             <p class="text-[10px] opacity-80">Verified & paid</p>
           </div>
-          <div class="p-6 bg-[#E31837] text-white font-bold space-y-2 shadow-lg">
+          <div class="p-6 bg-[#6A8071] text-white font-bold space-y-2 shadow-lg">
             <span>02 / 04</span>
-            <p class="text-sm font-['Arial_Black']">Hub Packing</p>
+            <p class="text-sm font-extrabold">Hub Packing</p>
             <p class="text-[10px] opacity-80">Thermal sealed</p>
           </div>
-          <div class="p-6 bg-[#E31837] text-white font-bold space-y-2 shadow-lg animate-pulse">
+          <div class="p-6 bg-[#6A8071] text-white font-bold space-y-2 shadow-lg animate-pulse">
             <span>03 / 04</span>
-            <p class="text-sm font-['Arial_Black']">Out for Delivery</p>
+            <p class="text-sm font-extrabold">Out for Delivery</p>
             <p class="text-[10px] opacity-80">GPS Electric Van #4</p>
           </div>
-          <div class="p-6 nixon-card text-[#8A8A8A] space-y-2">
+          <div class="p-6 market-card text-slate-400 space-y-2">
             <span>04 / 04</span>
-            <p class="text-sm font-['Arial_Black']">Delivered</p>
+            <p class="text-sm font-extrabold">Delivered</p>
             <p class="text-[10px] opacity-50">Pending arrival</p>
           </div>
         </div>
 
-        <div class="p-6 nixon-card flex flex-col sm:flex-row items-center justify-between font-['Helvetica_Neue'] text-xs font-bold uppercase tracking-[0.15em] gap-4">
-          <span>Estimated Arrival: <strong class="text-[#E31837]">6 Minutes</strong></span>
+        <div class="p-6 market-card flex flex-col sm:flex-row items-center justify-between text-xs font-bold uppercase tracking-[0.15em] gap-4">
+          <span>Estimated Arrival: <strong class="text-[#6A8071]">6 Minutes</strong></span>
           <span>Courier: Marc V. (Zero-Emission Fleet)</span>
         </div>
       </div>
@@ -232,10 +247,10 @@
     <div id="content-reorders" class="dash-content hidden space-y-8">
       <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <p class="nixon-subheading text-[#E31837]">Custom Allocations</p>
-          <h2 class="nixon-heading text-2xl sm:text-3xl mt-1">Saved Weekly Shopping List</h2>
+          <p class="dashboard-subheading">Custom Allocations</p>
+          <h2 class="dashboard-heading text-2xl sm:text-3xl mt-1">Saved Weekly Shopping List</h2>
         </div>
-        <button onclick="reorderSavedList()" class="nixon-btn">Add All to Bag →</button>
+        <button onclick="reorderSavedList()" class="sage-btn">Add All to Bag →</button>
       </div>
       <div id="savedReordersGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
     </div>
@@ -243,26 +258,26 @@
     <!-- TAB CONTENT 4: PAST ORDER HISTORY & ITEMIZED BILLS -->
     <div id="content-history" class="dash-content hidden space-y-8">
       <div>
-        <p class="nixon-subheading text-[#E31837]">Archive Ledger</p>
-        <h2 class="nixon-heading text-2xl sm:text-3xl mt-1">Past Orders & Itemized Invoices</h2>
+        <p class="dashboard-subheading">Archive Ledger</p>
+        <h2 class="dashboard-heading text-2xl sm:text-3xl mt-1">Past Orders & Itemized Invoices</h2>
       </div>
       <div class="space-y-6">
-        <div class="nixon-card p-8 space-y-6">
-          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-[#E5E5E5] dark:border-[#333333] pb-4 gap-4">
+        <div class="market-card p-8 space-y-6">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-200 dark:border-[#2D3E35] pb-4 gap-4">
             <div>
-              <span class="text-xs font-mono text-[#8A8A8A] uppercase">Order #FC-7102-FR • August 14, 2026</span>
-              <h3 class="nixon-heading text-xl mt-1">Home Delivery (Organic Produce & Bakery)</h3>
+              <span class="text-xs font-mono text-slate-500 uppercase">Order #FC-7102-FR • August 14, 2026</span>
+              <h3 class="dashboard-heading text-xl mt-1">Home Delivery (Organic Produce & Bakery)</h3>
             </div>
             <div class="text-right">
-              <span class="font-['Arial_Black'] text-xl">$24.38</span>
-              <span class="block text-[10px] font-['Helvetica_Neue'] font-bold uppercase tracking-[0.15em] text-[#E31837]">Fulfilled</span>
+              <span class="font-extrabold text-xl">$24.38</span>
+              <span class="block text-[10px] font-bold uppercase tracking-[0.15em] text-[#6A8071]">Fulfilled</span>
             </div>
           </div>
-          <div class="space-y-2 font-['Helvetica_Neue'] text-xs font-bold uppercase tracking-[0.1em] text-[#8A8A8A]">
+          <div class="space-y-2 text-xs font-bold uppercase tracking-[0.1em] text-slate-500">
             <div class="flex justify-between"><span>Organic Hass Avocados (x2)</span><span class="text-slate-900 dark:text-white">$11.98</span></div>
             <div class="flex justify-between"><span>Artisanal Sourdough Loaf (x1)</span><span class="text-slate-900 dark:text-white">$4.50</span></div>
             <div class="flex justify-between"><span>Cold-Chain Delivery Fee</span><span class="text-slate-900 dark:text-white">$4.99</span></div>
-            <div class="flex justify-between pt-3 border-t border-[#E5E5E5] dark:border-[#333333] text-slate-900 dark:text-white font-['Arial_Black'] text-sm"><span>Total Paid (TLS Secure)</span><span class="text-[#E31837]">$24.38</span></div>
+            <div class="flex justify-between pt-3 border-t border-slate-200 dark:border-[#2D3E35] text-slate-900 dark:text-white font-extrabold text-sm"><span>Total Paid (TLS Secure)</span><span class="text-[#6A8071]">$24.38</span></div>
           </div>
         </div>
       </div>
@@ -271,15 +286,30 @@
   </main>
 
   <!-- Minimal Portal Footer -->
-  <footer class="py-12 px-4 border-t border-[#E5E5E5] dark:border-[#222222] text-center">
-    <p class="text-[0.5rem] font-bold tracking-[0.2em] uppercase text-[#8A8A8A]">
-      🔒 Encrypted TLS 256-Bit Protocol • © 2026 FreshCart Portal
+  <footer class="py-12 px-4 border-t border-slate-200 dark:border-[#2D3E35] text-center">
+    <p class="text-[0.5rem] font-bold tracking-[0.2em] uppercase text-slate-500">
+      🔒 Encrypted TLS 256-Bit Protocol • © 2026 FreshCart Botanical Portal
     </p>
   </footer>
 
   <!-- Script Handlers -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // 1. Initialize Lenis Slow Smooth Scrolling
+      const lenis = new Lenis({
+        duration: 2.0,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        direction: 'vertical',
+        smooth: true,
+        mouseMultiplier: 0.75,
+      });
+
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
+
       const userSession = JSON.parse(localStorage.getItem('freshcart_user'));
       if (userSession && userSession.name) {
         document.getElementById('welcomeUserTitle').innerText = `${userSession.name}'s Dashboard.`;
@@ -289,16 +319,16 @@
       const dashGrid = document.getElementById('dashboardCatalogGrid');
       if (dashGrid && window.FreshCartDB) {
         dashGrid.innerHTML = FreshCartDB.products.map(p => `
-          <div class="nixon-card p-6 flex flex-col justify-between space-y-4">
-            <div class="aspect-[4/3] overflow-hidden border border-[#E5E5E5] dark:border-[#333333]">
+          <div class="market-card p-6 flex flex-col justify-between space-y-4">
+            <div class="aspect-[4/3] overflow-hidden border border-slate-200 dark:border-[#2D3E35]">
               <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover">
             </div>
             <div class="space-y-1">
-              <span class="text-[0.55rem] font-bold uppercase tracking-[0.15em] text-[#E31837]">${p.badge}</span>
-              <h3 class="font-['Helvetica_Neue'] text-sm font-bold uppercase tracking-wide">${p.name}</h3>
-              <p class="font-['Arial_Black'] text-lg">$${p.price.toFixed(2)}</p>
+              <span class="text-[0.55rem] font-bold uppercase tracking-[0.15em] text-[#6A8071]">${p.badge || 'Organic'}</span>
+              <h3 class="text-sm font-bold uppercase tracking-wide">${p.name}</h3>
+              <p class="font-extrabold text-lg">$${p.price.toFixed(2)}</p>
             </div>
-            <button onclick="FreshCartDB.addToCart('${p.id}')" class="w-full py-3 bg-black text-white dark:bg-white dark:text-black font-['Helvetica_Neue'] text-xs font-bold tracking-[0.15em] uppercase hover:bg-[#E31837] hover:text-white transition-all">Add to Bag</button>
+            <button onclick="FreshCartDB.addToCart('${p.id}')" class="w-full py-3 bg-[#24302A] text-white dark:bg-white dark:text-[#24302A] text-xs font-bold tracking-[0.15em] uppercase hover:bg-[#6A8071] dark:hover:bg-[#6A8071] dark:hover:text-white transition-all cursor-pointer">Add to Bag</button>
           </div>
         `).join('');
       }
@@ -308,15 +338,15 @@
       if (reordersGrid && window.FreshCartDB) {
         const savedItems = FreshCartDB.products.slice(0, 2);
         reordersGrid.innerHTML = savedItems.map(p => `
-          <div class="nixon-card p-6 flex items-center justify-between gap-4">
+          <div class="market-card p-6 flex items-center justify-between gap-4">
             <div class="flex items-center gap-4">
-              <img src="${p.image}" alt="${p.name}" class="w-16 h-16 object-cover border border-[#E5E5E5] dark:border-[#333333]">
+              <img src="${p.image}" alt="${p.name}" class="w-16 h-16 object-cover border border-slate-200 dark:border-[#2D3E35]">
               <div>
-                <h4 class="font-['Helvetica_Neue'] text-xs font-bold uppercase tracking-wide">${p.name}</h4>
-                <p class="text-[0.6rem] font-bold uppercase tracking-[0.15em] text-[#8A8A8A] mt-0.5">$${p.price.toFixed(2)} • Weekly Reorder</p>
+                <h4 class="text-xs font-bold uppercase tracking-wide">${p.name}</h4>
+                <p class="text-[0.6rem] font-bold uppercase tracking-[0.15em] text-slate-500 mt-0.5">$${p.price.toFixed(2)} • Weekly Reorder</p>
               </div>
             </div>
-            <button onclick="FreshCartDB.addToCart('${p.id}')" class="px-4 py-2 bg-black text-white dark:bg-white dark:text-black font-['Helvetica_Neue'] text-[0.6rem] font-bold tracking-[0.15em] uppercase hover:bg-[#E31837] hover:text-white transition-all">Add</button>
+            <button onclick="FreshCartDB.addToCart('${p.id}')" class="px-4 py-2 bg-[#24302A] text-white dark:bg-white dark:text-[#24302A] text-[0.6rem] font-bold tracking-[0.15em] uppercase hover:bg-[#6A8071] dark:hover:bg-[#6A8071] dark:hover:text-white transition-all cursor-pointer">Add</button>
           </div>
         `).join('');
       }
@@ -339,9 +369,9 @@
 
     window.switchTab = (tabName) => {
       document.querySelectorAll('.dash-tab').forEach(btn => {
-        btn.className = "dash-tab px-6 py-3.5 nixon-card hover:border-[#E31837] transition-all";
+        btn.className = "dash-tab px-6 py-3.5 market-card hover:border-[#6A8071] transition-all";
       });
-      document.getElementById(`tab-${tabName}`).className = "dash-tab px-6 py-3.5 bg-black text-white dark:bg-white dark:text-black transition-all shadow-md";
+      document.getElementById(`tab-${tabName}`).className = "dash-tab px-6 py-3.5 bg-[#24302A] text-white dark:bg-white dark:text-[#24302A] transition-all shadow-md";
 
       document.querySelectorAll('.dash-content').forEach(content => {
         content.classList.add('hidden');
@@ -353,7 +383,7 @@
       if (window.FreshCartDB) {
         FreshCartDB.addToCart('prod-1');
         FreshCartDB.addToCart('prod-2');
-        FreshCartUI.showToast("✓ Saved weekly reorder items added to bag");
+        showToast("✓ Saved weekly reorder items added to bag");
       }
     };
 
@@ -361,6 +391,25 @@
       localStorage.removeItem('freshcart_user');
       window.location.href = 'index.html';
     };
+
+    function showToast(message) {
+      let container = document.getElementById('toast-container');
+      if (!container) {
+        container = document.createElement('div');
+        container.id = 'toast-container';
+        container.className = 'fixed bottom-8 right-8 z-50 flex flex-col gap-3 pointer-events-none';
+        document.body.appendChild(container);
+      }
+      const toast = document.createElement('div');
+      toast.className = 'market-toast pointer-events-auto transform translate-y-4 opacity-0 transition-all duration-300';
+      toast.textContent = message;
+      container.appendChild(toast);
+      requestAnimationFrame(() => toast.classList.remove('translate-y-4', 'opacity-0'));
+      setTimeout(() => {
+        toast.classList.add('translate-y-4', 'opacity-0');
+        setTimeout(() => toast.remove(), 400);
+      }, 2500);
+    }
   </script>
 </body>
 </html>

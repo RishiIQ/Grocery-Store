@@ -3,11 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Authentication — FreshCart Studio</title>
+  <title>Authentication — FreshCart Botanical Studio</title>
   <link rel="icon" type="image/png" href="assets/images/grossary-logo.png">
   <script>
   (function() {
-    // Instant Theme Init
     const savedTheme = localStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
@@ -16,7 +15,6 @@
       document.documentElement.classList.remove('dark');
     }
 
-    // Instant Direction Init
     const savedDir = localStorage.getItem('dir') || 'ltr';
     document.documentElement.setAttribute('dir', savedDir);
   })();
@@ -30,7 +28,9 @@
       theme: {
         extend: {
           colors: {
-            'nixon-red': '#E31837',
+            'sage-accent': '#6A8071',
+            'sage-dark': '#24302A',
+            'cream-bg': '#F7F6F2',
           }
         }
       }
@@ -42,13 +42,13 @@
   
   <style>
     /* ============================================
-       NIXON-STYLE AUTHENTICATION PAGE
+       SAGE & EARTH-TONE AUTHENTICATION PAGE
        ============================================ */
     
     html {
       perspective: 1600px;
       overflow-x: hidden;
-      background: #000000;
+      background: #24302A;
     }
 
     body {
@@ -57,7 +57,6 @@
       animation: pageSpinZoomIn 1.0s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
-    /* Incoming page animation */
     @keyframes pageSpinZoomIn {
       from {
         width: 100px;
@@ -75,7 +74,6 @@
       }
     }
 
-    /* Exiting page animation */
     body.cinematic-exit {
       opacity: 0;
       transform: scale(0.15) rotateZ(360deg) rotateX(30deg);
@@ -94,7 +92,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      background: #FFFFFF;
+      background: #F7F6F2;
       position: relative;
       overflow: hidden;
       padding: 40px 20px;
@@ -102,7 +100,7 @@
     }
 
     .dark .auth-page {
-      background: #000000;
+      background: #111814;
     }
     
     .auth-page::before {
@@ -132,15 +130,15 @@
     }
     
     @keyframes orbFloatSlow {
-      0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
-      33% { transform: translate(50px, -30px) scale(1.1); opacity: 0.5; }
-      66% { transform: translate(-30px, 40px) scale(0.9); opacity: 0.4; }
+      0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.2; }
+      33% { transform: translate(50px, -30px) scale(1.1); opacity: 0.4; }
+      66% { transform: translate(-30px, 40px) scale(0.9); opacity: 0.3; }
     }
     
     .auth-orb-1 {
       width: 500px;
       height: 500px;
-      background: rgba(227, 24, 55, 0.08);
+      background: rgba(106, 128, 113, 0.15);
       top: -200px;
       right: -200px;
       animation: orbFloatSlow 10s ease-in-out infinite;
@@ -149,30 +147,31 @@
     .auth-orb-2 {
       width: 400px;
       height: 400px;
-      background: rgba(227, 24, 55, 0.05);
+      background: rgba(106, 128, 113, 0.1);
       bottom: -150px;
       left: -150px;
       animation: orbFloatSlow 12s ease-in-out infinite reverse;
     }
     
-    /* Auth card - Nixon style */
+    /* Auth card */
     .auth-card {
       position: relative;
       z-index: 10;
       width: 100%;
       max-width: 440px;
       background: #FFFFFF;
-      border: 1px solid #E5E5E5;
+      border: 1px solid #E2E8F0;
       padding: 48px 40px;
       transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
       animation: cardSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
       opacity: 0;
       transform: translateY(30px);
+      border-radius: 0px;
     }
     
     .dark .auth-card {
-      background: #1A1A1A;
-      border-color: #333333;
+      background: #18221D;
+      border-color: #2D3E35;
     }
     
     @keyframes cardSlideUp {
@@ -189,7 +188,7 @@
       left: 0;
       right: 0;
       height: 4px;
-      background: #E31837;
+      background: #6A8071;
       transform: scaleX(0);
       transform-origin: left;
       transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -199,29 +198,28 @@
       transform: scaleX(1);
     }
     
-    /* Nixon typography */
-    .nixon-heading {
-      font-family: 'Arial Black', 'Impact', sans-serif;
+    .auth-heading {
+      font-weight: 800;
       text-transform: uppercase;
       letter-spacing: -0.02em;
       line-height: 0.95;
     }
     
-    .nixon-subheading {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
+    .auth-subheading {
       text-transform: uppercase;
       font-size: 0.7rem;
       letter-spacing: 0.2em;
       font-weight: 700;
+      color: #6A8071;
     }
    
     /* Logo */
     .auth-logo {
-      font-family: 'Arial Black', 'Impact', sans-serif;
+      font-weight: 800;
       font-size: 1.2rem;
       text-transform: uppercase;
       letter-spacing: -0.02em;
-      color: #000000;
+      color: #0F172A;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
@@ -229,61 +227,61 @@
     }
     
     .dark .auth-logo {
-      color: #FFFFFF;
+      color: #F8FAFC;
     }
     
-    .auth-logo .red {
-      color: #E31837;
+    .auth-logo .sage {
+      color: #6A8071;
     }
     
     .auth-logo .badge {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
       font-size: 0.5rem;
       font-weight: 700;
       letter-spacing: 0.15em;
-      color: #8A8A8A;
+      color: #64748B;
       padding: 2px 8px;
-      border: 1px solid #E5E5E5;
+      border: 1px solid #E2E8F0;
+      border-radius: 0px;
     }
     
     .dark .auth-logo .badge {
-      border-color: #333333;
+      border-color: #2D3E35;
     }
     
-    /* Form inputs - Nixon style */
-    .nixon-input {
+    /* Form inputs */
+    .market-input {
       width: 100%;
       padding: 16px 20px;
       background: transparent;
-      border: 1px solid #E5E5E5;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
+      border: 1px solid #E2E8F0;
       font-size: 0.8rem;
       font-weight: 500;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      color: #000000;
+      color: #0F172A;
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       outline: none;
+      border-radius: 0px;
     }
     
-    .dark .nixon-input {
-      border-color: #333333;
-      color: #FFFFFF;
+    .dark .market-input {
+      border-color: #2D3E35;
+      color: #F8FAFC;
     }
     
-    .nixon-input::placeholder {
-      color: #8A8A8A;
+    .market-input::placeholder {
+      color: #94A3B8;
       font-weight: 400;
       letter-spacing: 0.1em;
     }
     
-    .nixon-input:focus {
-      border-color: #E31837;
-      box-shadow: 0 0 0 3px rgba(227, 24, 55, 0.1);
+    .market-input:focus {
+      border-color: #6A8071;
+      box-shadow: 0 0 0 3px rgba(106, 128, 113, 0.15);
     }
     
-    .nixon-input.error {
-      border-color: #E31837;
+    .market-input.error {
+      border-color: #EF4444;
       animation: shake 0.4s ease;
     }
     
@@ -293,14 +291,13 @@
       75% { transform: translateX(8px); }
     }
     
-    .nixon-label {
+    .market-label {
       display: block;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
       font-size: 0.6rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.15em;
-      color: #8A8A8A;
+      color: #64748B;
       margin-bottom: 6px;
     }
     
@@ -313,13 +310,13 @@
       background: none;
       border: none;
       cursor: pointer;
-      color: #8A8A8A;
+      color: #64748B;
       padding: 4px;
       transition: all 0.3s ease;
     }
     
     .password-toggle:hover {
-      color: #E31837;
+      color: #6A8071;
     }
     
     .password-toggle svg {
@@ -328,18 +325,17 @@
       transition: all 0.3s ease;
     }
     
-    /* Nixon button */
-    .nixon-btn {
+    .sage-btn {
       display: inline-block;
       padding: 18px 40px;
-      background: #E31837;
+      background: #6A8071;
       color: #FFFFFF;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
       text-transform: uppercase;
       font-size: 0.7rem;
       font-weight: 700;
       letter-spacing: 0.15em;
       border: none;
+      border-radius: 0px;
       cursor: pointer;
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       text-align: center;
@@ -349,31 +345,16 @@
       width: 100%;
     }
     
-    .nixon-btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-      transition: left 0.6s ease;
-    }
-    
-    .nixon-btn:hover::before {
-      left: 100%;
-    }
-    
-    .nixon-btn:hover {
-      background: #C41230;
+    .sage-btn:hover {
+      background: #576B5D;
       transform: scale(1.02);
     }
     
-    .nixon-btn:active {
+    .sage-btn:active {
       transform: scale(0.98);
     }
     
-    .nixon-btn:disabled {
+    .sage-btn:disabled {
       opacity: 0.6;
       cursor: not-allowed;
       transform: none !important;
@@ -381,12 +362,11 @@
     
     /* Toggle mode button */
     .toggle-mode-btn {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
       font-size: 0.6rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.15em;
-      color: #8A8A8A;
+      color: #64748B;
       background: none;
       border: none;
       cursor: pointer;
@@ -395,7 +375,7 @@
     }
     
     .toggle-mode-btn:hover {
-      color: #E31837;
+      color: #6A8071;
     }
     
     /* Divider */
@@ -411,21 +391,20 @@
       content: '';
       flex: 1;
       height: 1px;
-      background: #E5E5E5;
+      background: #E2E8F0;
     }
     
     .dark .auth-divider::before,
     .dark .auth-divider::after {
-      background: #333333;
+      background: #2D3E35;
     }
     
     .auth-divider span {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
       font-size: 0.55rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.15em;
-      color: #8A8A8A;
+      color: #64748B;
     }
     
     /* Social login buttons */
@@ -437,58 +416,53 @@
       width: 100%;
       padding: 14px;
       background: transparent;
-      border: 1px solid #E5E5E5;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
+      border: 1px solid #E2E8F0;
       font-size: 0.6rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      color: #000000;
+      color: #0F172A;
       cursor: pointer;
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      border-radius: 0px;
     }
     
     .dark .social-btn {
-      border-color: #333333;
-      color: #FFFFFF;
+      border-color: #2D3E35;
+      color: #F8FAFC;
     }
     
     .social-btn:hover {
-      border-color: #E31837;
-      color: #E31837;
+      border-color: #6A8071;
+      color: #6A8071;
       transform: translateY(-2px);
     }
     
-    .social-btn .icon {
-      font-size: 1.2rem;
-    }
-    
-    /* Theme toggle buttons - Nixon style */
+    /* Theme toggle buttons */
     .theme-toggle-btn {
       width: 36px;
       height: 36px;
-      border: 1px solid #E5E5E5;
+      border: 1px solid #E2E8F0;
       background: transparent;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #000000;
+      color: #0F172A;
       transition: all 0.3s ease;
-      border-radius: 50%;
+      border-radius: 0px;
     }
     
     .dark .theme-toggle-btn {
-      border-color: #333333;
+      border-color: #2D3E35;
       color: #FFFFFF;
     }
     
     .theme-toggle-btn:hover {
-      border-color: #E31837;
-      color: #E31837;
+      border-color: #6A8071;
+      color: #6A8071;
     }
     
-    /* Loading spinner */
     .spinner {
       display: none;
       width: 20px;
@@ -503,9 +477,22 @@
     @keyframes spin {
       to { transform: rotate(360deg); }
     }
+
+    .market-toast {
+      background: #24302A;
+      color: #FFFFFF;
+      padding: 14px 24px;
+      border-radius: 0px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      border-left: 4px solid #6A8071;
+    }
   </style>
 </head>
-<body class="bg-white dark:bg-[#0A0A0A] text-slate-900 dark:text-white transition-colors duration-500">
+<body class="bg-cream-bg dark:bg-[#111814] text-slate-900 dark:text-slate-100 transition-colors duration-500">
 
   <!-- ============================================ -->
   <!-- AUTH PAGE -->
@@ -541,14 +528,14 @@
       <!-- Brand with Asset Image Logo in Front -->
       <div class="text-center mb-8">
         <a href="index.html" class="auth-logo">
-          <div class="w-8 h-8 overflow-hidden flex items-center justify-center rounded-sm">
+          <div class="w-8 h-8 overflow-hidden flex items-center justify-center rounded-none">
             <img src="assets/images/grossary-logo.png" alt="Logo" class="w-full h-full object-contain">
           </div>
-          <span>Fresh<span class="red">Cart</span></span>
-          
+          <span>Fresh<span class="sage">Cart</span></span>
+          <span class="badge">PRO</span>
         </a>
-        <h1 id="formTitle" class="nixon-heading text-3xl mt-4">Member Login</h1>
-        <p id="formSubtitle" class="nixon-body text-sm mt-2">Access your private reserve and dispatch bag</p>
+        <h1 id="formTitle" class="auth-heading text-3xl mt-4">Member Login</h1>
+        <p id="formSubtitle" class="text-slate-500 text-sm mt-2">Access your private reserve and harvest bag</p>
       </div>
 
       <!-- ========================================== -->
@@ -558,24 +545,24 @@
         
         <!-- Name Field (Sign Up only) -->
         <div id="nameFieldContainer" class="space-y-2 hidden">
-          <label class="nixon-label" for="fullName">Full Name</label>
+          <label class="market-label" for="fullName">Full Name</label>
           <input 
             type="text" 
             id="fullName" 
             placeholder="JUSTIN MASON" 
-            class="nixon-input"
+            class="market-input"
             autocomplete="name"
           >
         </div>
 
         <!-- Email -->
         <div class="space-y-2">
-          <label class="nixon-label" for="email">Email Address</label>
+          <label class="market-label" for="email">Email Address</label>
           <input 
             type="email" 
             id="email" 
             placeholder="JUSTIN@EXAMPLE.COM" 
-            class="nixon-input"
+            class="market-input"
             autocomplete="email"
             required
           >
@@ -583,13 +570,13 @@
 
         <!-- Password -->
         <div class="space-y-2">
-          <label class="nixon-label" for="password">Password</label>
+          <label class="market-label" for="password">Password</label>
           <div class="relative">
             <input 
               type="password" 
               id="password" 
               placeholder="••••••••" 
-              class="nixon-input pr-14"
+              class="market-input pr-14"
               autocomplete="current-password"
               required
               minlength="6"
@@ -615,13 +602,13 @@
 
         <!-- Forgot Password -->
         <div class="text-right">
-          <a href="#" class="text-[0.5rem] font-bold tracking-[0.15em] uppercase text-[#8A8A8A] hover:text-[#E31837] transition-colors">
+          <a href="#" class="text-[0.5rem] font-bold tracking-[0.15em] uppercase text-slate-500 hover:text-[#6A8071] transition-colors">
             Forgot password?
           </a>
         </div>
 
         <!-- Submit -->
-        <button type="submit" id="submitBtn" class="nixon-btn mt-4">
+        <button type="submit" id="submitBtn" class="sage-btn mt-4">
           <span id="btnText">Authorize Session →</span>
           <span id="btnLoading" class="hidden">
             <span class="spinner" style="display: inline-block;"></span>
@@ -660,7 +647,7 @@
       </form>
 
       <!-- Toggle Mode -->
-      <div class="mt-6 pt-6 border-t border-[#E5E5E5] dark:border-[#333333] text-center">
+      <div class="mt-6 pt-6 border-t border-slate-200 dark:border-[#2D3E35] text-center">
         <button type="button" id="toggleModeBtn" class="toggle-mode-btn">
           Need an account? Sign Up →
         </button>
@@ -670,8 +657,8 @@
 
     <!-- Footer -->
     <div class="relative z-10 mt-8 text-center">
-      <p class="text-[0.5rem] font-bold tracking-[0.2em] uppercase text-[#8A8A8A]">
-        🔒 Encrypted TLS 256-Bit Protocol • © 2026 FreshCart
+      <p class="text-[0.5rem] font-bold tracking-[0.2em] uppercase text-slate-500">
+        🔒 Encrypted TLS 256-Bit Protocol • © 2026 FreshCart Botanical Studio
       </p>
     </div>
 
@@ -683,14 +670,8 @@
   <script src="js/db.js"></script>
 
   <script>
-    // ==========================================
-    // 1. AUTH STATE
-    // ==========================================
     let isSignUp = false;
 
-    // ==========================================
-    // 2. PASSWORD TOGGLE
-    // ==========================================
     const passwordToggle = document.getElementById('passwordToggle');
     const passwordInput = document.getElementById('password');
     const eyeOpen = document.getElementById('eyeOpen');
@@ -703,9 +684,6 @@
       eyeClosed.classList.toggle('hidden');
     });
 
-    // ==========================================
-    // 3. TOGGLE AUTH MODE
-    // ==========================================
     const toggleModeBtn = document.getElementById('toggleModeBtn');
     const formTitle = document.getElementById('formTitle');
     const formSubtitle = document.getElementById('formSubtitle');
@@ -732,7 +710,7 @@
         showToast('📝 Switch to Sign Up mode');
       } else {
         formTitle.textContent = 'Member Login';
-        formSubtitle.textContent = 'Access your private reserve and dispatch bag';
+        formSubtitle.textContent = 'Access your private reserve and harvest bag';
         nameContainer.classList.add('hidden');
         fullNameInput.removeAttribute('required');
         btnText.textContent = 'Authorize Session →';
@@ -746,9 +724,6 @@
       }
     });
 
-    // ==========================================
-    // 4. FORM SUBMISSION
-    // ==========================================
     const authForm = document.getElementById('authForm');
     const btnLoading = document.getElementById('btnLoading');
 
@@ -812,25 +787,16 @@
       }, 1500);
     });
 
-    // ==========================================
-    // 5. SOCIAL LOGIN
-    // ==========================================
     window.socialLogin = function(provider) {
       showToast(`🔑 ${provider} authentication coming soon`);
     };
 
-    // ==========================================
-    // 6. THEME TOGGLE
-    // ==========================================
     document.getElementById('themeToggle').addEventListener('click', function() {
       const isDark = document.documentElement.classList.toggle('dark');
       localStorage.setItem('theme', isDark ? 'dark' : 'light');
       showToast(isDark ? '🌙 Dark mode enabled' : '☀️ Light mode enabled');
     });
 
-    // ==========================================
-    // 7. RTL TOGGLE
-    // ==========================================
     const rtlBtn = document.getElementById('rtlToggle');
     const savedDir = localStorage.getItem('dir') || 'ltr';
     
@@ -850,9 +816,6 @@
       showToast(newDir === 'rtl' ? '📖 RTL mode enabled' : '📖 LTR mode enabled');
     });
 
-    // ==========================================
-    // 8. PAGE SWITCHING INTERCEPTOR FOR LOGIN
-    // ==========================================
     document.addEventListener('click', (e) => {
       const link = e.target.closest('a');
       
@@ -877,9 +840,6 @@
       }
     });
 
-    // ==========================================
-    // 9. TOAST FUNCTION
-    // ==========================================
     function showToast(message) {
       let container = document.getElementById('toast-container');
       if (!container) {
@@ -890,7 +850,7 @@
       }
       
       const toast = document.createElement('div');
-      toast.className = 'pointer-events-auto bg-black text-white dark:bg-white dark:text-black px-6 py-4 text-sm font-bold tracking-[0.15em] uppercase shadow-2xl border border-[#333333] dark:border-[#E5E5E5] transform translate-y-4 opacity-0 transition-all duration-300';
+      toast.className = 'market-toast pointer-events-auto transform translate-y-4 opacity-0 transition-all duration-300';
       toast.textContent = message;
       container.appendChild(toast);
       
@@ -904,22 +864,15 @@
       }, 3000);
     }
 
-    // ==========================================
-    // 10. REMOVE ERROR STATE ON INPUT
-    // ==========================================
-    document.querySelectorAll('.nixon-input').forEach(input => {
+    document.querySelectorAll('.market-input').forEach(input => {
       input.addEventListener('input', function() {
         this.classList.remove('error');
       });
     });
 
-    // ==========================================
-    // 11. INITIALIZE RTL
-    // ==========================================
     if (savedDir === 'rtl') {
       document.documentElement.setAttribute('dir', 'rtl');
     }
-
   </script>
 
 </body>

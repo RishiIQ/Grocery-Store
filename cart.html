@@ -6,7 +6,6 @@
   <link rel="icon" type="image/png" href="assets/images/grossary-logo.png">
   <script>
   (function() {
-    // Instant Theme Init
     const savedTheme = localStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
@@ -15,12 +14,11 @@
       document.documentElement.classList.remove('dark');
     }
 
-    // Instant Direction Init
     const savedDir = localStorage.getItem('dir') || 'ltr';
     document.documentElement.setAttribute('dir', savedDir);
   })();
 </script>
-  <title>Shopping Bag — FreshCart Pro</title>
+  <title>Shopping Bag — FreshCart Botanical Studio</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -28,133 +26,161 @@
       theme: {
         extend: {
           colors: {
-            'nixon-red': '#E31837',
+            'sage-accent': '#6A8071',
+            'sage-dark': '#24302A',
+            'cream-bg': '#F7F6F2',
           }
         }
       }
     }
   </script>
   <link rel="stylesheet" href="css/style.css">
+  
+  <!-- Lenis Smooth Slow Scroll Library -->
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
   <style>
-    /* Nixon Typography & Card UI */
-    .nixon-heading {
-      font-family: 'Arial Black', 'Impact', sans-serif;
+    /* Sage & Earth-Tone Typography & Card UI */
+    .dashboard-heading {
+      font-weight: 800;
       text-transform: uppercase;
       letter-spacing: -0.02em;
     }
-    .nixon-subheading {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
+    .dashboard-subheading {
       text-transform: uppercase;
       font-size: 0.7rem;
       letter-spacing: 0.2em;
       font-weight: 700;
+      color: #6A8071;
     }
-    .nixon-card {
+    .market-card {
       background: #FFFFFF;
-      border: 1px solid #E5E5E5;
+      border: 1px solid #E2E8F0;
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      border-radius: 0px;
     }
-    .dark .nixon-card {
-      background: #1A1A1A;
-      border-color: #333333;
+    .dark .market-card {
+      background: #18221D;
+      border-color: #2D3E35;
     }
-    .nixon-card:hover {
-      border-color: #E31837;
-      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.08);
+    .market-card:hover {
+      border-color: #6A8071;
+      box-shadow: 0 16px 48px rgba(106, 128, 113, 0.15);
     }
-    .dark .nixon-card:hover {
-      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
-    }
-    .nixon-btn {
+    .sage-btn {
       display: inline-block;
       padding: 16px 32px;
-      background: #E31837;
+      background: #6A8071;
       color: #FFFFFF;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
       text-transform: uppercase;
       font-size: 0.7rem;
       font-weight: 700;
       letter-spacing: 0.15em;
       border: none;
+      border-radius: 0px;
       cursor: pointer;
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       text-align: center;
       text-decoration: none;
       width: 100%;
     }
-    .nixon-btn:hover {
-      background: #C41230;
+    .sage-btn:hover {
+      background: #576B5D;
       transform: scale(1.02);
     }
 
-    /* Dribbble-style Success Animation Styles */
+    /* Stuningly Animated Success Modal & Checkmark */
+    #successModal {
+      transition: opacity 0.4s ease, backdrop-filter 0.4s ease;
+    }
+    
+    .success-card {
+      transform: scale(0.8) translateY(20px);
+      opacity: 0;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      border-radius: 0px;
+    }
+    
+    #successModal:not(.hidden) .success-card {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+    }
+
     .success-checkmark {
-      width: 80px;
-      height: 80px;
+      width: 90px;
+      height: 90px;
       margin: 0 auto;
       position: relative;
     }
+    
     .check-icon {
-      width: 80px;
-      height: 80px;
+      width: 90px;
+      height: 90px;
       position: relative;
-      border-radius: 50%;
+      border-radius: 0%;
       box-sizing: content-box;
-      border: 4px solid #4bb71b;
+      border: 4px solid #6A8071;
+      background: rgba(106, 128, 113, 0.08);
+      box-shadow: 0 0 30px rgba(106, 128, 113, 0.3);
+      animation: pulse-ring 2s infinite;
     }
-    .check-icon::before {
-      top: 3px;
-      left: -2px;
-      width: 30px;
-      transform-origin: 100% 50%;
-      border-radius: 100px 0 0 100px;
+
+    @keyframes pulse-ring {
+      0% { box-shadow: 0 0 0 0 rgba(106, 128, 113, 0.4); }
+      70% { box-shadow: 0 0 0 20px rgba(106, 128, 113, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(106, 128, 113, 0); }
     }
-    .check-icon::after {
-      top: 0;
-      left: 30px;
-      width: 60px;
-      transform-origin: 0 50%;
-      border-radius: 0 100px 100px 0;
-      animation: rotate-circle 4.25s ease-in;
-    }
+
     .check-icon .icon-line {
       height: 5px;
-      background-color: #4bb71b;
+      background-color: #6A8071;
       display: block;
-      border-radius: 2px;
+      border-radius: 0px;
       position: absolute;
       z-index: 10;
     }
+    
     .check-icon .icon-line.line-tip {
-      top: 46px;
-      left: 14px;
+      top: 50px;
+      left: 20px;
       width: 25px;
       transform: rotate(45deg);
-      animation: icon-line-tip 0.75s;
+      animation: icon-line-tip 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
+    
     .check-icon .icon-line.line-long {
-      top: 38px;
-      right: 8px;
-      width: 47px;
+      top: 42px;
+      right: 14px;
+      width: 45px;
       transform: rotate(-45deg);
-      animation: icon-line-long 0.75s;
+      animation: icon-line-long 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
+
     @keyframes icon-line-tip {
-      0% { width: 0; left: 1px; top: 19px; }
-      54% { width: 0; left: 1px; top: 19px; }
-      70% { width: 50px; left: -8px; top: 37px; }
-      84% { width: 17px; left: 21px; top: 48px; }
-      100% { width: 25px; left: 14px; top: 46px; }
+      0% { width: 0; left: 10px; top: 30px; opacity: 0; }
+      100% { width: 25px; left: 20px; top: 50px; opacity: 1; }
     }
+
     @keyframes icon-line-long {
-      0% { width: 0; right: 46px; top: 54px; }
-      65% { width: 0; right: 46px; top: 54px; }
-      84% { width: 55px; right: 0px; top: 35px; }
-      100% { width: 47px; right: 8px; top: 38px; }
+      0% { width: 0; right: 30px; top: 40px; opacity: 0; }
+      100% { width: 45px; right: 14px; top: 42px; opacity: 1; }
+    }
+
+    .market-toast {
+      background: #24302A;
+      color: #FFFFFF;
+      padding: 14px 24px;
+      border-radius: 0px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      border-left: 4px solid #6A8071;
     }
   </style>
 </head>
-<body class="bg-white dark:bg-[#0A0A0A] text-slate-900 dark:text-white antialiased transition-colors duration-500">
+<body class="bg-cream-bg dark:bg-[#111814] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-500">
 
   <!-- Shared DB and Layout Injector Scripts -->
   <script src="js/db.js"></script>
@@ -162,9 +188,9 @@
 
   <!-- Cart Bag Main Section -->
   <main class="pt-40 pb-36 px-4 sm:px-6 lg:px-12 max-w-7xl mx-auto space-y-12">
-    <div class="border-b border-[#E5E5E5] dark:border-[#222222] pb-8">
-      <p class="nixon-subheading text-[#E31837]">( Secure Telemetry Checkout )</p>
-      <h1 class="nixon-heading text-4xl sm:text-6xl mt-2">Shopping Bag.</h1>
+    <div class="border-b border-slate-200 dark:border-[#2D3E35] pb-8">
+      <p class="dashboard-subheading">( Secure Telemetry Checkout )</p>
+      <h1 class="dashboard-heading text-4xl sm:text-6xl mt-2">Shopping Bag.</h1>
     </div>
 
     <div id="cartContainer" class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
@@ -174,40 +200,40 @@
 
   <!-- Payment Modal Container -->
   <div id="paymentModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden">
-    <div class="nixon-card p-8 max-w-md w-full mx-4 space-y-6 relative">
-      <div class="flex justify-between items-center border-b border-[#E5E5E5] dark:border-[#333333] pb-4">
-        <h3 class="nixon-heading text-xl">Secure Payment Gateway</h3>
-        <button onclick="closePaymentModal()" class="text-[#8A8A8A] hover:text-[#E31837] font-bold text-lg">✕</button>
+    <div class="market-card p-8 max-w-md w-full mx-4 space-y-6 relative">
+      <div class="flex justify-between items-center border-b border-slate-200 dark:border-[#2D3E35] pb-4">
+        <h3 class="dashboard-heading text-xl">Secure Payment Gateway</h3>
+        <button onclick="closePaymentModal()" class="text-slate-400 hover:text-[#6A8071] font-bold text-lg cursor-pointer">✕</button>
       </div>
       <div class="space-y-4">
         <div>
-          <label class="block text-[0.6rem] font-bold uppercase tracking-[0.15em] text-[#8A8A8A] mb-1">Cardholder Name</label>
-          <input type="text" id="cardName" placeholder="JUSTIN MASON" class="w-full px-4 py-3 bg-transparent border border-[#E5E5E5] dark:border-[#333333] text-xs font-bold uppercase tracking-wider outline-none focus:border-[#E31837]">
+          <label class="block text-[0.6rem] font-bold uppercase tracking-[0.15em] text-slate-500 mb-1">Cardholder Name</label>
+          <input type="text" id="cardName" placeholder="JUSTIN MASON" class="w-full px-4 py-3 bg-transparent border border-slate-200 dark:border-[#2D3E35] text-xs font-bold uppercase tracking-wider outline-none focus:border-[#6A8071]">
         </div>
         <div>
-          <label class="block text-[0.6rem] font-bold uppercase tracking-[0.15em] text-[#8A8A8A] mb-1">Card Number</label>
-          <input type="text" id="cardNumber" placeholder="4242 •••• •••• 4242" maxlength="19" class="w-full px-4 py-3 bg-transparent border border-[#E5E5E5] dark:border-[#333333] text-xs font-bold uppercase tracking-wider outline-none focus:border-[#E31837]">
+          <label class="block text-[0.6rem] font-bold uppercase tracking-[0.15em] text-slate-500 mb-1">Card Number</label>
+          <input type="text" id="cardNumber" placeholder="4242 •••• •••• 4242" maxlength="19" class="w-full px-4 py-3 bg-transparent border border-slate-200 dark:border-[#2D3E35] text-xs font-bold uppercase tracking-wider outline-none focus:border-[#6A8071]">
         </div>
         <div class="grid grid-cols-2 gap-4">
           <div>
-            <label class="block text-[0.6rem] font-bold uppercase tracking-[0.15em] text-[#8A8A8A] mb-1">Expiry Date</label>
-            <input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5" class="w-full px-4 py-3 bg-transparent border border-[#E5E5E5] dark:border-[#333333] text-xs font-bold uppercase tracking-wider outline-none focus:border-[#E31837]">
+            <label class="block text-[0.6rem] font-bold uppercase tracking-[0.15em] text-slate-500 mb-1">Expiry Date</label>
+            <input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5" class="w-full px-4 py-3 bg-transparent border border-slate-200 dark:border-[#2D3E35] text-xs font-bold uppercase tracking-wider outline-none focus:border-[#6A8071]">
           </div>
           <div>
-            <label class="block text-[0.6rem] font-bold uppercase tracking-[0.15em] text-[#8A8A8A] mb-1">CVV Security</label>
-            <input type="password" id="cardCvv" placeholder="•••" maxlength="4" class="w-full px-4 py-3 bg-transparent border border-[#E5E5E5] dark:border-[#333333] text-xs font-bold uppercase tracking-wider outline-none focus:border-[#E31837]">
+            <label class="block text-[0.6rem] font-bold uppercase tracking-[0.15em] text-slate-500 mb-1">CVV Security</label>
+            <input type="password" id="cardCvv" placeholder="•••" maxlength="4" class="w-full px-4 py-3 bg-transparent border border-slate-200 dark:border-[#2D3E35] text-xs font-bold uppercase tracking-wider outline-none focus:border-[#6A8071]">
           </div>
         </div>
       </div>
-      <button onclick="confirmPayment()" class="nixon-btn mt-4">
+      <button onclick="confirmPayment()" class="sage-btn mt-4">
         Authorize & Pay Now →
       </button>
     </div>
   </div>
 
-  <!-- Success Animation Modal Container -->
-  <div id="successModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md hidden">
-    <div class="nixon-card p-10 max-w-sm w-full mx-4 text-center space-y-6">
+  <!-- Stunning Success Animation Modal -->
+  <div id="successModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-xl hidden">
+    <div class="market-card success-card p-10 max-w-sm w-full mx-4 text-center space-y-6">
       <div class="success-checkmark">
         <div class="check-icon">
           <span class="icon-line line-tip"></span>
@@ -215,17 +241,32 @@
         </div>
       </div>
       <div class="space-y-2">
-        <h3 class="nixon-heading text-2xl">Payment Successful!</h3>
-        <p class="text-[0.65rem] font-['Helvetica_Neue'] uppercase tracking-[0.15em] text-[#8A8A8A]">Cold-chain telemetry dispatch initiated.</p>
+        <h3 class="dashboard-heading text-2xl">Payment Authorized!</h3>
+        <p class="text-[0.65rem] uppercase tracking-[0.15em] text-slate-400">Cold-chain telemetry dispatch initiated.</p>
       </div>
       <div class="pt-2">
-        <span class="text-xs font-mono text-[#E31837] uppercase font-bold animate-pulse">Redirecting to portal...</span>
+        <span class="text-xs font-mono text-[#6A8071] uppercase font-bold animate-pulse">Syncing logistics node...</span>
       </div>
     </div>
   </div>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // 1. Initialize Lenis Slow Smooth Scrolling
+      const lenis = new Lenis({
+        duration: 2.0,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        direction: 'vertical',
+        smooth: true,
+        mouseMultiplier: 0.75,
+      });
+
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
+
       const container = document.getElementById('cartContainer');
       if (!container || !window.FreshCartDB) return;
 
@@ -236,10 +277,10 @@
 
         if (cart.length === 0) {
           container.innerHTML = `
-            <div class="col-span-full py-20 text-center space-y-6 nixon-card p-12">
-              <h2 class="nixon-heading text-2xl">Your bag is currently empty.</h2>
-              <p class="text-xs font-['Helvetica_Neue'] uppercase tracking-[0.15em] text-[#8A8A8A]">Explore our marketplace to add organic farm provisions.</p>
-              <a href="shop.html" class="inline-block px-8 py-4 bg-black text-white dark:bg-white dark:text-black font-['Helvetica_Neue'] text-xs font-bold tracking-[0.15em] uppercase hover:bg-[#E31837] hover:text-white transition-all">Explore Marketplace →</a>
+            <div class="col-span-full py-20 text-center space-y-6 market-card p-12">
+              <h2 class="dashboard-heading text-2xl">Your bag is currently empty.</h2>
+              <p class="text-xs uppercase tracking-[0.15em] text-slate-500">Explore our botanical marketplace to add organic farm provisions.</p>
+              <a href="shop.html" class="inline-block px-8 py-4 bg-[#24302A] text-white dark:bg-white dark:text-[#24302A] text-xs font-bold tracking-[0.15em] uppercase hover:bg-[#6A8071] transition-all">Explore Marketplace →</a>
             </div>
           `;
           return;
@@ -253,24 +294,24 @@
           subtotal += itemTotal;
 
           return `
-            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-6 nixon-card gap-6">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-6 market-card gap-6">
               <div class="flex items-center gap-6">
-                <img src="${product.image}" alt="${product.name}" class="w-20 h-20 object-cover border border-[#E5E5E5] dark:border-[#333333]">
+                <img src="${product.image}" alt="${product.name}" class="w-20 h-20 object-cover border border-slate-200 dark:border-[#2D3E35]">
                 <div class="space-y-1">
-                  <a href="product-detail.html?id=${product.id}" class="font-['Helvetica_Neue'] text-sm font-bold uppercase tracking-wide hover:text-[#E31837] transition-colors">${product.name}</a>
-                  <p class="text-[0.6rem] font-bold uppercase tracking-[0.15em] text-[#8A8A8A]">Sector / ${product.category}</p>
+                  <a href="product-detail.html?id=${product.id}" class="text-sm font-bold uppercase tracking-wide hover:text-[#6A8071] transition-colors">${product.name}</a>
+                  <p class="text-[0.6rem] font-bold uppercase tracking-[0.15em] text-slate-500">Parcel / ${product.category}</p>
                   <p class="text-xs font-bold uppercase tracking-wider">$${product.price.toFixed(2)} each</p>
                 </div>
               </div>
 
               <div class="flex items-center gap-6 w-full sm:w-auto justify-between sm:justify-end">
-                <div class="flex items-center border border-[#E5E5E5] dark:border-[#333333] overflow-hidden text-xs">
-                  <button onclick="updateQty('${product.id}', ${cartItem.qty - 1})" class="px-3.5 py-2 hover:bg-[#E31837] hover:text-white transition-colors">-</button>
+                <div class="flex items-center border border-slate-200 dark:border-[#2D3E35] overflow-hidden text-xs">
+                  <button onclick="updateQty('${product.id}', ${cartItem.qty - 1})" class="px-3.5 py-2 hover:bg-[#6A8071] hover:text-white transition-colors cursor-pointer">-</button>
                   <span class="px-4 py-2 font-bold">${cartItem.qty}</span>
-                  <button onclick="updateQty('${product.id}', ${cartItem.qty + 1})" class="px-3.5 py-2 hover:bg-[#E31837] hover:text-white transition-colors">+</button>
+                  <button onclick="updateQty('${product.id}', ${cartItem.qty + 1})" class="px-3.5 py-2 hover:bg-[#6A8071] hover:text-white transition-colors cursor-pointer">+</button>
                 </div>
-                <span class="font-['Arial_Black'] text-lg w-24 text-right">$${itemTotal.toFixed(2)}</span>
-                <button onclick="removeItem('${product.id}')" class="text-[0.6rem] font-bold uppercase tracking-[0.15em] text-[#E31837] hover:underline">Remove</button>
+                <span class="font-extrabold text-lg w-24 text-right">$${itemTotal.toFixed(2)}</span>
+                <button onclick="removeItem('${product.id}')" class="text-[0.6rem] font-bold uppercase tracking-[0.15em] text-red-500 hover:underline cursor-pointer">Remove</button>
               </div>
             </div>
           `;
@@ -287,30 +328,30 @@
           </div>
 
           <!-- Order Summary Ledger -->
-          <div class="lg:col-span-4 nixon-card p-8 space-y-6 sticky top-28">
-            <h3 class="nixon-heading text-xl border-b border-[#E5E5E5] dark:border-[#333333] pb-4">Order Summary</h3>
+          <div class="lg:col-span-4 market-card p-8 space-y-6 sticky top-28">
+            <h3 class="dashboard-heading text-xl border-b border-slate-200 dark:border-[#2D3E35] pb-4">Order Summary</h3>
             
-            <div class="space-y-3 text-xs font-bold uppercase tracking-[0.1em] text-[#8A8A8A]">
+            <div class="space-y-3 text-xs font-bold uppercase tracking-[0.1em] text-slate-500">
               <div class="flex justify-between">
                 <span>Subtotal</span>
-                <span class="text-black dark:text-white">$${subtotal.toFixed(2)}</span>
+                <span class="text-slate-900 dark:text-white">$${subtotal.toFixed(2)}</span>
               </div>
               <div class="flex justify-between">
                 <span>Cold-Chain Shipping</span>
-                <span class="text-black dark:text-white">${shipping === 0 ? 'FREE (Over $50)' : '$' + shipping.toFixed(2)}</span>
+                <span class="text-slate-900 dark:text-white">${shipping === 0 ? 'FREE (Over $50)' : '$' + shipping.toFixed(2)}</span>
               </div>
               <div class="flex justify-between">
                 <span>Estimated Tax (8%)</span>
-                <span class="text-black dark:text-white">$${tax.toFixed(2)}</span>
+                <span class="text-slate-900 dark:text-white">$${tax.toFixed(2)}</span>
               </div>
             </div>
 
-            <div class="border-t border-[#E5E5E5] dark:border-[#333333] pt-4 flex justify-between items-center font-['Arial_Black'] text-xl">
+            <div class="border-t border-slate-200 dark:border-[#2D3E35] pt-4 flex justify-between items-center font-extrabold text-xl">
               <span>Grand Total</span>
-              <span class="text-[#E31837]">$${calculatedGrandTotal.toFixed(2)}</span>
+              <span class="text-[#6A8071]">$${calculatedGrandTotal.toFixed(2)}</span>
             </div>
 
-            <button onclick="openPaymentModal()" class="nixon-btn">
+            <button onclick="openPaymentModal()" class="sage-btn">
               Proceed to Secure Checkout →
             </button>
           </div>
@@ -334,13 +375,13 @@
         cart = cart.filter(item => item.id !== productId);
         FreshCartDB.saveCart(cart);
         renderCart();
-        FreshCartUI.showToast("✓ Item removed from bag");
+        showToast("✓ Item removed from bag");
       };
 
       window.openPaymentModal = () => {
         const cart = FreshCartDB.getCart();
         if (cart.length === 0) {
-          FreshCartUI.showToast("⚠️ Your bag is empty.");
+          showToast("⚠️ Your bag is empty.");
           return;
         }
         document.getElementById('paymentModal').classList.remove('hidden');
@@ -357,11 +398,10 @@
         const cardCvv = document.getElementById('cardCvv').value.trim();
 
         if (!cardName || !cardNumber || !cardExpiry || !cardCvv) {
-          FreshCartUI.showToast("⚠️ Please fill in all payment details.");
+          showToast("⚠️ Please fill in all payment details.");
           return;
         }
 
-        // Close payment modal and show success checkmark animation modal
         closePaymentModal();
         document.getElementById('successModal').classList.remove('hidden');
 
@@ -370,8 +410,27 @@
 
         setTimeout(() => {
           window.location.href = 'index.html';
-        }, 3000);
+        }, 3200);
       };
+
+      function showToast(message) {
+        let container = document.getElementById('toast-container');
+        if (!container) {
+          container = document.createElement('div');
+          container.id = 'toast-container';
+          container.className = 'fixed bottom-8 right-8 z-50 flex flex-col gap-3 pointer-events-none';
+          document.body.appendChild(container);
+        }
+        const toast = document.createElement('div');
+        toast.className = 'market-toast pointer-events-auto transform translate-y-4 opacity-0 transition-all duration-300';
+        toast.textContent = message;
+        container.appendChild(toast);
+        requestAnimationFrame(() => toast.classList.remove('translate-y-4', 'opacity-0'));
+        setTimeout(() => {
+          toast.classList.add('translate-y-4', 'opacity-0');
+          setTimeout(() => toast.remove(), 400);
+        }, 2500);
+      }
 
       renderCart();
     });

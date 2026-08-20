@@ -3,11 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Article — FreshCart Journal</title>
+  <title>Article — FreshCart Botanical Journal</title>
   <link rel="icon" type="image/png" href="assets/images/grossary-logo.png">
   <script>
   (function() {
-    // Instant Theme Init
     const savedTheme = localStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
@@ -16,7 +15,6 @@
       document.documentElement.classList.remove('dark');
     }
 
-    // Instant Direction Init
     const savedDir = localStorage.getItem('dir') || 'ltr';
     document.documentElement.setAttribute('dir', savedDir);
   })();
@@ -29,7 +27,9 @@
       theme: {
         extend: {
           colors: {
-            'nixon-red': '#E31837',
+            'sage-accent': '#6A8071',
+            'sage-dark': '#24302A',
+            'cream-bg': '#F7F6F2',
           }
         }
       }
@@ -39,16 +39,18 @@
   <!-- Styles -->
   <link rel="stylesheet" href="css/style.css">
   
+  <!-- Lenis Smooth Slow Scroll Library -->
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  
   <style>
     /* ============================================
-       NIXON-STYLE ARTICLE DETAIL
+       SAGE & EARTH-TONE ARTICLE DETAIL
        ============================================ */
     
-    /* Article hero with gradient */
     .article-hero {
       position: relative;
       overflow: hidden;
-      background: #000000;
+      background: #24302A;
     }
     
     .article-hero::before {
@@ -56,8 +58,8 @@
       position: absolute;
       inset: 0;
       background-image: 
-        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
       background-size: 50px 50px;
       pointer-events: none;
     }
@@ -72,15 +74,15 @@
     }
     
     @keyframes orbFloatSlow {
-      0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
-      33% { transform: translate(50px, -30px) scale(1.1); opacity: 0.5; }
-      66% { transform: translate(-30px, 40px) scale(0.9); opacity: 0.4; }
+      0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.2; }
+      33% { transform: translate(50px, -30px) scale(1.1); opacity: 0.4; }
+      66% { transform: translate(-30px, 40px) scale(0.9); opacity: 0.3; }
     }
     
     .orb-article-1 {
       width: 500px;
       height: 500px;
-      background: rgba(227, 24, 55, 0.06);
+      background: rgba(106, 128, 113, 0.15);
       top: -150px;
       right: -150px;
       animation: orbFloatSlow 10s ease-in-out infinite;
@@ -89,78 +91,74 @@
     .orb-article-2 {
       width: 350px;
       height: 350px;
-      background: rgba(227, 24, 55, 0.04);
+      background: rgba(106, 128, 113, 0.1);
       bottom: -100px;
       left: -100px;
       animation: orbFloatSlow 12s ease-in-out infinite reverse;
     }
     
-    /* Nixon typography */
-    .nixon-heading {
-      font-family: 'Arial Black', 'Impact', sans-serif;
+    .article-heading {
+      font-weight: 800;
       text-transform: uppercase;
       letter-spacing: -0.02em;
       line-height: 0.95;
     }
     
-    .nixon-subheading {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
+    .article-subheading {
       text-transform: uppercase;
       font-size: 0.7rem;
       letter-spacing: 0.2em;
       font-weight: 700;
+      color: #6A8071;
     }
     
-    .nixon-body {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
+    .article-body {
       font-size: 1.05rem;
       line-height: 1.9;
-      color: #333333;
+      color: #334155;
     }
     
-    .dark .nixon-body {
-      color: #CCCCCC;
+    .dark .article-body {
+      color: #94A3B8;
     }
     
-    /* Article content styling */
     .article-content {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
       font-size: 1.05rem;
       line-height: 1.9;
-      color: #333333;
+      color: #334155;
     }
     
     .dark .article-content {
-      color: #CCCCCC;
+      color: #94A3B8;
     }
     
     .article-content h2 {
-      font-family: 'Arial Black', 'Impact', sans-serif;
+      font-weight: 800;
       text-transform: uppercase;
       font-size: 1.8rem;
       letter-spacing: -0.02em;
       line-height: 1.2;
-      color: #000000;
+      color: #0F172A;
       margin-top: 2.5rem;
       margin-bottom: 1rem;
     }
     
     .dark .article-content h2 {
-      color: #FFFFFF;
+      color: #F8FAFC;
     }
     
     .article-content h3 {
-      font-family: 'Arial Black', 'Impact', sans-serif;
+      font-weight: 800;
       text-transform: uppercase;
       font-size: 1.3rem;
       letter-spacing: -0.02em;
-      color: #000000;
+      color: #0F172A;
       margin-top: 2rem;
       margin-bottom: 0.75rem;
     }
     
     .dark .article-content h3 {
-      color: #FFFFFF;
+      color: #F8FAFC;
     }
     
     .article-content p {
@@ -168,19 +166,19 @@
     }
     
     .article-content .pull-quote {
-      font-family: 'Arial Black', 'Impact', sans-serif;
+      font-weight: 800;
       font-size: 1.5rem;
       text-transform: uppercase;
       letter-spacing: -0.02em;
       line-height: 1.2;
-      color: #000000;
-      border-left: 4px solid #E31837;
+      color: #0F172A;
+      border-left: 4px solid #6A8071;
       padding-left: 1.5rem;
       margin: 2rem 0;
     }
     
     .dark .article-content .pull-quote {
-      color: #FFFFFF;
+      color: #F8FAFC;
     }
     
     .article-content ul, 
@@ -193,22 +191,23 @@
     }
     
     .article-content .highlight-box {
-      background: #F5F5F5;
-      border: 1px solid #E5E5E5;
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
       padding: 2rem;
       margin: 2rem 0;
+      border-radius: 0px;
     }
     
     .dark .article-content .highlight-box {
-      background: #1A1A1A;
-      border-color: #333333;
+      background: #18221D;
+      border-color: #2D3E35;
     }
     
     .article-content .highlight-box h4 {
-      font-family: 'Arial Black', 'Impact', sans-serif;
+      font-weight: 800;
       text-transform: uppercase;
       font-size: 1rem;
-      color: #E31837;
+      color: #6A8071;
       margin-bottom: 0.5rem;
     }
     
@@ -217,6 +216,7 @@
       position: relative;
       overflow: hidden;
       margin: 2rem 0;
+      border-radius: 0px;
     }
     
     .article-image-wrap img {
@@ -229,41 +229,17 @@
     }
     
     .article-image-wrap .caption {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
       font-size: 0.75rem;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      color: #8A8A8A;
+      color: #64748B;
       padding: 0.75rem 0 0;
       text-align: center;
-      border-bottom: 1px solid #E5E5E5;
+      border-bottom: 1px solid #E2E8F0;
     }
     
     .dark .article-image-wrap .caption {
-      border-color: #333333;
-    }
-    
-    /* Meta tags */
-    .meta-tag {
-      display: inline-block;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-size: 0.6rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: #8A8A8A;
-      padding: 4px 12px;
-      border: 1px solid #E5E5E5;
-      transition: all 0.3s ease;
-    }
-    
-    .dark .meta-tag {
-      border-color: #333333;
-    }
-    
-    .meta-tag:hover {
-      border-color: #E31837;
-      color: #E31837;
+      border-color: #2D3E35;
     }
     
     /* Share buttons */
@@ -272,25 +248,25 @@
       align-items: center;
       gap: 8px;
       padding: 8px 16px;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
       font-size: 0.6rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.15em;
-      color: #000000;
-      border: 1px solid #E5E5E5;
+      color: #0F172A;
+      border: 1px solid #E2E8F0;
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       text-decoration: none;
+      border-radius: 0px;
     }
     
     .dark .share-btn {
-      color: #FFFFFF;
-      border-color: #333333;
+      color: #F8FAFC;
+      border-color: #2D3E35;
     }
     
     .share-btn:hover {
-      border-color: #E31837;
-      color: #E31837;
+      border-color: #6A8071;
+      color: #6A8071;
       transform: translateY(-2px);
     }
     
@@ -299,27 +275,22 @@
       display: inline-flex;
       align-items: center;
       gap: 12px;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
       font-size: 0.6rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.15em;
-      color: #000000;
+      color: #0F172A;
       text-decoration: none;
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       padding: 12px 0;
     }
     
     .dark .nav-arrow {
-      color: #FFFFFF;
+      color: #F8FAFC;
     }
     
     .nav-arrow:hover {
-      color: #E31837;
-      gap: 16px;
-    }
-    
-    .nav-arrow.prev:hover {
+      color: #6A8071;
       gap: 16px;
     }
     
@@ -329,87 +300,86 @@
       top: 70px;
       left: 0;
       height: 3px;
-      background: #E31837;
+      background: #6A8071;
       width: 0%;
       z-index: 100;
       transition: width 0.05s linear;
-      box-shadow: 0 0 20px rgba(227, 24, 55, 0.3);
+      box-shadow: 0 0 20px rgba(106, 128, 113, 0.3);
     }
     
     /* Reading time indicator */
     .reading-time {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
       font-size: 0.6rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.15em;
-      color: #8A8A8A;
+      color: #94A3B8;
     }
     
     /* Author bio */
     .author-bio {
-      background: #F5F5F5;
-      border: 1px solid #E5E5E5;
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
       padding: 2rem;
       margin-top: 3rem;
+      border-radius: 0px;
     }
     
     .dark .author-bio {
-      background: #1A1A1A;
-      border-color: #333333;
+      background: #18221D;
+      border-color: #2D3E35;
     }
     
     .author-bio .avatar {
       width: 64px;
       height: 64px;
-      border-radius: 50%;
-      background: #E31837;
+      border-radius: 0px;
+      background: #6A8071;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: 'Arial Black', 'Impact', sans-serif;
+      font-weight: 800;
       font-size: 1.5rem;
       color: #FFFFFF;
     }
     
     /* Related articles */
     .related-card {
-      border: 1px solid #E5E5E5;
+      border: 1px solid #E2E8F0;
       padding: 1.5rem;
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       text-decoration: none;
       display: block;
+      border-radius: 0px;
+      background: #FFFFFF;
     }
     
     .dark .related-card {
-      border-color: #333333;
+      background: #18221D;
+      border-color: #2D3E35;
     }
     
     .related-card:hover {
-      border-color: #E31837;
+      border-color: #6A8071;
       transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
-    }
-    
-    .dark .related-card:hover {
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 12px 40px rgba(106, 128, 113, 0.15);
     }
     
     .related-card h4 {
-      font-family: 'Arial Black', 'Impact', sans-serif;
+      font-weight: 800;
       text-transform: uppercase;
       font-size: 0.9rem;
       letter-spacing: -0.02em;
-      color: #000000;
+      color: #0F172A;
       transition: color 0.3s ease;
     }
     
     .dark .related-card h4 {
-      color: #FFFFFF;
+      color: #F8FAFC;
     }
     
     .related-card:hover h4 {
-      color: #E31837;
+      color: #6A8071;
     }
     
     /* Scroll reveal */
@@ -427,62 +397,22 @@
     .reveal-on-scroll.delay-1 { transition-delay: 0.1s; }
     .reveal-on-scroll.delay-2 { transition-delay: 0.2s; }
     .reveal-on-scroll.delay-3 { transition-delay: 0.3s; }
-    
-    /* Responsive */
-    @media (max-width: 768px) {
-      .article-content {
-        font-size: 0.95rem;
-      }
-      .article-content h2 {
-        font-size: 1.4rem;
-      }
-      .article-content .pull-quote {
-        font-size: 1.2rem;
-        padding-left: 1rem;
-      }
-      .author-bio {
-        padding: 1.5rem;
-      }
-      .related-card {
-        padding: 1rem;
-      }
-    }
-    
-    @media (max-width: 480px) {
-      .article-content {
-        font-size: 0.9rem;
-      }
-      .article-content h2 {
-        font-size: 1.2rem;
-      }
-      .article-content .pull-quote {
-        font-size: 1rem;
-      }
-    }
-    
-    /* Reduced motion */
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
-      }
-      .reveal-on-scroll {
-        opacity: 1 !important;
-        transform: none !important;
-      }
-      .article-image-wrap:hover img {
-        transform: none !important;
-      }
+
+    .market-toast {
+      background: #24302A;
+      color: #FFFFFF;
+      padding: 14px 24px;
+      border-radius: 0px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      border-left: 4px solid #6A8071;
     }
   </style>
 </head>
-<body>
-
-  <!-- ============================================ -->
-  <!-- HEADER INJECTED BY layout.js -->
-  <!-- ============================================ -->
+<body class="bg-cream-bg dark:bg-[#111814] text-slate-900 dark:text-slate-100 antialiased">
 
   <!-- Scroll Progress Bar -->
   <div class="scroll-progress" id="scrollProgress"></div>
@@ -495,7 +425,7 @@
     <!-- ========================================== -->
     <!-- ARTICLE HERO -->
     <!-- ========================================== -->
-    <section id="articleHero" class="article-hero min-h-[50vh] flex items-center relative">
+    <section id="articleHero" class="article-hero min-h-[50vh] flex items-center relative text-white">
       
       <!-- Glow Orbs -->
       <div class="hero-orb orb-article-1"></div>
@@ -521,7 +451,7 @@
     <!-- ========================================== -->
     <!-- AUTHOR BIO & SHARE -->
     <!-- ========================================== -->
-    <section class="py-8 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto border-t border-[#E5E5E5] dark:border-[#222222]">
+    <section class="py-8 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto border-t border-slate-200 dark:border-[#2D3E35]">
       
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
         
@@ -530,8 +460,8 @@
           <div class="flex items-start gap-4">
             <div class="avatar">F</div>
             <div>
-              <h4 class="font-['Arial_Black'] text-sm uppercase">FreshCart Studio</h4>
-              <p class="text-sm text-[#8A8A8A] mt-1 leading-relaxed">
+              <h4 class="font-extrabold text-sm uppercase">FreshCart Botanical Studio</h4>
+              <p class="text-sm text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
                 Research and editorial team exploring the intersection of cold-chain logistics, regenerative agriculture, and autonomous delivery systems.
               </p>
             </div>
@@ -540,7 +470,7 @@
 
         <!-- Share -->
         <div class="reveal-on-scroll delay-2">
-          <p class="text-xs font-bold tracking-[0.2em] uppercase text-[#8A8A8A] mb-4">Share This Article</p>
+          <p class="text-xs font-bold tracking-[0.2em] uppercase text-slate-500 mb-4">Share This Article</p>
           <div class="flex flex-wrap gap-3">
             <a href="#" class="share-btn">
               <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -569,12 +499,12 @@
     <!-- ========================================== -->
     <!-- RELATED ARTICLES -->
     <!-- ========================================== -->
-    <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto border-t border-[#E5E5E5] dark:border-[#222222]">
+    <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto border-t border-slate-200 dark:border-[#2D3E35]">
       
       <div class="text-center mb-12">
-        <p class="nixon-subheading text-[#E31837]">Related Reading</p>
-        <h2 class="nixon-heading text-2xl sm:text-3xl mt-2">More From The Journal</h2>
-        <div class="w-12 h-0.5 bg-[#E31837] mx-auto mt-4"></div>
+        <p class="article-subheading">Related Reading</p>
+        <h2 class="article-heading text-2xl sm:text-3xl mt-2">More From The Journal</h2>
+        <div class="w-12 h-0.5 bg-[#6A8071] mx-auto mt-4"></div>
       </div>
 
       <div id="relatedArticles" class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -586,7 +516,7 @@
     <!-- ========================================== -->
     <!-- BACK NAVIGATION -->
     <!-- ========================================== -->
-    <section class="py-8 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto border-t border-[#E5E5E5] dark:border-[#222222]">
+    <section class="py-8 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto border-t border-slate-200 dark:border-[#2D3E35]">
       <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
         <a href="blog.html" class="nav-arrow prev">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -594,15 +524,11 @@
           </svg>
           Back to Journal
         </a>
-        <span class="text-xs font-bold tracking-[0.15em] uppercase text-[#8A8A8A]">FreshCart Studio Research</span>
+        <span class="text-xs font-bold tracking-[0.15em] uppercase text-slate-500">FreshCart Botanical Research</span>
       </div>
     </section>
 
   </main>
-
-  <!-- ============================================ -->
-  <!-- FOOTER INJECTED BY layout.js -->
-  <!-- ============================================ -->
 
   <!-- ============================================ -->
   <!-- SCRIPTS -->
@@ -612,15 +538,27 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // 1. Initialize Lenis Slow Smooth Scrolling
+      const lenis = new Lenis({
+        duration: 2.0,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        direction: 'vertical',
+        smooth: true,
+        mouseMultiplier: 0.75,
+      });
+
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
+
       const headerContainer = document.getElementById('articleHeader');
       const bodyContainer = document.getElementById('articleBody');
       const relatedContainer = document.getElementById('relatedArticles');
       
       if (!headerContainer || !bodyContainer || !window.FreshCartDB) return;
 
-      // ==========================================
-      // 1. READ SLUG FROM URL
-      // ==========================================
       const urlParams = new URLSearchParams(window.location.search);
       const postSlug = urlParams.get('slug');
 
@@ -630,9 +568,9 @@
       if (!post) {
         document.querySelector('#articleHero').innerHTML = `
           <div class="py-20 text-center space-y-6 max-w-4xl mx-auto px-4">
-            <h1 class="nixon-heading text-4xl">Dispatch Not Found</h1>
-            <p class="nixon-body text-[#8A8A8A]">The requested journal entry may have been archived or does not exist.</p>
-            <a href="blog.html" class="inline-block px-8 py-4 bg-black text-white font-['Helvetica_Neue'] text-xs font-bold tracking-[0.15em] uppercase hover:bg-[#E31837] transition-all">
+            <h1 class="article-heading text-4xl">Dispatch Not Found</h1>
+            <p class="article-body text-slate-400">The requested journal entry may have been archived or does not exist.</p>
+            <a href="blog.html" class="inline-block px-8 py-4 bg-[#24302A] text-white dark:bg-white dark:text-[#24302A] text-xs font-bold tracking-[0.15em] uppercase hover:bg-[#6A8071] transition-all">
               Return to Journal →
             </a>
           </div>
@@ -640,41 +578,28 @@
         return;
       }
 
-      // ==========================================
-      // 2. RENDER ARTICLE HEADER
-      // ==========================================
       headerContainer.innerHTML = `
-        <div class="inline-flex items-center gap-3 px-4 py-2 border border-[#E5E5E5] dark:border-[#333333] text-[#E31837] text-xs font-bold tracking-[0.2em] uppercase">
+        <div class="inline-flex items-center gap-3 px-4 py-2 border border-white/20 text-[#8FA89B] text-xs font-bold tracking-[0.2em] uppercase">
           <span>${post.category}</span>
-          <span class="text-[#8A8A8A]">•</span>
-          <span class="text-[#8A8A8A]">${post.date}</span>
+          <span class="text-slate-400">•</span>
+          <span class="text-slate-400">${post.date}</span>
         </div>
-        <h1 class="nixon-heading text-white text-4xl sm:text-5xl lg:text-6xl">${post.title}</h1>
+        <h1 class="article-heading text-white text-4xl sm:text-5xl lg:text-6xl">${post.title}</h1>
         <div class="flex items-center justify-center gap-6">
           <span class="reading-time">📖 ${post.readTime || '4 Min Read'}</span>
         </div>
       `;
 
-      // ==========================================
-      // 3. RENDER ARTICLE BODY
-      // ==========================================
       bodyContainer.innerHTML = `
-        <!-- Featured Image -->
         <div class="article-image-wrap reveal-on-scroll">
-          <img 
-            src="${post.image}" 
-            alt="${post.title}" 
-            loading="lazy"
-          >
+          <img src="${post.image}" alt="${post.title}" loading="lazy">
           <div class="caption">Featured Image • ${post.category}</div>
         </div>
 
-        <!-- Pull Quote / Excerpt -->
         <div class="pull-quote reveal-on-scroll delay-1">
           "${post.excerpt}"
         </div>
 
-        <!-- Article Content -->
         <div class="reveal-on-scroll delay-2">
           <p>
             In modern metropolitan grocery distribution, maintaining strict thermal integrity from farm gate to consumer doorstep represents one of the most complex logistical challenges in supply chain engineering. Traditional wholesale pathways often suffer from multi-tiered transit delays, exposing perishable organic harvests to unmonitored thermal fluctuations.
@@ -704,27 +629,21 @@
         </div>
       `;
 
-      // ==========================================
-      // 4. RENDER RELATED ARTICLES
-      // ==========================================
       const relatedPosts = allPosts
         .filter(p => p.slug !== postSlug)
         .slice(0, 3);
 
       relatedContainer.innerHTML = relatedPosts.map(p => `
         <a href="blog-detail.html?slug=${p.slug}" class="related-card reveal-on-scroll">
-          <div class="text-xs font-bold tracking-[0.15em] uppercase text-[#E31837]">${p.category}</div>
+          <div class="text-xs font-bold tracking-[0.15em] uppercase text-[#6A8071]">${p.category}</div>
           <h4 class="mt-2">${p.title}</h4>
           <div class="flex items-center justify-between mt-3">
-            <span class="text-xs text-[#8A8A8A]">${p.date}</span>
-            <span class="text-xs font-bold tracking-[0.1em] uppercase text-[#E31837]">Read →</span>
+            <span class="text-xs text-slate-500">${p.date}</span>
+            <span class="text-xs font-bold tracking-[0.1em] uppercase text-[#6A8071]">Read →</span>
           </div>
         </a>
       `).join('');
 
-      // ==========================================
-      // 5. SCROLL PROGRESS BAR
-      // ==========================================
       const progressBar = document.getElementById('scrollProgress');
       
       window.addEventListener('scroll', () => {
@@ -734,9 +653,6 @@
         progressBar.style.width = progress + '%';
       });
 
-      // ==========================================
-      // 6. SCROLL REVEAL
-      // ==========================================
       const revealElements = document.querySelectorAll('.reveal-on-scroll');
       
       const revealObserver = new IntersectionObserver((entries) => {
@@ -752,9 +668,6 @@
 
       revealElements.forEach(el => revealObserver.observe(el));
 
-      // ==========================================
-      // 7. TOAST FUNCTION
-      // ==========================================
       function showToast(message) {
         let container = document.getElementById('toast-container');
         if (!container) {
@@ -765,7 +678,7 @@
         }
         
         const toast = document.createElement('div');
-        toast.className = 'pointer-events-auto bg-black text-white dark:bg-white dark:text-black px-6 py-4 text-sm font-bold tracking-[0.15em] uppercase shadow-2xl border border-[#333333] dark:border-[#E5E5E5] transform translate-y-4 opacity-0 transition-all duration-300';
+        toast.className = 'market-toast pointer-events-auto transform translate-y-4 opacity-0 transition-all duration-300';
         toast.textContent = message;
         container.appendChild(toast);
         
@@ -779,14 +692,12 @@
         }, 2500);
       }
 
-      // Share button functionality
       document.querySelectorAll('.share-btn').forEach(btn => {
         btn.addEventListener('click', function(e) {
           e.preventDefault();
           showToast('📋 Link copied to clipboard');
         });
       });
-
     });
   </script>
 

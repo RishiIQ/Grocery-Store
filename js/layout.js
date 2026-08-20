@@ -18,12 +18,12 @@ document.addEventListener('DOMContentLoaded', () => {
         
         <!-- Logo with Reliable SVG Grocery Basket Icon -->
         <a href="index.html" class="nixon-logo flex items-center gap-2.5">
-          <div class="w-8 h-8 bg-[#E31837]/10 border border-[#E31837]/30 flex items-center justify-center text-[#E31837] rounded-sm">
+          <div class="w-8 h-8 bg-[#6A8071]/10 border border-[#6A8071]/30 flex items-center justify-center text-[#6A8071] rounded-sm">
             <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
             </svg>
           </div>
-          <span class="nixon-logo-text">Fresh<span class="nixon-red">Cart</span></span>
+          <span class="nixon-logo-text">Fresh<span style="color: #6A8071;">Cart</span></span>
         </a>
 
         <!-- Navigation -->
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <a href="blog.html" class="nixon-nav-link ${currentPath === 'blog.html' || currentPath === 'blog-detail.html' ? 'active' : ''}">Journal</a>
           <a href="pricing.html" class="nixon-nav-link ${currentPath === 'pricing.html' ? 'active' : ''}">Pricing</a>
           <a href="contact.html" class="nixon-nav-link ${currentPath === 'contact.html' ? 'active' : ''}">Contact</a>
-          ${isLoggedIn ? `<a href="account.html" class="nixon-nav-link text-[#E31837] ${currentPath === 'account.html' || currentPath === 'dashboard.html' ? 'active' : ''}">Dashboard</a>` : ''}
+          ${isLoggedIn ? `<a href="account.html" class="nixon-nav-link text-[#6A8071] ${currentPath === 'account.html' || currentPath === 'dashboard.html' ? 'active' : ''}">Dashboard</a>` : ''}
         </nav>
 
         <!-- Right Actions -->
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
             </svg>
-            <span class="nixon-cart-badge" id="nixonCartBadge">0</span>
+            <span class="nixon-cart-badge" id="nixonCartBadge" style="background: #6A8071;">0</span>
           </a>
 
           <!-- Auth -->
@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
         </div>
         <div class="nixon-footer-bottom">
-          <p>© 2026 FreshCart. All rights reserved.</p>
+          <p>© 2026 FreshCart[cite: 3]. All rights reserved.</p>
         </div>
       </div>
     </footer>
@@ -279,7 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (userSession && userSession.email) {
       container.innerHTML = `
         <div class="nixon-auth-dropdown">
-          <button class="nixon-auth-btn" id="nixonUserBtn">
+          <button class="nixon-auth-btn" id="nixonUserBtn" style="background: #6A8071; color: #FFFFFF;">
             ${userSession.name || 'Account'}
           </button>
           <div class="nixon-auth-dropdown-menu">
@@ -307,29 +307,30 @@ document.addEventListener('DOMContentLoaded', () => {
     refreshTheme: initThemeToggle
   };
 });
+
 // ============================================
-  // SPIN & ZOOM TRANSITION HANDLER
-  // ============================================
-  document.addEventListener('click', (e) => {
-    const link = e.target.closest('a');
-    
-    if (
-      link &&
-      link.href &&
-      link.hostname === window.location.hostname &&
-      !link.getAttribute('target') &&
-      !link.getAttribute('download') &&
-      link.getAttribute('href') !== '#' &&
-      !link.getAttribute('href').startsWith('javascript') &&
-      !link.getAttribute('href').startsWith('#')
-    ) {
-      e.preventDefault();
-      const targetUrl = link.href;
+// SPIN & ZOOM TRANSITION HANDLER
+// ============================================
+document.addEventListener('click', (e) => {
+  const link = e.target.closest('a');
+  
+  if (
+    link &&
+    link.href &&
+    link.hostname === window.location.hostname &&
+    !link.getAttribute('target') &&
+    !link.getAttribute('download') &&
+    link.getAttribute('href') !== '#' &&
+    !link.getAttribute('href').startsWith('javascript') &&
+    !link.getAttribute('href').startsWith('#')
+  ) {
+    e.preventDefault();
+    const targetUrl = link.href;
 
-      document.body.classList.add('cinematic-exit');
+    document.body.classList.add('cinematic-exit');
 
-      setTimeout(() => {
-        window.location.href = targetUrl;
-      }, 750); // Matches exit animation duration
-    }
-  });
+    setTimeout(() => {
+      window.location.href = targetUrl;
+    }, 750);
+  }
+});

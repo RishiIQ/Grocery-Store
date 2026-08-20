@@ -4,10 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" href="assets/images/grossary-logo.png">
-  <title>Contact — FreshCart Studio</title>
+  <title>Contact — FreshCart Botanical Studio</title>
   <script>
   (function() {
-    // Instant Theme Init
     const savedTheme = localStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
@@ -16,7 +15,6 @@
       document.documentElement.classList.remove('dark');
     }
 
-    // Instant Direction Init
     const savedDir = localStorage.getItem('dir') || 'ltr';
     document.documentElement.setAttribute('dir', savedDir);
   })();
@@ -29,7 +27,9 @@
       theme: {
         extend: {
           colors: {
-            'nixon-red': '#E31837',
+            'sage-accent': '#6A8071',
+            'sage-dark': '#24302A',
+            'cream-bg': '#F7F6F2',
           }
         }
       }
@@ -39,14 +39,16 @@
   <!-- Styles -->
   <link rel="stylesheet" href="css/style.css">
   
+  <!-- Lenis Smooth Slow Scroll Library -->
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  
   <style>
     /* ============================================
-       NIXON-STYLE CONTACT PAGE
+       SAGE & EARTH-TONE CONTACT PAGE
        ============================================ */
     
-    /* Hero with grid pattern */
     .contact-hero {
-      background: #000000;
+      background: #24302A;
       position: relative;
       overflow: hidden;
     }
@@ -56,16 +58,10 @@
       position: absolute;
       inset: 0;
       background-image: 
-        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-      background-size: 50px 50px;
-      pointer-events: none;
-    }
-    
-    .dark .contact-hero::before {
-      background-image: 
         linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      pointer-events: none;
     }
     
     /* Hero glow orbs */
@@ -78,15 +74,15 @@
     }
     
     @keyframes orbFloatSlow {
-      0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
-      33% { transform: translate(50px, -30px) scale(1.1); opacity: 0.5; }
-      66% { transform: translate(-30px, 40px) scale(0.9); opacity: 0.4; }
+      0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.2; }
+      33% { transform: translate(50px, -30px) scale(1.1); opacity: 0.4; }
+      66% { transform: translate(-30px, 40px) scale(0.9); opacity: 0.3; }
     }
     
     .orb-contact-1 {
       width: 600px;
       height: 600px;
-      background: rgba(227, 24, 55, 0.08);
+      background: rgba(106, 128, 113, 0.15);
       top: -200px;
       right: -200px;
       animation: orbFloatSlow 10s ease-in-out infinite;
@@ -95,55 +91,47 @@
     .orb-contact-2 {
       width: 400px;
       height: 400px;
-      background: rgba(227, 24, 55, 0.05);
+      background: rgba(106, 128, 113, 0.1);
       bottom: -100px;
       left: -100px;
       animation: orbFloatSlow 12s ease-in-out infinite reverse;
     }
     
-    /* Nixon typography */
-    .nixon-heading {
-      font-family: 'Arial Black', 'Impact', sans-serif;
+    .contact-heading {
+      font-weight: 800;
       text-transform: uppercase;
       letter-spacing: -0.02em;
       line-height: 0.95;
     }
     
-    .nixon-subheading {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
+    .contact-subheading {
       text-transform: uppercase;
       font-size: 0.7rem;
       letter-spacing: 0.2em;
       font-weight: 700;
+      color: #6A8071;
     }
     
-    .nixon-body {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
+    .contact-body {
       font-size: 0.95rem;
       line-height: 1.8;
-      color: #8A8A8A;
+      color: #94A3B8;
     }
     
-    .dark .nixon-body {
-      color: #8A8A8A;
-    }
-    
-    /* ============================================
-       CONTACT FORM - NIXON STYLE
-       ============================================ */
-    
+    /* Contact Form Wrapper */
     .contact-form-wrap {
       background: #FFFFFF;
-      border: 1px solid #E5E5E5;
+      border: 1px solid #E2E8F0;
       padding: 48px 40px;
       transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
       position: relative;
       overflow: hidden;
+      border-radius: 0px;
     }
     
     .dark .contact-form-wrap {
-      background: #1A1A1A;
-      border-color: #333333;
+      background: #18221D;
+      border-color: #2D3E35;
     }
     
     .contact-form-wrap::before {
@@ -153,7 +141,7 @@
       left: 0;
       right: 0;
       height: 4px;
-      background: #E31837;
+      background: #6A8071;
       transform: scaleX(0);
       transform-origin: left;
       transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -163,127 +151,125 @@
       transform: scaleX(1);
     }
     
-    /* Form inputs - Nixon style */
-    .nixon-input {
+    /* Form inputs */
+    .market-input {
       width: 100%;
       padding: 16px 20px;
       background: transparent;
-      border: 1px solid #E5E5E5;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
+      border: 1px solid #E2E8F0;
       font-size: 0.8rem;
       font-weight: 500;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      color: #000000;
+      color: #0F172A;
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       outline: none;
+      border-radius: 0px;
     }
     
-    .dark .nixon-input {
-      border-color: #333333;
-      color: #FFFFFF;
+    .dark .market-input {
+      border-color: #2D3E35;
+      color: #F8FAFC;
     }
     
-    .nixon-input::placeholder {
-      color: #8A8A8A;
+    .market-input::placeholder {
+      color: #94A3B8;
       font-weight: 400;
     }
     
-    .nixon-input:focus {
-      border-color: #E31837;
-      box-shadow: 0 0 0 3px rgba(227, 24, 55, 0.1);
+    .market-input:focus {
+      border-color: #6A8071;
+      box-shadow: 0 0 0 3px rgba(106, 128, 113, 0.15);
     }
     
-    .nixon-input.error {
-      border-color: #E31837;
+    .market-input.error {
+      border-color: #EF4444;
     }
     
-    .nixon-label {
+    .market-label {
       display: block;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
       font-size: 0.6rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.15em;
-      color: #8A8A8A;
+      color: #64748B;
       margin-bottom: 6px;
     }
     
-    .nixon-select {
+    .market-select {
       width: 100%;
       padding: 16px 20px;
       background: transparent;
-      border: 1px solid #E5E5E5;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
+      border: 1px solid #E2E8F0;
       font-size: 0.8rem;
       font-weight: 500;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      color: #000000;
+      color: #0F172A;
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       outline: none;
       appearance: none;
       cursor: pointer;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238A8A8A' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      border-radius: 0px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2364748B' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-position: right 16px center;
     }
     
-    .dark .nixon-select {
-      border-color: #333333;
-      color: #FFFFFF;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23666666' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    .dark .market-select {
+      border-color: #2D3E35;
+      color: #F8FAFC;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2394A3B8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
     }
     
-    .nixon-select:focus {
-      border-color: #E31837;
-      box-shadow: 0 0 0 3px rgba(227, 24, 55, 0.1);
+    .market-select:focus {
+      border-color: #6A8071;
+      box-shadow: 0 0 0 3px rgba(106, 128, 113, 0.15);
     }
     
-    .nixon-textarea {
+    .market-textarea {
       width: 100%;
       padding: 16px 20px;
       background: transparent;
-      border: 1px solid #E5E5E5;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
+      border: 1px solid #E2E8F0;
       font-size: 0.8rem;
       font-weight: 500;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      color: #000000;
+      color: #0F172A;
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       outline: none;
       resize: vertical;
       min-height: 120px;
+      border-radius: 0px;
     }
     
-    .dark .nixon-textarea {
-      border-color: #333333;
-      color: #FFFFFF;
+    .dark .market-textarea {
+      border-color: #2D3E35;
+      color: #F8FAFC;
     }
     
-    .nixon-textarea::placeholder {
-      color: #8A8A8A;
+    .market-textarea::placeholder {
+      color: #94A3B8;
       font-weight: 400;
     }
     
-    .nixon-textarea:focus {
-      border-color: #E31837;
-      box-shadow: 0 0 0 3px rgba(227, 24, 55, 0.1);
+    .market-textarea:focus {
+      border-color: #6A8071;
+      box-shadow: 0 0 0 3px rgba(106, 128, 113, 0.15);
     }
     
-    /* Nixon button */
-    .nixon-btn {
+    .sage-btn {
       display: inline-block;
       padding: 18px 48px;
-      background: #E31837;
+      background: #6A8071;
       color: #FFFFFF;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
       text-transform: uppercase;
       font-size: 0.7rem;
       font-weight: 700;
       letter-spacing: 0.15em;
       border: none;
+      border-radius: 0px;
       cursor: pointer;
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       text-align: center;
@@ -293,48 +279,27 @@
       width: 100%;
     }
     
-    .nixon-btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-      transition: left 0.6s ease;
-    }
-    
-    .nixon-btn:hover::before {
-      left: 100%;
-    }
-    
-    .nixon-btn:hover {
-      background: #C41230;
+    .sage-btn:hover {
+      background: #576B5D;
       transform: scale(1.02);
     }
     
-    .nixon-btn:active {
-      transform: scale(0.98);
-    }
-    
-    /* ============================================
-       HUB CARDS - NIXON STYLE
-       ============================================ */
-    
+    /* Hub Cards */
     .hub-card {
       background: #FFFFFF;
-      border: 1px solid #E5E5E5;
+      border: 1px solid #E2E8F0;
       padding: 32px;
       transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
       position: relative;
       overflow: hidden;
       opacity: 0;
       transform: translateY(30px);
+      border-radius: 0px;
     }
     
     .dark .hub-card {
-      background: #1A1A1A;
-      border-color: #333333;
+      background: #18221D;
+      border-color: #2D3E35;
     }
     
     .hub-card.is-visible {
@@ -349,7 +314,7 @@
       left: 0;
       right: 0;
       height: 3px;
-      background: #E31837;
+      background: #6A8071;
       transform: scaleX(0);
       transform-origin: left;
       transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
@@ -360,29 +325,24 @@
     }
     
     .hub-card:hover {
-      border-color: #E31837;
+      border-color: #6A8071;
       transform: translateY(-4px);
-      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.06);
-    }
-    
-    .dark .hub-card:hover {
-      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 16px 48px rgba(106, 128, 113, 0.15);
     }
     
     .hub-card .hub-number {
-      font-family: 'Arial Black', 'Impact', sans-serif;
+      font-weight: 800;
       font-size: 2.5rem;
-      color: #E31837;
-      opacity: 0.15;
+      color: #6A8071;
+      opacity: 0.2;
       line-height: 1;
     }
     
     .hub-card .hub-email {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
       font-size: 0.8rem;
       font-weight: 700;
       text-transform: lowercase;
-      color: #E31837;
+      color: #6A8071;
       text-decoration: none;
       transition: all 0.3s ease;
       display: inline-block;
@@ -392,58 +352,55 @@
       letter-spacing: 0.05em;
     }
     
-    /* ============================================
-       QUICK CONTACT BADGES
-       ============================================ */
-    
+    /* Quick Contact Badges */
     .quick-contact {
       display: inline-flex;
       align-items: center;
       gap: 10px;
       padding: 10px 20px;
-      border: 1px solid #E5E5E5;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
+      border: 1px solid #E2E8F0;
       font-size: 0.65rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      color: #000000;
+      color: #0F172A;
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       text-decoration: none;
+      border-radius: 0px;
+      background: #FFFFFF;
     }
     
     .dark .quick-contact {
-      border-color: #333333;
-      color: #FFFFFF;
+      background: #18221D;
+      border-color: #2D3E35;
+      color: #F8FAFC;
     }
     
     .quick-contact:hover {
-      border-color: #E31837;
-      color: #E31837;
+      border-color: #6A8071;
+      color: #6A8071;
       transform: translateY(-2px);
     }
     
     .quick-contact .icon {
-      color: #E31837;
+      color: #6A8071;
       font-size: 1.2rem;
     }
     
-    /* ============================================
-       MAP PLACEHOLDER
-       ============================================ */
-    
+    /* Map Placeholder */
     .map-placeholder {
-      background: #F5F5F5;
-      border: 1px solid #E5E5E5;
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
       padding: 60px 20px;
       text-align: center;
       position: relative;
       overflow: hidden;
+      border-radius: 0px;
     }
     
     .dark .map-placeholder {
-      background: #1A1A1A;
-      border-color: #333333;
+      background: #18221D;
+      border-color: #2D3E35;
     }
     
     .map-placeholder .map-pin {
@@ -472,67 +429,45 @@
     .reveal-on-scroll.delay-1 { transition-delay: 0.1s; }
     .reveal-on-scroll.delay-2 { transition-delay: 0.2s; }
     .reveal-on-scroll.delay-3 { transition-delay: 0.3s; }
-    .reveal-on-scroll.delay-4 { transition-delay: 0.4s; }
-    
-    /* Responsive */
-    @media (max-width: 768px) {
-      .contact-form-wrap {
-        padding: 32px 24px;
-      }
-      .hub-card {
-        padding: 24px;
-      }
-      .hub-card .hub-number {
-        font-size: 2rem;
-      }
-      .quick-contact {
-        padding: 8px 16px;
-        font-size: 0.55rem;
-      }
+
+    .sage-btn-outline {
+      display: inline-block;
+      padding: 16px 40px;
+      background: transparent;
+      color: #FFFFFF;
+      border: 2px solid #FFFFFF;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      border-radius: 0px;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      text-align: center;
+      text-decoration: none;
     }
     
-    @media (max-width: 480px) {
-      .contact-form-wrap {
-        padding: 24px 16px;
-      }
-      .hub-card {
-        padding: 20px;
-      }
-      .hub-card .hub-number {
-        font-size: 1.6rem;
-      }
-      .nixon-btn {
-        padding: 16px 24px;
-        font-size: 0.6rem;
-      }
+    .sage-btn-outline:hover {
+      background: #FFFFFF;
+      color: #24302A;
+      transform: scale(1.02);
     }
-    
-    /* Reduced motion */
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
-      }
-      .hub-card {
-        opacity: 1 !important;
-        transform: none !important;
-      }
-      .hub-card:hover {
-        transform: none !important;
-      }
-      .quick-contact:hover {
-        transform: none !important;
-      }
+
+    .market-toast {
+      background: #24302A;
+      color: #FFFFFF;
+      padding: 14px 24px;
+      border-radius: 0px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      border-left: 4px solid #6A8071;
     }
   </style>
 </head>
-<body>
-
-  <!-- ============================================ -->
-  <!-- HEADER INJECTED BY layout.js -->
-  <!-- ============================================ -->
+<body class="bg-cream-bg dark:bg-[#111814] text-slate-900 dark:text-slate-100 antialiased">
 
   <!-- ============================================ -->
   <!-- MAIN CONTENT -->
@@ -542,7 +477,7 @@
     <!-- ========================================== -->
     <!-- CONTACT HERO -->
     <!-- ========================================== -->
-    <section class="contact-hero min-h-[50vh] flex items-center relative">
+    <section class="contact-hero min-h-[50vh] flex items-center relative text-white">
       
       <!-- Glow Orbs -->
       <div class="hero-orb orb-contact-1"></div>
@@ -551,14 +486,14 @@
       <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-16">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 border-b border-white/10 pb-8">
           <div>
-            <p class="nixon-subheading text-[#E31837]">Global Outposts</p>
-            <h1 class="nixon-heading text-white text-5xl sm:text-6xl lg:text-7xl mt-2">
+            <p class="contact-subheading">Global Outposts</p>
+            <h1 class="contact-heading text-5xl sm:text-6xl lg:text-7xl mt-2">
               Get in<br>
-              <span class="text-[#E31837]">Touch</span>
+              <span class="text-[#8FA89B]">Touch</span>
             </h1>
           </div>
-          <p class="nixon-body text-white/60 max-w-xs text-right">
-            Connect with our support concierge or regional infrastructure hubs.
+          <p class="contact-body text-slate-300 max-w-xs text-right">
+            Connect with our botanical support concierge or regional infrastructure hubs.
           </p>
         </div>
       </div>
@@ -600,41 +535,41 @@
         <div class="lg:col-span-7 reveal-on-scroll">
           <div class="contact-form-wrap">
             <div class="space-y-3">
-              <p class="nixon-subheading text-[#E31837]">Inquiry Dispatch</p>
-              <h2 class="nixon-heading text-2xl sm:text-3xl">Send a Secure Message</h2>
-              <p class="nixon-body text-sm">All messages are encrypted end-to-end. We'll respond within 2 hours.</p>
+              <p class="contact-subheading">Inquiry Dispatch</p>
+              <h2 class="contact-heading text-2xl sm:text-3xl">Send a Secure Message</h2>
+              <p class="contact-body text-sm">All messages are encrypted end-to-end. We'll respond within 2 hours.</p>
             </div>
 
             <form id="contactForm" class="space-y-6 mt-8" novalidate>
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div class="space-y-2">
-                  <label class="nixon-label" for="fullName">Full Name</label>
+                  <label class="market-label" for="fullName">Full Name</label>
                   <input 
                     type="text" 
                     id="fullName"
                     placeholder="JUSTIN MASON" 
                     required 
-                    class="nixon-input"
+                    class="market-input"
                     minlength="2"
                   >
-                  <span class="error-message text-[0.5rem] font-bold tracking-[0.1em] uppercase text-[#E31837] hidden">Please enter your full name</span>
+                  <span class="error-message text-[0.5rem] font-bold tracking-[0.1em] uppercase text-red-500 hidden">Please enter your full name</span>
                 </div>
                 <div class="space-y-2">
-                  <label class="nixon-label" for="email">Email Address</label>
+                  <label class="market-label" for="email">Email Address</label>
                   <input 
                     type="email" 
                     id="email"
                     placeholder="JUSTIN@EXAMPLE.COM" 
                     required 
-                    class="nixon-input"
+                    class="market-input"
                   >
-                  <span class="error-message text-[0.5rem] font-bold tracking-[0.1em] uppercase text-[#E31837] hidden">Please enter a valid email</span>
+                  <span class="error-message text-[0.5rem] font-bold tracking-[0.1em] uppercase text-red-500 hidden">Please enter a valid email</span>
                 </div>
               </div>
 
               <div class="space-y-2">
-                <label class="nixon-label" for="subject">Inquiry Subject</label>
-                <select id="subject" class="nixon-select">
+                <label class="market-label" for="subject">Inquiry Subject</label>
+                <select id="subject" class="market-select">
                   <option value="Cold-Chain Telemetry Support">Cold-Chain Telemetry Support</option>
                   <option value="Enterprise B2B API Access">Enterprise B2B API Access</option>
                   <option value="Regenerative Farm Partnership">Regenerative Farm Partnership</option>
@@ -645,35 +580,35 @@
               </div>
 
               <div class="space-y-2">
-                <label class="nixon-label" for="message">Message Content</label>
+                <label class="market-label" for="message">Message Content</label>
                 <textarea 
                   id="message"
                   placeholder="ENTER YOUR MESSAGE..." 
                   required 
-                  class="nixon-textarea"
+                  class="market-textarea"
                   minlength="10"
                 ></textarea>
-                <span class="error-message text-[0.5rem] font-bold tracking-[0.1em] uppercase text-[#E31837] hidden">Please enter a message (min 10 characters)</span>
+                <span class="error-message text-[0.5rem] font-bold tracking-[0.1em] uppercase text-red-500 hidden">Please enter a message (min 10 characters)</span>
               </div>
 
               <div class="flex items-center gap-3">
-                <input type="checkbox" id="consent" class="w-4 h-4 accent-[#E31837]" required>
-                <label for="consent" class="text-xs font-bold tracking-[0.1em] uppercase text-[#8A8A8A]">
+                <input type="checkbox" id="consent" class="w-4 h-4 accent-[#6A8071]" required>
+                <label for="consent" class="text-xs font-bold tracking-[0.1em] uppercase text-slate-500">
                   I agree to the privacy policy and consent to data processing
                 </label>
               </div>
 
-              <button type="submit" class="nixon-btn" id="submitBtn">
+              <button type="submit" class="sage-btn" id="submitBtn">
                 <span id="btnText">Transmit Secure Dispatch →</span>
                 <span id="btnLoading" class="hidden">Sending...</span>
               </button>
             </form>
 
             <!-- Success Message -->
-            <div id="successMessage" class="hidden mt-6 p-6 border border-[#E31837] bg-[#E31837]/5 text-center">
-              <p class="text-2xl font-['Arial_Black'] text-[#E31837]">✓</p>
-              <h3 class="nixon-heading text-lg mt-2">Message Transmitted</h3>
-              <p class="nixon-body text-sm">Your secure inquiry has been received. Our concierge will reply within 2 hours.</p>
+            <div id="successMessage" class="hidden mt-6 p-6 border border-[#6A8071] bg-[#6A8071]/10 text-center">
+              <p class="text-2xl font-extrabold text-[#6A8071]">✓</p>
+              <h3 class="contact-heading text-lg mt-2">Message Transmitted</h3>
+              <p class="contact-body text-sm">Your secure inquiry has been received. Our concierge will reply within 2 hours.</p>
             </div>
           </div>
         </div>
@@ -683,34 +618,34 @@
           
           <div class="hub-card" data-delay="0">
             <div class="hub-number">01</div>
-            <p class="text-xs font-bold tracking-[0.2em] uppercase text-[#E31837] mt-2">Europe Hub</p>
-            <h3 class="nixon-heading text-xl mt-1">Paris Central</h3>
-            <p class="nixon-body text-sm mt-2">42 Rue du Faubourg Saint-Honoré, 75008 Paris, France</p>
+            <p class="text-xs font-bold tracking-[0.2em] uppercase text-[#6A8071] mt-2">Europe Hub</p>
+            <h3 class="contact-heading text-xl mt-1">Paris Central</h3>
+            <p class="contact-body text-sm mt-2">42 Rue du Faubourg Saint-Honoré, 75008 Paris, France</p>
             <a href="mailto:paris@freshcart.pro" class="hub-email mt-3">paris@freshcart.pro</a>
-            <div class="mt-3 pt-3 border-t border-[#E5E5E5] dark:border-[#333333] flex items-center gap-2">
-              <span class="text-[0.5rem] font-bold tracking-[0.1em] uppercase text-[#8A8A8A]">🕐 24/7 Operations</span>
+            <div class="mt-3 pt-3 border-t border-slate-200 dark:border-[#2D3E35] flex items-center gap-2">
+              <span class="text-[0.5rem] font-bold tracking-[0.1em] uppercase text-slate-400">🕐 24/7 Operations</span>
             </div>
           </div>
 
           <div class="hub-card" data-delay="1">
             <div class="hub-number">02</div>
-            <p class="text-xs font-bold tracking-[0.2em] uppercase text-[#E31837] mt-2">Asia Pacific Hub</p>
-            <h3 class="nixon-heading text-xl mt-1">Tokyo Metro</h3>
-            <p class="nixon-body text-sm mt-2">6-10-1 Roppongi, Minato-ku, Tokyo 106-6108, Japan</p>
+            <p class="text-xs font-bold tracking-[0.2em] uppercase text-[#6A8071] mt-2">Asia Pacific Hub</p>
+            <h3 class="contact-heading text-xl mt-1">Tokyo Metro</h3>
+            <p class="contact-body text-sm mt-2">6-10-1 Roppongi, Minato-ku, Tokyo 106-6108, Japan</p>
             <a href="mailto:tokyo@freshcart.pro" class="hub-email mt-3">tokyo@freshcart.pro</a>
-            <div class="mt-3 pt-3 border-t border-[#E5E5E5] dark:border-[#333333] flex items-center gap-2">
-              <span class="text-[0.5rem] font-bold tracking-[0.1em] uppercase text-[#8A8A8A]">🕐 24/7 Operations</span>
+            <div class="mt-3 pt-3 border-t border-slate-200 dark:border-[#2D3E35] flex items-center gap-2">
+              <span class="text-[0.5rem] font-bold tracking-[0.1em] uppercase text-slate-400">🕐 24/7 Operations</span>
             </div>
           </div>
 
           <div class="hub-card" data-delay="2">
             <div class="hub-number">03</div>
-            <p class="text-xs font-bold tracking-[0.2em] uppercase text-[#E31837] mt-2">Americas Hub</p>
-            <h3 class="nixon-heading text-xl mt-1">New York East</h3>
-            <p class="nixon-body text-sm mt-2">350 Fifth Avenue, 59th Floor, New York, NY 10118, USA</p>
+            <p class="text-xs font-bold tracking-[0.2em] uppercase text-[#6A8071] mt-2">Americas Hub</p>
+            <h3 class="contact-heading text-xl mt-1">New York East</h3>
+            <p class="contact-body text-sm mt-2">350 Fifth Avenue, 59th Floor, New York, NY 10118, USA</p>
             <a href="mailto:ny@freshcart.pro" class="hub-email mt-3">ny@freshcart.pro</a>
-            <div class="mt-3 pt-3 border-t border-[#E5E5E5] dark:border-[#333333] flex items-center gap-2">
-              <span class="text-[0.5rem] font-bold tracking-[0.1em] uppercase text-[#8A8A8A]">🕐 24/7 Operations</span>
+            <div class="mt-3 pt-3 border-t border-slate-200 dark:border-[#2D3E35] flex items-center gap-2">
+              <span class="text-[0.5rem] font-bold tracking-[0.1em] uppercase text-slate-400">🕐 24/7 Operations</span>
             </div>
           </div>
 
@@ -722,7 +657,7 @@
     <!-- ========================================== -->
     <!-- MAP & OFFICE HOURS -->
     <!-- ========================================== -->
-    <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[#E5E5E5] dark:border-[#222222]">
+    <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-slate-200 dark:border-[#2D3E35]">
       
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         
@@ -730,9 +665,9 @@
         <div class="lg:col-span-2 reveal-on-scroll">
           <div class="map-placeholder">
             <div class="map-pin">📍</div>
-            <p class="nixon-heading text-xl mt-4">Global Headquarters</p>
-            <p class="nixon-body text-sm">Paris, France — 42 Rue du Faubourg Saint-Honoré</p>
-            <div class="mt-6 inline-block px-6 py-3 border border-[#E5E5E5] dark:border-[#333333] text-xs font-bold tracking-[0.1em] uppercase text-[#8A8A8A]">
+            <p class="contact-heading text-xl mt-4">Global Headquarters</p>
+            <p class="contact-body text-sm">Paris, France — 42 Rue du Faubourg Saint-Honoré</p>
+            <div class="mt-6 inline-block px-6 py-3 border border-slate-200 dark:border-[#2D3E35] text-xs font-bold tracking-[0.1em] uppercase text-slate-500">
               Interactive Map Loading...
             </div>
           </div>
@@ -740,25 +675,25 @@
 
         <!-- Office Hours -->
         <div class="reveal-on-scroll delay-2">
-          <div class="border border-[#E5E5E5] dark:border-[#333333] p-8">
-            <h3 class="nixon-heading text-xl">Office Hours</h3>
-            <div class="space-y-3 mt-4">
+          <div class="border border-slate-200 dark:border-[#2D3E35] p-8 bg-white dark:bg-[#18221D]">
+            <h3 class="contact-heading text-xl">Office Hours</h3>
+            <div class="space-y-3 mt-4 text-slate-600 dark:text-slate-300">
               <div class="flex justify-between text-sm">
-                <span class="font-bold tracking-[0.1em] uppercase text-[#8A8A8A]">Monday - Friday</span>
+                <span class="font-bold tracking-[0.1em] uppercase text-slate-500">Monday - Friday</span>
                 <span class="font-bold">24/7</span>
               </div>
               <div class="flex justify-between text-sm">
-                <span class="font-bold tracking-[0.1em] uppercase text-[#8A8A8A]">Saturday</span>
+                <span class="font-bold tracking-[0.1em] uppercase text-slate-500">Saturday</span>
                 <span class="font-bold">24/7</span>
               </div>
               <div class="flex justify-between text-sm">
-                <span class="font-bold tracking-[0.1em] uppercase text-[#8A8A8A]">Sunday</span>
+                <span class="font-bold tracking-[0.1em] uppercase text-slate-500">Sunday</span>
                 <span class="font-bold">24/7</span>
               </div>
             </div>
-            <div class="mt-6 pt-6 border-t border-[#E5E5E5] dark:border-[#333333]">
-              <p class="text-xs font-bold tracking-[0.1em] uppercase text-[#E31837]">⚡ 24/7 Support Available</p>
-              <p class="text-xs text-[#8A8A8A] mt-1">Our concierge team is always ready to assist</p>
+            <div class="mt-6 pt-6 border-t border-slate-200 dark:border-[#2D3E35]">
+              <p class="text-xs font-bold tracking-[0.1em] uppercase text-[#6A8071]">⚡ 24/7 Support Available</p>
+              <p class="text-xs text-slate-500 mt-1">Our concierge team is always ready to assist</p>
             </div>
           </div>
         </div>
@@ -769,20 +704,20 @@
     <!-- ========================================== -->
     <!-- CTA BANNER -->
     <!-- ========================================== -->
-    <section class="bg-black border-y border-[#222222] py-20 px-4 sm:px-6 lg:px-8">
-      <div class="max-w-4xl mx-auto text-center">
-        <h2 class="nixon-heading text-white text-3xl sm:text-4xl lg:text-5xl">
+    <section class="bg-sage-dark border-y border-[#2D3E35] py-20 px-4 sm:px-6 lg:px-8 text-white">
+      <div class="max-w-4xl mx-auto text-center reveal-on-scroll">
+        <h2 class="contact-heading text-3xl sm:text-4xl lg:text-5xl">
           Ready to<br>
-          <span class="text-[#E31837]">Connect?</span>
+          <span class="text-[#8FA89B]">Connect?</span>
         </h2>
-        <p class="nixon-body text-white/60 mt-4 max-w-xl mx-auto">
+        <p class="contact-body text-slate-300 mt-4 max-w-xl mx-auto">
           Whether you're a household, enterprise, or farm partner — we're here to help.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center mt-8">
-          <a href="#contactForm" class="inline-block px-10 py-4 bg-[#E31837] text-white font-['Helvetica_Neue'] text-sm font-bold tracking-[0.15em] uppercase hover:bg-[#C41230] transition-all hover:scale-[1.02]">
+          <a href="#contactForm" class="sage-btn max-w-xs mx-auto sm:mx-0">
             Send a Message →
           </a>
-          <a href="pricing.html" class="inline-block px-10 py-4 border-2 border-white text-white font-['Helvetica_Neue'] text-sm font-bold tracking-[0.15em] uppercase hover:bg-white hover:text-black transition-all hover:scale-[1.02]">
+          <a href="pricing.html" class="sage-btn-outline">
             View Pricing
           </a>
         </div>
@@ -792,20 +727,28 @@
   </main>
 
   <!-- ============================================ -->
-  <!-- FOOTER INJECTED BY layout.js -->
-  <!-- ============================================ -->
-
-  <!-- ============================================ -->
   <!-- SCRIPTS -->
   <!-- ============================================ -->
   <script src="js/db.js"></script>
   <script src="js/layout.js"></script>
 
   <script>
-    // ==========================================
-    // 1. HUB CARD REVEAL
-    // ==========================================
     document.addEventListener('DOMContentLoaded', () => {
+      // 1. Initialize Lenis Slow Smooth Scrolling
+      const lenis = new Lenis({
+        duration: 2.0,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        direction: 'vertical',
+        smooth: true,
+        mouseMultiplier: 0.75,
+      });
+
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
+
       const hubCards = document.querySelectorAll('.hub-card');
       
       const hubObserver = new IntersectionObserver((entries) => {
@@ -825,9 +768,6 @@
 
       hubCards.forEach(card => hubObserver.observe(card));
 
-      // ==========================================
-      // 2. SCROLL REVEAL
-      // ==========================================
       const revealElements = document.querySelectorAll('.reveal-on-scroll');
       
       const revealObserver = new IntersectionObserver((entries) => {
@@ -843,9 +783,6 @@
 
       revealElements.forEach(el => revealObserver.observe(el));
 
-      // ==========================================
-      // 3. FORM VALIDATION & SUBMISSION
-      // ==========================================
       const form = document.getElementById('contactForm');
       const submitBtn = document.getElementById('submitBtn');
       const btnText = document.getElementById('btnText');
@@ -856,9 +793,8 @@
         form.addEventListener('submit', function(e) {
           e.preventDefault();
           
-          // Validate all fields
           let isValid = true;
-          const inputs = form.querySelectorAll('.nixon-input, .nixon-textarea');
+          const inputs = form.querySelectorAll('.market-input, .market-textarea');
           
           inputs.forEach(input => {
             const errorMsg = input.parentElement.querySelector('.error-message');
@@ -882,10 +818,9 @@
             }
           });
 
-          // Check consent
           const consent = document.getElementById('consent');
           if (!consent.checked) {
-            consent.style.outline = '2px solid #E31837';
+            consent.style.outline = '2px solid #EF4444';
             isValid = false;
           } else {
             consent.style.outline = 'none';
@@ -896,7 +831,6 @@
             return;
           }
 
-          // Simulate sending
           btnText.classList.add('hidden');
           btnLoading.classList.remove('hidden');
           submitBtn.disabled = true;
@@ -906,13 +840,11 @@
             btnLoading.classList.add('hidden');
             submitBtn.disabled = false;
             
-            // Show success
             form.classList.add('hidden');
             successMessage.classList.remove('hidden');
             
             showToast('✓ Secure inquiry transmitted successfully!');
             
-            // Reset form after 5 seconds
             setTimeout(() => {
               form.reset();
               form.classList.remove('hidden');
@@ -921,8 +853,7 @@
           }, 2000);
         });
 
-        // Remove error state on input
-        form.querySelectorAll('.nixon-input, .nixon-textarea').forEach(input => {
+        form.querySelectorAll('.market-input, .market-textarea').forEach(input => {
           input.addEventListener('input', function() {
             this.classList.remove('error');
             const errorMsg = this.parentElement.querySelector('.error-message');
@@ -935,9 +866,6 @@
         });
       }
 
-      // ==========================================
-      // 4. TOAST FUNCTION
-      // ==========================================
       function showToast(message) {
         let container = document.getElementById('toast-container');
         if (!container) {
@@ -948,7 +876,7 @@
         }
         
         const toast = document.createElement('div');
-        toast.className = 'pointer-events-auto bg-black text-white dark:bg-white dark:text-black px-6 py-4 text-sm font-bold tracking-[0.15em] uppercase shadow-2xl border border-[#333333] dark:border-[#E5E5E5] transform translate-y-4 opacity-0 transition-all duration-300';
+        toast.className = 'market-toast pointer-events-auto transform translate-y-4 opacity-0 transition-all duration-300';
         toast.textContent = message;
         container.appendChild(toast);
         
@@ -962,9 +890,6 @@
         }, 3500);
       }
 
-      // ==========================================
-      // 5. SMOOTH SCROLL FOR ANCHOR LINKS
-      // ==========================================
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
           e.preventDefault();
@@ -974,7 +899,6 @@
           }
         });
       });
-
     });
   </script>
 

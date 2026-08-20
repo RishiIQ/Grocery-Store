@@ -3,11 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Journal — FreshCart Studio</title>
+  <title>Journal — FreshCart Botanical Studio</title>
   <link rel="icon" type="image/png" href="assets/images/grossary-logo.png">
   <script>
   (function() {
-    // Instant Theme Init
     const savedTheme = localStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
@@ -16,7 +15,6 @@
       document.documentElement.classList.remove('dark');
     }
 
-    // Instant Direction Init
     const savedDir = localStorage.getItem('dir') || 'ltr';
     document.documentElement.setAttribute('dir', savedDir);
   })();
@@ -29,7 +27,9 @@
       theme: {
         extend: {
           colors: {
-            'nixon-red': '#E31837',
+            'sage-accent': '#6A8071',
+            'sage-dark': '#24302A',
+            'cream-bg': '#F7F6F2',
           }
         }
       }
@@ -39,14 +39,16 @@
   <!-- Styles -->
   <link rel="stylesheet" href="css/style.css">
   
+  <!-- Lenis Smooth Slow Scroll Library -->
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  
   <style>
     /* ============================================
-       NIXON-STYLE BLOG PAGE
+       SAGE & EARTH-TONE BLOG PAGE
        ============================================ */
     
-    /* Hero with grid pattern */
     .blog-hero {
-      background: #000000;
+      background: #24302A;
       position: relative;
       overflow: hidden;
     }
@@ -56,16 +58,10 @@
       position: absolute;
       inset: 0;
       background-image: 
-        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-      background-size: 50px 50px;
-      pointer-events: none;
-    }
-    
-    .dark .blog-hero::before {
-      background-image: 
         linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      pointer-events: none;
     }
     
     /* Hero glow orbs */
@@ -78,15 +74,15 @@
     }
     
     @keyframes orbFloatSlow {
-      0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
-      33% { transform: translate(50px, -30px) scale(1.1); opacity: 0.5; }
-      66% { transform: translate(-30px, 40px) scale(0.9); opacity: 0.4; }
+      0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.2; }
+      33% { transform: translate(50px, -30px) scale(1.1); opacity: 0.4; }
+      66% { transform: translate(-30px, 40px) scale(0.9); opacity: 0.3; }
     }
     
     .orb-blog-1 {
       width: 600px;
       height: 600px;
-      background: rgba(227, 24, 55, 0.08);
+      background: rgba(106, 128, 113, 0.15);
       top: -200px;
       right: -200px;
       animation: orbFloatSlow 10s ease-in-out infinite;
@@ -95,55 +91,47 @@
     .orb-blog-2 {
       width: 400px;
       height: 400px;
-      background: rgba(227, 24, 55, 0.05);
+      background: rgba(106, 128, 113, 0.1);
       bottom: -100px;
       left: -100px;
       animation: orbFloatSlow 12s ease-in-out infinite reverse;
     }
     
-    /* Nixon typography */
-    .nixon-heading {
-      font-family: 'Arial Black', 'Impact', sans-serif;
+    .blog-heading {
+      font-weight: 800;
       text-transform: uppercase;
       letter-spacing: -0.02em;
       line-height: 0.95;
     }
     
-    .nixon-subheading {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
+    .blog-subheading {
       text-transform: uppercase;
       font-size: 0.7rem;
       letter-spacing: 0.2em;
       font-weight: 700;
+      color: #6A8071;
     }
     
-    .nixon-body {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
+    .blog-body {
       font-size: 0.95rem;
       line-height: 1.8;
-      color: #8A8A8A;
+      color: #94A3B8;
     }
     
-    .dark .nixon-body {
-      color: #8A8A8A;
-    }
-    
-    /* ============================================
-       FEATURED SPOTLIGHT - NIXON STYLE
-       ============================================ */
-    
+    /* Featured Spotlight */
     .spotlight-card {
       background: #FFFFFF;
-      border: 1px solid #E5E5E5;
+      border: 1px solid #E2E8F0;
       transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
       position: relative;
       overflow: hidden;
       cursor: pointer;
+      border-radius: 0px;
     }
     
     .dark .spotlight-card {
-      background: #1A1A1A;
-      border-color: #333333;
+      background: #18221D;
+      border-color: #2D3E35;
     }
     
     .spotlight-card::before {
@@ -153,7 +141,7 @@
       left: 0;
       right: 0;
       height: 4px;
-      background: #E31837;
+      background: #6A8071;
       transform: scaleX(0);
       transform-origin: left;
       transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -164,13 +152,9 @@
     }
     
     .spotlight-card:hover {
-      border-color: #E31837;
+      border-color: #6A8071;
       transform: translateY(-4px);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
-    }
-    
-    .dark .spotlight-card:hover {
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 20px 60px rgba(106, 128, 113, 0.15);
     }
     
     .spotlight-card .image-wrap {
@@ -190,34 +174,32 @@
       position: absolute;
       top: 16px;
       left: 16px;
-      background: #E31837;
+      background: #6A8071;
       color: #FFFFFF;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
       font-size: 0.55rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.1em;
       padding: 4px 14px;
       z-index: 10;
+      border-radius: 0px;
     }
     
-    /* ============================================
-       ARTICLE CARDS - NIXON STYLE
-       ============================================ */
-    
+    /* Article Cards */
     .article-card {
       background: #FFFFFF;
-      border: 1px solid #E5E5E5;
+      border: 1px solid #E2E8F0;
       transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
       position: relative;
       overflow: hidden;
       opacity: 0;
       transform: translateY(40px);
+      border-radius: 0px;
     }
     
     .dark .article-card {
-      background: #1A1A1A;
-      border-color: #333333;
+      background: #18221D;
+      border-color: #2D3E35;
     }
     
     .article-card.is-visible {
@@ -232,7 +214,7 @@
       left: 0;
       right: 0;
       height: 3px;
-      background: #E31837;
+      background: #6A8071;
       transform: scaleX(0);
       transform-origin: left;
       transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
@@ -243,13 +225,9 @@
     }
     
     .article-card:hover {
-      border-color: #E31837;
+      border-color: #6A8071;
       transform: translateY(-6px);
-      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.06);
-    }
-    
-    .dark .article-card:hover {
-      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 16px 48px rgba(106, 128, 113, 0.15);
     }
     
     .article-card .image-wrap {
@@ -270,56 +248,52 @@
     }
     
     .article-card .category-tag {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
       font-size: 0.55rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.15em;
-      color: #E31837;
+      color: #6A8071;
     }
     
     .article-card .date-tag {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
       font-size: 0.55rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      color: #8A8A8A;
+      color: #94A3B8;
     }
     
     .article-card .title-link {
-      font-family: 'Arial Black', 'Impact', sans-serif;
+      font-weight: 800;
       text-transform: uppercase;
       font-size: 1.1rem;
       letter-spacing: -0.02em;
       line-height: 1.2;
-      color: #000000;
+      color: #0F172A;
       text-decoration: none;
       transition: color 0.3s ease;
     }
     
     .dark .article-card .title-link {
-      color: #FFFFFF;
+      color: #F8FAFC;
     }
     
     .article-card:hover .title-link {
-      color: #E31837;
+      color: #6A8071;
     }
     
     .article-card .excerpt {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
       font-size: 0.85rem;
       line-height: 1.6;
-      color: #8A8A8A;
+      color: #64748B;
     }
     
     .article-card .read-link {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
       font-size: 0.6rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.15em;
-      color: #E31837;
+      color: #6A8071;
       text-decoration: none;
       transition: all 0.3s ease;
     }
@@ -343,87 +317,51 @@
     .reveal-on-scroll.delay-1 { transition-delay: 0.1s; }
     .reveal-on-scroll.delay-2 { transition-delay: 0.2s; }
     .reveal-on-scroll.delay-3 { transition-delay: 0.3s; }
-    .reveal-on-scroll.delay-4 { transition-delay: 0.4s; }
-    
-    /* Nixon button */
-    .nixon-btn-outline {
+
+    .sage-btn-outline {
       display: inline-block;
       padding: 14px 36px;
       background: transparent;
-      color: #000000;
-      border: 2px solid #000000;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
+      color: #0F172A;
+      border: 2px solid #0F172A;
       text-transform: uppercase;
       font-size: 0.7rem;
       font-weight: 700;
       letter-spacing: 0.15em;
+      border-radius: 0px;
       cursor: pointer;
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       text-align: center;
       text-decoration: none;
     }
     
-    .dark .nixon-btn-outline {
+    .dark .sage-btn-outline {
       color: #FFFFFF;
       border-color: #FFFFFF;
     }
     
-    .nixon-btn-outline:hover {
-      background: #000000;
+    .sage-btn-outline:hover {
+      background: #6A8071;
+      border-color: #6A8071;
       color: #FFFFFF;
       transform: scale(1.02);
     }
-    
-    .dark .nixon-btn-outline:hover {
-      background: #FFFFFF;
-      color: #000000;
-    }
-    
-    /* Responsive */
-    @media (max-width: 768px) {
-      .spotlight-card .image-wrap {
-        aspect-ratio: 16/9;
-      }
-      .article-card .title-link {
-        font-size: 0.95rem;
-      }
-    }
-    
-    @media (max-width: 480px) {
-      .article-card .title-link {
-        font-size: 0.85rem;
-      }
-      .spotlight-card {
-        padding: 16px !important;
-      }
-    }
-    
-    /* Reduced motion */
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
-      }
-      .article-card {
-        opacity: 1 !important;
-        transform: none !important;
-      }
-      .spotlight-card:hover {
-        transform: none !important;
-      }
-      .article-card:hover {
-        transform: none !important;
-      }
+
+    .market-toast {
+      background: #24302A;
+      color: #FFFFFF;
+      padding: 14px 24px;
+      border-radius: 0px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      border-left: 4px solid #6A8071;
     }
   </style>
 </head>
-<body>
-
-  <!-- ============================================ -->
-  <!-- HEADER INJECTED BY layout.js -->
-  <!-- ============================================ -->
+<body class="bg-cream-bg dark:bg-[#111814] text-slate-900 dark:text-slate-100 antialiased">
 
   <!-- ============================================ -->
   <!-- MAIN CONTENT -->
@@ -433,7 +371,7 @@
     <!-- ========================================== -->
     <!-- BLOG HERO -->
     <!-- ========================================== -->
-    <section class="blog-hero min-h-[50vh] flex items-center relative">
+    <section class="blog-hero min-h-[50vh] flex items-center relative text-white">
       
       <!-- Glow Orbs -->
       <div class="hero-orb orb-blog-1"></div>
@@ -442,12 +380,12 @@
       <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-16">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 border-b border-white/10 pb-8">
           <div>
-            <p class="nixon-subheading text-[#E31837]">Editorial & Research</p>
-            <h1 class="nixon-heading text-white text-5xl sm:text-6xl lg:text-7xl mt-2">
-              The <span class="text-[#E31837]">Journal</span>
+            <p class="blog-subheading">Editorial & Research</p>
+            <h1 class="blog-heading text-5xl sm:text-6xl lg:text-7xl mt-2">
+              The <span class="text-[#8FA89B]">Journal</span>
             </h1>
           </div>
-          <p class="nixon-body text-white/60 max-w-xs text-right">
+          <p class="blog-body text-slate-300 max-w-xs text-right">
             Deep dives into cold-chain logistics, wild yeast sourdough fermentation, and regenerative agriculture.
           </p>
         </div>
@@ -477,17 +415,17 @@
           <!-- Content -->
           <div class="lg:col-span-7 p-8 lg:p-12 flex flex-col justify-center">
             <div class="flex items-center gap-4 text-xs font-bold tracking-[0.15em] uppercase">
-              <span class="text-[#E31837]">Spotlight</span>
-              <span class="text-[#8A8A8A]">•</span>
-              <span class="text-[#8A8A8A]">August 2026</span>
+              <span class="text-[#6A8071]">Spotlight</span>
+              <span class="text-slate-400">•</span>
+              <span class="text-slate-400">August 2026</span>
             </div>
-            <h2 class="nixon-heading text-2xl sm:text-3xl lg:text-4xl mt-4 group-hover:text-[#E31837] transition-colors">
+            <h2 class="blog-heading text-2xl sm:text-3xl lg:text-4xl mt-4 group-hover:text-[#6A8071] transition-colors">
               The 15-Minute Cold-Chain Logistics Revolution
             </h2>
-            <p class="nixon-body mt-4">
+            <p class="blog-body mt-4">
               How decentralized micro-fulfillment hubs and IoT hardware telemetry ensure zero thermal fluctuation during express metropolitan grocery transit.
             </p>
-            <span class="inline-flex items-center gap-2 text-xs font-bold tracking-[0.15em] uppercase text-[#E31837] mt-6 group-hover:gap-4 transition-all">
+            <span class="inline-flex items-center gap-2 text-xs font-bold tracking-[0.15em] uppercase text-[#6A8071] mt-6 group-hover:gap-4 transition-all">
               Read Full Dispatch →
             </span>
           </div>
@@ -500,12 +438,12 @@
     <!-- ========================================== -->
     <!-- ARTICLES GRID -->
     <!-- ========================================== -->
-    <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[#E5E5E5] dark:border-[#222222]">
+    <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-slate-200 dark:border-[#2D3E35]">
       
-      <div class="text-center mb-16">
-        <p class="nixon-subheading text-[#E31837]">Latest Articles</p>
-        <h2 class="nixon-heading text-3xl sm:text-4xl lg:text-5xl mt-2">All Dispatches</h2>
-        <div class="w-12 h-0.5 bg-[#E31837] mx-auto mt-4"></div>
+      <div class="text-center mb-16 reveal-on-scroll">
+        <p class="blog-subheading">Latest Articles</p>
+        <h2 class="blog-heading text-3xl sm:text-4xl lg:text-5xl mt-2">All Dispatches</h2>
+        <div class="w-12 h-0.5 bg-[#6A8071] mx-auto mt-4"></div>
       </div>
 
       <div id="blogGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -513,17 +451,13 @@
       </div>
 
       <!-- View All Button -->
-      <div class="text-center mt-12">
-        <a href="#" class="nixon-btn-outline">Load More Articles</a>
+      <div class="text-center mt-12 reveal-on-scroll">
+        <a href="#" class="sage-btn-outline">Load More Articles</a>
       </div>
 
     </section>
 
   </main>
-
-  <!-- ============================================ -->
-  <!-- FOOTER INJECTED BY layout.js -->
-  <!-- ============================================ -->
 
   <!-- ============================================ -->
   <!-- SCRIPTS -->
@@ -532,25 +466,32 @@
   <script src="js/layout.js"></script>
 
   <script>
-    // ==========================================
-    // 1. RENDER ARTICLES
-    // ==========================================
     document.addEventListener('DOMContentLoaded', () => {
+      // 1. Initialize Lenis Slow Smooth Scrolling
+      const lenis = new Lenis({
+        duration: 2.0,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        direction: 'vertical',
+        smooth: true,
+        mouseMultiplier: 0.75,
+      });
+
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
+
       const grid = document.getElementById('blogGrid');
       if (!grid || !window.FreshCartDB) return;
 
       const posts = window.FreshCartDB.blogPosts;
 
-      // Generate HTML for each post with Nixon styling
       grid.innerHTML = posts.map((post, index) => `
         <article class="article-card" data-index="${index}">
           <a href="blog-detail.html?slug=${post.slug}" class="block h-full flex flex-col">
             <div class="image-wrap">
-              <img 
-                src="${post.image}" 
-                alt="${post.title}" 
-                loading="lazy"
-              >
+              <img src="${post.image}" alt="${post.title}" loading="lazy">
             </div>
             <div class="p-6 flex-1 flex flex-col">
               <div class="flex items-center justify-between text-xs">
@@ -559,18 +500,15 @@
               </div>
               <h3 class="title-link mt-3 flex-1">${post.title}</h3>
               <p class="excerpt mt-2 line-clamp-2">${post.excerpt}</p>
-              <div class="flex items-center justify-between mt-4 pt-4 border-t border-[#E5E5E5] dark:border-[#333333]">
+              <div class="flex items-center justify-between mt-4 pt-4 border-t border-slate-200 dark:border-[#2D3E35]">
                 <span class="read-link">Read Article →</span>
-                <span class="text-[0.5rem] font-bold tracking-[0.15em] uppercase text-[#8A8A8A]">${post.readTime}</span>
+                <span class="text-[0.5rem] font-bold tracking-[0.15em] uppercase text-slate-500">${post.readTime}</span>
               </div>
             </div>
           </a>
         </article>
       `).join('');
 
-      // ==========================================
-      // 2. SCROLL REVEAL FOR ARTICLES
-      // ==========================================
       const articleCards = document.querySelectorAll('.article-card');
       
       const articleObserver = new IntersectionObserver((entries) => {
@@ -593,10 +531,7 @@
 
       articleCards.forEach(card => articleObserver.observe(card));
 
-      // ==========================================
-      // 3. LOAD MORE BUTTON (with counter)
-      // ==========================================
-      const loadMoreBtn = document.querySelector('.nixon-btn-outline');
+      const loadMoreBtn = document.querySelector('.sage-btn-outline');
       let currentCount = posts.length;
       
       if (loadMoreBtn) {
@@ -608,25 +543,21 @@
           this.style.cursor = 'default';
         });
       }
-    });
 
-    // ==========================================
-    // 4. SCROLL REVEAL FOR HERO
-    // ==========================================
-    document.addEventListener('DOMContentLoaded', () => {
-      const heroElements = document.querySelectorAll('.blog-hero .nixon-heading, .blog-hero .nixon-body');
-      
-      heroElements.forEach((el, index) => {
-        setTimeout(() => {
-          el.style.opacity = '1';
-          el.style.transform = 'translateY(0)';
-        }, 200 + index * 150);
+      const revealElements = document.querySelectorAll('.reveal-on-scroll');
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+          }
+        });
+      }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
       });
+      revealElements.forEach(el => revealObserver.observe(el));
     });
 
-    // ==========================================
-    // 5. TOAST FUNCTION
-    // ==========================================
     function showToast(message) {
       let container = document.getElementById('toast-container');
       if (!container) {
@@ -637,7 +568,7 @@
       }
       
       const toast = document.createElement('div');
-      toast.className = 'pointer-events-auto bg-black text-white dark:bg-white dark:text-black px-6 py-4 text-sm font-bold tracking-[0.15em] uppercase shadow-2xl border border-[#333333] dark:border-[#E5E5E5] transform translate-y-4 opacity-0 transition-all duration-300';
+      toast.className = 'market-toast pointer-events-auto transform translate-y-4 opacity-0 transition-all duration-300';
       toast.textContent = message;
       container.appendChild(toast);
       

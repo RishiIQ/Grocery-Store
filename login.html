@@ -45,6 +45,49 @@
        NIXON-STYLE AUTHENTICATION PAGE
        ============================================ */
     
+    html {
+      perspective: 1600px;
+      overflow-x: hidden;
+      background: #000000;
+    }
+
+    body {
+      transform-style: preserve-3d;
+      overflow-x: hidden;
+      animation: pageSpinZoomIn 1.0s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* Incoming page animation */
+    @keyframes pageSpinZoomIn {
+      from {
+        width: 100px;
+        opacity: 0;
+        transform: translateY(-200px) translateX(200px) scale(0.5);
+        border-radius: 5000px;
+        filter: blur(12px);
+      }
+      to {
+        width: 100%;
+        opacity: 1;
+        transform: translateY(0px) translateX(0px) scale(1);
+        border-radius: 0px;
+        filter: blur(0px);
+      }
+    }
+
+    /* Exiting page animation */
+    body.cinematic-exit {
+      opacity: 0;
+      transform: scale(0.15) rotateZ(360deg) rotateX(30deg);
+      border-radius: 100px;
+      filter: blur(16px);
+      transition: opacity 1.0s cubic-bezier(0.77, 0, 0.175, 1), 
+                  transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), 
+                  border-radius 1.0s ease,
+                  filter 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+      pointer-events: none;
+    }
+
     .auth-page {
       min-height: 100vh;
       display: flex;
@@ -172,7 +215,6 @@
       font-weight: 700;
     }
    
-    
     /* Logo */
     .auth-logo {
       font-family: 'Arial Black', 'Impact', sans-serif;
@@ -183,7 +225,7 @@
       text-decoration: none;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
     }
     
     .dark .auth-logo {
@@ -496,11 +538,14 @@
         </button>
       </div>
 
-      <!-- Brand -->
+      <!-- Brand with Asset Image Logo in Front -->
       <div class="text-center mb-8">
         <a href="index.html" class="auth-logo">
-          Fresh<span class="red">Cart</span>
-          <span class="badge">PRO</span>
+          <div class="w-8 h-8 overflow-hidden flex items-center justify-center rounded-sm">
+            <img src="assets/images/grossary-logo.png" alt="Logo" class="w-full h-full object-contain">
+          </div>
+          <span>Fresh<span class="red">Cart</span></span>
+          
         </a>
         <h1 id="formTitle" class="nixon-heading text-3xl mt-4">Member Login</h1>
         <p id="formSubtitle" class="nixon-body text-sm mt-2">Access your private reserve and dispatch bag</p>
@@ -806,7 +851,34 @@
     });
 
     // ==========================================
-    // 8. TOAST FUNCTION
+    // 8. PAGE SWITCHING INTERCEPTOR FOR LOGIN
+    // ==========================================
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('a');
+      
+      if (
+        link &&
+        link.href &&
+        link.hostname === window.location.hostname &&
+        !link.getAttribute('target') &&
+        !link.getAttribute('download') &&
+        link.getAttribute('href') !== '#' &&
+        !link.getAttribute('href').startsWith('javascript') &&
+        !link.getAttribute('href').startsWith('#')
+      ) {
+        e.preventDefault();
+        const targetUrl = link.href;
+
+        document.body.classList.add('cinematic-exit');
+
+        setTimeout(() => {
+          window.location.href = targetUrl;
+        }, 1000);
+      }
+    });
+
+    // ==========================================
+    // 9. TOAST FUNCTION
     // ==========================================
     function showToast(message) {
       let container = document.getElementById('toast-container');
@@ -833,26 +905,12 @@
     }
 
     // ==========================================
-    // 9. REMOVE ERROR STATE ON INPUT
+    // 10. REMOVE ERROR STATE ON INPUT
     // ==========================================
     document.querySelectorAll('.nixon-input').forEach(input => {
       input.addEventListener('input', function() {
         this.classList.remove('error');
       });
-    });
-
-    // ==========================================
-    // 10. KEYBOARD SHORTCUTS
-    // ==========================================
-    document.addEventListener('keydown', function(e) {
-      if (e.ctrlKey && e.shiftKey && e.key === 'L') {
-        e.preventDefault();
-        if (isSignUp) toggleModeBtn.click();
-      }
-      if (e.ctrlKey && e.shiftKey && e.key === 'S') {
-        e.preventDefault();
-        if (!isSignUp) toggleModeBtn.click();
-      }
     });
 
     // ==========================================

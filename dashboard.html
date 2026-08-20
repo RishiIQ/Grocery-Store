@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Dashboard — FreshCart Pro</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class' }</script>
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+    // Initialize theme & direction before paint
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (savedTheme === 'light') {
+      document.documentElement.classList.remove('dark');
+    } else if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+      document.documentElement.classList.add('dark');
+    }
+    const savedDir = localStorage.getItem('dir') || 'ltr';
+    document.documentElement.setAttribute('dir', savedDir);
+  </script>
+</head>
+<body class="antialiased transition-colors duration-500 selection:bg-emerald-500 selection:text-white bg-slate-50 dark:bg-[#07080c] min-h-screen flex flex-col justify-between">
+
+  <!-- Shared DB Script for Toast & Data -->
+  <script src="js/db.js"></script>
+
+  <!-- Unique Dedicated Dashboard Navigation Header -->
+  <header class="w-full z-50 px-6 lg:px-12 py-5 flex items-center justify-between backdrop-blur-2xl bg-white/90 dark:bg-[#090a0f]/90 border-b border-slate-200 dark:border-white/10 transition-colors duration-500">
+    <div class="flex items-center gap-6">
+      <a href="index.html" class="text-sm uppercase tracking-[0.25em] font-mono font-black flex items-center gap-2.5 text-slate-900 dark:text-white group">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse group-hover:scale-125 transition-transform"></span>
+        FreshCart<span class="text-emerald-500">.pro</span>
+      </a>
+      <span class="hidden sm:inline-block text-[10px] font-mono uppercase tracking-widest px-3 py-1 rounded-lg bg-emerald-500/10 text-emerald-500 font-bold">Customer Portal</span>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <button id="rtlToggle" title="Toggle Text Direction (LTR / RTL)" class="w-9 h-9 rounded-xl border border-slate-300 dark:border-white/25 hover:border-emerald-500 flex items-center justify-center transition-all text-slate-700 dark:text-slate-300">
+        <!-- Populated via script -->
+      </button>
+      <button id="themeToggle" title="Toggle Color Theme" class="w-9 h-9 rounded-xl border border-slate-300 dark:border-white/25 hover:border-emerald-500 flex items-center justify-center transition-all text-slate-700 dark:text-slate-300">
+        <svg class="w-4 h-4 dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+        <svg class="w-4 h-4 hidden dark:block text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+      </button>
+      <button onclick="logoutCustomer()" class="text-xs font-mono uppercase tracking-widest px-4 py-2 bg-red-500/10 text-red-500 font-semibold rounded-xl hover:bg-red-500/20 transition-all">Sign Out</button>
+    </div>
+  </header>
+
+  <!-- Dashboard Main Container -->
+  <main class="py-16 px-6 lg:px-12 max-w-7xl mx-auto w-full space-y-12 flex-1">
+    
+    <!-- Welcome Header & Quick Stats -->
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-end border-b editorial-border pb-8 gap-6">
+      <div>
+        <span class="text-xs font-mono uppercase tracking-[0.3em] text-emerald-500">( Overview )</span>
+        <h1 id="welcomeUserTitle" class="text-4xl sm:text-6xl font-light tracking-tight mt-2">Dashboard.</h1>
+      </div>
+      <div class="flex items-center gap-3 font-mono text-xs uppercase tracking-widest">
+        <span class="px-4 py-2 voxelo-card rounded-xl border editorial-border">Active Orders: <span class="text-emerald-500 font-bold">1</span></span>
+      </div>
+    </div>
+
+    <!-- Dashboard Navigation Tabs -->
+    <div class="flex flex-wrap gap-3 font-mono text-xs uppercase tracking-widest border-b editorial-border pb-6">
+      <button onclick="switchTab('catalog')" id="tab-catalog" class="dash-tab px-6 py-3 rounded-xl bg-slate-900 text-white dark:bg-white dark:text-slate-950 font-bold transition-all shadow-md">Market Catalog</button>
+      <button onclick="switchTab('tracking')" id="tab-tracking" class="dash-tab px-6 py-3 rounded-xl voxelo-card border editorial-border hover:border-emerald-500 transition-all">Live Order Tracking</button>
+      <button onclick="switchTab('reorders')" id="tab-reorders" class="dash-tab px-6 py-3 rounded-xl voxelo-card border editorial-border hover:border-emerald-500 transition-all">Saved Reorders</button>
+      <button onclick="switchTab('history')" id="tab-history" class="dash-tab px-6 py-3 rounded-xl voxelo-card border editorial-border hover:border-emerald-500 transition-all">Order History & Bills</button>
+    </div>
+
+    <!-- TAB CONTENT 1: MARKET CATALOG & ORDER PLACEMENT -->
+    <div id="content-catalog" class="dash-content space-y-8">
+      <div class="flex justify-between items-center">
+        <h2 class="text-2xl font-light">Browse & Order Provisions</h2>
+        <div class="flex items-center gap-3 font-mono text-xs uppercase">
+          <label class="text-slate-500">Fulfillment Method:</label>
+          <select id="fulfillmentMethod" class="px-4 py-2 bg-transparent border editorial-border rounded-xl font-mono text-xs uppercase">
+            <option value="delivery">Home Delivery (15-Min Express)</option>
+            <option value="pickup">Hub Store Pickup</option>
+          </select>
+        </div>
+      </div>
+      <div id="dashboardCatalogGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+    </div>
+
+    <!-- TAB CONTENT 2: LIVE ORDER TRACKING -->
+    <div id="content-tracking" class="dash-content hidden space-y-8">
+      <div class="voxelo-card rounded-3xl p-8 lg:p-12 border editorial-border space-y-8">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b editorial-border pb-6 gap-4">
+          <div>
+            <span class="text-xs font-mono text-emerald-500 uppercase tracking-widest">Order ID: #FC-8942-EU</span>
+            <h2 class="text-2xl font-light mt-1">Real-Time Telemetry Tracking</h2>
+          </div>
+          <span class="px-4 py-1.5 rounded-full bg-emerald-500/10 text-emerald-500 font-mono text-xs uppercase font-bold animate-pulse">Status: Out for Delivery</span>
+        </div>
+
+        <!-- Progress Timeline Steps -->
+        <div class="grid grid-cols-1 sm:grid-cols-4 gap-6 font-mono text-xs uppercase tracking-wider">
+          <div class="p-6 rounded-2xl bg-emerald-500 text-slate-950 font-bold space-y-2 shadow-lg">
+            <span>01 / 04</span>
+            <p class="text-sm">Order Confirmed</p>
+            <p class="text-[10px] opacity-80">Verified & paid</p>
+          </div>
+          <div class="p-6 rounded-2xl bg-emerald-500 text-slate-950 font-bold space-y-2 shadow-lg">
+            <span>02 / 04</span>
+            <p class="text-sm">Hub Packing</p>
+            <p class="text-[10px] opacity-80">Thermal sealed</p>
+          </div>
+          <div class="p-6 rounded-2xl bg-emerald-500 text-slate-950 font-bold space-y-2 shadow-lg animate-bounce">
+            <span>03 / 04</span>
+            <p class="text-sm">Out for Delivery</p>
+            <p class="text-[10px] opacity-80">GPS Electric Van #4</p>
+          </div>
+          <div class="p-6 rounded-2xl voxelo-card border editorial-border text-slate-400 space-y-2">
+            <span>04 / 04</span>
+            <p class="text-sm">Delivered</p>
+            <p class="text-[10px] opacity-40">Pending arrival</p>
+          </div>
+        </div>
+
+        <div class="p-6 voxelo-card rounded-2xl border editorial-border flex items-center justify-between font-mono text-xs uppercase">
+          <span>Estimated Arrival: <strong class="text-emerald-500">6 Minutes</strong></span>
+          <span>Courier: Marc V. (Electric Fleet)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB CONTENT 3: SAVED WEEKLY REORDERS -->
+    <div id="content-reorders" class="dash-content hidden space-y-8">
+      <div class="flex justify-between items-center">
+        <h2 class="text-2xl font-light">Saved Weekly Shopping List</h2>
+        <button onclick="reorderSavedList()" class="px-6 py-3 bg-slate-900 text-white dark:bg-white dark:text-slate-950 font-mono text-xs uppercase tracking-widest font-bold rounded-xl shadow-xl hover:opacity-90 transition-all">Add All to Bag &rarr;</button>
+      </div>
+      <div id="savedReordersGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+    </div>
+
+    <!-- TAB CONTENT 4: PAST ORDER HISTORY & ITEMIZED BILLS -->
+    <div id="content-history" class="dash-content hidden space-y-8">
+      <h2 class="text-2xl font-light">Past Orders & Itemized Invoices</h2>
+      <div class="space-y-6">
+        <div class="voxelo-card rounded-3xl p-8 border editorial-border space-y-6">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b editorial-border pb-4 gap-4">
+            <div>
+              <span class="text-xs font-mono text-slate-500 uppercase">Order #FC-7102-FR • August 14, 2026</span>
+              <h3 class="text-xl font-light mt-1">Home Delivery (Organic Produce & Bakery)</h3>
+            </div>
+            <div class="text-right">
+              <span class="text-lg font-mono font-light">$24.38</span>
+              <span class="block text-[10px] font-mono uppercase text-emerald-500 font-bold">Fulfilled</span>
+            </div>
+          </div>
+          <div class="space-y-2 font-mono text-xs uppercase text-slate-500">
+            <div class="flex justify-between"><span>Organic Hass Avocados (x2)</span><span>$11.98</span></div>
+            <div class="flex justify-between"><span>Artisanal Sourdough Loaf (x1)</span><span>$4.50</span></div>
+            <div class="flex justify-between"><span>Cold-Chain Delivery Fee</span><span>$4.99</span></div>
+            <div class="flex justify-between pt-2 border-t editorial-border text-slate-900 dark:text-white font-bold"><span>Total Paid (TLS Secure)</span><span>$24.38</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Minimal Footer -->
+  <footer class="text-center text-xs font-mono text-slate-500 uppercase tracking-widest py-8 border-t editorial-border mt-16">
+    <p>FreshCart Portal © 2026. Secure Customer Session.</p>
+  </footer>
+
+  <!-- Script Handlers -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const userSession = JSON.parse(localStorage.getItem('freshcart_user'));
+      if (userSession && userSession.name) {
+        document.getElementById('welcomeUserTitle').innerText = `${userSession.name}'s Dashboard.`;
+      }
+
+      // Initialize RTL Icon
+      const rtlBtn = document.getElementById('rtlToggle');
+      const updateRtlIcon = (dir) => {
+        rtlBtn.innerHTML = dir === 'rtl'
+          ? `<svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 6h12M10 12h8M8 18h10"></path></svg>`
+          : `<svg class="w-4 h-4 text-slate-700 dark:text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 6h12M6 12h8M6 18h10"></path></svg>`;
+      };
+      updateRtlIcon(savedDir);
+
+      // Render Catalog in Dashboard
+      const dashGrid = document.getElementById('dashboardCatalogGrid');
+      if (dashGrid && window.FreshCartDB) {
+        dashGrid.innerHTML = FreshCartDB.products.map(p => `
+          <div class="voxelo-card rounded-2xl p-6 border editorial-border flex flex-col justify-between space-y-4">
+            <div class="aspect-[4/3] rounded-xl overflow-hidden border editorial-border">
+              <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover">
+            </div>
+            <div class="space-y-1">
+              <span class="text-[10px] font-mono text-emerald-500 uppercase tracking-widest">${p.badge}</span>
+              <h3 class="text-lg font-light">${p.name}</h3>
+              <p class="text-sm font-mono font-light">$${p.price.toFixed(2)}</p>
+            </div>
+            <button onclick="FreshCartDB.addToCart('${p.id}')" class="w-full py-3 rounded-xl bg-slate-900 text-white dark:bg-white dark:text-slate-950 font-mono text-xs uppercase tracking-widest font-bold hover:opacity-90 transition-all">+ Quick Add</button>
+          </div>
+        `).join('');
+      }
+
+      // Render Saved Reorders
+      const reordersGrid = document.getElementById('savedReordersGrid');
+      if (reordersGrid && window.FreshCartDB) {
+        const savedItems = FreshCartDB.products.slice(0, 2);
+        reordersGrid.innerHTML = savedItems.map(p => `
+          <div class="voxelo-card rounded-2xl p-6 border editorial-border flex items-center justify-between gap-4">
+            <div class="flex items-center gap-4">
+              <img src="${p.image}" alt="${p.name}" class="w-16 h-16 object-cover rounded-xl border editorial-border">
+              <div>
+                <h4 class="font-light text-base">${p.name}</h4>
+                <p class="text-xs font-mono text-slate-500 uppercase">$${p.price.toFixed(2)} • Weekly Reorder</p>
+              </div>
+            </div>
+            <button onclick="FreshCartDB.addToCart('${p.id}')" class="px-4 py-2 bg-emerald-500 text-slate-950 font-mono text-xs uppercase font-bold rounded-lg hover:opacity-90">Add</button>
+          </div>
+        `).join('');
+      }
+
+      // Theme & RTL Handlers
+      document.getElementById('themeToggle').addEventListener('click', () => {
+        const isDark = document.documentElement.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      });
+
+      rtlBtn.addEventListener('click', () => {
+        const currentDir = document.documentElement.getAttribute('dir');
+        const newDir = currentDir === 'rtl' ? 'ltr' : 'rtl';
+        document.documentElement.setAttribute('dir', newDir);
+        localStorage.setItem('dir', newDir);
+        updateRtlIcon(newDir);
+      });
+    });
+
+    window.switchTab = (tabName) => {
+      document.querySelectorAll('.dash-tab').forEach(btn => {
+        btn.className = "dash-tab px-6 py-3 rounded-xl voxelo-card border editorial-border hover:border-emerald-500 transition-all";
+      });
+      document.getElementById(`tab-${tabName}`).className = "dash-tab px-6 py-3 rounded-xl bg-slate-900 text-white dark:bg-white dark:text-slate-950 font-bold transition-all shadow-md";
+
+      document.querySelectorAll('.dash-content').forEach(content => {
+        content.classList.add('hidden');
+      });
+      document.getElementById(`content-${tabName}`).classList.remove('hidden');
+    };
+
+    window.reorderSavedList = () => {
+      if (window.FreshCartDB) {
+        FreshCartDB.addToCart('prod-1');
+        FreshCartDB.addToCart('prod-2');
+        FreshCartUI.showToast("Saved weekly reorder items added to your bag.");
+      }
+    };
+
+    window.logoutCustomer = () => {
+      localStorage.removeItem('freshcart_user');
+      FreshCartUI.showToast("Signed out successfully.");
+      setTimeout(() => { window.location.href = 'index.html'; }, 1000);
+    };
+  </script>
+</body>
+</html>

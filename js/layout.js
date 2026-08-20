@@ -307,3 +307,29 @@ document.addEventListener('DOMContentLoaded', () => {
     refreshTheme: initThemeToggle
   };
 });
+// ============================================
+  // SPIN & ZOOM TRANSITION HANDLER
+  // ============================================
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a');
+    
+    if (
+      link &&
+      link.href &&
+      link.hostname === window.location.hostname &&
+      !link.getAttribute('target') &&
+      !link.getAttribute('download') &&
+      link.getAttribute('href') !== '#' &&
+      !link.getAttribute('href').startsWith('javascript') &&
+      !link.getAttribute('href').startsWith('#')
+    ) {
+      e.preventDefault();
+      const targetUrl = link.href;
+
+      document.body.classList.add('cinematic-exit');
+
+      setTimeout(() => {
+        window.location.href = targetUrl;
+      }, 750); // Matches exit animation duration
+    }
+  });

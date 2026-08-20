@@ -21,9 +21,6 @@
     }
   </script>
   <link rel="stylesheet" href="css/style.css">
-  
-  <!-- Lenis Smooth Slow Scroll Library -->
-  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 
   <script>
   (function() {
@@ -295,21 +292,6 @@
   <!-- Script Handlers -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // 1. Initialize Lenis Slow Smooth Scrolling
-      const lenis = new Lenis({
-        duration: 2.0,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        direction: 'vertical',
-        smooth: true,
-        mouseMultiplier: 0.75,
-      });
-
-      function raf(time) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-      }
-      requestAnimationFrame(raf);
-
       const userSession = JSON.parse(localStorage.getItem('freshcart_user'));
       if (userSession && userSession.name) {
         document.getElementById('welcomeUserTitle').innerText = `${userSession.name}'s Dashboard.`;

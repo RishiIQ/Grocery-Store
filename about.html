@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — FreshCart Studio</title>
+  <link rel="icon" type="image/png" href="assets/images/grossary-logo.png">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'nixon-red': '#E31837',
+          }
+        }
+      }
+    }
+  </script>
+  <script>
+  (function() {
+    // Instant Theme Init
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+
+    // Instant Direction Init
+    const savedDir = localStorage.getItem('dir') || 'ltr';
+    document.documentElement.setAttribute('dir', savedDir);
+  })();
+</script>
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css">
+  
+  <style>
+    /* ============================================
+       NIXON-STYLE ABOUT PAGE
+       ============================================ */
+    
+    /* Hero with grid pattern */
+    .about-hero {
+      background: #000000;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .about-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 50px 50px;
+      pointer-events: none;
+    }
+    
+    .dark .about-hero::before {
+      background-image: 
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    }
+    
+    /* Hero glow orbs */
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      pointer-events: none;
+      will-change: transform, opacity;
+    }
+    
+    @keyframes orbFloatSlow {
+      0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
+      33% { transform: translate(50px, -30px) scale(1.1); opacity: 0.5; }
+      66% { transform: translate(-30px, 40px) scale(0.9); opacity: 0.4; }
+    }
+    
+    .orb-about-1 {
+      width: 600px;
+      height: 600px;
+      background: rgba(227, 24, 55, 0.08);
+      top: -200px;
+      right: -200px;
+      animation: orbFloatSlow 10s ease-in-out infinite;
+    }
+    
+    .orb-about-2 {
+      width: 400px;
+      height: 400px;
+      background: rgba(227, 24, 55, 0.05);
+      bottom: -100px;
+      left: -100px;
+      animation: orbFloatSlow 12s ease-in-out infinite reverse;
+    }
+    
+    /* Nixon typography */
+    .nixon-heading {
+      font-family: 'Arial Black', 'Impact', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      line-height: 0.95;
+    }
+    
+    .nixon-subheading {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      font-weight: 700;
+    }
+    
+    .nixon-body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: #8A8A8A;
+    }
+    
+    .dark .nixon-body {
+      color: #8A8A8A;
+    }
+    
+    /* Stats card - Nixon style */
+    .stats-card {
+      background: #FFFFFF;
+      border: 1px solid #E5E5E5;
+      padding: 32px;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .dark .stats-card {
+      background: #1A1A1A;
+      border-color: #333333;
+    }
+    
+    .stats-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: #E31837;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .stats-card:hover::before {
+      transform: scaleX(1);
+    }
+    
+    .stats-card:hover {
+      transform: translateY(-4px);
+      border-color: #E31837;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.06);
+    }
+    
+    .dark .stats-card:hover {
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+    }
+    
+    .stats-number {
+      font-family: 'Arial Black', 'Impact', sans-serif;
+      font-size: 2.5rem;
+      color: #E31837;
+    }
+    
+    /* Pillar cards with 3D tilt */
+    .pillar-card-3d {
+      perspective: 800px;
+      transform-style: preserve-3d;
+    }
+    
+    .pillar-card-3d .card-inner {
+      background: #FFFFFF;
+      border: 1px solid #E5E5E5;
+      padding: 32px;
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: rotateX(0) rotateY(0) translateZ(0);
+      will-change: transform;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .dark .pillar-card-3d .card-inner {
+      background: #1A1A1A;
+      border-color: #333333;
+    }
+    
+    .pillar-card-3d .card-inner::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: #E31837;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .pillar-card-3d:hover .card-inner::after {
+      transform: scaleX(1);
+    }
+    
+    .pillar-card-3d:hover .card-inner {
+      transform: rotateX(3deg) rotateY(3deg) translateZ(10px);
+      border-color: #E31837;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+    }
+    
+    .dark .pillar-card-3d:hover .card-inner {
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+    
+    .pillar-number {
+      font-family: 'Arial Black', 'Impact', sans-serif;
+      font-size: 2.8rem;
+      color: #E31837;
+      opacity: 0.15;
+      transition: opacity 0.4s ease;
+    }
+    
+    .pillar-card-3d:hover .pillar-number {
+      opacity: 0.4;
+    }
+    
+    /* Timeline spin cards - enhanced */
+    .timeline-card {
+      background: #FFFFFF;
+      border: 1px solid #E5E5E5;
+      padding: 32px;
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: perspective(800px) rotateY(15deg) translateX(-20px) scale(0.9);
+      opacity: 0.3;
+      will-change: transform, opacity;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .dark .timeline-card {
+      background: #1A1A1A;
+      border-color: #333333;
+    }
+    
+    .timeline-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: #E31837;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .timeline-card.is-visible {
+      transform: perspective(800px) rotateY(0deg) translateX(0) scale(1);
+      opacity: 1;
+    }
+    
+    .timeline-card.is-visible::before {
+      transform: scaleX(1);
+    }
+    
+    .timeline-card:hover {
+      border-color: #E31837;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+    }
+    
+    .dark .timeline-card:hover {
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+    
+    .timeline-phase {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: #E31837;
+      text-transform: uppercase;
+    }
+    
+    .timeline-year {
+      font-family: 'Arial Black', 'Impact', sans-serif;
+      font-size: 1.8rem;
+      color: #E31837;
+      opacity: 0.2;
+    }
+    
+    /* Scroll reveal */
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .reveal-on-scroll.is-revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .reveal-on-scroll.delay-1 { transition-delay: 0.1s; }
+    .reveal-on-scroll.delay-2 { transition-delay: 0.2s; }
+    .reveal-on-scroll.delay-3 { transition-delay: 0.3s; }
+    .reveal-on-scroll.delay-4 { transition-delay: 0.4s; }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .stats-number {
+        font-size: 2rem;
+      }
+      .pillar-card-3d .card-inner {
+        padding: 24px;
+      }
+      .timeline-card {
+        padding: 24px;
+      }
+      .timeline-year {
+        font-size: 1.4rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .stats-card {
+        padding: 20px;
+      }
+      .pillar-card-3d .card-inner {
+        padding: 20px;
+      }
+      .timeline-card {
+        padding: 20px;
+      }
+    }
+    
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+      .timeline-card {
+        transform: none !important;
+        opacity: 1 !important;
+      }
+      .pillar-card-3d:hover .card-inner {
+        transform: none !important;
+      }
+      .stats-card:hover {
+        transform: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-white dark:bg-[#0A0A0A] text-slate-900 dark:text-white transition-colors duration-500">
+
+  <!-- ============================================ -->
+  <!-- HEADER INJECTED BY layout.js -->
+  <!-- ============================================ -->
+
+  <!-- ============================================ -->
+  <!-- MAIN CONTENT -->
+  <!-- ============================================ -->
+  <main style="padding-top: 70px;">
+
+    <!-- ========================================== -->
+    <!-- ABOUT HERO -->
+    <!-- ========================================== -->
+    <section class="about-hero min-h-[60vh] flex items-center relative">
+      
+      <!-- Glow Orbs -->
+      <div class="hero-orb orb-about-1"></div>
+      <div class="hero-orb orb-about-2"></div>
+
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-16">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 border-b border-white/10 pb-8">
+          <div>
+            <p class="nixon-subheading text-[#E31837]">Studio Manifest</p>
+            <h1 class="nixon-heading text-white text-5xl sm:text-6xl lg:text-7xl mt-2">
+              Reinventing<br>
+              <span class="text-[#E31837]">Food Supply</span>
+            </h1>
+          </div>
+          <p class="nixon-body text-white/60 max-w-xs text-right">
+            Global Hub • Paris / Tokyo / New York
+          </p>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- NARRATIVE & STATS -->
+    <!-- ========================================== -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+        
+        <!-- Narrative -->
+        <div class="lg:col-span-7 space-y-6 reveal-on-scroll">
+          <h2 class="nixon-heading text-3xl sm:text-4xl">
+            Uncompromising Quality Through<br>
+            <span class="text-[#E31837]">Decentralized Micro-Fulfillment</span>
+          </h2>
+          <p class="nixon-body">
+            Founded in 2024, FreshCart Pro emerged from a singular conviction: that farm-fresh organic provisions should reach consumer tables with zero thermal fluctuation, absolute supply transparency, and sub-15-minute express transit.
+          </p>
+          <p class="nixon-body">
+            By combining regenerative agricultural cooperatives with advanced IoT cold-chain telemetry, we bridge the gap between traditional heritage farming and autonomous metropolitan logistics.
+          </p>
+        </div>
+
+        <!-- Stats Card -->
+        <div class="lg:col-span-5 reveal-on-scroll delay-2">
+          <div class="stats-card">
+            <p class="text-xs font-bold tracking-[0.2em] uppercase text-[#E31837]">Global Telemetry Stats</p>
+            <div class="space-y-4 mt-4">
+              <div class="flex justify-between items-center border-b border-[#E5E5E5] dark:border-[#333333] pb-3">
+                <span class="text-xs font-bold tracking-[0.1em] uppercase text-[#8A8A8A]">Active Micro-Hubs</span>
+                <span class="stats-number">73</span>
+              </div>
+              <div class="flex justify-between items-center border-b border-[#E5E5E5] dark:border-[#333333] pb-3">
+                <span class="text-xs font-bold tracking-[0.1em] uppercase text-[#8A8A8A]">Partner Cooperatives</span>
+                <span class="stats-number">140+</span>
+              </div>
+              <div class="flex justify-between items-center border-b border-[#E5E5E5] dark:border-[#333333] pb-3">
+                <span class="text-xs font-bold tracking-[0.1em] uppercase text-[#8A8A8A]">Daily Dispatches</span>
+                <span class="stats-number">450K+</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-xs font-bold tracking-[0.1em] uppercase text-[#8A8A8A]">Carbon Offset</span>
+                <span class="text-sm font-bold text-[#E31837]">100% Neutral</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- THREE PILLARS - 3D TILT CARDS -->
+    <!-- ========================================== -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[#E5E5E5] dark:border-[#222222]">
+      
+      <div class="text-center mb-16">
+        <p class="nixon-subheading text-[#E31837]">Operating Principles</p>
+        <h2 class="nixon-heading text-3xl sm:text-4xl lg:text-5xl mt-2">The Three Pillars</h2>
+        <div class="w-12 h-0.5 bg-[#E31837] mx-auto mt-4"></div>
+        <p class="nixon-body max-w-2xl mx-auto mt-4">Architected for absolute integrity from soil to doorstep</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Pillar 1 -->
+        <div class="pillar-card-3d reveal-on-scroll delay-1">
+          <div class="card-inner h-full flex flex-col">
+            <div class="pillar-number">01</div>
+            <p class="text-xs font-bold tracking-[0.2em] uppercase text-[#E31837] mt-2">Pillar 01</p>
+            <h3 class="nixon-heading text-xl mt-1">Zero Waste Logistics</h3>
+            <p class="nixon-body text-sm mt-3 flex-1">
+              Predictive machine-learning pipelines match regional inventory requirements to prevent food spoilage.
+            </p>
+          </div>
+        </div>
+
+        <!-- Pillar 2 -->
+        <div class="pillar-card-3d reveal-on-scroll delay-2">
+          <div class="card-inner h-full flex flex-col">
+            <div class="pillar-number">02</div>
+            <p class="text-xs font-bold tracking-[0.2em] uppercase text-[#E31837] mt-2">Pillar 02</p>
+            <h3 class="nixon-heading text-xl mt-1">Direct Fair Trade</h3>
+            <p class="nixon-body text-sm mt-3 flex-1">
+              We bypass middlemen entirely, ensuring 40% higher margins go straight back to independent farmers.
+            </p>
+          </div>
+        </div>
+
+        <!-- Pillar 3 -->
+        <div class="pillar-card-3d reveal-on-scroll delay-3">
+          <div class="card-inner h-full flex flex-col">
+            <div class="pillar-number">03</div>
+            <p class="text-xs font-bold tracking-[0.2em] uppercase text-[#E31837] mt-2">Pillar 03</p>
+            <h3 class="nixon-heading text-xl mt-1">Autonomous Fleet</h3>
+            <p class="nixon-body text-sm mt-3 flex-1">
+              Zero-emission electric transport vehicles coordinated by real-time route optimization software.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TIMELINE - SPIN CARDS -->
+    <!-- ========================================== -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[#E5E5E5] dark:border-[#222222]">
+      
+      <div class="text-center mb-16">
+        <p class="nixon-subheading text-[#E31837]">Evolution Timeline</p>
+        <h2 class="nixon-heading text-3xl sm:text-4xl lg:text-5xl mt-2">Our Journey</h2>
+        <div class="w-12 h-0.5 bg-[#E31837] mx-auto mt-4"></div>
+        <p class="nixon-body max-w-2xl mx-auto mt-4">Scroll to reveal milestones as they spin into view</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="timelineGrid">
+        
+        <!-- Milestone 1 -->
+        <div class="timeline-card" data-timeline>
+          <div class="flex justify-between items-start">
+            <span class="timeline-phase">Phase 01</span>
+            <span class="timeline-year">2024</span>
+          </div>
+          <h3 class="nixon-heading text-xl mt-3">Founding & Paris Pilot</h3>
+          <p class="nixon-body text-sm mt-3">
+            Established our first centralized regenerative agriculture cooperative partnership in the Loire Valley and launched our inaugural Parisian micro-fulfillment hub.
+          </p>
+        </div>
+
+        <!-- Milestone 2 -->
+        <div class="timeline-card" data-timeline>
+          <div class="flex justify-between items-start">
+            <span class="timeline-phase">Phase 02</span>
+            <span class="timeline-year">2025</span>
+          </div>
+          <h3 class="nixon-heading text-xl mt-3">IoT Telemetry Integration</h3>
+          <p class="nixon-body text-sm mt-3">
+            Engineered our proprietary 2.4°C IoT hardware sensor fleet and deployed automated cloud routing webhooks for enterprise grocery partners.
+          </p>
+        </div>
+
+        <!-- Milestone 3 -->
+        <div class="timeline-card" data-timeline>
+          <div class="flex justify-between items-start">
+            <span class="timeline-phase">Phase 03</span>
+            <span class="timeline-year">2026</span>
+          </div>
+          <h3 class="nixon-heading text-xl mt-3">Global Expansion</h3>
+          <p class="nixon-body text-sm mt-3">
+            Scaled operations across Tokyo and New York metropolitan zones, achieving 450k+ daily automated dispatches with 99.99% API uptime.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- CTA BANNER -->
+    <!-- ========================================== -->
+    <section class="bg-black border-y border-[#222222] py-20 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="nixon-heading text-white text-3xl sm:text-4xl lg:text-5xl">
+          Join the<br>
+          <span class="text-[#E31837]">Revolution</span>
+        </h2>
+        <p class="nixon-body text-white/60 mt-4 max-w-xl mx-auto">
+          Be part of the movement that's reinventing food supply from farm to door.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+          <a href="shop.html" class="inline-block px-10 py-4 bg-[#E31837] text-white font-['Helvetica_Neue'] text-sm font-bold tracking-[0.15em] uppercase hover:bg-[#C41230] transition-all hover:scale-[1.02]">
+            Explore Marketplace →
+          </a>
+          <a href="contact.html" class="inline-block px-10 py-4 border-2 border-white text-white font-['Helvetica_Neue'] text-sm font-bold tracking-[0.15em] uppercase hover:bg-white hover:text-black transition-all hover:scale-[1.02]">
+            Contact Us
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================ -->
+  <!-- FOOTER INJECTED BY layout.js -->
+  <!-- ============================================ -->
+
+  <!-- ============================================ -->
+  <!-- SCRIPTS -->
+  <!-- ============================================ -->
+  <script src="js/db.js"></script>
+  <script src="js/layout.js"></script>
+
+  <script>
+    // ==========================================
+    // 1. SCROLL REVEAL
+    // ==========================================
+    document.addEventListener('DOMContentLoaded', () => {
+      const revealElements = document.querySelectorAll('.reveal-on-scroll');
+      
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+          }
+        });
+      }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+      });
+
+      revealElements.forEach(el => revealObserver.observe(el));
+    });
+
+    // ==========================================
+    // 2. TIMELINE SPIN CARDS
+    // ==========================================
+    document.addEventListener('DOMContentLoaded', () => {
+      const timelineCards = document.querySelectorAll('[data-timeline]');
+      
+      const timelineObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            // Add a staggered delay based on index
+            const index = Array.from(timelineCards).indexOf(entry.target);
+            const delay = index * 150;
+            
+            setTimeout(() => {
+              entry.target.classList.add('is-visible');
+            }, delay);
+            
+            timelineObserver.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.2,
+        rootMargin: '0px 0px -50px 0px'
+      });
+
+      timelineCards.forEach(card => timelineObserver.observe(card));
+    });
+
+    // ==========================================
+    // 3. TOAST FUNCTION
+    // ==========================================
+    function showToast(message) {
+      let container = document.getElementById('toast-container');
+      if (!container) {
+        container = document.createElement('div');
+        container.id = 'toast-container';
+        container.className = 'fixed bottom-8 right-8 z-50 flex flex-col gap-3 pointer-events-none';
+        document.body.appendChild(container);
+      }
+      
+      const toast = document.createElement('div');
+      toast.className = 'pointer-events-auto bg-black text-white dark:bg-white dark:text-black px-6 py-4 text-sm font-bold tracking-[0.15em] uppercase shadow-2xl border border-[#333333] dark:border-[#E5E5E5] transform translate-y-4 opacity-0 transition-all duration-300';
+      toast.textContent = message;
+      container.appendChild(toast);
+      
+      requestAnimationFrame(() => {
+        toast.classList.remove('translate-y-4', 'opacity-0');
+      });
+      
+      setTimeout(() => {
+        toast.classList.add('translate-y-4', 'opacity-0');
+        setTimeout(() => toast.remove(), 400);
+      }, 2500);
+    }
+  </script>
+
+</body>
+</html>

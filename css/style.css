@@ -1,0 +1,969 @@
+/* ============================================
+   NIXON EXACT HEADER & FOOTER STYLES
+   ============================================ */
+
+/* ----- HEADER ----- */
+.nixon-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.98);
+  border-bottom: 1px solid #E5E5E5;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  height: 70px;
+  display: flex;
+  align-items: center;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.dark .nixon-header {
+  background: rgba(0, 0, 0, 0.98);
+  border-bottom: 1px solid #222222;
+}
+
+.nixon-header-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+/* Logo */
+.nixon-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.nixon-logo-text {
+  font-family: 'Arial Black', 'Impact', sans-serif;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  color: #000000;
+  transition: color 0.3s ease;
+}
+
+.dark .nixon-logo-text {
+  color: #FFFFFF;
+}
+
+.nixon-red {
+  color: #E31837;
+}
+
+/* Navigation */
+.nixon-nav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nixon-nav-link {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  text-transform: uppercase;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: #000000;
+  text-decoration: none;
+  padding: 8px 0;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.dark .nixon-nav-link {
+  color: #FFFFFF;
+}
+
+.nixon-nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #E31837;
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nixon-nav-link:hover::after,
+.nixon-nav-link.active::after {
+  width: 100%;
+}
+
+.nixon-nav-link:hover,
+.nixon-nav-link.active {
+  color: #E31837;
+}
+
+/* Right Actions */
+.nixon-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.nixon-action-btn {
+  width: 36px;
+  height: 36px;
+  border: 1px solid #E5E5E5;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000000;
+  transition: all 0.2s ease;
+}
+
+.dark .nixon-action-btn {
+  border-color: #333333;
+  color: #FFFFFF;
+}
+
+.nixon-action-btn:hover {
+  border-color: #E31837;
+  color: #E31837;
+}
+
+.nixon-icon-light {
+  display: none;
+}
+
+.dark .nixon-icon-dark {
+  display: none;
+}
+
+.dark .nixon-icon-light {
+  display: block;
+}
+
+/* Cart Button */
+.nixon-cart-btn {
+  position: relative;
+  padding: 8px;
+  color: #000000;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
+}
+
+.dark .nixon-cart-btn {
+  color: #FFFFFF;
+}
+
+.nixon-cart-btn:hover {
+  color: #E31837;
+}
+
+.nixon-cart-badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  background: #E31837;
+  color: #FFFFFF;
+  font-size: 0.55rem;
+  font-weight: 700;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+}
+
+/* Auth Button */
+.nixon-auth-btn {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  text-transform: uppercase;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #000000;
+  text-decoration: none;
+  padding: 8px 16px;
+  border: 1px solid #E5E5E5;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  background: transparent;
+  cursor: pointer;
+}
+
+.dark .nixon-auth-btn {
+  color: #FFFFFF;
+  border-color: #333333;
+}
+
+.nixon-auth-btn:hover {
+  border-color: #E31837;
+  color: #E31837;
+}
+
+/* Auth Dropdown */
+.nixon-auth-dropdown {
+  position: relative;
+}
+
+.nixon-auth-dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: #FFFFFF;
+  border: 1px solid #E5E5E5;
+  min-width: 160px;
+  padding: 8px 0;
+  margin-top: 4px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.dark .nixon-auth-dropdown-menu {
+  background: #1A1A1A;
+  border-color: #333333;
+}
+
+.nixon-auth-dropdown:hover .nixon-auth-dropdown-menu {
+  display: block;
+}
+
+.nixon-auth-dropdown-menu a {
+  display: block;
+  padding: 8px 20px;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #000000;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.dark .nixon-auth-dropdown-menu a {
+  color: #FFFFFF;
+}
+
+.nixon-auth-dropdown-menu a:hover {
+  background: #F5F5F5;
+  color: #E31837;
+}
+
+.dark .nixon-auth-dropdown-menu a:hover {
+  background: #2A2A2A;
+}
+
+/* Hamburger */
+.nixon-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  flex-shrink: 0;
+}
+
+.nixon-hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #000000;
+  transition: all 0.3s ease;
+}
+
+.dark .nixon-hamburger span {
+  background: #FFFFFF;
+}
+
+.nixon-hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(4px, 4px);
+}
+
+.nixon-hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.nixon-hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(4px, -4px);
+}
+
+/* ----- FOOTER ----- */
+.nixon-footer {
+  background: #000000;
+  color: #FFFFFF;
+  padding: 60px 40px 40px;
+  border-top: 1px solid #222222;
+  margin-top: 60px;
+}
+
+.nixon-footer-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.nixon-footer-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+}
+
+.nixon-footer h4 {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  text-transform: uppercase;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: #FFFFFF;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.nixon-footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nixon-footer ul li {
+  margin-bottom: 8px;
+}
+
+.nixon-footer a {
+  color: #8A8A8A;
+  text-decoration: none;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  text-transform: uppercase;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  transition: color 0.2s ease;
+}
+
+.nixon-footer a:hover {
+  color: #FFFFFF;
+}
+
+.nixon-footer-bottom {
+  border-top: 1px solid #222222;
+  margin-top: 40px;
+  padding-top: 32px;
+  text-align: center;
+}
+
+.nixon-footer-bottom p {
+  color: #8A8A8A;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  text-transform: uppercase;
+  font-size: 0.55rem;
+  letter-spacing: 0.15em;
+}
+
+/* ============================================
+   DARK MODE FIXES FOR ALL CARDS
+   ============================================ */
+
+/* Fix for stats cards */
+.stats-card {
+  background: #FFFFFF;
+  border: 1px solid #E5E5E5;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dark .stats-card {
+  background: #1A1A1A;
+  border-color: #333333;
+}
+
+.stats-card .stat-number {
+  color: #E31837;
+}
+
+.stats-card .text-slate-900 {
+  color: #000000;
+}
+
+.dark .stats-card .text-slate-900 {
+  color: #FFFFFF;
+}
+
+/* Fix for pillar cards */
+.pillar-card-3d .card-inner {
+  background: #FFFFFF;
+  border: 1px solid #E5E5E5;
+}
+
+.dark .pillar-card-3d .card-inner {
+  background: #1A1A1A;
+  border-color: #333333;
+}
+
+.pillar-card-3d .card-inner .nixon-body {
+  color: #666666;
+}
+
+.dark .pillar-card-3d .card-inner .nixon-body {
+  color: #8A8A8A;
+}
+
+.pillar-card-3d .card-inner h3 {
+  color: #000000;
+}
+
+.dark .pillar-card-3d .card-inner h3 {
+  color: #FFFFFF;
+}
+
+/* Fix for timeline cards */
+.timeline-card {
+  background: #FFFFFF;
+  border: 1px solid #E5E5E5;
+}
+
+.dark .timeline-card {
+  background: #1A1A1A;
+  border-color: #333333;
+}
+
+.timeline-card h3 {
+  color: #000000;
+}
+
+.dark .timeline-card h3 {
+  color: #FFFFFF;
+}
+
+.timeline-card .nixon-body {
+  color: #666666;
+}
+
+.dark .timeline-card .nixon-body {
+  color: #8A8A8A;
+}
+
+/* Fix for voxelo cards */
+.voxelo-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.dark .voxelo-card {
+  background: rgba(13, 15, 23, 0.75);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Fix for editorial border */
+.editorial-border {
+  border-color: rgba(15, 23, 42, 0.1);
+}
+
+.dark .editorial-border {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Fix for text colors */
+.text-slate-600 {
+  color: #475569;
+}
+
+.dark .text-slate-600 {
+  color: #94A3B8;
+}
+
+.text-slate-500 {
+  color: #64748B;
+}
+
+.dark .text-slate-500 {
+  color: #94A3B8;
+}
+
+.text-slate-900 {
+  color: #0F172A;
+}
+
+.dark .text-slate-900 {
+  color: #F1F5F9;
+}
+
+.text-slate-400 {
+  color: #94A3B8;
+}
+
+.dark .text-slate-400 {
+  color: #64748B;
+}
+
+/* Fix for border colors in dark mode */
+.border-slate-200 {
+  border-color: #E2E8F0;
+}
+
+.dark .border-slate-200 {
+  border-color: #334155;
+}
+
+.border-slate-300 {
+  border-color: #CBD5E1;
+}
+
+.dark .border-slate-300 {
+  border-color: #475569;
+}
+
+/* Fix for background colors */
+.bg-slate-50 {
+  background-color: #F8FAFC;
+}
+
+.dark .bg-slate-50 {
+  background-color: #0F172A;
+}
+
+.bg-white {
+  background-color: #FFFFFF;
+}
+
+.dark .bg-white {
+  background-color: #1E293B;
+}
+
+.bg-slate-100 {
+  background-color: #F1F5F9;
+}
+
+.dark .bg-slate-100 {
+  background-color: #1E293B;
+}
+
+/* Fix for card hover states in dark mode */
+.pillar-card-3d:hover .card-inner {
+  border-color: #E31837;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.timeline-card:hover {
+  border-color: #E31837;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.stats-card:hover {
+  border-color: #E31837;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+}
+
+/* Fix for CTA section in dark mode */
+.bg-black {
+  background-color: #000000;
+}
+
+.dark .bg-black {
+  background-color: #000000;
+}
+
+.border-y.border-\[E5E5E5\] {
+  border-color: #E5E5E5;
+}
+
+.dark .border-y.border-\[E5E5E5\] {
+  border-color: #222222;
+}
+
+/* Fix for section dividers */
+.border-t {
+  border-top-color: #E5E5E5;
+}
+
+.dark .border-t {
+  border-top-color: #222222;
+}
+
+/* Fix for section backgrounds */
+.bg-\[\#F5F5F5\] {
+  background-color: #F5F5F5;
+}
+
+.dark .bg-\[\#F5F5F5\] {
+  background-color: #111111;
+}
+
+/* Fix for reveal cards in dark mode */
+.reveal-on-scroll .nixon-body {
+  color: #666666;
+}
+
+.dark .reveal-on-scroll .nixon-body {
+  color: #8A8A8A;
+}
+
+/* Fix for hero text */
+.about-hero .nixon-body {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Fix for stats card labels */
+.stats-card .text-\[8A8A8A\] {
+  color: #8A8A8A;
+}
+
+.dark .stats-card .text-\[8A8A8A\] {
+  color: #94A3B8;
+}
+
+/* Fix for section subtitle */
+.nixon-subheading {
+  color: #8A8A8A;
+}
+
+.dark .nixon-subheading {
+  color: #8A8A8A;
+}
+
+.nixon-subheading.text-\[\#E31837\] {
+  color: #E31837;
+}
+
+/* Fix for scroll reveal animations */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-on-scroll.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Fix for CTA button in dark mode */
+.bg-\[\#E31837\] {
+  background-color: #E31837;
+}
+
+.bg-\[\#E31837\]:hover {
+  background-color: #C41230;
+}
+
+/* Fix for border-white in dark mode */
+.border-white {
+  border-color: #FFFFFF;
+}
+
+.dark .border-white {
+  border-color: #FFFFFF;
+}
+
+/* Fix for hover states */
+.hover\:bg-\[\#C41230\]:hover {
+  background-color: #C41230;
+}
+
+.hover\:bg-white:hover {
+  background-color: #FFFFFF;
+}
+
+.dark .hover\:bg-white:hover {
+  background-color: #FFFFFF;
+}
+
+.hover\:text-black:hover {
+  color: #000000;
+}
+
+/* ----- RESPONSIVE ----- */
+@media (max-width: 1024px) {
+  .nixon-nav {
+    gap: 20px;
+  }
+  .nixon-header-inner {
+    padding: 0 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .nixon-header {
+    height: 60px;
+  }
+
+  .nixon-header-inner {
+    padding: 0 16px;
+  }
+
+  .nixon-nav {
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
+    flex-direction: column;
+    padding: 20px;
+    gap: 16px;
+    border-bottom: 1px solid #E5E5E5;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  .dark .nixon-nav {
+    background: rgba(0, 0, 0, 0.98);
+    border-bottom: 1px solid #222222;
+  }
+
+  .nixon-nav.open {
+    display: flex;
+  }
+
+  .nixon-hamburger {
+    display: flex;
+  }
+
+  .nixon-actions {
+    gap: 8px;
+  }
+
+  .nixon-auth-btn {
+    padding: 6px 12px;
+    font-size: 0.55rem;
+  }
+
+  .nixon-action-btn {
+    width: 32px;
+    height: 32px;
+  }
+
+  .nixon-footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .nixon-footer {
+    padding: 40px 20px 30px;
+  }
+
+  .nixon-logo-text {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .nixon-footer-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .nixon-header-inner {
+    padding: 0 12px;
+  }
+
+  .nixon-logo-text {
+    font-size: 0.9rem;
+  }
+
+  .nixon-action-btn {
+    width: 28px;
+    height: 28px;
+  }
+
+  .nixon-action-btn svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .nixon-cart-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* RTL Support */
+[dir="rtl"] .nixon-nav-link::after {
+  left: auto;
+  right: 0;
+}
+
+[dir="rtl"] .nixon-auth-dropdown-menu {
+  right: auto;
+  left: 0;
+}
+
+[dir="rtl"] .nixon-cart-badge {
+  right: auto;
+  left: -2px;
+}
+
+[dir="rtl"] .nixon-actions {
+  flex-direction: row-reverse;
+}
+
+/* ============================================
+   THEME ICON FIX
+   ============================================ */
+.nixon-icon-dark {
+  display: block;
+}
+
+.nixon-icon-light {
+  display: none;
+}
+
+.dark .nixon-icon-dark {
+  display: none;
+}
+
+.dark .nixon-icon-light {
+  display: block;
+}
+
+/* ============================================
+   GLOBAL DARK MODE BASELINE FIX
+   ============================================ */
+.dark body {
+  background-color: #0A0A0A !important;
+  color: #FFFFFF !important;
+}
+
+.dark main {
+  background-color: #0A0A0A !important;
+}
+
+/* Ensure secondary background sections respect dark mode */
+.dark section:not(.about-hero):not(.services-hero):not(.pricing-hero):not(.contact-hero):not(.blog-hero):not(.enterprise-hero) {
+  background-color: #0A0A0A;
+  color: #FFFFFF;
+}
+
+/* ============================================
+   NIXON EDITORIAL RESPONSIVE MEDIA SYSTEM
+   ============================================ */
+
+/* 1. Large Desktops & Ultrawide (1440px and up) */
+@media (min-width: 1440px) {
+  .nixon-header-inner,
+  .nixon-footer-inner {
+    max-width: 1400px;
+  }
+}
+
+/* 2. Standard Laptops & Tablets Landscape (1024px to 1439px) */
+@media (max-width: 1024px) {
+  .nixon-nav {
+    gap: 24px;
+  }
+  .nixon-header-inner {
+    padding: 0 24px;
+  }
+}
+
+/* 3. Tablets Portrait & Large Mobile Devices (768px to 1023px) */
+@media (max-width: 1023px) {
+  .nixon-header {
+    height: 65px;
+  }
+  .nixon-header-inner {
+    padding: 0 20px;
+  }
+  .nixon-nav {
+    display: none;
+    position: absolute;
+    top: 65px;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    flex-direction: column;
+    padding: 24px;
+    gap: 16px;
+    border-bottom: 1px solid #E5E5E5;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  }
+  .dark .nixon-nav {
+    background: rgba(0, 0, 0, 0.98);
+    border-bottom: 1px solid #222222;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  }
+  .nixon-nav.open {
+    display: flex;
+  }
+  .nixon-hamburger {
+    display: flex;
+  }
+  .nixon-footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+}
+
+/* 4. Mobile Devices & Small Tablets (481px to 767px) */
+@media (max-width: 767px) {
+  .nixon-header {
+    height: 60px;
+  }
+  .nixon-header-inner {
+    padding: 0 16px;
+  }
+  .nixon-nav {
+    top: 60px;
+  }
+  .auth-card {
+    padding: 36px 24px;
+  }
+  .nixon-heading {
+    font-size: 2.2rem !important;
+  }
+}
+
+/* 5. Compact Mobile Devices / Small Screens (Up to 480px) */
+@media (max-width: 480px) {
+  .nixon-header-inner {
+    padding: 0 12px;
+  }
+  .nixon-logo-text {
+    font-size: 1rem;
+  }
+  .nixon-actions {
+    gap: 8px;
+  }
+  .nixon-action-btn {
+    width: 32px;
+    height: 32px;
+  }
+  .auth-card {
+    padding: 28px 16px;
+  }
+  .nixon-footer-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .nixon-footer {
+    padding: 40px 16px 24px;
+  }
+}
+
+/* 6. Landscape Orientation Optimizations for Mobile */
+@media (max-height: 550px) and (orientation: landscape) {
+  .auth-page {
+    padding: 20px 10px;
+    justify-content: flex-start;
+    overflow-y: auto;
+  }
+  .auth-card {
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+}

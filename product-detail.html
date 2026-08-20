@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="assets/images/grossary-logo.png">
+  <title>Product Details — FreshCart Pro</title>
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+      const savedDir = localStorage.getItem('dir') || 'ltr';
+      document.documentElement.setAttribute('dir', savedDir);
+    })();
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'nixon-red': '#E31837',
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Nixon Aesthetic & Animation Overrides */
+    .nixon-heading {
+      font-family: 'Arial Black', 'Impact', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+    .nixon-subheading {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      font-weight: 700;
+    }
+    .nixon-card {
+      background: #FFFFFF;
+      border: 1px solid #E5E5E5;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .dark .nixon-card {
+      background: #1A1A1A;
+      border-color: #333333;
+    }
+    .nixon-card:hover {
+      border-color: #E31837;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.08);
+    }
+    .dark .nixon-card:hover {
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+    }
+    .nixon-btn {
+      display: inline-block;
+      padding: 16px 32px;
+      background: #E31837;
+      color: #FFFFFF;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      border: none;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      text-align: center;
+      text-decoration: none;
+      width: 100%;
+    }
+    .nixon-btn:hover {
+      background: #C41230;
+      transform: scale(1.02);
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .animate-fade-in {
+      animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+  </style>
+</head>
+<body class="bg-white dark:bg-[#0A0A0A] text-slate-900 dark:text-white antialiased transition-colors duration-500">
+
+  <!-- Shared DB and Layout Injector Scripts -->
+  <script src="js/db.js"></script>
+  <script src="js/layout.js"></script>
+
+  <!-- Product Detail Section -->
+  <main class="pt-48 pb-36 px-4 sm:px-6 lg:px-12 max-w-7xl mx-auto space-y-24 animate-fade-in">
+    <div id="productDetailContainer" class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+      <!-- Injected via JavaScript below -->
+    </div>
+
+    <!-- Additional Rich Content Sections -->
+    <div class="border-t border-[#E5E5E5] dark:border-[#222222] pt-24 grid grid-cols-1 lg:grid-cols-3 gap-12">
+      <div class="p-8 nixon-card space-y-4">
+        <span class="nixon-subheading text-[#E31837]">01 / Cold-Chain</span>
+        <h3 class="nixon-heading text-xl">Thermal Telemetry Verified</h3>
+        <p class="text-xs font-['Helvetica_Neue'] text-[#8A8A8A] uppercase tracking-[0.1em] leading-relaxed">This provision is monitored 24/7 via IoT sensors ensuring transit temperature never exceeds strict 2.4°C thresholds.</p>
+      </div>
+      <div class="p-8 nixon-card space-y-4">
+        <span class="nixon-subheading text-[#E31837]">02 / Sustainability</span>
+        <h3 class="nixon-heading text-xl">Zero-Plastic Packaging</h3>
+        <p class="text-xs font-['Helvetica_Neue'] text-[#8A8A8A] uppercase tracking-[0.1em] leading-relaxed">Sealed in fully compostable cellulose and recycled unbleached fiber paper that degrades safely within 45 days.</p>
+      </div>
+      <div class="p-8 nixon-card space-y-4">
+        <span class="nixon-subheading text-[#E31837]">03 / Provenance</span>
+        <h3 class="nixon-heading text-xl">Regenerative Agriculture</h3>
+        <p class="text-xs font-['Helvetica_Neue'] text-[#8A8A8A] uppercase tracking-[0.1em] leading-relaxed">Purchased directly from certified partner cooperatives using soil-restoring farming and ethical labor standards.</p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const container = document.getElementById('productDetailContainer');
+      if (!container || !window.FreshCartDB) return;
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const productId = urlParams.get('id');
+
+      const product = FreshCartDB.products.find(p => p.id === productId);
+
+      if (!product) {
+        container.innerHTML = `
+          <div class="col-span-full py-20 text-center space-y-6 nixon-card p-12">
+            <h1 class="nixon-heading text-3xl">Provision Not Found</h1>
+            <p class="text-xs font-['Helvetica_Neue'] uppercase tracking-[0.15em] text-[#8A8A8A]">The requested item may have been archived or is out of season.</p>
+            <a href="shop.html" class="inline-block px-8 py-4 bg-black text-white dark:bg-white dark:text-black font-['Helvetica_Neue'] text-xs font-bold tracking-[0.15em] uppercase hover:bg-[#E31837] hover:text-white transition-all">Return to Marketplace →</a>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = `
+        <!-- Product Image Showcase -->
+        <div class="lg:col-span-7 relative">
+          <div class="relative overflow-hidden aspect-[4/5] nixon-card shadow-2xl">
+            <span class="absolute top-6 left-6 z-10 text-[0.6rem] font-['Helvetica_Neue'] font-bold uppercase tracking-[0.2em] bg-white/90 dark:bg-black/90 backdrop-blur-md px-3.5 py-1.5 border border-[#E5E5E5] dark:border-[#333333] text-[#E31837]">${product.badge || 'Fresh'}</span>
+            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105">
+          </div>
+        </div>
+
+        <!-- Product Information & Actions -->
+        <div class="lg:col-span-5 space-y-8 sticky top-32">
+          <div class="space-y-3">
+            <span class="nixon-subheading text-[#E31837]">Sector / ${product.category}</span>
+            <h1 class="nixon-heading text-4xl sm:text-5xl tracking-tight">${product.name}</h1>
+          </div>
+
+          <div class="flex items-center gap-6 border-y border-[#E5E5E5] dark:border-[#333333] py-6">
+            <span class="font-['Arial_Black'] text-3xl">$${product.price.toFixed(2)}</span>
+            ${product.oldPrice ? `<span class="text-lg font-['Arial_Black'] text-[#8A8A8A] line-through">$${product.oldPrice.toFixed(2)}</span>` : ''}
+            <span class="px-3 py-1 bg-[#E31837]/10 text-[#E31837] font-['Helvetica_Neue'] text-xs uppercase font-bold tracking-[0.15em] border border-[#E31837]/30">In Stock (${product.stock || 24} Units)</span>
+          </div>
+
+          <p class="font-['Helvetica_Neue'] text-sm text-[#666666] dark:text-[#CCCCCC] leading-relaxed">
+            ${product.description}
+          </p>
+
+          <div class="p-6 nixon-card space-y-2 font-['Helvetica_Neue'] text-xs font-bold uppercase tracking-[0.15em]">
+            <p class="text-[#8A8A8A]">Sourced Origin:</p>
+            <p class="text-[#E31837]">${product.origin || 'Verified Direct Farm Cooperative'}</p>
+          </div>
+
+          <div class="space-y-4 pt-4">
+            <button onclick="handleAddToCart('${product.id}')" class="nixon-btn">
+              Add to Bag →
+            </button>
+            <a href="shop.html" class="block text-center py-4 border border-[#E5E5E5] dark:border-[#333333] font-['Helvetica_Neue'] text-xs font-bold uppercase tracking-[0.15em] hover:border-[#E31837] hover:text-[#E31837] transition-all">
+              Continue Shopping
+            </a>
+          </div>
+
+          <!-- Nutritional & Compliance Specs -->
+          <div class="border-t border-[#E5E5E5] dark:border-[#333333] pt-6 space-y-3 font-['Helvetica_Neue'] text-xs font-bold uppercase tracking-[0.15em] text-[#8A8A8A]">
+            <div class="flex justify-between">
+              <span>Quality Grade:</span>
+              <span class="text-black dark:text-white">Premium Organic A+</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Fulfillment Window:</span>
+              <span class="text-black dark:text-white">15-Min Micro-Hub Dispatch</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Allergen Status:</span>
+              <span class="text-black dark:text-white">Uncontaminated Facility</span>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+
+    window.handleAddToCart = function(productId) {
+      if (window.FreshCartDB) {
+        window.FreshCartDB.addToCart(productId);
+        if (window.NixonLayout && window.NixonLayout.updateCartBadge) {
+          window.NixonLayout.updateCartBadge();
+        }
+        FreshCartUI.showToast('✓ Added to bag');
+      }
+    };
+  </script>
+</body>
+</html>

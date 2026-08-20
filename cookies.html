@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="assets/images/grossary-logo.png">
+  <!-- Fast Theme & Direction Init (Prevents Flashing) -->
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+
+      const savedDir = localStorage.getItem('dir') || 'ltr';
+      document.documentElement.setAttribute('dir', savedDir);
+    })();
+  </script>
+
+  <title>Cookie Policy — FreshCart Pro</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'nixon-red': '#E31837',
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Nixon Typography & Card UI */
+    .nixon-heading {
+      font-family: 'Arial Black', 'Impact', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+    .nixon-subheading {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      font-weight: 700;
+    }
+    .nixon-card {
+      background: #FFFFFF;
+      border: 1px solid #E5E5E5;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .dark .nixon-card {
+      background: #1A1A1A;
+      border-color: #333333;
+    }
+    /* Legal Text Formatting */
+    .legal-text {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: #333333;
+    }
+    .dark .legal-text {
+      color: #CCCCCC;
+    }
+    .legal-list li {
+      margin-bottom: 0.75rem;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+    .legal-list li::before {
+      content: '■';
+      position: absolute;
+      left: 0;
+      color: #E31837;
+      font-size: 0.6rem;
+      top: 0.3rem;
+    }
+  </style>
+</head>
+<body class="bg-white dark:bg-[#0A0A0A] text-slate-900 dark:text-white antialiased transition-colors duration-500">
+
+  <!-- Shared Layout Scripts (Injects Header & Footer) -->
+  <script src="js/db.js"></script>
+  <script src="js/layout.js"></script>
+
+  <!-- Cookie Policy Main Section -->
+  <main class="pt-40 pb-36 px-4 sm:px-6 lg:px-12 max-w-4xl mx-auto space-y-16">
+    
+    <!-- Page Header -->
+    <div class="border-b border-[#E5E5E5] dark:border-[#222222] pb-8">
+      <p class="nixon-subheading text-[#E31837]">( Storage Protocol )</p>
+      <h1 class="nixon-heading text-4xl sm:text-6xl mt-2">Cookie Policy.</h1>
+      <div class="mt-6 flex items-center gap-4">
+        <span class="px-3 py-1.5 border border-[#E5E5E5] dark:border-[#333333] font-['Helvetica_Neue'] text-[0.6rem] font-bold uppercase tracking-[0.2em] text-[#8A8A8A]">
+          Effective Date: August 20, 2026
+        </span>
+        <span class="px-3 py-1.5 bg-[#E31837] text-white font-['Helvetica_Neue'] text-[0.6rem] font-bold uppercase tracking-[0.2em]">
+          Directive 2.0
+        </span>
+      </div>
+    </div>
+
+    <!-- Content Blocks -->
+    <div class="space-y-12">
+      
+      <!-- Section 01 -->
+      <section class="space-y-4">
+        <h2 class="nixon-heading text-2xl">01. What Are Cookies & Local Nodes</h2>
+        <p class="legal-text">
+          FreshCart Pro utilizes minor browser-side storage artifacts, including standard HTTP cookies and local storage nodes (`localStorage`), to maintain active user session parameters, shopping bag contents, and theme configurations. These elements allow our network to remember your layout choices seamlessly across page navigations.
+        </p>
+      </section>
+
+      <!-- Divider -->
+      <hr class="border-[#E5E5E5] dark:border-[#333333]">
+
+      <!-- Section 02 -->
+      <section class="space-y-4">
+        <h2 class="nixon-heading text-2xl">02. Categories of Storage Utilized</h2>
+        <p class="legal-text">
+          We categorize our storage nodes into three primary operational brackets:
+        </p>
+        <ul class="legal-text legal-list">
+          <li><strong>Essential Telemetry Cookies:</strong> Required for secure login authentications, shopping bag state persistence, and cryptographic CSRF mitigation.</li>
+          <li><strong>Preference Nodes:</strong> Stores your active UI preferences, including dark/light theme choices and LTR/RTL text-direction vectors.</li>
+          <li><strong>Analytical Metrics:</strong> Anonymous performance telemetry used to monitor hub loading speeds and detect software anomalies.</li>
+        </ul>
+      </section>
+
+      <!-- Section 03 -->
+      <section class="space-y-4">
+        <h2 class="nixon-heading text-2xl">03. Managing & Purging Cookies</h2>
+        <div class="nixon-card p-6 mt-4">
+          <p class="font-['Helvetica_Neue'] text-sm uppercase font-bold tracking-widest text-[#E31837] mb-2">User Control</p>
+          <p class="legal-text">
+            You retain full authority to disable or clear browser cookies via your individual client settings. However, please note that purging essential telemetry cookies will terminate your active user session and clear items currently resting in your shopping bag.
+          </p>
+        </div>
+      </section>
+
+      <!-- Divider -->
+      <hr class="border-[#E5E5E5] dark:border-[#333333]">
+
+      <!-- Section 04 -->
+      <section class="space-y-4">
+        <h2 class="nixon-heading text-2xl">04. Updates to Storage Protocols</h2>
+        <p class="legal-text">
+          As our fulfillment infrastructure evolves, this Cookie Policy may experience periodic revisions. Continued utilization of the FreshCart platform following any structural update indicates your formal acknowledgment of the modified storage parameters.
+        </p>
+      </section>
+
+      <!-- Contact block -->
+      <section class="pt-8">
+        <div class="p-8 border-l-4 border-[#E31837] bg-slate-50 dark:bg-[#111111]">
+          <p class="nixon-subheading text-[#8A8A8A] mb-2">Support & Inquiries</p>
+          <p class="legal-text font-bold text-black dark:text-white">
+            For technical questions regarding our local data nodes, contact our engineering desk at:
+          </p>
+          <a href="mailto:support@freshcart.pro" class="inline-block mt-2 font-['Arial_Black'] text-lg hover:text-[#E31837] transition-colors">support@freshcart.pro</a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+</body>
+</html>

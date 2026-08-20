@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FreshCart Enterprise — Cold-Chain Telemetry & API</title>
+  <link rel="icon" type="image/png" href="assets/images/grossary-logo.png">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'nixon-red': '#E31837',
+          }
+        }
+      }
+    }
+  </script>
+  <script>
+  (function() {
+    // Instant Theme Init
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+
+    // Instant Direction Init
+    const savedDir = localStorage.getItem('dir') || 'ltr';
+    document.documentElement.setAttribute('dir', savedDir);
+  })();
+</script>
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css">
+  
+  <style>
+    /* ============================================
+       NIXON-STYLE ENTERPRISE PAGE
+       ============================================ */
+    
+    /* Hero with grid pattern */
+    .enterprise-hero {
+      background: #000000;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .enterprise-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 50px 50px;
+      pointer-events: none;
+    }
+    
+    .dark .enterprise-hero::before {
+      background-image: 
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    }
+    
+    /* Hero glow orbs */
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      pointer-events: none;
+      will-change: transform, opacity;
+    }
+    
+    @keyframes orbFloatSlow {
+      0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
+      33% { transform: translate(50px, -30px) scale(1.1); opacity: 0.5; }
+      66% { transform: translate(-30px, 40px) scale(0.9); opacity: 0.4; }
+    }
+    
+    .orb-enterprise-1 {
+      width: 600px;
+      height: 600px;
+      background: rgba(227, 24, 55, 0.08);
+      top: -200px;
+      right: -200px;
+      animation: orbFloatSlow 10s ease-in-out infinite;
+    }
+    
+    .orb-enterprise-2 {
+      width: 400px;
+      height: 400px;
+      background: rgba(227, 24, 55, 0.05);
+      bottom: -100px;
+      left: -100px;
+      animation: orbFloatSlow 12s ease-in-out infinite reverse;
+    }
+    
+    /* Nixon typography */
+    .nixon-heading {
+      font-family: 'Arial Black', 'Impact', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      line-height: 0.95;
+    }
+    
+    .nixon-subheading {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      font-weight: 700;
+    }
+    
+    .nixon-body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: #8A8A8A;
+    }
+    
+    .dark .nixon-body {
+      color: #8A8A8A;
+    }
+    
+    /* Feature cards with 3D tilt */
+    .feature-card-3d {
+      perspective: 800px;
+      transform-style: preserve-3d;
+    }
+    
+    .feature-card-3d .card-inner {
+      background: #FFFFFF;
+      border: 1px solid #E5E5E5;
+      padding: 32px;
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: rotateX(0) rotateY(0) translateZ(0);
+      will-change: transform;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .dark .feature-card-3d .card-inner {
+      background: #1A1A1A;
+      border-color: #333333;
+    }
+    
+    .feature-card-3d .card-inner::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: #E31837;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .feature-card-3d:hover .card-inner::before {
+      transform: scaleX(1);
+    }
+    
+    .feature-card-3d:hover .card-inner {
+      transform: rotateX(3deg) rotateY(3deg) translateZ(10px);
+      border-color: #E31837;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+    }
+    
+    .dark .feature-card-3d:hover .card-inner {
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+    
+    .feature-card-3d .card-number {
+      font-family: 'Arial Black', 'Impact', sans-serif;
+      font-size: 3rem;
+      color: #E31837;
+      opacity: 0.2;
+      transition: opacity 0.4s ease;
+    }
+    
+    .feature-card-3d:hover .card-number {
+      opacity: 0.5;
+    }
+    
+    /* Code block with glow */
+    .code-block {
+      background: #0A0A0A;
+      border: 1px solid #222222;
+      padding: 24px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.75rem;
+      line-height: 1.8;
+      color: #E31837;
+      overflow-x: auto;
+      position: relative;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .dark .code-block {
+      background: #111111;
+      border-color: #333333;
+    }
+    
+    .code-block:hover {
+      border-color: #E31837;
+      box-shadow: 0 0 40px rgba(227, 24, 55, 0.1);
+    }
+    
+    .code-block .comment {
+      color: #666666;
+    }
+    .code-block .keyword {
+      color: #FFFFFF;
+    }
+    .code-block .string {
+      color: #F5A623;
+    }
+    .code-block .function {
+      color: #4FC3F7;
+    }
+    
+    /* Health bars with glow */
+    .health-bar-track {
+      width: 100%;
+      height: 4px;
+      background: #E5E5E5;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .dark .health-bar-track {
+      background: #333333;
+    }
+    
+    .health-bar-fill {
+      height: 100%;
+      background: #E31837;
+      transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+    
+    .health-bar-fill::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 20px;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3));
+      animation: shimmer 2s infinite;
+    }
+    
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+    
+    /* Stats ticker with roll effect */
+    .stat-number {
+      font-family: 'Arial Black', 'Impact', sans-serif;
+      font-size: 3rem;
+      color: #FFFFFF;
+      display: inline-block;
+      transition: all 0.3s ease;
+    }
+    
+    .dark .stat-number {
+      color: #FFFFFF;
+    }
+    
+    .stat-label {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      text-transform: uppercase;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      color: #8A8A8A;
+      font-weight: 700;
+    }
+    
+    /* Scroll reveal */
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .reveal-on-scroll.is-revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .reveal-on-scroll.delay-1 { transition-delay: 0.1s; }
+    .reveal-on-scroll.delay-2 { transition-delay: 0.2s; }
+    .reveal-on-scroll.delay-3 { transition-delay: 0.3s; }
+    .reveal-on-scroll.delay-4 { transition-delay: 0.4s; }
+    
+    /* Nixon button */
+    .nixon-btn {
+      display: inline-block;
+      padding: 16px 40px;
+      background: #E31837;
+      color: #FFFFFF;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      border: none;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      text-align: center;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .nixon-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.6s ease;
+    }
+    
+    .nixon-btn:hover::before {
+      left: 100%;
+    }
+    
+    .nixon-btn:hover {
+      background: #C41230;
+      transform: scale(1.02);
+    }
+    
+    .nixon-btn-outline {
+      display: inline-block;
+      padding: 15px 38px;
+      background: transparent;
+      color: #FFFFFF;
+      border: 2px solid #FFFFFF;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      text-align: center;
+      text-decoration: none;
+    }
+    
+    .nixon-btn-outline:hover {
+      background: #FFFFFF;
+      color: #000000;
+      transform: scale(1.02);
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .stat-number {
+        font-size: 2.2rem;
+      }
+      .feature-card-3d .card-inner {
+        padding: 24px;
+      }
+      .code-block {
+        font-size: 0.65rem;
+        padding: 16px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .stat-number {
+        font-size: 1.8rem;
+      }
+      .feature-card-3d .card-inner {
+        padding: 20px;
+      }
+    }
+    
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+      .feature-card-3d:hover .card-inner {
+        transform: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================ -->
+  <!-- HEADER INJECTED BY layout.js -->
+  <!-- ============================================ -->
+
+  <!-- ============================================ -->
+  <!-- MAIN CONTENT -->
+  <!-- ============================================ -->
+  <main style="padding-top: 70px;">
+
+    <!-- ========================================== -->
+    <!-- ENTERPRISE HERO -->
+    <!-- ========================================== -->
+    <section class="enterprise-hero min-h-[90vh] flex items-center relative">
+      
+      <!-- Glow Orbs -->
+      <div class="hero-orb orb-enterprise-1"></div>
+      <div class="hero-orb orb-enterprise-2"></div>
+
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-20">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+          
+          <!-- Left Content -->
+          <div class="lg:col-span-7 space-y-8">
+            <div class="inline-flex items-center gap-3 bg-[#E31837] text-white px-4 py-2">
+              <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+              <span class="text-xs font-bold tracking-[0.2em] uppercase">⚡ Enterprise Telemetry API v4.2</span>
+            </div>
+            
+            <h1 class="nixon-heading text-white text-5xl sm:text-6xl lg:text-7xl xl:text-8xl">
+              Autonomous<br>
+              <span class="text-[#E31837]">Logistics</span>
+            </h1>
+            
+            <p class="nixon-body text-white/70 max-w-xl">
+              Scale your grocery supply network with decentralized micro-fulfillment routing, 
+              thermal IoT tracking, and sub-15-minute dispatch engines designed for high-throughput enterprises.
+            </p>
+
+            <div class="flex flex-wrap items-center gap-4">
+              <a href="pricing.html" class="nixon-btn">
+                Deploy API Nodes →
+              </a>
+              <a href="services.html" class="nixon-btn-outline">
+                Explore Architecture
+              </a>
+            </div>
+
+            <!-- Trust badges -->
+            <div class="flex flex-wrap items-center gap-6 pt-4 border-t border-white/10">
+              <div class="flex items-center gap-2">
+                <svg class="w-5 h-5 text-[#E31837]" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                </svg>
+                <span class="text-xs font-bold tracking-wider text-white/60 uppercase">SOC2 Type II</span>
+              </div>
+              <div class="w-px h-6 bg-white/20"></div>
+              <div class="flex items-center gap-2">
+                <svg class="w-5 h-5 text-[#E31837]" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span class="text-xs font-bold tracking-wider text-white/60 uppercase">256-Bit TLS</span>
+              </div>
+              <div class="w-px h-6 bg-white/20"></div>
+              <div class="flex items-center gap-2">
+                <svg class="w-5 h-5 text-[#E31837]" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 2a8 8 0 100 16 8 8 0 000-16zm0 14a6 6 0 110-12 6 6 0 010 12zm0-10a1 1 0 011 1v3.586l2.707 2.707a1 1 0 01-1.414 1.414l-3-3A1 1 0 019 10V7a1 1 0 011-1z" clip-rule="evenodd"/>
+                </svg>
+                <span class="text-xs font-bold tracking-wider text-white/60 uppercase">99.99% Uptime</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right - Live Telemetry Preview -->
+          <div class="lg:col-span-5 reveal-on-scroll">
+            <div class="bg-white dark:bg-[#1A1A1A] border border-[#E5E5E5] dark:border-[#333333] p-6 shadow-2xl">
+              <div class="flex items-center justify-between border-b border-[#E5E5E5] dark:border-[#333333] pb-4">
+                <span class="text-xs font-bold tracking-[0.2em] uppercase text-[#E31837]">Live Cold-Chain Stream</span>
+                <span class="w-3 h-3 rounded-full bg-[#E31837] animate-pulse"></span>
+              </div>
+              <div class="space-y-4 mt-4">
+                <div class="flex justify-between items-center p-4 border border-[#E5E5E5] dark:border-[#333333] hover:border-[#E31837] transition-all">
+                  <span class="text-xs font-bold tracking-[0.1em] uppercase">Node_Paris_Central</span>
+                  <span class="text-xs font-bold text-[#E31837]">2.3°C ✓</span>
+                </div>
+                <div class="flex justify-between items-center p-4 border border-[#E5E5E5] dark:border-[#333333] hover:border-[#E31837] transition-all">
+                  <span class="text-xs font-bold tracking-[0.1em] uppercase">Node_Tokyo_Hub</span>
+                  <span class="text-xs font-bold text-[#E31837]">1.8°C ✓</span>
+                </div>
+                <div class="flex justify-between items-center p-4 border border-[#E5E5E5] dark:border-[#333333] hover:border-[#E31837] transition-all">
+                  <span class="text-xs font-bold tracking-[0.1em] uppercase">Node_NewYork_East</span>
+                  <span class="text-xs font-bold text-[#E31837]">2.5°C ✓</span>
+                </div>
+              </div>
+              <div class="pt-4 mt-4 border-t border-[#E5E5E5] dark:border-[#333333] text-center">
+                <span class="text-[0.55rem] font-bold tracking-[0.2em] uppercase text-[#8A8A8A]">Zero Thermal Fluctuation • 48h Guarantee</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/30 scroll-indicator hidden sm:block">
+        <svg class="w-6 h-6 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+        </svg>
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- STATS TICKER -->
+    <!-- ========================================== -->
+    <section class="bg-black border-y border-[#222222] py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div class="text-center">
+            <div class="stat-number">99.99%</div>
+            <div class="stat-label mt-1">API Uptime SLA</div>
+          </div>
+          <div class="text-center">
+            <div class="stat-number">&lt;12ms</div>
+            <div class="stat-label mt-1">Global Routing Latency</div>
+          </div>
+          <div class="text-center">
+            <div class="stat-number">450K+</div>
+            <div class="stat-label mt-1">Daily Dispatches</div>
+          </div>
+          <div class="text-center">
+            <div class="stat-number">256-Bit</div>
+            <div class="stat-label mt-1">TLS Encrypted</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- FEATURES WITH 3D TILT CARDS -->
+    <!-- ========================================== -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      
+      <div class="text-center mb-16">
+        <p class="nixon-subheading text-[#E31837]">Enterprise Engine</p>
+        <h2 class="nixon-heading text-3xl sm:text-4xl lg:text-5xl mt-2">Built for Scale</h2>
+        <div class="w-12 h-0.5 bg-[#E31837] mx-auto mt-4"></div>
+        <p class="nixon-body max-w-2xl mx-auto mt-4">Modular infrastructure designed to integrate seamlessly into legacy retail supply stacks.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Feature 1 -->
+        <div class="feature-card-3d reveal-on-scroll delay-1">
+          <div class="card-inner h-full flex flex-col">
+            <div class="card-number">01</div>
+            <h3 class="nixon-heading text-xl mt-2">Algorithmic Routing</h3>
+            <p class="nixon-body text-sm mt-3 flex-1">Dynamic graph algorithms calculate the fastest micro-fulfillment paths based on real-time traffic and warehouse inventory load.</p>
+            <div class="mt-4 pt-4 border-t border-[#E5E5E5] dark:border-[#333333]">
+              <span class="text-xs font-bold tracking-[0.1em] uppercase text-[#E31837]">→ Dispatch Engine</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="feature-card-3d reveal-on-scroll delay-2">
+          <div class="card-inner h-full flex flex-col">
+            <div class="card-number">02</div>
+            <h3 class="nixon-heading text-xl mt-2">IoT Cold-Chain Sensors</h3>
+            <p class="nixon-body text-sm mt-3 flex-1">Continuous hardware logging ensures perishables never deviate outside strict temperature bounds during final-mile transit.</p>
+            <div class="mt-4 pt-4 border-t border-[#E5E5E5] dark:border-[#333333]">
+              <span class="text-xs font-bold tracking-[0.1em] uppercase text-[#E31837]">→ Telemetry Hub</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="feature-card-3d reveal-on-scroll delay-3">
+          <div class="card-inner h-full flex flex-col">
+            <div class="card-number">03</div>
+            <h3 class="nixon-heading text-xl mt-2">Predictive Stock Sync</h3>
+            <p class="nixon-body text-sm mt-3 flex-1">Machine learning pipelines forecast regional demand spikes to pre-position organic produce at neighborhood nodes.</p>
+            <div class="mt-4 pt-4 border-t border-[#E5E5E5] dark:border-[#333333]">
+              <span class="text-xs font-bold tracking-[0.1em] uppercase text-[#E31837]">→ ML Pipeline</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- DEVELOPER SDK WITH CODE BLOCK -->
+    <!-- ========================================== -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 border-y border-[#E5E5E5] dark:border-[#222222] bg-[#F5F5F5] dark:bg-[#0A0A0A]">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          
+          <div class="reveal-on-scroll">
+            <p class="nixon-subheading text-[#E31837]">Developer Experience</p>
+            <h2 class="nixon-heading text-3xl sm:text-4xl lg:text-5xl mt-2">Integrate in Minutes</h2>
+            <div class="w-12 h-0.5 bg-[#E31837] mt-4"></div>
+            <p class="nixon-body mt-6">
+              Our robust REST and GraphQL endpoints allow your engineering teams to spin up micro-fulfillment dispatch webhooks with zero friction.
+            </p>
+            <ul class="space-y-4 mt-6">
+              <li class="flex items-center gap-3">
+                <span class="w-2 h-2 rounded-full bg-[#E31837]"></span>
+                <span class="text-xs font-bold tracking-[0.1em] uppercase">Native Python, Node.js, Go SDKs</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="w-2 h-2 rounded-full bg-[#E31837]"></span>
+                <span class="text-xs font-bold tracking-[0.1em] uppercase">Automated Webhook Retries</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="w-2 h-2 rounded-full bg-[#E31837]"></span>
+                <span class="text-xs font-bold tracking-[0.1em] uppercase">Real-time WebSocket Feeds</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="reveal-on-scroll delay-2">
+            <div class="code-block">
+              <div class="flex items-center justify-between pb-3 border-b border-[#222222] text-[0.55rem] text-[#666666] uppercase tracking-wider">
+                <span>node_dispatch_hook.js</span>
+                <button onclick="copyCode()" class="hover:text-white transition-colors cursor-pointer">Copy →</button>
+              </div>
+              <pre class="pt-4 leading-relaxed">
+<span class="comment">// Initialize FreshCart Telemetry Client</span>
+<span class="keyword">const</span> { FreshCartNode } = <span class="function">require</span>(<span class="string">'@freshcart/sdk'</span>);
+
+<span class="keyword">const</span> client = <span class="keyword">new</span> <span class="function">FreshCartNode</span>({
+  apiKey: <span class="function">process</span>.env.FRESHCART_API_KEY,
+  region: <span class="string">'eu-west-1'</span>
+});
+
+<span class="keyword">async function</span> <span class="function">dispatchOrder</span>() {
+  <span class="keyword">const</span> telemetryStream = <span class="keyword">await</span> client.<span class="function">dispatch</span>({
+    hubId: <span class="string">'hub-paris-04'</span>,
+    temperatureMax: <span class="string">2.5</span>,
+    maxDispatchTimeMins: <span class="string">15</span>
+  });
+  <span class="function">console</span>.<span class="function">log</span>(<span class="string">`Telemetry Node Active: ${telemetryStream.id}`</span>);
+}
+
+<span class="function">dispatchOrder</span>();</pre>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TRUST & COMPLIANCE WITH HEALTH BARS -->
+    <!-- ========================================== -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        
+        <div class="reveal-on-scroll">
+          <p class="nixon-subheading text-[#E31837]">Trust & Compliance</p>
+          <h2 class="nixon-heading text-3xl sm:text-4xl lg:text-5xl mt-2">Enterprise-Grade Security</h2>
+          <div class="w-12 h-0.5 bg-[#E31837] mt-4"></div>
+          <p class="nixon-body mt-6">
+            We adhere to strict international data privacy and food supply regulations. All telemetry streams are encrypted end-to-end with automated SOC2 compliance auditing.
+          </p>
+          <div class="grid grid-cols-2 gap-4 mt-8">
+            <div class="p-6 border border-[#E5E5E5] dark:border-[#333333]">
+              <h4 class="text-xs font-bold tracking-[0.15em] uppercase text-[#E31837]">SOC2 Type II</h4>
+              <p class="text-xs text-[#8A8A8A] mt-1">Audited annual security controls</p>
+            </div>
+            <div class="p-6 border border-[#E5E5E5] dark:border-[#333333]">
+              <h4 class="text-xs font-bold tracking-[0.15em] uppercase text-[#E31837]">GDPR & CCPA</h4>
+              <p class="text-xs text-[#8A8A8A] mt-1">Absolute data sovereignty</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal-on-scroll delay-2">
+          <div class="bg-white dark:bg-[#1A1A1A] border border-[#E5E5E5] dark:border-[#333333] p-8">
+            <h3 class="nixon-heading text-xl">System Telemetry Health</h3>
+            
+            <div class="space-y-6 mt-6">
+              <div>
+                <div class="flex justify-between text-xs font-bold tracking-[0.1em] uppercase">
+                  <span class="text-[#8A8A8A]">Database Cluster Latency</span>
+                  <span class="text-[#E31837]">3.2ms</span>
+                </div>
+                <div class="health-bar-track mt-2">
+                  <div class="health-bar-fill" style="width: 95%;"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-xs font-bold tracking-[0.1em] uppercase">
+                  <span class="text-[#8A8A8A]">IoT Sensor Packet Delivery</span>
+                  <span class="text-[#E31837]">99.99%</span>
+                </div>
+                <div class="health-bar-track mt-2">
+                  <div class="health-bar-fill" style="width: 99.9%;"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-xs font-bold tracking-[0.1em] uppercase">
+                  <span class="text-[#8A8A8A]">Cold-Chain Thermal Variance</span>
+                  <span class="text-[#E31837]">0.00%</span>
+                </div>
+                <div class="health-bar-track mt-2">
+                  <div class="health-bar-fill" style="width: 100%;"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-6 border-t border-[#E5E5E5] dark:border-[#333333] text-center">
+              <span class="text-[0.55rem] font-bold tracking-[0.2em] uppercase text-[#8A8A8A]">All Systems Operational • 99.99% Uptime</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- CTA BANNER -->
+    <!-- ========================================== -->
+    <section class="bg-black border-y border-[#222222] py-20 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="nixon-heading text-white text-3xl sm:text-4xl lg:text-5xl">
+          Ready to Scale<br>
+          <span class="text-[#E31837]">Your Infrastructure?</span>
+        </h2>
+        <p class="nixon-body text-white/60 mt-4 max-w-xl mx-auto">
+          Join 450K+ daily dispatches powered by autonomous cold-chain telemetry.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+          <a href="pricing.html" class="nixon-btn">
+            View Pricing →
+          </a>
+          <a href="contact.html" class="nixon-btn-outline">
+            Contact Sales
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================ -->
+  <!-- FOOTER INJECTED BY layout.js -->
+  <!-- ============================================ -->
+
+  <!-- ============================================ -->
+  <!-- SCRIPTS -->
+  <!-- ============================================ -->
+  <script src="js/db.js"></script>
+  <script src="js/layout.js"></script>
+
+  <script>
+    // ==========================================
+    // 1. SCROLL REVEAL
+    // ==========================================
+    document.addEventListener('DOMContentLoaded', () => {
+      const revealElements = document.querySelectorAll('.reveal-on-scroll');
+      
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+          }
+        });
+      }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+      });
+
+      revealElements.forEach(el => revealObserver.observe(el));
+    });
+
+    // ==========================================
+    // 2. COPY CODE FUNCTION
+    // ==========================================
+    window.copyCode = function() {
+      const codeBlock = document.querySelector('.code-block pre');
+      if (codeBlock) {
+        const text = codeBlock.textContent;
+        navigator.clipboard.writeText(text).then(() => {
+          showToast('✓ SDK snippet copied');
+        }).catch(() => {
+          // Fallback
+          const textarea = document.createElement('textarea');
+          textarea.value = text;
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textarea);
+          showToast('✓ SDK snippet copied');
+        });
+      }
+    };
+
+    // ==========================================
+    // 3. TOAST NOTIFICATION
+    // ==========================================
+    function showToast(message) {
+      let container = document.getElementById('toast-container');
+      if (!container) {
+        container = document.createElement('div');
+        container.id = 'toast-container';
+        container.className = 'fixed bottom-8 right-8 z-50 flex flex-col gap-3 pointer-events-none';
+        document.body.appendChild(container);
+      }
+      
+      const toast = document.createElement('div');
+      toast.className = 'pointer-events-auto bg-black text-white dark:bg-white dark:text-black px-6 py-4 text-sm font-bold tracking-[0.15em] uppercase shadow-2xl border border-[#333333] dark:border-[#E5E5E5] transform translate-y-4 opacity-0 transition-all duration-300';
+      toast.textContent = message;
+      container.appendChild(toast);
+      
+      requestAnimationFrame(() => {
+        toast.classList.remove('translate-y-4', 'opacity-0');
+      });
+      
+      setTimeout(() => {
+        toast.classList.add('translate-y-4', 'opacity-0');
+        setTimeout(() => toast.remove(), 400);
+      }, 2500);
+    }
+  </script>
+
+</body>
+</html>

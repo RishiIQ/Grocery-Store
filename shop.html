@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="assets/images/grossary-logo.png">
+  <title>Shop — FreshCart Marketplace</title>
+  <script>
+  (function() {
+    // Instant Theme Init
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+
+    // Instant Direction Init
+    const savedDir = localStorage.getItem('dir') || 'ltr';
+    document.documentElement.setAttribute('dir', savedDir);
+  })();
+</script>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'nixon-red': '#E31837',
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css">
+  
+  <style>
+    /* ============================================
+       NEXT-LEVEL TUNNEL ANIMATION
+       ============================================ */
+    
+    .tunnel-stage {
+      perspective: 1400px;
+      transform-style: preserve-3d;
+      background: #000000;
+      overflow: hidden;
+    }
+    
+    .dark .tunnel-stage {
+      background: #0A0A0A;
+    }
+    
+    /* Card container with 3D space */
+    .tunnel-card-wrapper {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      will-change: transform, opacity;
+    }
+    
+    .tunnel-card {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 85%;
+      max-width: 750px;
+      transform: translate(-50%, -50%);
+      background: #FFFFFF;
+      border: 1px solid #E5E5E5;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+      transform-style: preserve-3d;
+      will-change: transform, opacity;
+      transition: none;
+    }
+    
+    .dark .tunnel-card {
+      background: #1A1A1A;
+      border-color: #333333;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+    
+    /* Inner content with 3D depth */
+    .tunnel-card-content {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 32px;
+      gap: 32px;
+      transform: translateZ(0);
+      will-change: transform;
+    }
+    
+    @media (max-width: 768px) {
+      .tunnel-card {
+        width: 92%;
+        max-width: 100%;
+      }
+      .tunnel-card-content {
+        flex-direction: column;
+        padding: 20px;
+        gap: 20px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .tunnel-card-content {
+        padding: 16px;
+        gap: 12px;
+      }
+    }
+    
+    /* Product image with zoom effect */
+    .tunnel-image-wrap {
+      flex: 0 0 45%;
+      aspect-ratio: 1/1;
+      overflow: hidden;
+      position: relative;
+      transform: translateZ(20px);
+      will-change: transform;
+    }
+    
+    @media (max-width: 768px) {
+      .tunnel-image-wrap {
+        flex: 0 0 100%;
+        width: 100%;
+        max-height: 280px;
+      }
+    }
+    
+    .tunnel-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .tunnel-card:hover .tunnel-image-wrap img {
+      transform: scale(1.08);
+    }
+    
+    /* Nixon badge */
+    .nixon-badge {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: #E31837;
+      color: #FFFFFF;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.55rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 4px 14px;
+      z-index: 10;
+      transform: translateZ(30px);
+    }
+    
+    /* Product info with depth */
+    .tunnel-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 16px;
+      transform: translateZ(15px);
+      will-change: transform;
+    }
+    
+    .tunnel-info h3 {
+      font-family: 'Arial Black', 'Impact', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      font-size: 1.5rem;
+    }
+    
+    @media (max-width: 768px) {
+      .tunnel-info h3 {
+        font-size: 1.25rem;
+      }
+    }
+    
+    /* Glow orbs */
+    .glow-orb {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(80px);
+      will-change: transform, opacity;
+    }
+    
+    @keyframes orbFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
+      25% { transform: translate(30px, -40px) scale(1.1); opacity: 0.5; }
+      50% { transform: translate(-20px, 20px) scale(0.9); opacity: 0.4; }
+      75% { transform: translate(40px, 30px) scale(1.05); opacity: 0.5; }
+    }
+    
+    .orb-1 {
+      width: 500px;
+      height: 500px;
+      background: rgba(227, 24, 55, 0.12);
+      top: -100px;
+      right: -100px;
+      animation: orbFloat 8s ease-in-out infinite;
+    }
+    
+    .orb-2 {
+      width: 400px;
+      height: 400px;
+      background: rgba(227, 24, 55, 0.08);
+      bottom: -100px;
+      left: -100px;
+      animation: orbFloat 10s ease-in-out infinite reverse;
+    }
+    
+    /* Particle sparks */
+    .sparkle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: #E31837;
+      border-radius: 50%;
+      pointer-events: none;
+      will-change: transform, opacity;
+      box-shadow: 0 0 10px rgba(227, 24, 55, 0.5);
+    }
+    
+    @keyframes sparkleFloat {
+      0% { transform: translate(0, 0) scale(1); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+    }
+    
+    /* Progress bar */
+    #tunnelProgressBar {
+      height: 3px;
+      background: #E31837;
+      width: 0%;
+      position: fixed;
+      top: 70px;
+      left: 0;
+      z-index: 100;
+      transition: width 0.05s linear;
+      box-shadow: 0 0 20px rgba(227, 24, 55, 0.3);
+    }
+    
+    /* Nixon section header */
+    .nixon-section-title {
+      font-family: 'Arial Black', 'Impact', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+    }
+    
+    .nixon-section-subtitle {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      color: #8A8A8A;
+      font-weight: 700;
+    }
+    
+    /* Nixon button */
+    .nixon-btn-small {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      text-transform: uppercase;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      padding: 10px 28px;
+      background: #000000;
+      color: #FFFFFF;
+      border: none;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+    }
+    
+    .dark .nixon-btn-small {
+      background: #FFFFFF;
+      color: #000000;
+    }
+    
+    .nixon-btn-small::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.6s ease;
+    }
+    
+    .nixon-btn-small:hover::before {
+      left: 100%;
+    }
+    
+    .nixon-btn-small:hover {
+      background: #E31837;
+      color: #FFFFFF;
+      transform: scale(1.02);
+    }
+    
+    /* Grid product cards */
+    .grid-product-card {
+      border: 1px solid #E5E5E5;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      background: #FFFFFF;
+      overflow: hidden;
+    }
+    
+    .dark .grid-product-card {
+      background: #1A1A1A;
+      border-color: #333333;
+    }
+    
+    .grid-product-card:hover {
+      border-color: #E31837;
+      transform: translateY(-6px);
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1);
+    }
+    
+    .dark .grid-product-card:hover {
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+    }
+    
+    .grid-product-card .product-image-wrap {
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .grid-product-card .product-image-wrap img {
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .grid-product-card:hover .product-image-wrap img {
+      transform: scale(1.08);
+    }
+    
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+      .tunnel-card {
+        transition: none !important;
+      }
+    }
+    
+    /* Scroll progress indicator text */
+    .scroll-hint {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,0.3);
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      animation: bounce 2s infinite;
+      z-index: 10;
+      pointer-events: none;
+    }
+    
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+      40% { transform: translateX(-50%) translateY(-12px); }
+      60% { transform: translateX(-50%) translateY(-6px); }
+    }
+    
+    .dark .scroll-hint {
+      color: rgba(255,255,255,0.2);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Progress Bar -->
+  <div id="tunnelProgressBar"></div>
+
+  <!-- MAIN CONTENT -->
+  <main style="padding-top: 70px;">
+
+    <!-- PAGE HEADER -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center border-b border-[#E5E5E5] dark:border-[#222222]">
+      <p class="nixon-section-subtitle text-[#E31837]">⚡ Immersive Experience</p>
+      <h1 class="nixon-section-title text-4xl sm:text-5xl lg:text-6xl mt-2">Infinite Tunnel</h1>
+      <div class="w-12 h-0.5 bg-[#E31837] mx-auto mt-4"></div>
+      <p class="text-[#8A8A8A] text-sm mt-4 max-w-xl mx-auto">
+        Scroll to watch products zoom, turn, and reveal the next item from within. A continuous 3D journey.
+      </p>
+    </section>
+
+    <!-- NEXT-LEVEL TUNNEL ANIMATION -->
+    <section id="tunnelScrollContainer" class="relative h-[700vh]">
+      <div class="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden tunnel-stage" id="tunnelStage">
+        
+        <!-- Glow Orbs -->
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+
+        <!-- Sparkle particles container -->
+        <div id="sparkleContainer" class="absolute inset-0 pointer-events-none"></div>
+
+        <!-- Tunnel Stack -->
+        <div id="tunnelStack" class="relative w-full h-full flex items-center justify-center">
+          <!-- Cards injected by JavaScript -->
+        </div>
+
+        <!-- Scroll Hint -->
+        <div class="scroll-hint">↓ Scroll to explore ↓</div>
+
+      </div>
+    </section>
+
+    <!-- STANDARD GRID -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[#E5E5E5] dark:border-[#222222]">
+      
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-12">
+        <div>
+          <p class="nixon-section-subtitle text-[#E31837]">Complete Catalog</p>
+          <h2 class="nixon-section-title text-3xl sm:text-4xl mt-1">All Aisles</h2>
+        </div>
+        <span class="text-xs font-bold tracking-[0.15em] uppercase text-[#8A8A8A]">
+          <span id="productCount">0</span> Products Available
+        </span>
+      </div>
+
+      <div id="standardGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Products injected by JavaScript -->
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- SCRIPTS -->
+  <script src="js/db.js"></script>
+  <script src="js/layout.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const tunnelStack = document.getElementById('tunnelStack');
+      const tunnelContainer = document.getElementById('tunnelScrollContainer');
+      const progressBar = document.getElementById('tunnelProgressBar');
+      const standardGrid = document.getElementById('standardGrid');
+      
+      const products = window.FreshCartDB ? window.FreshCartDB.products.slice(0, 8) : [];
+      const allProducts = window.FreshCartDB ? window.FreshCartDB.products : [];
+
+      if (tunnelStack && products.length > 0) {
+        tunnelStack.innerHTML = products.map((p, i) => `
+          <div class="tunnel-card-wrapper" data-index="${i}" data-total="${products.length}">
+            <div class="tunnel-card">
+              <div class="tunnel-card-content">
+                <a href="product-detail.html?id=${p.id}" class="tunnel-image-wrap block">
+                  <span class="nixon-badge">${p.badge || 'Fresh'}</span>
+                  <img 
+                    src="${p.image}" 
+                    alt="${p.name}" 
+                    loading="lazy"
+                    data-src="${p.image}"
+                  >
+                </a>
+                <div class="tunnel-info">
+                  <div>
+                    <span class="text-xs font-bold tracking-[0.2em] uppercase text-[#E31837]">Sector ${String(i + 1).padStart(2, '0')}</span>
+                    <a href="product-detail.html?id=${p.id}" class="block hover:text-[#E31837] transition-colors">
+                      <h3>${p.name}</h3>
+                    </a>
+                    <p class="text-sm text-[#666666] dark:text-[#8A8A8A] leading-relaxed mt-2">${p.description}</p>
+                    <div class="text-xs font-bold tracking-[0.1em] uppercase text-[#8A8A8A] mt-3">
+                      Origin: <span class="text-[#000000] dark:text-[#FFFFFF]">${p.origin || 'Direct Farm'}</span>
+                    </div>
+                  </div>
+                  <div class="pt-4 border-t border-[#E5E5E5] dark:border-[#333333] flex justify-between items-center gap-4">
+                    <span class="font-['Arial_Black'] text-2xl">$${p.price.toFixed(2)}</span>
+                    <div class="flex items-center gap-2">
+                      <a href="product-detail.html?id=${p.id}" class="nixon-btn-small" style="background: transparent; color: inherit; border: 1px solid currentColor;">Details</a>
+                      <button onclick="handleAddToCart('${p.id}')" class="nixon-btn-small">Add to Bag</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `).join('');
+
+        const wrappers = tunnelStack.querySelectorAll('.tunnel-card-wrapper');
+        const cards = tunnelStack.querySelectorAll('.tunnel-card');
+
+        function createSparkles(count = 8) {
+          const container = document.getElementById('sparkleContainer');
+          if (!container) return;
+          
+          for (let i = 0; i < count; i++) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            const x = Math.random() * 100;
+            const y = Math.random() * 100;
+            const size = 2 + Math.random() * 4;
+            const duration = 2 + Math.random() * 3;
+            const tx = (Math.random() - 0.5) * 300;
+            const ty = (Math.random() - 0.5) * 300;
+            
+            sparkle.style.cssText = `
+              left: ${x}%;
+              top: ${y}%;
+              width: ${size}px;
+              height: ${size}px;
+              --tx: ${tx}px;
+              --ty: ${ty}px;
+              animation: sparkleFloat ${duration}s ease-in-out infinite;
+              animation-delay: ${Math.random() * 2}s;
+            `;
+            container.appendChild(sparkle);
+          }
+        }
+        createSparkles(12);
+
+        window.addEventListener('scroll', () => {
+          const rect = tunnelContainer.getBoundingClientRect();
+          const totalHeight = tunnelContainer.offsetHeight - window.innerHeight;
+          let progress = -rect.top / totalHeight;
+          progress = Math.max(0, Math.min(1, progress));
+
+          if (progressBar) {
+            progressBar.style.width = `${progress * 100}%`;
+          }
+
+          const totalCards = wrappers.length;
+          const segmentSize = 1 / totalCards;
+
+          wrappers.forEach((wrapper, index) => {
+            const card = cards[index];
+            if (!card) return;
+
+            const cardStart = index * segmentSize;
+            const cardEnd = cardStart + segmentSize;
+            
+            let localProgress = (progress - cardStart) / segmentSize;
+            localProgress = Math.max(0, Math.min(1, localProgress));
+
+            let scale, opacity, zIndex, rotateX, rotateY, translateZ, translateY;
+            let imageScale = 1;
+            let infoTranslateZ = 0;
+
+            if (progress < cardStart) {
+              scale = 0.2;
+              opacity = 0;
+              rotateX = 25;
+              rotateY = 15 * (index % 2 === 0 ? 1 : -1);
+              translateZ = -400;
+              translateY = 80;
+              zIndex = totalCards - index;
+            } else if (progress > cardEnd) {
+              scale = 2.8;
+              opacity = 0;
+              rotateX = -15;
+              rotateY = -10 * (index % 2 === 0 ? 1 : -1);
+              translateZ = 600;
+              translateY = -60;
+              zIndex = index;
+            } else {
+              if (localProgress < 0.3) {
+                const p = localProgress / 0.3;
+                scale = 0.2 + p * 0.9;
+                imageScale = 1 + p * 0.08;
+                infoTranslateZ = p * 20;
+              } else if (localProgress < 0.5) {
+                const p = (localProgress - 0.3) / 0.2;
+                scale = 1.1 + p * 0.2;
+                imageScale = 1.08 + p * 0.05;
+                infoTranslateZ = 20 - p * 5;
+              } else if (localProgress < 0.7) {
+                const p = (localProgress - 0.5) / 0.2;
+                scale = 1.3 - p * 0.4;
+                imageScale = 1.13 - p * 0.08;
+                infoTranslateZ = 15 - p * 10;
+              } else {
+                const p = (localProgress - 0.7) / 0.3;
+                scale = 0.9 - p * 0.6;
+                imageScale = 1.05 - p * 0.08;
+                infoTranslateZ = 5 - p * 10;
+              }
+
+              rotateX = 25 - (localProgress * 40);
+              rotateY = 15 * (1 - localProgress * 2) * (index % 2 === 0 ? 1 : -1);
+              translateZ = -400 + (localProgress * 1000);
+              translateY = 80 - (localProgress * 140) + Math.sin(localProgress * Math.PI * 3) * 10;
+
+              if (localProgress < 0.1) {
+                opacity = localProgress / 0.1;
+              } else if (localProgress < 0.85) {
+                opacity = 1;
+              } else {
+                opacity = 1 - (localProgress - 0.85) / 0.15;
+              }
+
+              zIndex = 50 + index;
+            }
+
+            const transform = `
+              translate(-50%, -50%) 
+              scale(${scale}) 
+              rotateX(${rotateX}deg) 
+              rotateY(${rotateY}deg) 
+              translateZ(${translateZ}px) 
+              translateY(${translateY}px)
+            `;
+
+            card.style.transform = transform;
+            card.style.opacity = opacity;
+            card.style.zIndex = zIndex;
+
+            const img = card.querySelector('.tunnel-image-wrap');
+            const info = card.querySelector('.tunnel-info');
+            const badge = card.querySelector('.nixon-badge');
+
+            if (img) {
+              img.style.transform = `translateZ(${imageScale * 25}px) scale(${imageScale})`;
+            }
+            if (info) {
+              info.style.transform = `translateZ(${infoTranslateZ + 10}px)`;
+            }
+            if (badge) {
+              badge.style.transform = `translateZ(${imageScale * 35}px)`;
+            }
+          });
+        });
+
+        window.dispatchEvent(new Event('scroll'));
+      }
+
+      if (standardGrid && allProducts.length > 0) {
+        const productCount = document.getElementById('productCount');
+        if (productCount) productCount.textContent = allProducts.length;
+
+        standardGrid.innerHTML = allProducts.map(p => `
+          <div class="grid-product-card">
+            <a href="product-detail.html?id=${p.id}" class="product-image-wrap aspect-square block">
+              <img 
+                src="${p.image}" 
+                alt="${p.name}" 
+                class="w-full h-full object-cover"
+                loading="lazy"
+              >
+              <span class="absolute top-3 left-3 bg-[#E31837] text-white text-[0.5rem] font-bold tracking-[0.1em] uppercase px-3 py-1">${p.badge || 'Fresh'}</span>
+            </a>
+            <div class="p-5">
+              <div class="flex items-start justify-between gap-2">
+                <div>
+                  <a href="product-detail.html?id=${p.id}" class="block hover:text-[#E31837] transition-colors">
+                    <h3 class="font-['Helvetica_Neue'] text-sm font-bold uppercase tracking-wide">${p.name}</h3>
+                  </a>
+                  <p class="text-xs text-[#8A8A8A] uppercase tracking-wider mt-0.5">${p.category}</p>
+                </div>
+                <div class="text-right flex-shrink-0">
+                  <span class="font-['Helvetica_Neue'] text-lg font-bold">$${p.price.toFixed(2)}</span>
+                  ${p.oldPrice ? `<span class="text-xs text-[#8A8A8A] line-through block">$${p.oldPrice.toFixed(2)}</span>` : ''}
+                </div>
+              </div>
+              <div class="mt-4 flex items-center gap-2">
+                <a href="product-detail.html?id=${p.id}" class="flex-1 text-center py-2.5 border border-black dark:border-white font-['Helvetica_Neue'] text-xs font-bold tracking-[0.15em] uppercase hover:border-[#E31837] hover:text-[#E31837] transition-all">View</a>
+                <button 
+                  onclick="handleAddToCart('${p.id}')" 
+                  class="flex-1 py-2.5 bg-black text-white dark:bg-white dark:text-black font-['Helvetica_Neue'] text-xs font-bold tracking-[0.15em] uppercase hover:bg-[#E31837] hover:text-white transition-all"
+                >
+                  Add
+                </button>
+              </div>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      window.handleAddToCart = function(productId) {
+        if (window.FreshCartDB) {
+          window.FreshCartDB.addToCart(productId);
+          if (window.NixonLayout && window.NixonLayout.updateCartBadge) {
+            window.NixonLayout.updateCartBadge();
+          }
+          showToast('✓ Added to bag');
+        }
+      };
+
+      function showToast(message) {
+        let container = document.getElementById('toast-container');
+        if (!container) {
+          container = document.createElement('div');
+          container.id = 'toast-container';
+          container.className = 'fixed bottom-8 right-8 z-50 flex flex-col gap-3 pointer-events-none';
+          document.body.appendChild(container);
+        }
+        
+        const toast = document.createElement('div');
+        toast.className = 'pointer-events-auto bg-black text-white dark:bg-white dark:text-black px-6 py-4 text-sm font-bold tracking-[0.15em] uppercase shadow-2xl border border-[#333333] dark:border-[#E5E5E5] transform translate-y-4 opacity-0 transition-all duration-300';
+        toast.textContent = message;
+        container.appendChild(toast);
+        
+        requestAnimationFrame(() => {
+          toast.classList.remove('translate-y-4', 'opacity-0');
+        });
+        
+        setTimeout(() => {
+          toast.classList.add('translate-y-4', 'opacity-0');
+          setTimeout(() => toast.remove(), 400);
+        }, 2500);
+      }
+    });
+  </script>
+
+</body>
+</html>

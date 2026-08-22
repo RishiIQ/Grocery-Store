@@ -137,9 +137,9 @@ document.addEventListener('DOMContentLoaded', () => {
           <div>
             <h4>Connect</h4>
             <ul>
-              <li><a href="#">Twitter</a></li>
-              <li><a href="#">LinkedIn</a></li>
-              <li><a href="#">GitHub</a></li>
+              <li><a href="https://x.com/">Twitter</a></li>
+              <li><a href="https://in.linkedin.com/">LinkedIn</a></li>
+              <li><a href="https://github.com/">GitHub</a></li>
             </ul>
           </div>
         </div>

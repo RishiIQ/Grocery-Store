@@ -13,7 +13,6 @@
     } else {
       document.documentElement.classList.remove('dark');
     }
-
     const savedDir = localStorage.getItem('dir') || 'ltr';
     document.documentElement.setAttribute('dir', savedDir);
   })();
@@ -108,154 +107,357 @@
       border-color: #6A8071;
     }
 
-    #successModal {
-      transition: opacity 0.4s ease;
-    }
-    .success-card {
-      transform: scale(0.95) translateY(10px);
-      opacity: 0;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      border-radius: 0px;
-      max-height: 94vh;
-      overflow-y: auto;
-    }
-    #successModal:not(.hidden) .success-card {
-      transform: scale(1) translateY(0);
-      opacity: 1;
-    }
-
     /* ==========================================================
-       MODERN UI PAYMENT ANIMATIONS (FaceID, UPI Radar, Vault Lock)
-       ================================================          */
+       CREDIT CARD UI - 3D Card
+       ========================================================== */
+    .card-preview {
+      perspective: 1000px;
+      width: 100%;
+      max-width: 420px;
+      margin: 0 auto;
+    }
     
-    /* 1. Modern Card FaceID / Fingerprint Biometric Scan */
-    .biometric-scanner {
-      width: 76px;
-      height: 76px;
-      border: 2px dashed #6A8071;
-      border-radius: 50%;
-      margin: 0 auto;
+    .credit-card {
+      width: 100%;
+      aspect-ratio: 1.586/1;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      border-radius: 16px;
+      padding: 24px 28px;
       position: relative;
+      color: #FFFFFF;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+      transform: rotateY(0deg) rotateX(0deg);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      animation: spinScanner 4s linear infinite;
-    }
-    @keyframes spinScanner {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-    .biometric-inner {
-      width: 56px;
-      height: 56px;
-      background: rgba(106, 128, 113, 0.15);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      animation: pulseInner 1s ease-in-out infinite alternate;
-    }
-    @keyframes pulseInner {
-      0% { transform: scale(0.9); }
-      100% { transform: scale(1.1); }
-    }
-
-    /* 2. Modern UPI Radar Sweep Animation */
-    .upi-radar-wrap {
-      width: 80px;
-      height: 80px;
-      margin: 0 auto;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #18221D;
-      border-radius: 50%;
-      border: 1px solid #2D3E35;
+      flex-direction: column;
+      justify-content: space-between;
       overflow: hidden;
     }
-    .radar-sweep {
-      width: 40px;
-      height: 40px;
-      border-top: 3px solid #6A8071;
-      border-right: 3px solid transparent;
-      border-radius: 100% 0 0 0;
+    
+    .credit-card::before {
+      content: '';
       position: absolute;
-      top: 0;
-      right: 0;
-      transform-origin: bottom left;
-      animation: radarSpin 1.2s linear infinite;
+      top: -50%;
+      right: -50%;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+      pointer-events: none;
     }
-    @keyframes radarSpin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+    
+    .credit-card .card-chip {
+      width: 40px;
+      height: 30px;
+      background: linear-gradient(135deg, #FFD700, #FFA500);
+      border-radius: 4px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-
-    /* 3. Modern Cash Vault Lock Animation */
-    .vault-lock-wrap {
-      width: 76px;
-      height: 76px;
+    
+    .credit-card .card-chip::after {
+      content: '';
+      width: 24px;
+      height: 18px;
+      border: 2px solid rgba(255, 215, 0, 0.3);
+      border-radius: 2px;
+      position: absolute;
+    }
+    
+    .credit-card .card-brand {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-weight: 800;
+      font-size: 1.2rem;
+      letter-spacing: 0.1em;
+      opacity: 0.8;
+    }
+    
+    .credit-card .card-number {
+      font-family: 'Courier New', monospace;
+      font-size: 1.5rem;
+      letter-spacing: 4px;
+      font-weight: 600;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+      min-height: 36px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .credit-card .card-number .placeholder {
+      opacity: 0.3;
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+    }
+    
+    .credit-card .card-holder {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      opacity: 0.8;
+    }
+    
+    .credit-card .card-holder .value {
+      font-size: 0.9rem;
+      font-weight: 600;
+      opacity: 1;
+      text-transform: uppercase;
+      min-height: 24px;
+      display: block;
+      margin-top: 2px;
+    }
+    
+    .credit-card .card-expiry {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      opacity: 0.8;
+      text-align: right;
+    }
+    
+    .credit-card .card-expiry .value {
+      font-size: 0.9rem;
+      font-weight: 600;
+      opacity: 1;
+      min-height: 24px;
+      display: block;
+      margin-top: 2px;
+    }
+    
+    .credit-card .card-cvv {
+      position: absolute;
+      right: 28px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.1);
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+      font-weight: 600;
+      backdrop-filter: blur(4px);
+      min-width: 50px;
+      text-align: center;
+    }
+    
+    .credit-card .card-cvv .placeholder {
+      opacity: 0.3;
+      font-size: 1rem;
+    }
+    
+    .credit-card .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-top: auto;
+    }
+    
+    /* Card color variants */
+    .credit-card.visa {
+      background: linear-gradient(135deg, #1a1a2e 0%, #1a3a5c 50%, #1a5276 100%);
+    }
+    
+    .credit-card.mastercard {
+      background: linear-gradient(135deg, #1a1a2e 0%, #2d1b2e 50%, #4a1a2e 100%);
+    }
+    
+    .credit-card.amex {
+      background: linear-gradient(135deg, #1a1a2e 0%, #1a2d2e 50%, #1a3a3a 100%);
+    }
+    
+    /* ==========================================================
+       UPI PHONE LAYOUT
+       ========================================================== */
+    .phone-frame {
+      width: 280px;
+      max-width: 100%;
       margin: 0 auto;
-      background: #24302A;
-      border: 2px solid #6A8071;
+      background: #000000;
+      border-radius: 36px;
+      padding: 14px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+    
+    .dark .phone-frame {
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+    }
+    
+    .phone-screen {
+      background: #FFFFFF;
+      border-radius: 24px;
+      overflow: hidden;
+      aspect-ratio: 9/16;
+      display: flex;
+      flex-direction: column;
+      padding: 20px 16px;
+    }
+    
+    .dark .phone-screen {
+      background: #1A1A1A;
+    }
+    
+    .phone-screen .status-bar {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.5rem;
+      font-weight: 700;
+      color: #94A3B8;
+      margin-bottom: 16px;
+    }
+    
+    .dark .phone-screen .status-bar {
+      color: #64748B;
+    }
+    
+    .phone-screen .app-header {
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    
+    .phone-screen .app-header .app-icon {
+      width: 48px;
+      height: 48px;
+      background: #6A8071;
       border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      animation: vaultShake 0.6s infinite ease-in-out;
-    }
-    @keyframes vaultShake {
-      0%, 100% { transform: translateX(0); }
-      25% { transform: translateX(-3px); }
-      75% { transform: translateX(3px); }
-    }
-
-    /* ==========================================================
-       THERMAL RECEIPT PRINTER PHYSICS ANIMATION
-       ================================================          */
-    .printer-terminal {
-      background: #1E293B;
-      border: 2px solid #334155;
-      padding: 12px;
-      border-radius: 6px;
-      width: 280px;
-      margin: 0 auto;
-      position: relative;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-    }
-    .printer-slot {
-      width: 100%;
-      height: 6px;
-      background: #0F172A;
-      border-radius: 3px;
-      margin-bottom: 4px;
-      position: relative;
-      overflow: hidden;
+      margin: 0 auto 8px;
+      font-size: 1.4rem;
     }
     
-    .receipt-paper {
-      background: #FFFFFF;
-      color: #0F172A;
-      font-family: 'Courier New', Courier, monospace;
-      padding: 20px;
-      width: 260px;
-      margin: 0 auto;
-      border-left: 1px solid #CBD5E1;
-      border-right: 1px solid #CBD5E1;
-      border-bottom: 2px dashed #94A3B8;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.25);
-      position: relative;
-      transform-origin: top center;
-      transform: translateY(-110%) scaleY(0.05);
-      opacity: 0;
-      animation: printReceipt 1.4s 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-      text-align: left;
+    .phone-screen .app-header .app-name {
+      font-size: 0.55rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #6A8071;
+      letter-spacing: 0.1em;
     }
-    @keyframes printReceipt {
-      0% { transform: translateY(-110%) scaleY(0.05); opacity: 0; }
-      70% { transform: translateY(0) scaleY(1.03); opacity: 1; }
-      85% { transform: translateY(-4px) scaleY(0.98); opacity: 1; }
-      100% { transform: translateY(0) scaleY(1); opacity: 1; }
+    
+    .phone-screen .upi-amount {
+      text-align: center;
+      margin-bottom: 16px;
+      padding: 12px;
+      background: rgba(106, 128, 113, 0.06);
+      border: 1px solid rgba(106, 128, 113, 0.15);
+    }
+    
+    .phone-screen .upi-amount .label {
+      font-size: 0.5rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #94A3B8;
+      letter-spacing: 0.1em;
+    }
+    
+    .phone-screen .upi-amount .amount {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #0F172A;
+      margin-top: 2px;
+    }
+    
+    .dark .phone-screen .upi-amount .amount {
+      color: #FFFFFF;
+    }
+    
+    .phone-screen .upi-id-display {
+      padding: 12px;
+      border: 1px solid #E2E8F0;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+    
+    .dark .phone-screen .upi-id-display {
+      border-color: #2D3E35;
+    }
+    
+    .phone-screen .upi-id-display .label {
+      font-size: 0.45rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #94A3B8;
+      letter-spacing: 0.1em;
+    }
+    
+    .phone-screen .upi-id-display .id {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #0F172A;
+      margin-top: 2px;
+      word-break: break-all;
+    }
+    
+    .dark .phone-screen .upi-id-display .id {
+      color: #FFFFFF;
+    }
+    
+    .phone-screen .upi-id-display .id .placeholder {
+      opacity: 0.3;
+      font-size: 0.7rem;
+    }
+    
+    .phone-screen .upi-keypad {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: auto;
+    }
+    
+    .phone-screen .upi-keypad button {
+      padding: 12px 0;
+      background: transparent;
+      border: none;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #0F172A;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+    
+    .dark .phone-screen .upi-keypad button {
+      color: #FFFFFF;
+    }
+    
+    .phone-screen .upi-keypad button:hover {
+      background: rgba(106, 128, 113, 0.08);
+    }
+    
+    .phone-screen .upi-keypad button:active {
+      background: rgba(106, 128, 113, 0.2);
+      transform: scale(0.95);
+    }
+    
+    .phone-screen .upi-keypad .backspace {
+      color: #EF4444;
+    }
+    
+    /* ==========================================================
+       CONFIRMATION ANIMATION
+       ========================================================== */
+    @keyframes successPulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    
+    .success-animation {
+      animation: successPulse 0.6s ease-in-out 3;
+    }
+    
+    @keyframes cardShine {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+    
+    .card-shine {
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      background-size: 200% 100%;
+      animation: cardShine 2s ease-in-out infinite;
     }
 
     .market-toast {
@@ -291,56 +493,33 @@
   </main>
 
   <!-- Payment Modal Container -->
-  <div id="paymentModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden">
-    <div class="market-card p-8 max-w-md w-full mx-4 space-y-6 relative">
+  <div id="paymentModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden p-4">
+    <div class="market-card p-6 sm:p-8 max-w-5xl w-full mx-auto space-y-6 relative max-h-[95vh] overflow-y-auto">
       <div class="flex justify-between items-center border-b border-slate-200 dark:border-[#2D3E35] pb-4">
         <h3 class="dashboard-heading text-xl">Secure Payment Gateway</h3>
         <button onclick="closePaymentModal()" class="text-slate-400 hover:text-[#6A8071] font-bold text-lg cursor-pointer">✕</button>
       </div>
 
       <!-- Payment Method Tabs -->
-      <div class="flex gap-2">
+      <div class="flex gap-2 flex-wrap">
         <button type="button" onclick="switchPayMethod('card')" id="tab-card" class="pay-tab active">Credit Card</button>
         <button type="button" onclick="switchPayMethod('upi')" id="tab-upi" class="pay-tab">UPI Transfer</button>
         <button type="button" onclick="switchPayMethod('cash')" id="tab-cash" class="pay-tab">Cash on Delivery</button>
       </div>
 
-      <!-- Card Form -->
-      <div id="panel-card" class="pay-panel space-y-4">
-        <div>
-          <label class="block text-[0.6rem] font-bold uppercase tracking-[0.15em] text-slate-500 mb-1">Cardholder Name</label>
-          <input type="text" id="cardName" placeholder="JUSTIN MASON" class="w-full px-4 py-3 bg-transparent border border-slate-200 dark:border-[#2D3E35] text-xs font-bold uppercase tracking-wider outline-none focus:border-[#6A8071]">
+      <!-- Payment Content -->
+      <div id="paymentContent" class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        
+        <!-- LEFT SIDE: Card Preview or Phone UI -->
+        <div id="previewContainer" class="flex items-center justify-center min-h-[300px]">
+          <!-- Injected by JavaScript -->
         </div>
-        <div>
-          <label class="block text-[0.6rem] font-bold uppercase tracking-[0.15em] text-slate-500 mb-1">Card Number</label>
-          <input type="text" id="cardNumber" placeholder="4242 •••• •••• 4242" maxlength="19" class="w-full px-4 py-3 bg-transparent border border-slate-200 dark:border-[#2D3E35] text-xs font-bold uppercase tracking-wider outline-none focus:border-[#6A8071]">
-        </div>
-        <div class="grid grid-cols-2 gap-4">
-          <div>
-            <label class="block text-[0.6rem] font-bold uppercase tracking-[0.15em] text-slate-500 mb-1">Expiry Date</label>
-            <input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5" class="w-full px-4 py-3 bg-transparent border border-slate-200 dark:border-[#2D3E35] text-xs font-bold uppercase tracking-wider outline-none focus:border-[#6A8071]">
-          </div>
-          <div>
-            <label class="block text-[0.6rem] font-bold uppercase tracking-[0.15em] text-slate-500 mb-1">CVV Security</label>
-            <input type="password" id="cardCvv" placeholder="•••" maxlength="4" class="w-full px-4 py-3 bg-transparent border border-slate-200 dark:border-[#2D3E35] text-xs font-bold uppercase tracking-wider outline-none focus:border-[#6A8071]">
-          </div>
-        </div>
-      </div>
 
-      <!-- UPI Form -->
-      <div id="panel-upi" class="pay-panel space-y-4 hidden">
-        <div>
-          <label class="block text-[0.6rem] font-bold uppercase tracking-[0.15em] text-slate-500 mb-1">Virtual Payment Address (UPI ID)</label>
-          <input type="text" id="upiId" placeholder="username@okhdfcbank" class="w-full px-4 py-3 bg-transparent border border-slate-200 dark:border-[#2D3E35] text-xs font-bold uppercase tracking-wider outline-none focus:border-[#6A8071]">
+        <!-- RIGHT SIDE: Form -->
+        <div id="formContainer">
+          <!-- Injected by JavaScript -->
         </div>
-        <p class="text-[0.65rem] text-slate-500 uppercase tracking-wider">Triggers secure mobile app collect request.</p>
-      </div>
 
-      <!-- Cash Form -->
-      <div id="panel-cash" class="pay-panel space-y-4 hidden">
-        <div class="p-4 border border-slate-200 dark:border-[#2D3E35] bg-slate-50 dark:bg-[#18221D] text-xs text-slate-600 dark:text-slate-300 uppercase tracking-wider leading-relaxed">
-          Pay with physical cash upon delivery. Our zero-emission courier will verify the exchange at your doorstep.
-        </div>
       </div>
 
       <button onclick="confirmPayment()" class="sage-btn mt-4">
@@ -349,11 +528,10 @@
     </div>
   </div>
 
-  <!-- Dynamic Success & Thermal Printer Bill Animation Modal -->
-  <div id="successModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-xl hidden">
-    <div class="success-card p-6 max-w-sm w-full mx-4 text-center space-y-4">
+  <!-- Dynamic Success Modal -->
+  <div id="successModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-xl hidden p-4">
+    <div class="success-card p-6 max-w-md w-full mx-4 text-center space-y-4 bg-white dark:bg-[#18221D] border border-slate-200 dark:border-[#2D3E35]">
       
-      <!-- Modern UI Payment Animation Container -->
       <div id="animationContainer"></div>
 
       <div class="space-y-1">
@@ -361,7 +539,6 @@
         <p id="modalStatusSubtitle" class="text-[0.6rem] uppercase tracking-[0.15em] text-slate-400">Communicating with financial nodes.</p>
       </div>
 
-      <!-- Thermal Printer Receipt Area -->
       <div id="thermalPrinterArea" class="hidden pt-2">
         <div class="printer-terminal">
           <div class="printer-slot"></div>
@@ -369,6 +546,9 @@
         </div>
       </div>
 
+      <button onclick="closeSuccessModal()" class="sage-btn mt-4 hidden" id="successCloseBtn">
+        Continue Shopping →
+      </button>
     </div>
   </div>
 
@@ -382,15 +562,344 @@
       let activeCartSnapshot = [];
       let activeTotals = { subtotal: 0, shipping: 0, tax: 0 };
 
+      // ==========================================================
+      // CREDIT CARD LIVE PREVIEW
+      // ==========================================================
+      function renderCardPreview() {
+        const previewContainer = document.getElementById('previewContainer');
+        if (!previewContainer) return;
+
+        const cardNumber = document.getElementById('cardNumber')?.value || '';
+        const cardName = document.getElementById('cardName')?.value || '';
+        const cardExpiry = document.getElementById('cardExpiry')?.value || '';
+        const cardCvv = document.getElementById('cardCvv')?.value || '';
+
+        // Format card number with spaces
+        let formattedNumber = cardNumber.replace(/\s/g, '');
+        if (formattedNumber.length > 0) {
+          formattedNumber = formattedNumber.match(/.{1,4}/g)?.join(' ') || formattedNumber;
+        }
+
+        // Determine card type
+        let cardType = 'visa';
+        const firstDigit = cardNumber.replace(/\s/g, '')[0];
+        if (firstDigit === '3') cardType = 'amex';
+        else if (firstDigit === '5') cardType = 'mastercard';
+        else if (firstDigit === '4') cardType = 'visa';
+
+        previewContainer.innerHTML = `
+          <div class="card-preview">
+            <div class="credit-card ${cardType}">
+              <div class="card-shine" style="position:absolute;inset:0;pointer-events:none;"></div>
+              
+              <!-- Card Top -->
+              <div style="display:flex;justify-content:space-between;align-items:center;position:relative;z-index:2;">
+                <div class="card-chip"></div>
+                <span class="card-brand">${cardType.toUpperCase()}</span>
+              </div>
+
+              <!-- Card Number -->
+              <div class="card-number" style="position:relative;z-index:2;">
+                ${formattedNumber || '<span class="placeholder">•••• •••• •••• ••••</span>'}
+              </div>
+
+              <!-- Card Bottom -->
+              <div class="card-footer" style="position:relative;z-index:2;">
+                <div class="card-holder">
+                  CARD HOLDER
+                  <span class="value">${cardName || 'JUSTIN MASON'}</span>
+                </div>
+                <div class="card-expiry">
+                  EXPIRY
+                  <span class="value">${cardExpiry || 'MM/YY'}</span>
+                </div>
+              </div>
+
+              <!-- CVV (hidden, shown on hover) -->
+              <div class="card-cvv" style="display:none;">
+                ${cardCvv || '<span class="placeholder">•••</span>'}
+              </div>
+            </div>
+            <p style="text-align:center;font-size:0.5rem;color:#94A3B8;margin-top:8px;text-transform:uppercase;letter-spacing:0.1em;">
+              Hover card to reveal CVV
+            </p>
+          </div>
+        `;
+
+        // Add hover to show CVV
+        const card = previewContainer.querySelector('.credit-card');
+        if (card) {
+          card.addEventListener('mouseenter', () => {
+            const cvv = card.querySelector('.card-cvv');
+            if (cvv) cvv.style.display = 'block';
+          });
+          card.addEventListener('mouseleave', () => {
+            const cvv = card.querySelector('.card-cvv');
+            if (cvv) cvv.style.display = 'none';
+          });
+        }
+      }
+
+      // ==========================================================
+      // UPI PHONE LAYOUT
+      // ==========================================================
+      function renderUPIPreview() {
+        const previewContainer = document.getElementById('previewContainer');
+        if (!previewContainer) return;
+
+        const upiId = document.getElementById('upiId')?.value || '';
+        const totalAmount = calculatedGrandTotal || 0;
+
+        previewContainer.innerHTML = `
+          <div class="phone-frame">
+            <div class="phone-screen">
+              <div class="status-bar">
+                <span>9:41</span>
+                <span>📶 🔋</span>
+              </div>
+              
+              <div class="app-header">
+                <div class="app-icon">🌿</div>
+                <div class="app-name">FreshCart Pay</div>
+              </div>
+
+              <div class="upi-amount">
+                <div class="label">Amount to Pay</div>
+                <div class="amount">$${totalAmount.toFixed(2)}</div>
+              </div>
+
+              <div class="upi-id-display">
+                <div class="label">Pay to (UPI ID)</div>
+                <div class="id">${upiId || '<span class="placeholder">Enter UPI ID</span>'}</div>
+              </div>
+
+              <div class="upi-keypad">
+                <button data-value="1">1</button>
+                <button data-value="2">2</button>
+                <button data-value="3">3</button>
+                <button data-value="4">4</button>
+                <button data-value="5">5</button>
+                <button data-value="6">6</button>
+                <button data-value="7">7</button>
+                <button data-value="8">8</button>
+                <button data-value="9">9</button>
+                <button data-value=".">.</button>
+                <button data-value="0">0</button>
+                <button data-value="backspace" class="backspace">⌫</button>
+              </div>
+            </div>
+          </div>
+        `;
+
+        // Add keypad functionality
+        const keypadButtons = previewContainer.querySelectorAll('.upi-keypad button');
+        const upiInput = document.getElementById('upiId');
+        
+        if (upiInput) {
+          keypadButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+              const value = btn.dataset.value;
+              if (value === 'backspace') {
+                upiInput.value = upiInput.value.slice(0, -1);
+              } else {
+                upiInput.value += value;
+              }
+              // Trigger input event to update preview
+              upiInput.dispatchEvent(new Event('input'));
+            });
+          });
+        }
+      }
+
+      // ==========================================================
+      // RENDER PAYMENT CONTENT BASED ON METHOD
+      // ==========================================================
+      function renderPaymentContent() {
+        const previewContainer = document.getElementById('previewContainer');
+        const formContainer = document.getElementById('formContainer');
+        if (!previewContainer || !formContainer) return;
+
+        if (currentMethod === 'card') {
+          previewContainer.innerHTML = `
+            <div class="card-preview">
+              <div class="credit-card visa" id="liveCard">
+                <div class="card-shine" style="position:absolute;inset:0;pointer-events:none;"></div>
+                <div style="display:flex;justify-content:space-between;align-items:center;position:relative;z-index:2;">
+                  <div class="card-chip"></div>
+                  <span class="card-brand" id="cardBrandDisplay">VISA</span>
+                </div>
+                <div class="card-number" style="position:relative;z-index:2;" id="cardNumberDisplay">
+                  <span class="placeholder">•••• •••• •••• ••••</span>
+                </div>
+                <div class="card-footer" style="position:relative;z-index:2;">
+                  <div class="card-holder">
+                    CARD HOLDER
+                    <span class="value" id="cardNameDisplay">JUSTIN MASON</span>
+                  </div>
+                  <div class="card-expiry">
+                    EXPIRY
+                    <span class="value" id="cardExpiryDisplay">MM/YY</span>
+                  </div>
+                </div>
+                <div class="card-cvv" style="display:none;position:absolute;right:28px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.1);padding:4px 12px;border-radius:4px;font-family:'Courier New',monospace;font-size:1.2rem;letter-spacing:2px;font-weight:600;backdrop-filter:blur(4px);min-width:50px;text-align:center;z-index:3;" id="cardCvvDisplay">
+                  <span class="placeholder">•••</span>
+                </div>
+              </div>
+              <p style="text-align:center;font-size:0.5rem;color:#94A3B8;margin-top:8px;text-transform:uppercase;letter-spacing:0.1em;">
+                Hover card to reveal CVV
+              </p>
+            </div>
+          `;
+
+          // Add hover to show CVV
+          const card = previewContainer.querySelector('#liveCard');
+          if (card) {
+            card.addEventListener('mouseenter', () => {
+              const cvv = card.querySelector('#cardCvvDisplay');
+              if (cvv) cvv.style.display = 'block';
+            });
+            card.addEventListener('mouseleave', () => {
+              const cvv = card.querySelector('#cardCvvDisplay');
+              if (cvv) cvv.style.display = 'none';
+            });
+          }
+
+          formContainer.innerHTML = `
+            <div class="space-y-4">
+              <div>
+                <label class="block text-[0.6rem] font-bold uppercase tracking-[0.15em] text-slate-500 mb-1">Cardholder Name</label>
+                <input type="text" id="cardName" placeholder="JUSTIN MASON" class="w-full px-4 py-3 bg-transparent border border-slate-200 dark:border-[#2D3E35] text-xs font-bold uppercase tracking-wider outline-none focus:border-[#6A8071] transition-colors">
+              </div>
+              <div>
+                <label class="block text-[0.6rem] font-bold uppercase tracking-[0.15em] text-slate-500 mb-1">Card Number</label>
+                <input type="text" id="cardNumber" placeholder="4242 4242 4242 4242" maxlength="19" class="w-full px-4 py-3 bg-transparent border border-slate-200 dark:border-[#2D3E35] text-xs font-bold uppercase tracking-wider outline-none focus:border-[#6A8071] transition-colors font-mono">
+              </div>
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-[0.6rem] font-bold uppercase tracking-[0.15em] text-slate-500 mb-1">Expiry Date</label>
+                  <input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5" class="w-full px-4 py-3 bg-transparent border border-slate-200 dark:border-[#2D3E35] text-xs font-bold uppercase tracking-wider outline-none focus:border-[#6A8071] transition-colors">
+                </div>
+                <div>
+                  <label class="block text-[0.6rem] font-bold uppercase tracking-[0.15em] text-slate-500 mb-1">CVV Security</label>
+                  <input type="password" id="cardCvv" placeholder="•••" maxlength="4" class="w-full px-4 py-3 bg-transparent border border-slate-200 dark:border-[#2D3E35] text-xs font-bold uppercase tracking-wider outline-none focus:border-[#6A8071] transition-colors">
+                </div>
+              </div>
+            </div>
+          `;
+
+          // Add live update listeners
+          const cardName = document.getElementById('cardName');
+          const cardNumber = document.getElementById('cardNumber');
+          const cardExpiry = document.getElementById('cardExpiry');
+          const cardCvv = document.getElementById('cardCvv');
+
+          function updateCardPreview() {
+            const nameDisplay = document.getElementById('cardNameDisplay');
+            const numberDisplay = document.getElementById('cardNumberDisplay');
+            const expiryDisplay = document.getElementById('cardExpiryDisplay');
+            const cvvDisplay = document.getElementById('cardCvvDisplay');
+            const brandDisplay = document.getElementById('cardBrandDisplay');
+
+            if (nameDisplay) nameDisplay.textContent = cardName?.value || 'JUSTIN MASON';
+            
+            if (numberDisplay) {
+              let num = cardNumber?.value || '';
+              let formatted = num.replace(/\s/g, '');
+              if (formatted.length > 0) {
+                formatted = formatted.match(/.{1,4}/g)?.join(' ') || formatted;
+              }
+              numberDisplay.innerHTML = formatted || '<span class="placeholder">•••• •••• •••• ••••</span>';
+              
+              // Detect card type
+              if (brandDisplay) {
+                const first = num.replace(/\s/g, '')[0];
+                if (first === '3') brandDisplay.textContent = 'AMEX';
+                else if (first === '5') brandDisplay.textContent = 'MASTERCARD';
+                else if (first === '4') brandDisplay.textContent = 'VISA';
+                else brandDisplay.textContent = 'CARD';
+              }
+            }
+
+            if (expiryDisplay) expiryDisplay.textContent = cardExpiry?.value || 'MM/YY';
+            if (cvvDisplay) {
+              const cvvVal = cardCvv?.value || '';
+              cvvDisplay.innerHTML = cvvVal || '<span class="placeholder">•••</span>';
+            }
+          }
+
+          [cardName, cardNumber, cardExpiry, cardCvv].forEach(input => {
+            if (input) {
+              input.addEventListener('input', updateCardPreview);
+              input.addEventListener('keyup', updateCardPreview);
+            }
+          });
+
+          // Initial update
+          setTimeout(updateCardPreview, 50);
+
+        } else if (currentMethod === 'upi') {
+          renderUPIPreview();
+
+          formContainer.innerHTML = `
+            <div class="space-y-4">
+              <div>
+                <label class="block text-[0.6rem] font-bold uppercase tracking-[0.15em] text-slate-500 mb-1">Virtual Payment Address (UPI ID)</label>
+                <input type="text" id="upiId" placeholder="username@okhdfcbank" class="w-full px-4 py-3 bg-transparent border border-slate-200 dark:border-[#2D3E35] text-xs font-bold uppercase tracking-wider outline-none focus:border-[#6A8071] transition-colors">
+                <p class="text-[0.5rem] text-slate-400 uppercase tracking-wider mt-2">💡 Use the keypad on the phone to enter UPI ID</p>
+              </div>
+              <div class="p-4 border border-slate-200 dark:border-[#2D3E35] bg-slate-50 dark:bg-[#18221D] text-xs text-slate-600 dark:text-slate-300 uppercase tracking-wider leading-relaxed">
+                <p class="font-bold text-[#6A8071]">📱 UPI Payment</p>
+                <p class="mt-1">Enter your UPI ID and authorize payment through your UPI app. You'll receive a collect request on your registered mobile app.</p>
+              </div>
+            </div>
+          `;
+
+          // Update UPI preview on input
+          const upiInput = document.getElementById('upiId');
+          if (upiInput) {
+            upiInput.addEventListener('input', renderUPIPreview);
+          }
+
+        } else {
+          // Cash on Delivery
+          previewContainer.innerHTML = `
+            <div class="flex flex-col items-center justify-center p-8 text-center border-2 border-dashed border-slate-200 dark:border-[#2D3E35] w-full max-w-sm mx-auto">
+              <div style="font-size:4rem;margin-bottom:12px;">💵</div>
+              <h3 class="font-bold text-xl uppercase">Cash on Delivery</h3>
+              <p class="text-sm text-slate-500 dark:text-slate-400 mt-2">Pay with physical cash upon delivery. Our zero-emission courier will verify the exchange at your doorstep.</p>
+              <div class="mt-4 text-xs font-bold uppercase tracking-[0.15em] text-[#6A8071]">✅ No advance payment required</div>
+            </div>
+          `;
+
+          formContainer.innerHTML = `
+            <div class="space-y-4">
+              <div class="p-6 border border-slate-200 dark:border-[#2D3E35] bg-slate-50 dark:bg-[#18221D]">
+                <p class="text-xs text-slate-600 dark:text-slate-300 uppercase tracking-wider leading-relaxed">
+                  Pay with physical cash upon delivery. Our zero-emission courier will verify the exchange at your doorstep.
+                </p>
+                <div class="mt-4 p-4 bg-[#6A8071]/10 border border-[#6A8071]/30">
+                  <p class="text-xs font-bold uppercase tracking-[0.1em] text-[#6A8071]">📦 Delivery Instructions</p>
+                  <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Keep exact cash ready for a smooth handover experience.</p>
+                </div>
+              </div>
+            </div>
+          `;
+        }
+      }
+
+      // ==========================================================
+      // SWITCH PAYMENT METHOD
+      // ==========================================================
       window.switchPayMethod = (method) => {
         currentMethod = method;
         document.querySelectorAll('.pay-tab').forEach(t => t.classList.remove('active'));
         document.getElementById(`tab-${method}`).classList.add('active');
-
-        document.querySelectorAll('.pay-panel').forEach(p => p.classList.add('hidden'));
-        document.getElementById(`panel-${method}`).classList.remove('hidden');
+        renderPaymentContent();
       };
 
+      // ==========================================================
+      // CART RENDER
+      // ==========================================================
       const renderCart = () => {
         const cart = FreshCartDB.getCart();
 
@@ -478,6 +987,9 @@
         `;
       };
 
+      // ==========================================================
+      // CART FUNCTIONS
+      // ==========================================================
       window.updateQty = (productId, newQty) => {
         let cart = FreshCartDB.getCart();
         if (newQty <= 0) {
@@ -498,6 +1010,9 @@
         showToast("✓ Item removed from bag");
       };
 
+      // ==========================================================
+      // PAYMENT MODAL
+      // ==========================================================
       window.openPaymentModal = () => {
         const cart = FreshCartDB.getCart();
         if (cart.length === 0) {
@@ -505,12 +1020,16 @@
           return;
         }
         document.getElementById('paymentModal').classList.remove('hidden');
+        renderPaymentContent();
       };
 
       window.closePaymentModal = () => {
         document.getElementById('paymentModal').classList.add('hidden');
       };
 
+      // ==========================================================
+      // CONFIRM PAYMENT
+      // ==========================================================
       window.confirmPayment = () => {
         if (currentMethod === 'card') {
           const cardName = document.getElementById('cardName').value.trim();
@@ -521,10 +1040,14 @@
             showToast("⚠️ Please fill in all card payment details.");
             return;
           }
+          if (cardNumber.replace(/\s/g, '').length < 16) {
+            showToast("⚠️ Please enter a valid 16-digit card number.");
+            return;
+          }
         } else if (currentMethod === 'upi') {
           const upiId = document.getElementById('upiId').value.trim();
           if (!upiId || !upiId.includes('@')) {
-            showToast("⚠️ Please enter a valid UPI ID.");
+            showToast("⚠️ Please enter a valid UPI ID (e.g., name@bank).");
             return;
           }
         }
@@ -538,14 +1061,16 @@
         const subtitleEl = document.getElementById('modalStatusSubtitle');
         const thermalArea = document.getElementById('thermalPrinterArea');
         const paperContainer = document.getElementById('receiptPaperContainer');
+        const closeBtn = document.getElementById('successCloseBtn');
 
         successModal.classList.remove('hidden');
         thermalArea.classList.add('hidden');
+        closeBtn.classList.add('hidden');
 
-        // 1. Render Modern UI Payment Animation
+        // Show appropriate animation
         if (currentMethod === 'card') {
-          titleEl.textContent = "Biometric Face/Touch ID...";
-          subtitleEl.textContent = "Authenticating secure card token.";
+          titleEl.textContent = "Processing Card Payment...";
+          subtitleEl.textContent = "Verifying with your bank.";
           animContainer.innerHTML = `
             <div class="biometric-scanner">
               <div class="biometric-inner">
@@ -554,8 +1079,8 @@
             </div>
           `;
         } else if (currentMethod === 'upi') {
-          titleEl.textContent = "Scanning UPI Network...";
-          subtitleEl.textContent = "Waiting for app pin confirmation.";
+          titleEl.textContent = "Processing UPI Payment...";
+          subtitleEl.textContent = "Waiting for app confirmation.";
           animContainer.innerHTML = `
             <div class="upi-radar-wrap">
               <div class="radar-sweep"></div>
@@ -563,8 +1088,8 @@
             </div>
           `;
         } else {
-          titleEl.textContent = "Locking Cash Order...";
-          subtitleEl.textContent = "Registering transaction to dispatch queue.";
+          titleEl.textContent = "Confirming Cash Order...";
+          subtitleEl.textContent = "Registering your order.";
           animContainer.innerHTML = `
             <div class="vault-lock-wrap">
               <svg width="32" height="32" fill="none" stroke="#6A8071" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
@@ -572,56 +1097,71 @@
           `;
         }
 
-        // 2. After 2.0 seconds, trigger Thermal Printer Receipt Animation
+        // After 2 seconds, show success
         setTimeout(() => {
-          titleEl.textContent = "Payment Authorized!";
-          subtitleEl.textContent = "Printing itemized receipt...";
+          titleEl.textContent = "Payment Successful! 🎉";
+          subtitleEl.textContent = "Your order has been confirmed.";
           animContainer.innerHTML = `
-            <div style="width: 32px; height: 32px; background: #6A8071; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto; color: white; font-weight: bold; font-size: 0.9rem;">✓</div>
+            <div style="width: 64px; height: 64px; background: #22C55E; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto; color: white; font-weight: bold; font-size: 2rem; animation: successPulse 0.6s ease-in-out 3;">✓</div>
           `;
 
-          const dateStr = new Date().toLocaleString();
-          const itemsListText = activeCartSnapshot.map(ci => {
-            const p = FreshCartDB.products.find(prod => prod.id === ci.id);
-            const lineTotal = p ? p.price * ci.qty : 0;
-            return `<div style="display: flex; justify-content: space-between; margin-bottom: 3px;"><span>${ci.qty}x ${p ? p.name : 'Item'}</span><span>$${lineTotal.toFixed(2)}</span></div>`;
-          }).join('');
-
-          paperContainer.innerHTML = `
-            <div class="receipt-paper">
-              <div style="text-align: center; border-bottom: 1px dashed #94A3B8; padding-bottom: 8px; margin-bottom: 8px;">
-                <p style="font-weight: bold; font-size: 0.8rem;">FRESHCART BOTANICAL</p>
-                <p style="font-size: 0.55rem; color: #64748B;">SECURE TELEMETRY RECEIPT</p>
-                <p style="font-size: 0.5rem; color: #64748B; margin-top: 2px;">${dateStr}</p>
-              </div>
-              <div style="font-size: 0.65rem; margin-bottom: 8px;">
-                ${itemsListText}
-              </div>
-              <div style="border-top: 1px dashed #94A3B8; padding-top: 6px; font-size: 0.65rem;">
-                <div style="display: flex; justify-content: space-between;"><span>Subtotal:</span><span>$${activeTotals.subtotal.toFixed(2)}</span></div>
-                <div style="display: flex; justify-content: space-between;"><span>Shipping:</span><span>$${activeTotals.shipping.toFixed(2)}</span></div>
-                <div style="display: flex; justify-content: space-between;"><span>Tax (8%):</span><span>$${activeTotals.tax.toFixed(2)}</span></div>
-                <div style="display: flex; justify-content: space-between; font-weight: bold; margin-top: 4px; border-top: 1px solid #0F172A; padding-top: 4px;"><span>TOTAL (${currentMethod.toUpperCase()}):</span><span>$${calculatedGrandTotal.toFixed(2)}</span></div>
-              </div>
-              <div style="text-align: center; font-size: 0.5rem; color: #64748B; margin-top: 12px;">
-                <p>THANK YOU FOR YOUR PATRONAGE</p>
-                <p>NODE ID: #FC-9082-TR</p>
-              </div>
-            </div>
-          `;
-          thermalArea.classList.remove('hidden');
-
-          // Clear Cart and Redirect after 5 seconds
-          localStorage.removeItem('freshcart_cart');
-          window.dispatchEvent(new Event('cartUpdated'));
-
+          // Show receipt after success
           setTimeout(() => {
-            window.location.href = 'index.html';
-          }, 5000);
+            titleEl.textContent = "Order Confirmed!";
+            subtitleEl.textContent = "Your receipt is being printed...";
+            
+            const dateStr = new Date().toLocaleString();
+            const itemsListText = activeCartSnapshot.map(ci => {
+              const p = FreshCartDB.products.find(prod => prod.id === ci.id);
+              const lineTotal = p ? p.price * ci.qty : 0;
+              return `<div style="display: flex; justify-content: space-between; margin-bottom: 3px;"><span>${ci.qty}x ${p ? p.name : 'Item'}</span><span>$${lineTotal.toFixed(2)}</span></div>`;
+            }).join('');
+
+            paperContainer.innerHTML = `
+              <div class="receipt-paper">
+                <div style="text-align: center; border-bottom: 1px dashed #94A3B8; padding-bottom: 8px; margin-bottom: 8px;">
+                  <p style="font-weight: bold; font-size: 0.8rem;">FRESHCART BOTANICAL</p>
+                  <p style="font-size: 0.55rem; color: #64748B;">SECURE TELEMETRY RECEIPT</p>
+                  <p style="font-size: 0.5rem; color: #64748B; margin-top: 2px;">${dateStr}</p>
+                </div>
+                <div style="font-size: 0.65rem; margin-bottom: 8px;">
+                  ${itemsListText}
+                </div>
+                <div style="border-top: 1px dashed #94A3B8; padding-top: 6px; font-size: 0.65rem;">
+                  <div style="display: flex; justify-content: space-between;"><span>Subtotal:</span><span>$${activeTotals.subtotal.toFixed(2)}</span></div>
+                  <div style="display: flex; justify-content: space-between;"><span>Shipping:</span><span>$${activeTotals.shipping.toFixed(2)}</span></div>
+                  <div style="display: flex; justify-content: space-between;"><span>Tax (8%):</span><span>$${activeTotals.tax.toFixed(2)}</span></div>
+                  <div style="display: flex; justify-content: space-between; font-weight: bold; margin-top: 4px; border-top: 1px solid #0F172A; padding-top: 4px;"><span>TOTAL (${currentMethod.toUpperCase()}):</span><span>$${calculatedGrandTotal.toFixed(2)}</span></div>
+                </div>
+                <div style="text-align: center; font-size: 0.5rem; color: #64748B; margin-top: 12px;">
+                  <p>THANK YOU FOR YOUR PATRONAGE</p>
+                  <p>NODE ID: #FC-9082-TR</p>
+                </div>
+              </div>
+            `;
+            thermalArea.classList.remove('hidden');
+            closeBtn.classList.remove('hidden');
+
+            // Clear Cart
+            localStorage.removeItem('freshcart_cart');
+            window.dispatchEvent(new Event('cartUpdated'));
+
+          }, 1000);
 
         }, 2000);
       };
 
+      // ==========================================================
+      // CLOSE SUCCESS MODAL
+      // ==========================================================
+      window.closeSuccessModal = () => {
+        document.getElementById('successModal').classList.add('hidden');
+        window.location.href = 'index.html';
+      };
+
+      // ==========================================================
+      // TOAST
+      // ==========================================================
       function showToast(message) {
         let container = document.getElementById('toast-container');
         if (!container) {
@@ -641,8 +1181,19 @@
         }, 2500);
       }
 
+      // Initial render
       renderCart();
+
+      // Render payment content when modal opens
+      const modalObserver = new MutationObserver(() => {
+        const modal = document.getElementById('paymentModal');
+        if (!modal.classList.contains('hidden')) {
+          renderPaymentContent();
+        }
+      });
+      modalObserver.observe(document.getElementById('paymentModal'), { attributes: true, attributeFilter: ['class'] });
     });
   </script>
+
 </body>
 </html>

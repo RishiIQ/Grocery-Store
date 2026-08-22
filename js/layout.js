@@ -21,8 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         <!-- Navigation -->
         <nav class="nixon-nav" id="nixonNav" role="navigation" aria-label="Main Navigation">
-          <a href="index.html" class="nixon-nav-link ${currentPath === 'index.html' || currentPath === '' ? 'active' : ''}">Home</a>
-          <a href="index-saas.html" class="nixon-nav-link ${currentPath === 'index-saas.html' ? 'active' : ''}">SaaS</a>
+          <a href="index.html" class="nixon-nav-link ${currentPath === 'index.html' || currentPath === '' ? 'active' : ''}">Home 1</a>
+          <a href="index-saas.html" class="nixon-nav-link ${currentPath === 'index-saas.html' ? 'active' : ''}">Home 2</a>
           <a href="shop.html" class="nixon-nav-link ${currentPath === 'shop.html' ? 'active' : ''}">Shop</a>
           <a href="services.html" class="nixon-nav-link ${currentPath === 'services.html' ? 'active' : ''}">Services</a>
           <a href="about.html" class="nixon-nav-link ${currentPath === 'about.html' ? 'active' : ''}">About</a>

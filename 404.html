@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found — FreshCart Botanical Studio</title>
+  <link rel="icon" type="image/png" href="assets/images/grossary-logo.png">
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+      const savedDir = localStorage.getItem('dir') || 'ltr';
+      document.documentElement.setAttribute('dir', savedDir);
+    })();
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'sage-accent': '#6A8071',
+            'sage-dark': '#24302A',
+            'cream-bg': '#F7F6F2',
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/style.css">
+  
+  <style>
+    /* ============================================
+       404 PAGE STYLES
+       ============================================ */
+    
+    /* Disable animations on 404 page */
+    html, body {
+      animation: none !important;
+      transform: none !important;
+      opacity: 1 !important;
+      filter: none !important;
+      perspective: none !important;
+    }
+    
+    body {
+      animation: none !important;
+      transform: none !important;
+      opacity: 1 !important;
+      filter: none !important;
+      overflow-x: hidden;
+      background: #F7F6F2;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .dark body {
+      background: #111814;
+    }
+    
+    body.cinematic-exit {
+      display: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+    
+    /* ============================================
+       404 MAIN CONTAINER
+       ============================================ */
+    .error-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 20px 80px;
+      min-height: 100vh;
+    }
+    
+    .error-content {
+      max-width: 900px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+    }
+    
+    /* ============================================
+       3D ILLUSTRATION / ICON
+       ============================================ */
+    .error-illustration {
+      position: relative;
+      width: 280px;
+      height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    /* 3D Box / Cube Effect */
+    .error-cube {
+      width: 160px;
+      height: 160px;
+      position: relative;
+      transform-style: preserve-3d;
+      animation: float3D 6s ease-in-out infinite;
+    }
+    
+    @keyframes float3D {
+      0%, 100% {
+        transform: translateY(0) rotateX(-10deg) rotateY(0deg);
+      }
+      50% {
+        transform: translateY(-20px) rotateX(-15deg) rotateY(180deg);
+      }
+    }
+    
+    .cube-face {
+      position: absolute;
+      width: 160px;
+      height: 160px;
+      background: #6A8071;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      box-shadow: 0 8px 32px rgba(106, 128, 113, 0.3);
+    }
+    
+    .cube-face.front {
+      transform: translateZ(80px);
+      background: #6A8071;
+    }
+    
+    .cube-face.back {
+      transform: rotateY(180deg) translateZ(80px);
+      background: #576B5D;
+    }
+    
+    .cube-face.right {
+      transform: rotateY(90deg) translateZ(80px);
+      background: #7A9A88;
+    }
+    
+    .cube-face.left {
+      transform: rotateY(-90deg) translateZ(80px);
+      background: #5A7A68;
+    }
+    
+    .cube-face.top {
+      transform: rotateX(90deg) translateZ(80px);
+      background: #8FA89B;
+    }
+    
+    .cube-face.bottom {
+      transform: rotateX(-90deg) translateZ(80px);
+      background: #4A6A58;
+    }
+    
+    .cube-face .emoji {
+      font-size: 3.5rem;
+      transform: translateZ(10px);
+    }
+    
+    /* Floating elements around the cube */
+    .float-element {
+      position: absolute;
+      border-radius: 50%;
+      background: #6A8071;
+      opacity: 0.2;
+      animation: floatAround 8s ease-in-out infinite;
+    }
+    
+    .float-element:nth-child(1) {
+      width: 60px;
+      height: 60px;
+      top: -20px;
+      right: -20px;
+      animation-delay: 0s;
+      background: #8FA89B;
+    }
+    
+    .float-element:nth-child(2) {
+      width: 40px;
+      height: 40px;
+      bottom: -10px;
+      left: -30px;
+      animation-delay: 1.5s;
+      background: #7A9A88;
+    }
+    
+    .float-element:nth-child(3) {
+      width: 30px;
+      height: 30px;
+      top: 50%;
+      right: -40px;
+      animation-delay: 3s;
+      background: #5A7A68;
+    }
+    
+    .float-element:nth-child(4) {
+      width: 50px;
+      height: 50px;
+      bottom: 20%;
+      left: -50px;
+      animation-delay: 2s;
+      background: #576B5D;
+    }
+    
+    @keyframes floatAround {
+      0%, 100% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.2;
+      }
+      33% {
+        transform: translate(20px, -20px) scale(1.2);
+        opacity: 0.4;
+      }
+      66% {
+        transform: translate(-10px, 15px) scale(0.8);
+        opacity: 0.3;
+      }
+    }
+    
+    /* ============================================
+       TEXT CONTENT
+       ============================================ */
+    .error-title {
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      font-size: 5rem;
+      line-height: 1;
+      color: #0F172A;
+      text-align: center;
+    }
+    
+    .dark .error-title {
+      color: #FFFFFF;
+    }
+    
+    .error-title .highlight {
+      color: #6A8071;
+    }
+    
+    .error-subtitle {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #64748B;
+      text-align: center;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    
+    .dark .error-subtitle {
+      color: #94A3B8;
+    }
+    
+    .error-subtitle .cops {
+      color: #6A8071;
+      font-weight: 700;
+    }
+    
+    /* ============================================
+       SEARCH BAR
+       ============================================ */
+    .error-search {
+      width: 100%;
+      max-width: 480px;
+      position: relative;
+    }
+    
+    .error-search input {
+      width: 100%;
+      padding: 16px 56px 16px 20px;
+      background: #FFFFFF;
+      border: 2px solid #E2E8F0;
+      font-size: 0.9rem;
+      color: #0F172A;
+      outline: none;
+      transition: all 0.3s ease;
+      border-radius: 0px;
+    }
+    
+    .dark .error-search input {
+      background: #18221D;
+      border-color: #2D3E35;
+      color: #FFFFFF;
+    }
+    
+    .error-search input::placeholder {
+      color: #94A3B8;
+      font-weight: 400;
+    }
+    
+    .error-search input:focus {
+      border-color: #6A8071;
+      box-shadow: 0 0 0 4px rgba(106, 128, 113, 0.15);
+    }
+    
+    .error-search .search-icon {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #94A3B8;
+      pointer-events: none;
+    }
+    
+    /* ============================================
+       ACTION BUTTONS
+       ============================================ */
+    .error-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+      margin-top: 8px;
+    }
+    
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 36px;
+      background: #6A8071;
+      color: #FFFFFF;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      border: none;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      text-decoration: none;
+      border-radius: 0px;
+    }
+    
+    .btn-primary:hover {
+      background: #576B5D;
+      transform: scale(1.02);
+      box-shadow: 0 8px 30px rgba(106, 128, 113, 0.3);
+    }
+    
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 36px;
+      background: transparent;
+      color: #0F172A;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      border: 2px solid #0F172A;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      text-decoration: none;
+      border-radius: 0px;
+    }
+    
+    .dark .btn-secondary {
+      color: #FFFFFF;
+      border-color: #FFFFFF;
+    }
+    
+    .btn-secondary:hover {
+      background: #6A8071;
+      color: #FFFFFF;
+      border-color: #6A8071;
+      transform: scale(1.02);
+    }
+    
+    /* ============================================
+       RESPONSIVE
+       ============================================ */
+    @media (max-width: 768px) {
+      .error-container {
+        padding: 100px 16px 60px;
+      }
+      
+      .error-illustration {
+        width: 200px;
+        height: 200px;
+      }
+      
+      .error-cube {
+        width: 120px;
+        height: 120px;
+      }
+      
+      .cube-face {
+        width: 120px;
+        height: 120px;
+        font-size: 3rem;
+      }
+      
+      .cube-face.front {
+        transform: translateZ(60px);
+      }
+      
+      .cube-face.back {
+        transform: rotateY(180deg) translateZ(60px);
+      }
+      
+      .cube-face.right {
+        transform: rotateY(90deg) translateZ(60px);
+      }
+      
+      .cube-face.left {
+        transform: rotateY(-90deg) translateZ(60px);
+      }
+      
+      .cube-face.top {
+        transform: rotateX(90deg) translateZ(60px);
+      }
+      
+      .cube-face.bottom {
+        transform: rotateX(-90deg) translateZ(60px);
+      }
+      
+      .cube-face .emoji {
+        font-size: 2.5rem;
+      }
+      
+      .error-title {
+        font-size: 3rem;
+      }
+      
+      .error-subtitle {
+        font-size: 1rem;
+        padding: 0 10px;
+      }
+      
+      .float-element {
+        display: none;
+      }
+      
+      .error-search {
+        max-width: 100%;
+      }
+      
+      .error-actions {
+        flex-direction: column;
+        width: 100%;
+      }
+      
+      .error-actions .btn-primary,
+      .error-actions .btn-secondary {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .error-container {
+        padding: 80px 12px 40px;
+      }
+      
+      .error-illustration {
+        width: 160px;
+        height: 160px;
+      }
+      
+      .error-cube {
+        width: 100px;
+        height: 100px;
+      }
+      
+      .cube-face {
+        width: 100px;
+        height: 100px;
+        font-size: 2.5rem;
+      }
+      
+      .cube-face.front {
+        transform: translateZ(50px);
+      }
+      
+      .cube-face.back {
+        transform: rotateY(180deg) translateZ(50px);
+      }
+      
+      .cube-face.right {
+        transform: rotateY(90deg) translateZ(50px);
+      }
+      
+      .cube-face.left {
+        transform: rotateY(-90deg) translateZ(50px);
+      }
+      
+      .cube-face.top {
+        transform: rotateX(90deg) translateZ(50px);
+      }
+      
+      .cube-face.bottom {
+        transform: rotateX(-90deg) translateZ(50px);
+      }
+      
+      .cube-face .emoji {
+        font-size: 2rem;
+      }
+      
+      .error-title {
+        font-size: 2.2rem;
+      }
+      
+      .error-subtitle {
+        font-size: 0.9rem;
+      }
+    }
+    
+    /* ============================================
+       DARK MODE ADJUSTMENTS
+       ============================================ */
+    .dark .cube-face.front {
+      background: #4A6A58;
+    }
+    
+    .dark .cube-face.back {
+      background: #3A5A48;
+    }
+    
+    .dark .cube-face.right {
+      background: #5A7A68;
+    }
+    
+    .dark .cube-face.left {
+      background: #3A5A48;
+    }
+    
+    .dark .cube-face.top {
+      background: #6A8A78;
+    }
+    
+    .dark .cube-face.bottom {
+      background: #2A4A38;
+    }
+    
+    /* ============================================
+       TOAST
+       ============================================ */
+    .market-toast {
+      background: #24302A;
+      color: #FFFFFF;
+      padding: 14px 24px;
+      border-radius: 0px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      border-left: 4px solid #6A8071;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================ -->
+  <!-- 404 CONTENT -->
+  <!-- ============================================ -->
+  <main>
+    <div class="error-container">
+      <div class="error-content">
+        
+        <!-- 3D Illustration -->
+        <div class="error-illustration">
+          <div class="float-element"></div>
+          <div class="float-element"></div>
+          <div class="float-element"></div>
+          <div class="float-element"></div>
+          
+          <div class="error-cube">
+            <div class="cube-face front">
+              <span class="emoji">🌿</span>
+            </div>
+            <div class="cube-face back">
+              <span class="emoji">🍃</span>
+            </div>
+            <div class="cube-face right">
+              <span class="emoji">🌱</span>
+            </div>
+            <div class="cube-face left">
+              <span class="emoji">🌾</span>
+            </div>
+            <div class="cube-face top">
+              <span class="emoji">🌳</span>
+            </div>
+            <div class="cube-face bottom">
+              <span class="emoji">🌺</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Title -->
+        <h1 class="error-title">
+          4<span class="highlight">0</span>4
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="error-subtitle">
+          <span class="cops">Cops!</span> Looks like you followed a bad link. 
+          If you think this is a problem with us, please tell us.
+        </p>
+
+        <!-- Search Bar -->
+        <div class="error-search">
+          <input 
+            type="text" 
+            placeholder="Search our marketplace..." 
+            id="searchInput"
+            aria-label="Search products"
+          >
+          <span class="search-icon">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+          </span>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="error-actions">
+          <a href="index.html" class="btn-primary">
+            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1m-2 0h2"/>
+            </svg>
+            Go Back Home
+          </a>
+          <a href="shop.html" class="btn-secondary">
+            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+            </svg>
+            Browse Products
+          </a>
+        </div>
+
+        <!-- Help Text -->
+        <p style="font-size: 0.6rem; color: #94A3B8; text-transform: uppercase; letter-spacing: 0.15em; margin-top: 12px;">
+          Need help? <a href="contact.html" style="color: #6A8071; text-decoration: none; font-weight: 700;">Contact Support</a>
+        </p>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- ============================================ -->
+  <!-- SCRIPTS -->
+  <!-- ============================================ -->
+  <script src="js/db.js"></script>
+  <!-- <script src="js/layout.js"></script> -->
+
+  <script>
+    (function() {
+      'use strict';
+      
+      // Disable body animation
+      document.body.style.animation = 'none';
+      document.body.style.transform = 'none';
+      document.body.style.opacity = '1';
+      document.body.style.filter = 'none';
+
+      // ============================================
+      // SEARCH FUNCTIONALITY
+      // ============================================
+      const searchInput = document.getElementById('searchInput');
+      
+      if (searchInput) {
+        searchInput.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter') {
+            const query = this.value.trim();
+            if (query) {
+              window.location.href = 'shop.html?search=' + encodeURIComponent(query);
+            }
+          }
+        });
+      }
+
+      // ============================================
+      // TOAST NOTIFICATION
+      // ============================================
+      function showToast(message) {
+        let container = document.getElementById('toast-container');
+        if (!container) {
+          container = document.createElement('div');
+          container.id = 'toast-container';
+          container.className = 'fixed bottom-8 right-8 z-50 flex flex-col gap-3 pointer-events-none';
+          document.body.appendChild(container);
+        }
+        
+        const toast = document.createElement('div');
+        toast.className = 'market-toast pointer-events-auto transform translate-y-4 opacity-0 transition-all duration-300';
+        toast.textContent = message;
+        container.appendChild(toast);
+        
+        requestAnimationFrame(function() {
+          toast.classList.remove('translate-y-4', 'opacity-0');
+        });
+        
+        setTimeout(function() {
+          toast.classList.add('translate-y-4', 'opacity-0');
+          setTimeout(function() { toast.remove(); }, 400);
+        }, 2500);
+      }
+
+      // ============================================
+      // COPYRIGHT YEAR
+      // ============================================
+      const yearElement = document.querySelector('.nixon-footer-bottom p');
+      if (yearElement) {
+        const currentYear = new Date().getFullYear();
+        yearElement.textContent = '© ' + currentYear + ' FreshCart Marketplace. All rights reserved.';
+      }
+
+      // ============================================
+      // 3D CUBE ON MOUSE MOVE (Parallax effect)
+      // ============================================
+      const cube = document.querySelector('.error-cube');
+      if (cube) {
+        document.addEventListener('mousemove', function(e) {
+          const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+          const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+          cube.style.transform = 'rotateY(' + xAxis + 'deg) rotateX(' + -yAxis + 'deg)';
+        });
+      }
+
+      console.log('🌿 404 Page loaded successfully');
+    })();
+  </script>
+
+</body>
+</html>

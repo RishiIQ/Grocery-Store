@@ -16,6 +16,9 @@
       }
       const savedDir = localStorage.getItem('dir') || 'ltr';
       document.documentElement.setAttribute('dir', savedDir);
+      
+      // Disable page animation on product detail
+      document.documentElement.style.animation = 'none';
     })();
   </script>
   <script src="https://cdn.tailwindcss.com"></script>
@@ -25,7 +28,9 @@
       theme: {
         extend: {
           colors: {
-            'nixon-red': '#E31837',
+            'sage-accent': '#6A8071',
+            'sage-dark': '#24302A',
+            'cream-bg': '#F7F6F2',
           }
         }
       }
@@ -33,41 +38,317 @@
   </script>
   <link rel="stylesheet" href="css/style.css">
   <style>
-    /* Nixon Aesthetic & Animation Overrides */
-    .nixon-heading {
-      font-family: 'Arial Black', 'Impact', sans-serif;
-      text-transform: uppercase;
-      letter-spacing: -0.02em;
+    /* ============================================
+       PRODUCT DETAIL PAGE STYLES
+       ============================================ */
+    
+    /* Disable conflicting animations */
+    html, body {
+      animation: none !important;
+      transform: none !important;
+      opacity: 1 !important;
+      filter: none !important;
+      perspective: none !important;
     }
-    .nixon-subheading {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      text-transform: uppercase;
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
+    
+    body {
+      animation: none !important;
+      transform: none !important;
+      opacity: 1 !important;
+      filter: none !important;
+      overflow-x: hidden;
+    }
+    
+    body.cinematic-exit {
+      display: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+    /* ============================================
+       ANIMATIONS
+       ============================================ */
+    
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes scaleIn {
+      from {
+        opacity: 0;
+        transform: scale(0.92);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    @keyframes floatGlow {
+      0%, 100% {
+        transform: translateY(0) scale(1);
+        opacity: 0.3;
+      }
+      50% {
+        transform: translateY(-10px) scale(1.05);
+        opacity: 0.6;
+      }
+    }
+    
+    @keyframes pulseRing {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 0.8;
+      }
+      50% {
+        transform: scale(1.05);
+        opacity: 1;
+      }
+    }
+    
+    /* Animation Classes */
+    .animate-fade-slide-up {
+      animation: fadeSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    
+    .animate-scale-in {
+      animation: scaleIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    
+    .animate-slide-left {
+      animation: slideInLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    
+    .animate-slide-right {
+      animation: slideInRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    
+    .animate-float-glow {
+      animation: floatGlow 3s ease-in-out infinite;
+    }
+    
+    .animate-pulse-ring {
+      animation: pulseRing 2s ease-in-out infinite;
+    }
+    
+    /* Stagger delays */
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
+    .delay-5 { animation-delay: 0.5s; }
+    .delay-6 { animation-delay: 0.6s; }
+
+    /* ============================================
+       PRODUCT DETAIL STYLES
+       ============================================ */
+    
+    .product-image-wrap {
+      position: relative;
+      overflow: hidden;
+      background: #F7F6F2;
+    }
+    
+    .dark .product-image-wrap {
+      background: #111814;
+    }
+    
+    .product-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .product-image-wrap:hover img {
+      transform: scale(1.05);
+    }
+    
+    /* Badge */
+    .product-badge {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: #6A8071;
+      color: #FFFFFF;
+      font-size: 0.55rem;
       font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      padding: 8px 20px;
+      z-index: 10;
+      border-radius: 0px;
+      box-shadow: 0 4px 15px rgba(106, 128, 113, 0.3);
     }
-    .nixon-card {
-      background: #FFFFFF;
+    
+    .product-badge.fresh {
+      background: #6A8071;
+    }
+    
+    .product-badge.hot {
+      background: #E31837;
+    }
+    
+    .product-badge.sale {
+      background: #F59E0B;
+    }
+    
+    /* Stock indicator */
+    .stock-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 6px 16px;
+      border: 1px solid rgba(106, 128, 113, 0.3);
+      background: rgba(106, 128, 113, 0.08);
+      color: #6A8071;
+      border-radius: 0px;
+    }
+    
+    .dark .stock-indicator {
+      background: rgba(106, 128, 113, 0.15);
+    }
+    
+    .stock-indicator .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    
+    .stock-indicator .dot.in-stock {
+      background: #22C55E;
+      animation: pulseRing 1.5s ease-in-out infinite;
+    }
+    
+    .stock-indicator .dot.low-stock {
+      background: #F59E0B;
+      animation: pulseRing 1s ease-in-out infinite;
+    }
+    
+    .stock-indicator .dot.out-of-stock {
+      background: #EF4444;
+    }
+    
+    /* Price display */
+    .price-display {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+    }
+    
+    .price-current {
+      font-weight: 800;
+      font-size: 2.5rem;
+      color: #0F172A;
+    }
+    
+    .dark .price-current {
+      color: #FFFFFF;
+    }
+    
+    .price-old {
+      font-size: 1.2rem;
+      color: #94A3B8;
+      text-decoration: line-through;
+      font-weight: 500;
+    }
+    
+    .price-save {
+      font-size: 0.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #22C55E;
+      background: rgba(34, 197, 94, 0.12);
+      padding: 4px 12px;
+      border-radius: 0px;
+    }
+    
+    /* Quantity selector */
+    .qty-selector {
+      display: inline-flex;
+      align-items: center;
       border: 1px solid #E5E5E5;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      border-radius: 0px;
+      overflow: hidden;
     }
-    .dark .nixon-card {
-      background: #1A1A1A;
+    
+    .dark .qty-selector {
       border-color: #333333;
     }
-    .nixon-card:hover {
-      border-color: #E31837;
-      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.08);
+    
+    .qty-selector button {
+      width: 44px;
+      height: 44px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #0F172A;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .dark .nixon-card:hover {
-      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
-    }
-    .nixon-btn {
-      display: inline-block;
-      padding: 16px 32px;
-      background: #E31837;
+    
+    .dark .qty-selector button {
       color: #FFFFFF;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
+    }
+    
+    .qty-selector button:hover {
+      background: #6A8071;
+      color: #FFFFFF;
+    }
+    
+    .qty-selector .qty-value {
+      min-width: 50px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 0 8px;
+    }
+    
+    /* Buttons */
+    .btn-primary {
+      display: inline-block;
+      padding: 18px 40px;
+      background: #6A8071;
+      color: #FFFFFF;
       text-transform: uppercase;
       font-size: 0.7rem;
       font-weight: 700;
@@ -75,151 +356,505 @@
       border: none;
       cursor: pointer;
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      text-align: center;
       text-decoration: none;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
       width: 100%;
+      border-radius: 0px;
     }
-    .nixon-btn:hover {
-      background: #C41230;
+    
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+      transition: left 0.6s ease;
+    }
+    
+    .btn-primary:hover::before {
+      left: 100%;
+    }
+    
+    .btn-primary:hover {
+      background: #576B5D;
       transform: scale(1.02);
     }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
+    
+    .btn-primary:active {
+      transform: scale(0.98);
+    }
+    
+    .btn-secondary {
+      display: inline-block;
+      padding: 17px 38px;
+      background: transparent;
+      color: #0F172A;
+      text-transform: uppercase;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      border: 1px solid #0F172A;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      text-decoration: none;
+      text-align: center;
+      width: 100%;
+      border-radius: 0px;
+    }
+    
+    .dark .btn-secondary {
+      color: #FFFFFF;
+      border-color: #FFFFFF;
+    }
+    
+    .btn-secondary:hover {
+      background: #6A8071;
+      color: #FFFFFF;
+      border-color: #6A8071;
+      transform: scale(1.02);
+    }
+    
+    /* Feature cards */
+    .feature-card {
+      background: #FFFFFF;
+      border: 1px solid #E5E5E5;
+      padding: 32px;
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+      border-radius: 0px;
+    }
+    
+    .dark .feature-card {
+      background: #1A1A1A;
+      border-color: #333333;
+    }
+    
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: #6A8071;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .feature-card:hover::before {
+      transform: scaleX(1);
+    }
+    
+    .feature-card:hover {
+      border-color: #6A8071;
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(106, 128, 113, 0.12);
+    }
+    
+    .dark .feature-card:hover {
+      box-shadow: 0 16px 48px rgba(106, 128, 113, 0.2);
+    }
+    
+    .feature-card .icon {
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+      display: block;
+    }
+    
+    .feature-card h3 {
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+    
+    .feature-card p {
+      font-size: 0.8rem;
+      line-height: 1.6;
+      color: #64748B;
+    }
+    
+    .dark .feature-card p {
+      color: #94A3B8;
+    }
+    
+    /* Specs list */
+    .specs-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px 24px;
+    }
+    
+    .specs-list .spec-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .dark .specs-list .spec-item {
+      border-bottom-color: rgba(255, 255, 255, 0.05);
+    }
+    
+    .specs-list .spec-item .label {
+      color: #94A3B8;
+    }
+    
+    .specs-list .spec-item .value {
+      color: #0F172A;
+    }
+    
+    .dark .specs-list .spec-item .value {
+      color: #FFFFFF;
+    }
+    
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .price-current {
+        font-size: 2rem;
       }
-      to {
-        opacity: 1;
-        transform: translateY(0);
+      .feature-card {
+        padding: 24px;
       }
     }
-    .animate-fade-in {
-      animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    
+    @media (max-width: 768px) {
+      .price-current {
+        font-size: 1.8rem;
+      }
+      .product-badge {
+        top: 12px;
+        left: 12px;
+        font-size: 0.5rem;
+        padding: 6px 14px;
+      }
+      .specs-list {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+      .feature-card {
+        padding: 20px;
+      }
+      .feature-card .icon {
+        font-size: 1.4rem;
+      }
+      .btn-primary,
+      .btn-secondary {
+        padding: 14px 24px;
+        font-size: 0.6rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .price-current {
+        font-size: 1.5rem;
+      }
+      .price-old {
+        font-size: 1rem;
+      }
+      .qty-selector button {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+      }
+      .qty-selector .qty-value {
+        min-width: 40px;
+        font-size: 0.9rem;
+      }
+      .feature-card {
+        padding: 16px;
+      }
+    }
+    
+    /* Toast */
+    .market-toast {
+      background: #24302A;
+      color: #FFFFFF;
+      padding: 14px 24px;
+      border-radius: 0px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      border-left: 4px solid #6A8071;
+    }
+
+    /* Loading shimmer */
+    .shimmer {
+      background: linear-gradient(90deg, #F1F5F9 25%, #E2E8F0 50%, #F1F5F9 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+    }
+    
+    .dark .shimmer {
+      background: linear-gradient(90deg, #1E293B 25%, #334155 50%, #1E293B 75%);
+      background-size: 200% 100%;
+    }
+    
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
     }
   </style>
 </head>
-<body class="bg-white dark:bg-[#0A0A0A] text-slate-900 dark:text-white antialiased transition-colors duration-500">
+<body>
 
   <!-- Shared DB and Layout Injector Scripts -->
   <script src="js/db.js"></script>
   <script src="js/layout.js"></script>
 
   <!-- Product Detail Section -->
-  <main class="pt-48 pb-36 px-4 sm:px-6 lg:px-12 max-w-7xl mx-auto space-y-24 animate-fade-in">
+  <main class="pt-32 pb-24 px-4 sm:px-6 lg:px-12 max-w-7xl mx-auto">
+    
+    <!-- Breadcrumb -->
+    <div class="text-xs font-bold uppercase tracking-[0.15em] text-slate-400 mb-8 animate-fade-slide-up">
+      <a href="shop.html" class="hover:text-[#6A8071] transition-colors">Shop</a>
+      <span class="mx-2">/</span>
+      <span id="breadcrumbCategory">Product</span>
+      <span class="mx-2">/</span>
+      <span id="breadcrumbName" class="text-[#6A8071]">Details</span>
+    </div>
+
     <div id="productDetailContainer" class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
       <!-- Injected via JavaScript below -->
     </div>
 
-    <!-- Additional Rich Content Sections -->
-    <div class="border-t border-[#E5E5E5] dark:border-[#222222] pt-24 grid grid-cols-1 lg:grid-cols-3 gap-12">
-      <div class="p-8 nixon-card space-y-4">
-        <span class="nixon-subheading text-[#E31837]">01 / Cold-Chain</span>
-        <h3 class="nixon-heading text-xl">Thermal Telemetry Verified</h3>
-        <p class="text-xs font-['Helvetica_Neue'] text-[#8A8A8A] uppercase tracking-[0.1em] leading-relaxed">This provision is monitored 24/7 via IoT sensors ensuring transit temperature never exceeds strict 2.4°C thresholds.</p>
+    <!-- Feature Cards -->
+    <div class="border-t border-[#E5E5E5] dark:border-[#222222] pt-24 mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="feature-card animate-fade-slide-up delay-2">
+        <span class="icon">🌡️</span>
+        <h3>Cold-Chain Verified</h3>
+        <p>24/7 IoT sensor monitoring ensures strict 2.4°C temperature thresholds during transit.</p>
       </div>
-      <div class="p-8 nixon-card space-y-4">
-        <span class="nixon-subheading text-[#E31837]">02 / Sustainability</span>
-        <h3 class="nixon-heading text-xl">Zero-Plastic Packaging</h3>
-        <p class="text-xs font-['Helvetica_Neue'] text-[#8A8A8A] uppercase tracking-[0.1em] leading-relaxed">Sealed in fully compostable cellulose and recycled unbleached fiber paper that degrades safely within 45 days.</p>
+      <div class="feature-card animate-fade-slide-up delay-3">
+        <span class="icon">♻️</span>
+        <h3>Zero-Plastic Packaging</h3>
+        <p>Compostable cellulose and recycled fiber paper that degrades safely within 45 days.</p>
       </div>
-      <div class="p-8 nixon-card space-y-4">
-        <span class="nixon-subheading text-[#E31837]">03 / Provenance</span>
-        <h3 class="nixon-heading text-xl">Regenerative Agriculture</h3>
-        <p class="text-xs font-['Helvetica_Neue'] text-[#8A8A8A] uppercase tracking-[0.1em] leading-relaxed">Purchased directly from certified partner cooperatives using soil-restoring farming and ethical labor standards.</p>
+      <div class="feature-card animate-fade-slide-up delay-4">
+        <span class="icon">🌱</span>
+        <h3>Regenerative Agriculture</h3>
+        <p>Direct from certified cooperatives using soil-restoring farming and ethical labor.</p>
       </div>
     </div>
+
   </main>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', function() {
+      // Disable body animation
+      document.body.style.animation = 'none';
+      document.body.style.transform = 'none';
+      document.body.style.opacity = '1';
+      document.body.style.filter = 'none';
+      
       const container = document.getElementById('productDetailContainer');
       if (!container || !window.FreshCartDB) return;
 
       const urlParams = new URLSearchParams(window.location.search);
       const productId = urlParams.get('id');
 
-      const product = FreshCartDB.products.find(p => p.id === productId);
+      const product = FreshCartDB.products.find(function(p) { return p.id === productId; });
 
       if (!product) {
         container.innerHTML = `
-          <div class="col-span-full py-20 text-center space-y-6 nixon-card p-12">
-            <h1 class="nixon-heading text-3xl">Provision Not Found</h1>
-            <p class="text-xs font-['Helvetica_Neue'] uppercase tracking-[0.15em] text-[#8A8A8A]">The requested item may have been archived or is out of season.</p>
-            <a href="shop.html" class="inline-block px-8 py-4 bg-black text-white dark:bg-white dark:text-black font-['Helvetica_Neue'] text-xs font-bold tracking-[0.15em] uppercase hover:bg-[#E31837] hover:text-white transition-all">Return to Marketplace →</a>
+          <div class="col-span-full py-20 text-center space-y-6">
+            <div class="text-6xl mb-4">🔍</div>
+            <h1 class="font-['Arial_Black'] text-3xl uppercase">Provision Not Found</h1>
+            <p class="text-sm text-[#8A8A8A] uppercase tracking-[0.15em]">The requested item may have been archived or is out of season.</p>
+            <a href="shop.html" class="inline-block px-8 py-4 bg-[#24302A] text-white dark:bg-white dark:text-[#24302A] text-xs font-bold tracking-[0.15em] uppercase hover:bg-[#6A8071] hover:text-white transition-all">Return to Marketplace →</a>
           </div>
         `;
         return;
       }
 
+      // Update breadcrumb
+      document.getElementById('breadcrumbCategory').textContent = product.category || 'Product';
+      document.getElementById('breadcrumbName').textContent = product.name || 'Details';
+
+      var isInStock = product.stock > 0;
+      var stockStatus = isInStock ? (product.stock < 10 ? 'low-stock' : 'in-stock') : 'out-of-stock';
+      var stockLabel = isInStock ? (product.stock < 10 ? 'Low Stock' : 'In Stock') : 'Out of Stock';
+      
+      var stockDotClass = 'dot ' + stockStatus;
+      var stockTextColor = isInStock ? (product.stock < 10 ? 'text-[#F59E0B]' : 'text-[#22C55E]') : 'text-[#EF4444]';
+
+      var oldPriceHtml = product.oldPrice ? 
+        '<span class="price-old">$' + product.oldPrice.toFixed(2) + '</span>' : '';
+      
+      var savePercent = product.oldPrice ? 
+        '<span class="price-save">Save ' + Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100) + '%</span>' : '';
+
+      // Badge class based on badge text
+      var badgeClass = 'product-badge';
+      if (product.badge && product.badge.toLowerCase().includes('fresh')) badgeClass += ' fresh';
+      else if (product.badge && product.badge.toLowerCase().includes('hot')) badgeClass += ' hot';
+      else if (product.badge && product.badge.toLowerCase().includes('sale')) badgeClass += ' sale';
+
       container.innerHTML = `
-        <!-- Product Image Showcase -->
-        <div class="lg:col-span-7 relative">
-          <div class="relative overflow-hidden aspect-[4/5] nixon-card shadow-2xl">
-            <span class="absolute top-6 left-6 z-10 text-[0.6rem] font-['Helvetica_Neue'] font-bold uppercase tracking-[0.2em] bg-white/90 dark:bg-black/90 backdrop-blur-md px-3.5 py-1.5 border border-[#E5E5E5] dark:border-[#333333] text-[#E31837]">${product.badge || 'Fresh'}</span>
-            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105">
+        <!-- Product Image -->
+        <div class="lg:col-span-7 animate-scale-in delay-1">
+          <div class="product-image-wrap relative aspect-[4/5] shadow-2xl">
+            <span class="${badgeClass}">${product.badge || 'Organic'}</span>
+            <img src="${product.image}" alt="${product.name}" loading="lazy">
           </div>
         </div>
 
-        <!-- Product Information & Actions -->
-        <div class="lg:col-span-5 space-y-8 sticky top-32">
+        <!-- Product Info -->
+        <div class="lg:col-span-5 space-y-8 animate-slide-right delay-2">
+          
+          <!-- Category & Title -->
           <div class="space-y-3">
-            <span class="nixon-subheading text-[#E31837]">Sector / ${product.category}</span>
-            <h1 class="nixon-heading text-4xl sm:text-5xl tracking-tight">${product.name}</h1>
+            <span class="text-xs font-bold tracking-[0.2em] uppercase text-[#6A8071]">${product.category || 'Sector'}</span>
+            <h1 class="font-['Arial_Black'] text-4xl sm:text-5xl tracking-tight">${product.name}</h1>
           </div>
 
-          <div class="flex items-center gap-6 border-y border-[#E5E5E5] dark:border-[#333333] py-6">
-            <span class="font-['Arial_Black'] text-3xl">$${product.price.toFixed(2)}</span>
-            ${product.oldPrice ? `<span class="text-lg font-['Arial_Black'] text-[#8A8A8A] line-through">$${product.oldPrice.toFixed(2)}</span>` : ''}
-            <span class="px-3 py-1 bg-[#E31837]/10 text-[#E31837] font-['Helvetica_Neue'] text-xs uppercase font-bold tracking-[0.15em] border border-[#E31837]/30">In Stock (${product.stock || 24} Units)</span>
+          <!-- Price & Stock -->
+          <div class="flex flex-wrap items-center gap-4 border-y border-[#E5E5E5] dark:border-[#333333] py-6">
+            <div class="price-display">
+              <span class="price-current">$${product.price.toFixed(2)}</span>
+              ${oldPriceHtml}
+              ${savePercent}
+            </div>
+            <div class="stock-indicator ml-auto">
+              <span class="${stockDotClass}"></span>
+              <span class="${stockTextColor}">${stockLabel}</span>
+              <span class="text-slate-400 text-[0.5rem]">(${product.stock || 0} units)</span>
+            </div>
           </div>
 
-          <p class="font-['Helvetica_Neue'] text-sm text-[#666666] dark:text-[#CCCCCC] leading-relaxed">
+          <!-- Description -->
+          <p class="text-sm text-[#666666] dark:text-[#CCCCCC] leading-relaxed">
             ${product.description}
           </p>
 
-          <div class="p-6 nixon-card space-y-2 font-['Helvetica_Neue'] text-xs font-bold uppercase tracking-[0.15em]">
-            <p class="text-[#8A8A8A]">Sourced Origin:</p>
-            <p class="text-[#E31837]">${product.origin || 'Verified Direct Farm Cooperative'}</p>
+          <!-- Origin -->
+          <div class="p-6 border border-[#E5E5E5] dark:border-[#333333] space-y-2">
+            <p class="text-xs font-bold uppercase tracking-[0.15em] text-[#8A8A8A]">🌍 Sourced Origin</p>
+            <p class="font-bold text-[#6A8071] text-sm">${product.origin || 'Verified Direct Farm Cooperative'}</p>
           </div>
 
-          <div class="space-y-4 pt-4">
-            <button onclick="handleAddToCart('${product.id}')" class="nixon-btn">
+          <!-- Quantity & Actions -->
+          <div class="space-y-4">
+            <div class="flex items-center gap-4">
+              <span class="text-xs font-bold uppercase tracking-[0.15em] text-[#8A8A8A]">Quantity</span>
+              <div class="qty-selector">
+                <button id="qtyDecrease" aria-label="Decrease quantity">−</button>
+                <span class="qty-value" id="qtyValue">1</span>
+                <button id="qtyIncrease" aria-label="Increase quantity">+</button>
+              </div>
+            </div>
+
+            <button onclick="handleAddToCart('${product.id}')" class="btn-primary animate-pulse-ring">
               Add to Bag →
             </button>
-            <a href="shop.html" class="block text-center py-4 border border-[#E5E5E5] dark:border-[#333333] font-['Helvetica_Neue'] text-xs font-bold uppercase tracking-[0.15em] hover:border-[#E31837] hover:text-[#E31837] transition-all">
+            <a href="shop.html" class="btn-secondary">
               Continue Shopping
             </a>
           </div>
 
-          <!-- Nutritional & Compliance Specs -->
-          <div class="border-t border-[#E5E5E5] dark:border-[#333333] pt-6 space-y-3 font-['Helvetica_Neue'] text-xs font-bold uppercase tracking-[0.15em] text-[#8A8A8A]">
-            <div class="flex justify-between">
-              <span>Quality Grade:</span>
-              <span class="text-black dark:text-white">Premium Organic A+</span>
-            </div>
-            <div class="flex justify-between">
-              <span>Fulfillment Window:</span>
-              <span class="text-black dark:text-white">15-Min Micro-Hub Dispatch</span>
-            </div>
-            <div class="flex justify-between">
-              <span>Allergen Status:</span>
-              <span class="text-black dark:text-white">Uncontaminated Facility</span>
+          <!-- Specs -->
+          <div class="border-t border-[#E5E5E5] dark:border-[#333333] pt-6">
+            <div class="specs-list">
+              <div class="spec-item">
+                <span class="label">Quality Grade</span>
+                <span class="value">Premium Organic A+</span>
+              </div>
+              <div class="spec-item">
+                <span class="label">Fulfillment</span>
+                <span class="value">15-Min Dispatch</span>
+              </div>
+              <div class="spec-item">
+                <span class="label">Allergen Status</span>
+                <span class="value">Uncontaminated</span>
+              </div>
+              <div class="spec-item">
+                <span class="label">Sustainability</span>
+                <span class="value">100% Carbon Neutral</span>
+              </div>
             </div>
           </div>
+
         </div>
       `;
+
+      // Quantity selector functionality
+      var qtyValue = document.getElementById('qtyValue');
+      var qtyDecrease = document.getElementById('qtyDecrease');
+      var qtyIncrease = document.getElementById('qtyIncrease');
+      var currentQty = 1;
+
+      if (qtyDecrease && qtyIncrease && qtyValue) {
+        qtyDecrease.addEventListener('click', function() {
+          if (currentQty > 1) {
+            currentQty--;
+            qtyValue.textContent = currentQty;
+          }
+        });
+
+        qtyIncrease.addEventListener('click', function() {
+          if (currentQty < 99) {
+            currentQty++;
+            qtyValue.textContent = currentQty;
+          }
+        });
+      }
+
+      // Override add to cart to use quantity
+      window.handleAddToCart = function(productId) {
+        if (window.FreshCartDB) {
+          var qty = parseInt(document.getElementById('qtyValue').textContent) || 1;
+          // Add to cart with quantity
+          for (var i = 0; i < qty; i++) {
+            window.FreshCartDB.addToCart(productId);
+          }
+          if (window.NixonLayout && window.NixonLayout.updateCartBadge) {
+            window.NixonLayout.updateCartBadge();
+          }
+          showToast('✓ Added ' + qty + ' item' + (qty > 1 ? 's' : '') + ' to bag');
+        }
+      };
     });
 
-    window.handleAddToCart = function(productId) {
-      if (window.FreshCartDB) {
-        window.FreshCartDB.addToCart(productId);
-        if (window.NixonLayout && window.NixonLayout.updateCartBadge) {
-          window.NixonLayout.updateCartBadge();
-        }
-        FreshCartUI.showToast('✓ Added to bag');
+    // ============================================
+    // TOAST NOTIFICATION
+    // ============================================
+    function showToast(message) {
+      var container = document.getElementById('toast-container');
+      if (!container) {
+        container = document.createElement('div');
+        container.id = 'toast-container';
+        container.className = 'fixed bottom-8 right-8 z-50 flex flex-col gap-3 pointer-events-none';
+        document.body.appendChild(container);
       }
-    };
+      
+      var toast = document.createElement('div');
+      toast.className = 'market-toast pointer-events-auto transform translate-y-4 opacity-0 transition-all duration-300';
+      toast.textContent = message;
+      container.appendChild(toast);
+      
+      requestAnimationFrame(function() {
+        toast.classList.remove('translate-y-4', 'opacity-0');
+      });
+      
+      setTimeout(function() {
+        toast.classList.add('translate-y-4', 'opacity-0');
+        setTimeout(function() { toast.remove(); }, 400);
+      }, 3000);
+    }
   </script>
+
 </body>
 </html>

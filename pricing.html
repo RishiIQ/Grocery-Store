@@ -1,26 +1,25 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" href="assets/images/grossary-logo.png">
-  <!-- Fast Theme & Direction Init (Prevents Flashing) -->
+  <title>Pricing — FreshCart Botanical Studio</title>
   <script>
-    (function() {
-      const savedTheme = localStorage.getItem('theme');
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
+  (function() {
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
 
-      const savedDir = localStorage.getItem('dir') || 'ltr';
-      document.documentElement.setAttribute('dir', savedDir);
-    })();
-  </script>
-
-  <title>Privacy Policy — FreshCart Botanical Studio</title>
+    const savedDir = localStorage.getItem('dir') || 'ltr';
+    document.documentElement.setAttribute('dir', savedDir);
+  })();
+</script>
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -36,148 +35,848 @@
       }
     }
   </script>
+  
+  <!-- Styles -->
   <link rel="stylesheet" href="css/style.css">
   
-  <!-- Lenis Smooth Slow Scroll Library -->
-  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-
   <style>
-    /* Sage & Earth-Tone Typography & Card UI */
-    .dashboard-heading {
+    /* ============================================
+       SAGE & EARTH-TONE PRICING PAGE
+       ============================================ */
+    
+    .pricing-hero {
+      background: #24302A;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .pricing-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      pointer-events: none;
+    }
+    
+    /* Hero glow orbs */
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      pointer-events: none;
+      will-change: transform, opacity;
+    }
+    
+    @keyframes orbFloatSlow {
+      0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.2; }
+      33% { transform: translate(50px, -30px) scale(1.1); opacity: 0.4; }
+      66% { transform: translate(-30px, 40px) scale(0.9); opacity: 0.3; }
+    }
+    
+    .orb-pricing-1 {
+      width: 600px;
+      height: 600px;
+      background: rgba(106, 128, 113, 0.15);
+      top: -200px;
+      right: -200px;
+      animation: orbFloatSlow 10s ease-in-out infinite;
+    }
+    
+    .orb-pricing-2 {
+      width: 400px;
+      height: 400px;
+      background: rgba(106, 128, 113, 0.1);
+      bottom: -100px;
+      left: -100px;
+      animation: orbFloatSlow 12s ease-in-out infinite reverse;
+    }
+    
+    .pricing-heading {
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: -0.02em;
+      line-height: 0.95;
     }
-    .dashboard-subheading {
+    
+    .pricing-subheading {
       text-transform: uppercase;
       font-size: 0.7rem;
       letter-spacing: 0.2em;
       font-weight: 700;
       color: #6A8071;
     }
-    .market-card {
+    
+    .pricing-body {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: #94A3B8;
+    }
+    
+    /* Pricing Cards */
+    .pricing-card {
       background: #FFFFFF;
       border: 1px solid #E2E8F0;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      padding: 40px 32px;
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(40px) scale(0.98);
       border-radius: 0px;
     }
-    .dark .market-card {
+    
+    .dark .pricing-card {
       background: #18221D;
       border-color: #2D3E35;
     }
-    /* Legal Text Formatting */
-    .legal-text {
-      font-size: 0.95rem;
-      line-height: 1.8;
-      color: #334155;
+    
+    .pricing-card.is-visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
     }
-    .dark .legal-text {
+    
+    .pricing-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: #6A8071;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .pricing-card:hover::before {
+      transform: scaleX(1);
+    }
+    
+    .pricing-card:hover {
+      border-color: #6A8071;
+      transform: translateY(-8px) scale(1.01);
+      box-shadow: 0 20px 60px rgba(106, 128, 113, 0.15);
+    }
+    
+    /* Featured card */
+    .pricing-card.featured {
+      border-color: #6A8071;
+      background: #FFFFFF;
+      transform: translateY(-4px) scale(1.02);
+    }
+    
+    .dark .pricing-card.featured {
+      background: #18221D;
+      border-color: #6A8071;
+    }
+    
+    .pricing-card.featured::before {
+      transform: scaleX(1);
+    }
+    
+    .pricing-card.featured:hover {
+      transform: translateY(-12px) scale(1.03);
+    }
+    
+    /* Featured badge */
+    .featured-badge {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: #6A8071;
+      color: #FFFFFF;
+      font-size: 0.55rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 6px 18px;
+      border-radius: 0px;
+    }
+    
+    /* Price number */
+    .price-number {
+      font-weight: 800;
+      font-size: 3.5rem;
+      color: #0F172A;
+      display: inline-block;
+      transition: color 0.3s ease;
+    }
+    
+    .dark .price-number {
+      color: #F8FAFC;
+    }
+    
+    .pricing-card:hover .price-number {
+      color: #6A8071;
+    }
+    
+    .price-number .currency {
+      font-size: 1.8rem;
+      vertical-align: super;
+      margin-right: 2px;
+    }
+    
+    .price-number .period {
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: #94A3B8;
+      margin-left: 4px;
+    }
+    
+    /* Feature list */
+    .feature-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .feature-list li {
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #475569;
+      padding: 10px 0;
+      border-bottom: 1px solid #E2E8F0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: all 0.3s ease;
+    }
+    
+    .dark .feature-list li {
+      color: #94A3B8;
+      border-bottom-color: #2D3E35;
+    }
+    
+    .pricing-card:hover .feature-list li {
+      padding-left: 4px;
+    }
+    
+    .feature-list li .check {
+      color: #6A8071;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    
+    .feature-list li.disabled {
+      opacity: 0.4;
+    }
+    
+    .feature-list li.disabled .check {
       color: #94A3B8;
     }
-    .legal-list li {
-      margin-bottom: 0.75rem;
+    
+    .sage-btn {
+      display: inline-block;
+      padding: 16px 40px;
+      background: #6A8071;
+      color: #FFFFFF;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      border: none;
+      border-radius: 0px;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      text-align: center;
+      text-decoration: none;
       position: relative;
-      padding-left: 1.5rem;
+      overflow: hidden;
+      width: 100%;
     }
-    .legal-list li::before {
-      content: '■';
-      position: absolute;
-      left: 0;
+    
+    .sage-btn:hover {
+      background: #576B5D;
+      transform: scale(1.02);
+    }
+    
+    .sage-btn-outline {
+      display: inline-block;
+      padding: 15px 38px;
+      background: transparent;
+      color: #0F172A;
+      border: 2px solid #0F172A;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      border-radius: 0px;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      text-align: center;
+      text-decoration: none;
+      width: 100%;
+    }
+    
+    .dark .sage-btn-outline {
+      color: #FFFFFF;
+      border-color: #FFFFFF;
+    }
+    
+    .sage-btn-outline:hover {
+      background: #6A8071;
+      border-color: #6A8071;
+      color: #FFFFFF;
+      transform: scale(1.02);
+    }
+    
+    /* Comparison table */
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    .compare-table th {
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+      padding: 16px;
+      text-align: center;
+      border-bottom: 2px solid #E2E8F0;
+    }
+    
+    .dark .compare-table th {
+      border-bottom-color: #2D3E35;
+    }
+    
+    .compare-table td {
+      padding: 14px 16px;
+      text-align: center;
+      border-bottom: 1px solid #E2E8F0;
+      font-size: 0.8rem;
+    }
+    
+    .dark .compare-table td {
+      border-bottom-color: #2D3E35;
+    }
+    
+    .compare-table tr:hover td {
+      background: rgba(106, 128, 113, 0.05);
+    }
+    
+    .compare-table .feature-name {
+      text-align: left;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: 0.7rem;
+    }
+    
+    .compare-table .check-mark {
       color: #6A8071;
-      font-size: 0.6rem;
-      top: 0.3rem;
+      font-size: 1.2rem;
+    }
+    
+    .compare-table .cross-mark {
+      color: #94A3B8;
+      font-size: 1.2rem;
+    }
+    
+    /* Scroll reveal */
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .reveal-on-scroll.is-revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .reveal-on-scroll.delay-1 { transition-delay: 0.1s; }
+    .reveal-on-scroll.delay-2 { transition-delay: 0.2s; }
+    .reveal-on-scroll.delay-3 { transition-delay: 0.3s; }
+    .reveal-on-scroll.delay-4 { transition-delay: 0.4s; }
+    
+    /* Toggle switch for billing */
+    .toggle-container {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      padding: 8px 20px;
+      border: 1px solid #E2E8F0;
+      background: #FFFFFF;
+      border-radius: 0px;
+    }
+    
+    .dark .toggle-container {
+      background: #18221D;
+      border-color: #2D3E35;
+    }
+    
+    .toggle-switch {
+      position: relative;
+      width: 48px;
+      height: 26px;
+      background: #CBD5E1;
+      border-radius: 0px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    
+    .dark .toggle-switch {
+      background: #2D3E35;
+    }
+    
+    .toggle-switch.active {
+      background: #6A8071;
+    }
+    
+    .toggle-switch .toggle-knob {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 20px;
+      height: 20px;
+      background: #FFFFFF;
+      border-radius: 0px;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    
+    .toggle-switch.active .toggle-knob {
+      transform: translateX(22px);
+    }
+    
+    .toggle-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #94A3B8;
+    }
+    
+    .toggle-label.active {
+      color: #0F172A;
+    }
+    
+    .dark .toggle-label.active {
+      color: #F8FAFC;
+    }
+
+    .market-toast {
+      background: #24302A;
+      color: #FFFFFF;
+      padding: 14px 24px;
+      border-radius: 0px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      border-left: 4px solid #6A8071;
     }
   </style>
 </head>
-<body class="bg-cream-bg dark:bg-[#111814] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-500">
+<body class="bg-cream-bg dark:bg-[#111814] text-slate-900 dark:text-slate-100 antialiased">
 
-  <!-- Shared Layout Scripts (Injects Header & Footer) -->
+  <!-- ============================================ -->
+  <!-- MAIN CONTENT -->
+  <!-- ============================================ -->
+  <main style="padding-top: 70px;">
+
+    <!-- ========================================== -->
+    <!-- PRICING HERO -->
+    <!-- ========================================== -->
+    <section class="pricing-hero min-h-[50vh] flex items-center relative text-white">
+      
+      <!-- Glow Orbs -->
+      <div class="hero-orb orb-pricing-1"></div>
+      <div class="hero-orb orb-pricing-2"></div>
+
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-16">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 border-b border-white/10 pb-8">
+          <div>
+            <p class="pricing-subheading">Investment Plans</p>
+            <h1 class="pricing-heading text-5xl sm:text-6xl lg:text-7xl mt-2">
+              Transparent<br>
+              <span class="text-[#8FA89B]">Pricing</span>
+            </h1>
+          </div>
+          <p class="pricing-body text-slate-300 max-w-xs text-right">
+            Flexible membership tiers for daily organic households and enterprise API networks.
+          </p>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- BILLING TOGGLE -->
+    <!-- ========================================== -->
+    <section class="py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <div class="flex justify-center">
+        <div class="toggle-container reveal-on-scroll">
+          <span class="toggle-label active" id="monthlyLabel">Monthly</span>
+          <div class="toggle-switch" id="billingToggle">
+            <div class="toggle-knob"></div>
+          </div>
+          <span class="toggle-label" id="yearlyLabel">Yearly</span>
+          <span class="text-[0.5rem] font-bold tracking-[0.1em] uppercase text-[#6A8071] ml-2">Save 20%</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- PRICING GRID -->
+    <!-- ========================================== -->
+    <section class="py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="pricingGrid">
+        
+        <!-- Tier 1: Free -->
+        <div class="pricing-card" data-tier="free" data-monthly="0" data-yearly="0">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="text-xs font-bold tracking-[0.2em] uppercase text-[#6A8071]">Household</p>
+              <span class="inline-block mt-1 text-[0.5rem] font-bold tracking-[0.1em] uppercase px-3 py-1 border border-slate-200 dark:border-[#2D3E35]">Consumer</span>
+            </div>
+          </div>
+          
+          <h3 class="pricing-heading text-2xl mt-4">Free Club</h3>
+          <p class="text-xs font-bold tracking-[0.15em] uppercase text-slate-500 mt-1">Essential Daily Provisions</p>
+          
+          <div class="py-4 my-4 border-t border-b border-slate-200 dark:border-[#2D3E35]">
+            <span class="price-number">
+              <span class="currency">$</span>0
+              <span class="period">/ forever</span>
+            </span>
+          </div>
+          
+          <ul class="feature-list">
+            <li><span class="check">✓</span> 15-Min Express Dispatch</li>
+            <li><span class="check">✓</span> 100% Organic Produce Access</li>
+            <li><span class="check">✓</span> Standard Support</li>
+            <li class="disabled"><span class="check">✗</span> Priority Dispatch</li>
+          </ul>
+          
+          <div class="mt-8">
+            <a href="shop.html" class="sage-btn-outline">Get Started</a>
+          </div>
+        </div>
+
+        <!-- Tier 2: Pro (Featured) -->
+        <div class="pricing-card featured" data-tier="pro" data-monthly="14.99" data-yearly="11.99">
+          <div class="featured-badge">Most Popular</div>
+          
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="text-xs font-bold tracking-[0.2em] uppercase text-[#6A8071]">Pro Reserve</p>
+              <span class="inline-block mt-1 text-[0.5rem] font-bold tracking-[0.1em] uppercase px-3 py-1 bg-[#6A8071] text-white">VIP</span>
+            </div>
+          </div>
+          
+          <h3 class="pricing-heading text-2xl mt-4">Organic Plus</h3>
+          <p class="text-xs font-bold tracking-[0.15em] uppercase text-slate-500 mt-1">Private Farm Allocations</p>
+          
+          <div class="py-4 my-4 border-t border-b border-slate-200 dark:border-[#2D3E35]">
+            <span class="price-number" id="proPrice">
+              <span class="currency">$</span>14.99
+              <span class="period">/ month</span>
+            </span>
+          </div>
+          
+          <ul class="feature-list">
+            <li><span class="check">✓</span> Free Cold-Chain Shipping</li>
+            <li><span class="check">✓</span> Priority Micro-Hub Dispatch</li>
+            <li><span class="check">✓</span> Exclusive Reserve Access</li>
+            <li><span class="check">✓</span> 24/7 Priority Support</li>
+          </ul>
+          
+          <div class="mt-8">
+            <a href="shop.html" class="sage-btn">Join Pro Reserve</a>
+          </div>
+        </div>
+
+        <!-- Tier 3: Enterprise -->
+        <div class="pricing-card" data-tier="enterprise" data-monthly="299" data-yearly="239">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="text-xs font-bold tracking-[0.2em] uppercase text-[#6A8071]">Enterprise</p>
+              <span class="inline-block mt-1 text-[0.5rem] font-bold tracking-[0.1em] uppercase px-3 py-1 border border-slate-200 dark:border-[#2D3E35]">B2B SaaS</span>
+            </div>
+          </div>
+          
+          <h3 class="pricing-heading text-2xl mt-4">Telemetry API</h3>
+          <p class="text-xs font-bold tracking-[0.15em] uppercase text-slate-500 mt-1">Full Infrastructure Scale</p>
+          
+          <div class="py-4 my-4 border-t border-b border-slate-200 dark:border-[#2D3E35]">
+            <span class="price-number" id="enterprisePrice">
+              <span class="currency">$</span>299
+              <span class="period">/ month</span>
+            </span>
+          </div>
+          
+          <ul class="feature-list">
+            <li><span class="check">✓</span> 99.99% Uptime SLA</li>
+            <li><span class="check">✓</span> Unlimited IoT Webhooks</li>
+            <li><span class="check">✓</span> Dedicated Solutions Architect</li>
+            <li><span class="check">✓</span> SOC2 Type II Compliance</li>
+          </ul>
+          
+          <div class="mt-8">
+            <a href="contact.html" class="sage-btn-outline">Contact Sales</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- COMPARISON TABLE -->
+    <!-- ========================================== -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-slate-200 dark:border-[#2D3E35]">
+      
+      <div class="text-center mb-12 reveal-on-scroll">
+        <p class="pricing-subheading">Feature Comparison</p>
+        <h2 class="pricing-heading text-3xl sm:text-4xl mt-2">Compare Plans</h2>
+        <div class="w-12 h-0.5 bg-[#6A8071] mx-auto mt-4"></div>
+      </div>
+
+      <div class="overflow-x-auto reveal-on-scroll delay-2">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th style="text-align: left; min-width: 140px;">Features</th>
+              <th>Free</th>
+              <th class="text-[#6A8071]">Pro</th>
+              <th>Enterprise</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="feature-name">15-Min Dispatch</td>
+              <td><span class="check-mark">✓</span></td>
+              <td><span class="check-mark">✓</span></td>
+              <td><span class="check-mark">✓</span></td>
+            </tr>
+            <tr>
+              <td class="feature-name">Organic Produce</td>
+              <td><span class="check-mark">✓</span></td>
+              <td><span class="check-mark">✓</span></td>
+              <td><span class="check-mark">✓</span></td>
+            </tr>
+            <tr>
+              <td class="feature-name">Cold-Chain Shipping</td>
+              <td><span class="cross-mark">✗</span></td>
+              <td><span class="check-mark">✓</span></td>
+              <td><span class="check-mark">✓</span></td>
+            </tr>
+            <tr>
+              <td class="feature-name">Priority Dispatch</td>
+              <td><span class="cross-mark">✗</span></td>
+              <td><span class="check-mark">✓</span></td>
+              <td><span class="check-mark">✓</span></td>
+            </tr>
+            <tr>
+              <td class="feature-name">API Access</td>
+              <td><span class="cross-mark">✗</span></td>
+              <td><span class="cross-mark">✗</span></td>
+              <td><span class="check-mark">✓</span></td>
+            </tr>
+            <tr>
+              <td class="feature-name">Dedicated Support</td>
+              <td><span class="cross-mark">✗</span></td>
+              <td><span class="check-mark">✓</span></td>
+              <td><span class="check-mark">✓</span></td>
+            </tr>
+            <tr>
+              <td class="feature-name">SLA Guarantee</td>
+              <td><span class="cross-mark">✗</span></td>
+              <td><span class="cross-mark">✗</span></td>
+              <td><span class="check-mark">✓</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- FAQ SECTION -->
+    <!-- ========================================== -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto border-t border-slate-200 dark:border-[#2D3E35]">
+      
+      <div class="text-center mb-12 reveal-on-scroll">
+        <p class="pricing-subheading">Questions?</p>
+        <h2 class="pricing-heading text-3xl sm:text-4xl mt-2">Frequently Asked</h2>
+        <div class="w-12 h-0.5 bg-[#6A8071] mx-auto mt-4"></div>
+      </div>
+
+      <div class="space-y-4">
+        <div class="border border-slate-200 dark:border-[#2D3E35] p-6 reveal-on-scroll delay-1 bg-white dark:bg-[#18221D]">
+          <h4 class="font-extrabold text-sm uppercase">Can I switch plans later?</h4>
+          <p class="pricing-body text-sm mt-2">Yes, you can upgrade or downgrade your plan at any time. Changes take effect at the start of your next billing cycle.</p>
+        </div>
+        <div class="border border-slate-200 dark:border-[#2D3E35] p-6 reveal-on-scroll delay-2 bg-white dark:bg-[#18221D]">
+          <h4 class="font-extrabold text-sm uppercase">What payment methods do you accept?</h4>
+          <p class="pricing-body text-sm mt-2">We accept all major credit cards, PayPal, and bank transfers for enterprise plans. All transactions are 256-bit TLS encrypted.</p>
+        </div>
+        <div class="border border-slate-200 dark:border-[#2D3E35] p-6 reveal-on-scroll delay-3 bg-white dark:bg-[#18221D]">
+          <h4 class="font-extrabold text-sm uppercase">Is there a free trial for Pro?</h4>
+          <p class="pricing-body text-sm mt-2">Yes, we offer a 14-day free trial for Pro Reserve. No credit card required. Cancel anytime during the trial period.</p>
+        </div>
+        <div class="border border-slate-200 dark:border-[#2D3E35] p-6 reveal-on-scroll delay-4 bg-white dark:bg-[#18221D]">
+          <h4 class="font-extrabold text-sm uppercase">What happens if I exceed my plan limits?</h4>
+          <p class="pricing-body text-sm mt-2">We'll notify you when you're approaching your limits. You can upgrade your plan or purchase additional capacity as needed.</p>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- CTA BANNER -->
+    <!-- ========================================== -->
+    <section class="cta-section py-20 px-4 sm:px-6 lg:px-8 text-white">
+      <div class="max-w-4xl mx-auto text-center reveal-on-scroll">
+        <p class="pricing-subheading">Ready to Start?</p>
+        <h2 class="pricing-heading text-orange-400 text-3xl sm:text-4xl lg:text-5xl mt-2">
+          Secure Your <span class="text-[#8FA89B]">Harvest Plan</span>
+        </h2>
+        <p class="pricing-body text-slate-500 mt-4 max-w-xl mx-auto">
+          Choose your tier above or connect with our enterprise architecture team for customized logistics deployment.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+          <a href="#pricingGrid" class="sage-btn max-w-xs mx-auto sm:mx-0">
+            View Tiers →
+          </a>
+          <a href="contact.html" class="sage-btn-outline">
+            Contact Sales
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================ -->
+  <!-- SCRIPTS -->
+  <!-- ============================================ -->
   <script src="js/db.js"></script>
   <script src="js/layout.js"></script>
 
-  <!-- Privacy Policy Main Section -->
-  <main class="pt-40 pb-36 px-4 sm:px-6 lg:px-12 max-w-4xl mx-auto space-y-16">
-    
-    <!-- Page Header -->
-    <div class="border-b border-slate-200 dark:border-[#2D3E35] pb-8">
-      <p class="dashboard-subheading">( Legal Ledger )</p>
-      <h1 class="dashboard-heading text-4xl sm:text-6xl mt-2">Privacy Policy.</h1>
-      <div class="mt-6 flex items-center gap-4">
-        <span class="px-3 py-1.5 border border-slate-200 dark:border-[#2D3E35] text-[0.6rem] font-bold uppercase tracking-[0.2em] text-slate-500">
-          Effective Date: August 20, 2026
-        </span>
-        <span class="px-3 py-1.5 bg-[#6A8071] text-white text-[0.6rem] font-bold uppercase tracking-[0.2em]">
-          Version 4.2
-        </span>
-      </div>
-    </div>
-
-    <!-- Content Blocks -->
-    <div class="space-y-12">
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggle = document.getElementById('billingToggle');
+      const monthlyLabel = document.getElementById('monthlyLabel');
+      const yearlyLabel = document.getElementById('yearlyLabel');
+      const proPrice = document.getElementById('proPrice');
+      const enterprisePrice = document.getElementById('enterprisePrice');
       
-      <!-- Section 01 -->
-      <section class="space-y-4">
-        <h2 class="dashboard-heading text-2xl">01. Information We Collect</h2>
-        <p class="legal-text">
-          FreshCart operates on a telemetry-based fulfillment architecture. To provide seamless, 15-minute grocery delivery, we require specific data nodes from our clients. This includes, but is not limited to:
-        </p>
-        <ul class="legal-text legal-list">
-          <li><strong>Identity Data:</strong> Full name, verified billing addresses, and cryptographic user IDs.</li>
-          <li><strong>Telemetry Data:</strong> Real-time geolocation processing (only active during active delivery dispatches).</li>
-          <li><strong>Transaction Protocol:</strong> TLS 256-bit encrypted payment tokens. We do not store raw credit card digits on our native servers.</li>
-        </ul>
-      </section>
+      let isYearly = false;
 
-      <!-- Divider -->
-      <hr class="border-slate-200 dark:border-[#2D3E35]">
+      const proMonthly = 14.99;
+      const proYearly = 11.99;
+      const enterpriseMonthly = 299;
+      const enterpriseYearly = 239;
 
-      <!-- Section 02 -->
-      <section class="space-y-4">
-        <h2 class="dashboard-heading text-2xl">02. Utilization of Data</h2>
-        <p class="legal-text">
-          Data allocated to the FreshCart network is strictly utilized for fulfillment optimization. We map logistics routes, predict inventory degradation, and secure user accounts against brute-force anomalies. We explicitly guarantee that your dietary preferences and purchasing history are <strong class="text-slate-900 dark:text-white">never</strong> sold to third-party advertising brokers.
-        </p>
-      </section>
+      toggle.addEventListener('click', function() {
+        isYearly = !isYearly;
+        this.classList.toggle('active');
+        monthlyLabel.classList.toggle('active');
+        yearlyLabel.classList.toggle('active');
 
-      <!-- Section 03 -->
-      <section class="space-y-4">
-        <h2 class="dashboard-heading text-2xl">03. Security Architecture</h2>
-        <div class="market-card p-6 mt-4">
-          <p class="text-sm uppercase font-bold tracking-widest text-[#6A8071] mb-2">Cryptographic Storage</p>
-          <p class="legal-text">
-            All user databases operate behind an air-gapped security model with AES-256 encryption at rest. Node transit is secured via strict TLS 1.3 protocols. Our zero-emission courier fleet utilizes rotating cryptographic keys to verify delivery without exposing your permanent residential data to temporary logistical staff.
-          </p>
-        </div>
-      </section>
+        const proAmount = isYearly ? proYearly : proMonthly;
+        proPrice.innerHTML = `
+          <span class="currency">$</span>${proAmount.toFixed(2)}
+          <span class="period">/ ${isYearly ? 'year' : 'month'}</span>
+        `;
 
-      <!-- Divider -->
-      <hr class="border-slate-200 dark:border-[#2D3E35]">
+        const enterpriseAmount = isYearly ? enterpriseYearly : enterpriseMonthly;
+        enterprisePrice.innerHTML = `
+          <span class="currency">$</span>${enterpriseAmount}
+          <span class="period">/ ${isYearly ? 'year' : 'month'}</span>
+        `;
 
-      <!-- Section 04 -->
-      <section class="space-y-4">
-        <h2 class="dashboard-heading text-2xl">04. Client Rights & Deletion</h2>
-        <p class="legal-text">
-          Under the Global Data Protection Protocol (GDPP-2025), you retain absolute sovereignty over your profile data. You may execute a complete data purge directly from your secure Customer Dashboard. 
-        </p>
-        <p class="legal-text mt-4">
-          Initiating a "Ghost Protocol" via your dashboard will instantly scrub all relational databases of your telemetry, purchase history, and personal identifiers within 72 hours.
-        </p>
-      </section>
+        document.querySelectorAll('.pricing-card').forEach(card => {
+          const period = card.querySelector('.period');
+          if (period && card.dataset.tier !== 'free') {
+            period.textContent = `/ ${isYearly ? 'year' : 'month'}`;
+          }
+        });
 
-      <!-- Contact block -->
-      <section class="pt-8">
-        <div class="p-8 border-l-4 border-[#6A8071] bg-white dark:bg-[#18221D]">
-          <p class="dashboard-subheading mb-2">Direct Inquiry</p>
-          <p class="legal-text font-bold text-slate-900 dark:text-white">
-            For compliance overrides or data inquiries, contact our legal node at:
-          </p>
-          <a href="mailto:privacy@freshcart.pro" class="inline-block mt-2 font-extrabold text-lg hover:text-[#6A8071] transition-colors">privacy@freshcart.pro</a>
-        </div>
-      </section>
+        showToast(isYearly ? '💳 Switched to yearly billing (Save 20%)' : '💳 Switched to monthly billing');
+      });
 
-    </div>
-  </main>
+      const pricingCards = document.querySelectorAll('.pricing-card');
+      
+      const cardObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const index = Array.from(pricingCards).indexOf(entry.target);
+            const delay = Math.min(index * 150, 400);
+            
+            setTimeout(() => {
+              entry.target.classList.add('is-visible');
+            }, delay);
+            
+            cardObserver.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+      });
 
- 
+      pricingCards.forEach(card => cardObserver.observe(card));
+
+      const revealElements = document.querySelectorAll('.reveal-on-scroll');
+      
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+          }
+        });
+      }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+      });
+
+      revealElements.forEach(el => revealObserver.observe(el));
+
+      function showToast(message) {
+        let container = document.getElementById('toast-container');
+        if (!container) {
+          container = document.createElement('div');
+          container.id = 'toast-container';
+          container.className = 'fixed bottom-8 right-8 z-50 flex flex-col gap-3 pointer-events-none';
+          document.body.appendChild(container);
+        }
+        
+        const toast = document.createElement('div');
+        toast.className = 'market-toast pointer-events-auto transform translate-y-4 opacity-0 transition-all duration-300';
+        toast.textContent = message;
+        container.appendChild(toast);
+        
+        requestAnimationFrame(() => {
+          toast.classList.remove('translate-y-4', 'opacity-0');
+        });
+        
+        setTimeout(() => {
+          toast.classList.add('translate-y-4', 'opacity-0');
+          setTimeout(() => toast.remove(), 400);
+        }, 2500);
+      }
+
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+    });
+  </script>
+
 </body>
 </html>

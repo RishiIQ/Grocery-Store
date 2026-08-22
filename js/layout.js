@@ -1,33 +1,26 @@
-// js/layout.js - Nixon Style Header & Footer with Full Functionality
+// js/layout.js - Sage & Earth-Tone Layout & Navigation Engine
 document.addEventListener('DOMContentLoaded', () => {
-  // Get current active filename to highlight current page
   const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-
-  // ============================================
-  // CHECK USER AUTH STATUS FOR DYNAMIC NAV
-  // ============================================
   const userSession = JSON.parse(localStorage.getItem('freshcart_user'));
   const isLoggedIn = userSession && userSession.email;
 
   // ============================================
-  // NIXON-STYLE HEADER
+  // SAGE-ACCENT MARKETPLACE HEADER
   // ============================================
   const headerHTML = `
-    <header class="nixon-header" id="nixonHeader">
+    <header class="nixon-header" id="nixonHeader" role="banner">
       <div class="nixon-header-inner">
         
-        <!-- Logo with Reliable SVG Grocery Basket Icon -->
-        <a href="index.html" class="nixon-logo flex items-center gap-2.5">
-          <div class="w-8 h-8 bg-[#6A8071]/10 border border-[#6A8071]/30 flex items-center justify-center text-[#6A8071] rounded-sm">
-            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
-            </svg>
+        <!-- Brand Logo -->
+        <a href="index.html" class="nixon-logo" aria-label="FreshCart Home">
+          <div class="w-10">
+            <img src="assets/images/grossary-logo.png" alt="FreshCart Logo">
           </div>
-          <span class="nixon-logo-text">Fresh<span style="color: #6A8071;">Cart</span></span>
+          <span class="nixon-logo-text">Fresh<span class="nixon-red">Cart</span></span>
         </a>
 
         <!-- Navigation -->
-        <nav class="nixon-nav">
+        <nav class="nixon-nav" id="nixonNav" role="navigation" aria-label="Main Navigation">
           <a href="index.html" class="nixon-nav-link ${currentPath === 'index.html' || currentPath === '' ? 'active' : ''}">Home</a>
           <a href="index-saas.html" class="nixon-nav-link ${currentPath === 'index-saas.html' ? 'active' : ''}">SaaS</a>
           <a href="shop.html" class="nixon-nav-link ${currentPath === 'shop.html' ? 'active' : ''}">Shop</a>
@@ -36,13 +29,11 @@ document.addEventListener('DOMContentLoaded', () => {
           <a href="blog.html" class="nixon-nav-link ${currentPath === 'blog.html' || currentPath === 'blog-detail.html' ? 'active' : ''}">Journal</a>
           <a href="pricing.html" class="nixon-nav-link ${currentPath === 'pricing.html' ? 'active' : ''}">Pricing</a>
           <a href="contact.html" class="nixon-nav-link ${currentPath === 'contact.html' ? 'active' : ''}">Contact</a>
-          ${isLoggedIn ? `<a href="account.html" class="nixon-nav-link text-[#6A8071] ${currentPath === 'account.html' || currentPath === 'dashboard.html' ? 'active' : ''}">Dashboard</a>` : ''}
         </nav>
 
         <!-- Right Actions -->
         <div class="nixon-actions">
-          <!-- Theme Toggle -->
-          <button id="nixonThemeToggle" class="nixon-action-btn" title="Toggle Theme">
+          <button id="nixonThemeToggle" class="nixon-action-btn" title="Toggle Theme" aria-label="Toggle theme">
             <svg class="nixon-icon-dark" width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
             </svg>
@@ -51,8 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </svg>
           </button>
 
-          <!-- RTL Toggle -->
-          <button id="nixonRTLToggle" class="nixon-action-btn" title="Toggle Text Direction">
+          <button id="nixonRTLToggle" class="nixon-action-btn" title="Toggle Text Direction" aria-label="Toggle text direction">
             <svg class="nixon-icon-ltr" width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 6h12M6 12h8M6 18h10"/>
             </svg>
@@ -61,22 +51,34 @@ document.addEventListener('DOMContentLoaded', () => {
             </svg>
           </button>
 
-          <!-- Cart -->
-          <a href="cart.html" class="nixon-cart-btn ${currentPath === 'cart.html' ? 'active' : ''}">
+          <a href="cart.html" class="nixon-cart-btn ${currentPath === 'cart.html' ? 'active' : ''}" aria-label="Shopping cart">
             <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
             </svg>
-            <span class="nixon-cart-badge" id="nixonCartBadge" style="background: #6A8071;">0</span>
+            <span class="nixon-cart-badge" id="nixonCartBadge">0</span>
           </a>
 
-          <!-- Auth -->
           <div id="nixonAuthContainer">
-            <a href="login.html" class="nixon-auth-btn">Sign In</a>
+            ${isLoggedIn ? `
+              <div class="auth-dropdown">
+                <button class="nixon-auth-btn dashboard-btn" id="authUserBtn">
+                  ${userSession.name || 'Account'}
+                 
+                </button>
+                <div class="auth-dropdown-menu">
+                  <a href="account.html">Dashboard</a>
+                  <button id="signOutBtn" class="auth-dropdown-signout">Sign Out</button>
+                </div>
+              </div>
+            ` : `
+              <a href="login.html" class="nixon-auth-btn">Sign In</a>
+            `}
+            
           </div>
         </div>
 
         <!-- Mobile Hamburger -->
-        <button class="nixon-hamburger" id="nixonHamburger" aria-label="Toggle menu">
+        <button class="nixon-hamburger" id="nixonHamburger" aria-label="Toggle menu" aria-expanded="false">
           <span></span>
           <span></span>
           <span></span>
@@ -87,11 +89,26 @@ document.addEventListener('DOMContentLoaded', () => {
   `;
 
   // ============================================
-  // NIXON-STYLE FOOTER
+  // SAGE-TONE FOOTER WITH BRAND LOGO & NAME
   // ============================================
   const footerHTML = `
-    <footer class="nixon-footer">
+    <footer class="nixon-footer" role="contentinfo">
       <div class="nixon-footer-inner">
+        
+        <!-- Brand Column -->
+        <div class="nixon-footer-brand">
+          <a href="index.html" class="brand-logo">
+            <div class="logo-icon">
+              <img src="assets/images/grossary-logo.png" alt="FreshCart Logo">
+            </div>
+            <span class="brand-name">Fresh<span class="highlight">Cart</span></span>
+          </a>
+          <p class="brand-description">
+            Certified organic provisions and zero-fluctuation cold-chain telemetry delivered in 15 minutes.
+          </p>
+        </div>
+
+        <!-- Links Grid -->
         <div class="nixon-footer-grid">
           <div>
             <h4>Company</h4>
@@ -126,18 +143,119 @@ document.addEventListener('DOMContentLoaded', () => {
             </ul>
           </div>
         </div>
+
+        <!-- Footer Bottom -->
         <div class="nixon-footer-bottom">
-          <p>© 2026 FreshCart[cite: 3]. All rights reserved.</p>
+          <p>© 2026 FreshCart Marketplace. All rights reserved.</p>
         </div>
+
       </div>
     </footer>
   `;
 
-  // ============================================
-  // INJECT HEADER & FOOTER
-  // ============================================
   document.body.insertAdjacentHTML('afterbegin', headerHTML);
   document.body.insertAdjacentHTML('beforeend', footerHTML);
+
+  // ============================================
+  // SIGN OUT FUNCTIONALITY
+  // ============================================
+  function handleSignOut() {
+    localStorage.removeItem('freshcart_user');
+    // Clear any other user data if needed
+    window.location.reload();
+  }
+
+  // Add sign out event listeners
+  function initSignOutButtons() {
+    // Sign out button in desktop dropdown
+    const signOutBtn = document.getElementById('signOutBtn');
+    if (signOutBtn) {
+      signOutBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        handleSignOut();
+      });
+    }
+
+    // Sign out button in mobile nav
+    const navSignOutBtn = document.getElementById('navSignOutBtn');
+    if (navSignOutBtn) {
+      navSignOutBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        handleSignOut();
+      });
+    }
+  }
+
+  // ============================================
+  // ENHANCED MOBILE MENU
+  // ============================================
+  function initMobileMenu() {
+    const hamburger = document.getElementById('nixonHamburger');
+    const nav = document.getElementById('nixonNav');
+    const body = document.body;
+    
+    if (!hamburger || !nav) return;
+
+    function toggleMenu(forceState) {
+      const isOpen = forceState !== undefined ? forceState : !nav.classList.contains('open');
+      
+      if (isOpen) {
+        nav.classList.add('open');
+        hamburger.classList.add('active');
+        hamburger.setAttribute('aria-expanded', 'true');
+        body.style.overflow = 'hidden';
+      } else {
+        nav.classList.remove('open');
+        hamburger.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
+        body.style.overflow = '';
+      }
+    }
+
+    // Hamburger click
+    hamburger.addEventListener('click', function(e) {
+      e.stopPropagation();
+      toggleMenu();
+    });
+
+    // Close on link click (except sign out)
+    nav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', function() {
+        if (window.innerWidth <= 1024) {
+          toggleMenu(false);
+        }
+      });
+    });
+
+    // Close on outside click
+    document.addEventListener('click', function(e) {
+      if (nav.classList.contains('open')) {
+        const isClickInside = nav.contains(e.target) || hamburger.contains(e.target);
+        if (!isClickInside) {
+          toggleMenu(false);
+        }
+      }
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && nav.classList.contains('open')) {
+        toggleMenu(false);
+      }
+    });
+
+    // Handle resize
+    let resizeTimeout;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        if (window.innerWidth > 1024 && nav.classList.contains('open')) {
+          toggleMenu(false);
+        }
+      }, 250);
+    });
+  }
+  initMobileMenu();
 
   // ============================================
   // THEME TOGGLE
@@ -147,22 +265,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!themeBtn) return;
 
     const applyTheme = (theme) => {
-      if (theme === 'dark') {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
+      document.documentElement.classList.toggle('dark', theme === 'dark');
       localStorage.setItem('theme', theme);
       updateThemeIcons(theme);
     };
 
     const updateThemeIcons = (theme) => {
       const isDark = document.documentElement.classList.contains('dark');
-      const darkIcons = document.querySelectorAll('.nixon-icon-dark');
-      const lightIcons = document.querySelectorAll('.nixon-icon-light');
-      
-      darkIcons.forEach(icon => { icon.style.display = isDark ? 'none' : 'block'; });
-      lightIcons.forEach(icon => { icon.style.display = isDark ? 'block' : 'none'; });
+      document.querySelectorAll('.nixon-icon-dark').forEach(icon => icon.style.display = isDark ? 'none' : 'block');
+      document.querySelectorAll('.nixon-icon-light').forEach(icon => icon.style.display = isDark ? 'block' : 'none');
     };
 
     const currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
@@ -223,46 +334,20 @@ document.addEventListener('DOMContentLoaded', () => {
   initRTLToggle();
 
   // ============================================
-  // MOBILE HAMBURGER MENU
-  // ============================================
-  function initMobileMenu() {
-    const hamburger = document.getElementById('nixonHamburger');
-    const nav = document.querySelector('.nixon-nav');
-    if (!hamburger || !nav) return;
-
-    hamburger.addEventListener('click', function() {
-      this.classList.toggle('active');
-      nav.classList.toggle('open');
-    });
-
-    nav.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', function() {
-        hamburger.classList.remove('active');
-        nav.classList.remove('open');
-      });
-    });
-  }
-  initMobileMenu();
-
-  // ============================================
   // CART BADGE
   // ============================================
   function updateCartBadge() {
     const badge = document.getElementById('nixonCartBadge');
     if (!badge) return;
 
-    if (window.FreshCartDB) {
-      const cart = FreshCartDB.getCart();
-      const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+    try {
+      const cart = window.FreshCartDB ? FreshCartDB.getCart() : JSON.parse(localStorage.getItem('freshcart_cart')) || [];
+      const totalQty = cart.reduce((sum, item) => sum + (item.qty || 0), 0);
       badge.textContent = totalQty;
-    } else {
-      try {
-        const cart = JSON.parse(localStorage.getItem('freshcart_cart')) || [];
-        const totalQty = cart.reduce((sum, item) => sum + (item.qty || 0), 0);
-        badge.textContent = totalQty;
-      } catch (e) {
-        badge.textContent = '0';
-      }
+      badge.style.display = totalQty > 0 ? 'flex' : 'none';
+    } catch (e) {
+      badge.textContent = '0';
+      badge.style.display = 'none';
     }
   }
 
@@ -276,61 +361,62 @@ document.addEventListener('DOMContentLoaded', () => {
     const container = document.getElementById('nixonAuthContainer');
     if (!container) return;
 
-    if (userSession && userSession.email) {
-      container.innerHTML = `
-        <div class="nixon-auth-dropdown">
-          <button class="nixon-auth-btn" id="nixonUserBtn" style="background: #6A8071; color: #FFFFFF;">
-            ${userSession.name || 'Account'}
-          </button>
-          <div class="nixon-auth-dropdown-menu">
-            <a href="account.html">Dashboard</a>
-            <a href="#" id="nixonLogoutBtn">Sign Out</a>
-          </div>
-        </div>
-      `;
-
-      const logoutBtn = document.getElementById('nixonLogoutBtn');
-      if (logoutBtn) {
-        logoutBtn.addEventListener('click', function(e) {
-          e.preventDefault();
-          localStorage.removeItem('freshcart_user');
-          window.location.reload();
-        });
-      }
-    }
+    // Initialize sign out buttons after DOM update
+    setTimeout(initSignOutButtons, 100);
   }
   initAuthState();
 
+  // ============================================
+  // PAGE TRANSITIONS (Skip on shop)
+  // ============================================
+  const isShopPage = currentPath === 'shop.html' || currentPath === 'shop';
+  
+  if (!isShopPage) {
+    let isTransitioning = false;
+
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('a');
+      
+      if (isTransitioning) {
+        e.preventDefault();
+        return;
+      }
+      
+      if (
+        link &&
+        link.href &&
+        link.hostname === window.location.hostname &&
+        !link.getAttribute('target') &&
+        !link.getAttribute('download') &&
+        link.getAttribute('href') !== '#' &&
+        !link.getAttribute('href').startsWith('javascript') &&
+        !link.getAttribute('href').startsWith('#')
+      ) {
+        const currentUrl = window.location.pathname;
+        const targetUrl = new URL(link.href).pathname;
+        
+        if (currentUrl === targetUrl) return;
+        
+        e.preventDefault();
+        isTransitioning = true;
+        
+        const targetHref = link.href;
+        document.body.classList.add('cinematic-exit');
+
+        setTimeout(() => {
+          window.location.href = targetHref;
+        }, 750);
+      }
+    });
+
+    window.addEventListener('pageshow', () => {
+      isTransitioning = false;
+    });
+  }
+
   window.NixonLayout = {
-    updateCartBadge: updateCartBadge,
+    updateCartBadge,
     refreshAuth: initAuthState,
     refreshTheme: initThemeToggle
   };
-});
-
-// ============================================
-// SPIN & ZOOM TRANSITION HANDLER
-// ============================================
-document.addEventListener('click', (e) => {
-  const link = e.target.closest('a');
-  
-  if (
-    link &&
-    link.href &&
-    link.hostname === window.location.hostname &&
-    !link.getAttribute('target') &&
-    !link.getAttribute('download') &&
-    link.getAttribute('href') !== '#' &&
-    !link.getAttribute('href').startsWith('javascript') &&
-    !link.getAttribute('href').startsWith('#')
-  ) {
-    e.preventDefault();
-    const targetUrl = link.href;
-
-    document.body.classList.add('cinematic-exit');
-
-    setTimeout(() => {
-      window.location.href = targetUrl;
-    }, 750);
-  }
 });

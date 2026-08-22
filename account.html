@@ -37,7 +37,9 @@
   })();
 </script>
   <style>
-    /* Sage & Earth-Tone Aesthetic Overrides */
+    /* ============================================
+       SAGE & EARTH-TONE AESTHETIC
+       ============================================ */
     .dashboard-heading {
       font-weight: 800;
       text-transform: uppercase;
@@ -118,6 +120,219 @@
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
       border-left: 4px solid #6A8071;
     }
+
+    /* ============================================
+       MODERN SEAMLESS NAVIGATION ANIMATIONS
+       ============================================ */
+    
+    /* Tab Container */
+    .dash-tabs-container {
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Individual Tab Buttons */
+    .dash-tab {
+      position: relative;
+      cursor: pointer;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 700;
+      padding: 14px 28px;
+      border: 1px solid #E2E8F0;
+      background: transparent;
+      color: #64748B;
+      overflow: hidden;
+    }
+    .dark .dash-tab {
+      border-color: #2D3E35;
+      color: #94A3B8;
+    }
+
+    /* Tab Hover Effect */
+    .dash-tab::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(106, 128, 113, 0.08), transparent);
+      transition: left 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .dash-tab:hover::before {
+      left: 100%;
+    }
+    .dash-tab:hover {
+      border-color: #6A8071;
+      color: #6A8071;
+      transform: translateY(-2px);
+    }
+    .dark .dash-tab:hover {
+      border-color: #6A8071;
+      color: #6A8071;
+    }
+
+    /* Active Tab State */
+    .dash-tab.active {
+      background: #24302A;
+      color: #FFFFFF;
+      border-color: #24302A;
+      transform: translateY(0);
+      box-shadow: 0 4px 20px rgba(36, 48, 42, 0.2);
+    }
+    .dark .dash-tab.active {
+      background: #6A8071;
+      color: #FFFFFF;
+      border-color: #6A8071;
+      box-shadow: 0 4px 20px rgba(106, 128, 113, 0.3);
+    }
+
+    /* Tab Sliding Indicator */
+    .tab-indicator {
+      position: absolute;
+      bottom: 0;
+      height: 3px;
+      background: #6A8071;
+      border-radius: 0;
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      width: 0;
+    }
+    .dark .tab-indicator {
+      background: #6A8071;
+    }
+
+    /* Content Container */
+    .dash-content-wrapper {
+      position: relative;
+      overflow: hidden;
+      min-height: 400px;
+    }
+
+    /* Individual Content Panels */
+    .dash-content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      opacity: 0;
+      transform: translateY(30px) scale(0.98);
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+      visibility: hidden;
+      padding: 32px 0;
+    }
+    .dash-content.active {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: all;
+      visibility: visible;
+      position: relative;
+    }
+
+    /* Exit Animation */
+    .dash-content.exit {
+      opacity: 0;
+      transform: translateY(-20px) scale(0.96);
+      pointer-events: none;
+      visibility: hidden;
+      position: absolute;
+    }
+
+    /* Staggered Child Animations */
+    .dash-content.active .stagger-item {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: staggerFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .dash-content.active .stagger-item:nth-child(1) { animation-delay: 0.05s; }
+    .dash-content.active .stagger-item:nth-child(2) { animation-delay: 0.10s; }
+    .dash-content.active .stagger-item:nth-child(3) { animation-delay: 0.15s; }
+    .dash-content.active .stagger-item:nth-child(4) { animation-delay: 0.20s; }
+    .dash-content.active .stagger-item:nth-child(5) { animation-delay: 0.25s; }
+    .dash-content.active .stagger-item:nth-child(6) { animation-delay: 0.30s; }
+
+    @keyframes staggerFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Content Transition Overlay */
+    .content-transition-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 10;
+      background: linear-gradient(180deg, rgba(106, 128, 113, 0.02) 0%, transparent 50%, rgba(106, 128, 113, 0.02) 100%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .content-transition-overlay.active {
+      opacity: 1;
+    }
+
+    /* Counter Animation */
+    .counter-value {
+      display: inline-block;
+      transition: all 0.3s ease;
+    }
+
+    /* Glow Pulse for Active Tab */
+    @keyframes tabGlowPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(106, 128, 113, 0.2); }
+      50% { box-shadow: 0 0 20px 8px rgba(106, 128, 113, 0.1); }
+    }
+    .dash-tab.active {
+      animation: tabGlowPulse 2s ease-in-out infinite;
+    }
+
+    /* Smooth Scrollbar for Content */
+    .dash-content-wrapper::-webkit-scrollbar {
+      width: 4px;
+    }
+    .dash-content-wrapper::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .dash-content-wrapper::-webkit-scrollbar-thumb {
+      background: #6A8071;
+      border-radius: 2px;
+    }
+
+    /* Additional Tab Styles */
+    .dash-tabs-scroll {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      gap: 8px;
+      padding: 4px 0 12px 0;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .dash-tabs-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    @media (max-width: 640px) {
+      .dash-tab {
+        padding: 10px 16px;
+        font-size: 0.55rem;
+        white-space: nowrap;
+      }
+      .dash-content {
+        padding: 20px 0;
+      }
+    }
   </style>
 </head>
 <body class="bg-cream-bg dark:bg-[#111814] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-500 min-h-screen flex flex-col justify-between selection:bg-[#6A8071] selection:text-white">
@@ -162,7 +377,7 @@
   <main class="py-24 px-4 sm:px-6 lg:px-12 max-w-7xl mx-auto w-full space-y-12 flex-1" style="padding-top: 110px;">
     
     <!-- Welcome Header & Quick Stats -->
-    <div class="flex flex-col md:flex-row justify-between items-start md:items-end border-b border-slate-200 dark:border-[#2D3E35] pb-8 gap-6 pt-8">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-end border-b border-slate-200 dark:border-[#2D3E35] pb-8 gap-6 pt-8 stagger-item">
       <div>
         <p class="dashboard-subheading">( Secure Client Portal )</p>
         <h1 id="welcomeUserTitle" class="dashboard-heading text-4xl sm:text-6xl mt-2">Dashboard.</h1>
@@ -172,109 +387,127 @@
       </div>
     </div>
 
-    <!-- Dashboard Navigation Tabs -->
-    <div class="flex flex-wrap gap-3 text-xs font-bold uppercase tracking-[0.15em] border-b border-slate-200 dark:border-[#2D3E35] pb-6">
-      <button onclick="switchTab('catalog')" id="tab-catalog" class="dash-tab px-6 py-3.5 bg-[#24302A] text-white dark:bg-white dark:text-[#24302A] transition-all shadow-md">Market Catalog</button>
-      <button onclick="switchTab('tracking')" id="tab-tracking" class="dash-tab px-6 py-3.5 market-card hover:border-[#6A8071] transition-all">Live Telemetry Tracking</button>
-      <button onclick="switchTab('reorders')" id="tab-reorders" class="dash-tab px-6 py-3.5 market-card hover:border-[#6A8071] transition-all">Saved Reorders</button>
-      <button onclick="switchTab('history')" id="tab-history" class="dash-tab px-6 py-3.5 market-card hover:border-[#6A8071] transition-all">Order History & Bills</button>
+    <!-- Dashboard Navigation Tabs with Modern Animation -->
+    <div class="dash-tabs-container relative">
+      <div class="dash-tabs-scroll">
+        <button onclick="switchTab('catalog', event)" id="tab-catalog" class="dash-tab active">Market Catalog</button>
+        <button onclick="switchTab('tracking', event)" id="tab-tracking" class="dash-tab">Live Telemetry Tracking</button>
+        <button onclick="switchTab('reorders', event)" id="tab-reorders" class="dash-tab">Saved Reorders</button>
+        <button onclick="switchTab('history', event)" id="tab-history" class="dash-tab">Order History &amp; Bills</button>
+      </div>
+      <div class="tab-indicator" id="tabIndicator"></div>
     </div>
 
-    <!-- TAB CONTENT 1: MARKET CATALOG & ORDER PLACEMENT -->
-    <div id="content-catalog" class="dash-content space-y-8">
-      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <div>
-          <p class="dashboard-subheading">Instant Fulfillment</p>
-          <h2 class="dashboard-heading text-2xl sm:text-3xl mt-1">Browse & Order Provisions</h2>
-        </div>
-        <div class="flex items-center gap-3 text-xs uppercase font-bold tracking-wider">
-          <span class="text-slate-500">Dispatch Window:</span>
-          <select id="fulfillmentMethod" class="px-4 py-2.5 bg-transparent border border-slate-200 dark:border-[#2D3E35] font-mono text-xs uppercase outline-none focus:border-[#6A8071]">
-            <option value="delivery" class="bg-white dark:bg-[#18221D]">Home Delivery (15-Min Express)</option>
-            <option value="pickup" class="bg-white dark:bg-[#18221D]">Hub Store Pickup</option>
-          </select>
-        </div>
-      </div>
-      <div id="dashboardCatalogGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
-    </div>
+    <!-- Content Wrapper with Transitions -->
+    <div class="dash-content-wrapper relative" id="contentWrapper">
+      
+      <!-- Transition Overlay -->
+      <div class="content-transition-overlay" id="transitionOverlay"></div>
 
-    <!-- TAB CONTENT 2: LIVE ORDER TRACKING -->
-    <div id="content-tracking" class="dash-content hidden space-y-8">
-      <div class="market-card p-8 lg:p-12 space-y-8">
-        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-200 dark:border-[#2D3E35] pb-6 gap-4">
-          <div>
-            <span class="text-xs font-mono text-[#6A8071] uppercase tracking-widest">Order ID: #FC-8942-EU</span>
-            <h2 class="dashboard-heading text-2xl mt-1">Real-Time Telemetry Tracking</h2>
-          </div>
-          <span class="px-4 py-1.5 bg-[#6A8071]/10 text-[#6A8071] text-xs uppercase font-bold tracking-[0.15em] border border-[#6A8071]/30 animate-pulse">Status: Out for Delivery</span>
-        </div>
-
-        <!-- Progress Timeline Steps -->
-        <div class="grid grid-cols-1 sm:grid-cols-4 gap-6 text-xs uppercase tracking-[0.15em]">
-          <div class="p-6 bg-[#6A8071] text-white font-bold space-y-2 shadow-lg">
-            <span>01 / 04</span>
-            <p class="text-sm font-extrabold">Order Confirmed</p>
-            <p class="text-[10px] opacity-80">Verified & paid</p>
-          </div>
-          <div class="p-6 bg-[#6A8071] text-white font-bold space-y-2 shadow-lg">
-            <span>02 / 04</span>
-            <p class="text-sm font-extrabold">Hub Packing</p>
-            <p class="text-[10px] opacity-80">Thermal sealed</p>
-          </div>
-          <div class="p-6 bg-[#6A8071] text-white font-bold space-y-2 shadow-lg animate-pulse">
-            <span>03 / 04</span>
-            <p class="text-sm font-extrabold">Out for Delivery</p>
-            <p class="text-[10px] opacity-80">GPS Electric Van #4</p>
-          </div>
-          <div class="p-6 market-card text-slate-400 space-y-2">
-            <span>04 / 04</span>
-            <p class="text-sm font-extrabold">Delivered</p>
-            <p class="text-[10px] opacity-50">Pending arrival</p>
-          </div>
-        </div>
-
-        <div class="p-6 market-card flex flex-col sm:flex-row items-center justify-between text-xs font-bold uppercase tracking-[0.15em] gap-4">
-          <span>Estimated Arrival: <strong class="text-[#6A8071]">6 Minutes</strong></span>
-          <span>Courier: Marc V. (Zero-Emission Fleet)</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- TAB CONTENT 3: SAVED WEEKLY REORDERS -->
-    <div id="content-reorders" class="dash-content hidden space-y-8">
-      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <div>
-          <p class="dashboard-subheading">Custom Allocations</p>
-          <h2 class="dashboard-heading text-2xl sm:text-3xl mt-1">Saved Weekly Shopping List</h2>
-        </div>
-        <button onclick="reorderSavedList()" class="sage-btn">Add All to Bag →</button>
-      </div>
-      <div id="savedReordersGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
-    </div>
-
-    <!-- TAB CONTENT 4: PAST ORDER HISTORY & ITEMIZED BILLS -->
-    <div id="content-history" class="dash-content hidden space-y-8">
-      <div>
-        <p class="dashboard-subheading">Archive Ledger</p>
-        <h2 class="dashboard-heading text-2xl sm:text-3xl mt-1">Past Orders & Itemized Invoices</h2>
-      </div>
-      <div class="space-y-6">
-        <div class="market-card p-8 space-y-6">
-          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-200 dark:border-[#2D3E35] pb-4 gap-4">
+      <!-- TAB CONTENT 1: MARKET CATALOG & ORDER PLACEMENT -->
+      <div id="content-catalog" class="dash-content active">
+        <div class="space-y-8">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 stagger-item">
             <div>
-              <span class="text-xs font-mono text-slate-500 uppercase">Order #FC-7102-FR • August 14, 2026</span>
-              <h3 class="dashboard-heading text-xl mt-1">Home Delivery (Organic Produce & Bakery)</h3>
+              <p class="dashboard-subheading">Instant Fulfillment</p>
+              <h2 class="dashboard-heading text-2xl sm:text-3xl mt-1">Browse &amp; Order Provisions</h2>
             </div>
-            <div class="text-right">
-              <span class="font-extrabold text-xl">$24.38</span>
-              <span class="block text-[10px] font-bold uppercase tracking-[0.15em] text-[#6A8071]">Fulfilled</span>
+            <div class="flex items-center gap-3 text-xs uppercase font-bold tracking-wider">
+              <span class="text-slate-500">Dispatch Window:</span>
+              <select id="fulfillmentMethod" class="px-4 py-2.5 bg-transparent border border-slate-200 dark:border-[#2D3E35] font-mono text-xs uppercase outline-none focus:border-[#6A8071]">
+                <option value="delivery" class="bg-white dark:bg-[#18221D]">Home Delivery (15-Min Express)</option>
+                <option value="pickup" class="bg-white dark:bg-[#18221D]">Hub Store Pickup</option>
+              </select>
             </div>
           </div>
-          <div class="space-y-2 text-xs font-bold uppercase tracking-[0.1em] text-slate-500">
-            <div class="flex justify-between"><span>Organic Hass Avocados (x2)</span><span class="text-slate-900 dark:text-white">$11.98</span></div>
-            <div class="flex justify-between"><span>Artisanal Sourdough Loaf (x1)</span><span class="text-slate-900 dark:text-white">$4.50</span></div>
-            <div class="flex justify-between"><span>Cold-Chain Delivery Fee</span><span class="text-slate-900 dark:text-white">$4.99</span></div>
-            <div class="flex justify-between pt-3 border-t border-slate-200 dark:border-[#2D3E35] text-slate-900 dark:text-white font-extrabold text-sm"><span>Total Paid (TLS Secure)</span><span class="text-[#6A8071]">$24.38</span></div>
+          <div id="dashboardCatalogGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 stagger-item"></div>
+        </div>
+      </div>
+
+      <!-- TAB CONTENT 2: LIVE ORDER TRACKING -->
+      <div id="content-tracking" class="dash-content">
+        <div class="space-y-8">
+          <div class="market-card p-8 lg:p-12 space-y-8 stagger-item">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-200 dark:border-[#2D3E35] pb-6 gap-4">
+              <div>
+                <span class="text-xs font-mono text-[#6A8071] uppercase tracking-widest">Order ID: #FC-8942-EU</span>
+                <h2 class="dashboard-heading text-2xl mt-1">Real-Time Telemetry Tracking</h2>
+              </div>
+              <span class="px-4 py-1.5 bg-[#6A8071]/10 text-[#6A8071] text-xs uppercase font-bold tracking-[0.15em] border border-[#6A8071]/30 animate-pulse">Status: Out for Delivery</span>
+            </div>
+
+            <!-- Progress Timeline Steps -->
+            <div class="grid grid-cols-1 sm:grid-cols-4 gap-6 text-xs uppercase tracking-[0.15em] stagger-item">
+              <div class="p-6 bg-[#6A8071] text-white font-bold space-y-2 shadow-lg">
+                <span>01 / 04</span>
+                <p class="text-sm font-extrabold">Order Confirmed</p>
+                <p class="text-[10px] opacity-80">Verified &amp; paid</p>
+              </div>
+              <div class="p-6 bg-[#6A8071] text-white font-bold space-y-2 shadow-lg">
+                <span>02 / 04</span>
+                <p class="text-sm font-extrabold">Hub Packing</p>
+                <p class="text-[10px] opacity-80">Thermal sealed</p>
+              </div>
+              <div class="p-6 bg-[#6A8071] text-white font-bold space-y-2 shadow-lg animate-pulse">
+                <span>03 / 04</span>
+                <p class="text-sm font-extrabold">Out for Delivery</p>
+                <p class="text-[10px] opacity-80">GPS Electric Van #4</p>
+              </div>
+              <div class="p-6 market-card text-slate-400 space-y-2">
+                <span>04 / 04</span>
+                <p class="text-sm font-extrabold">Delivered</p>
+                <p class="text-[10px] opacity-50">Pending arrival</p>
+              </div>
+            </div>
+
+            <div class="p-6 market-card flex flex-col sm:flex-row items-center justify-between text-xs font-bold uppercase tracking-[0.15em] gap-4 stagger-item">
+              <span>Estimated Arrival: <strong class="text-[#6A8071]">6 Minutes</strong></span>
+              <span>Courier: Marc V. (Zero-Emission Fleet)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB CONTENT 3: SAVED WEEKLY REORDERS -->
+      <div id="content-reorders" class="dash-content">
+        <div class="space-y-8">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 stagger-item">
+            <div>
+              <p class="dashboard-subheading">Custom Allocations</p>
+              <h2 class="dashboard-heading text-2xl sm:text-3xl mt-1">Saved Weekly Shopping List</h2>
+            </div>
+            <button onclick="reorderSavedList()" class="sage-btn">Add All to Bag →</button>
+          </div>
+          <div id="savedReordersGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6 stagger-item"></div>
+        </div>
+      </div>
+
+      <!-- TAB CONTENT 4: PAST ORDER HISTORY & ITEMIZED BILLS -->
+      <div id="content-history" class="dash-content">
+        <div class="space-y-8">
+          <div class="stagger-item">
+            <p class="dashboard-subheading">Archive Ledger</p>
+            <h2 class="dashboard-heading text-2xl sm:text-3xl mt-1">Past Orders &amp; Itemized Invoices</h2>
+          </div>
+          <div class="space-y-6 stagger-item">
+            <div class="market-card p-8 space-y-6">
+              <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-200 dark:border-[#2D3E35] pb-4 gap-4">
+                <div>
+                  <span class="text-xs font-mono text-slate-500 uppercase">Order #FC-7102-FR • August 14, 2026</span>
+                  <h3 class="dashboard-heading text-xl mt-1">Home Delivery (Organic Produce &amp; Bakery)</h3>
+                </div>
+                <div class="text-right">
+                  <span class="font-extrabold text-xl">$24.38</span>
+                  <span class="block text-[10px] font-bold uppercase tracking-[0.15em] text-[#6A8071]">Fulfilled</span>
+                </div>
+              </div>
+              <div class="space-y-2 text-xs font-bold uppercase tracking-[0.1em] text-slate-500">
+                <div class="flex justify-between"><span>Organic Hass Avocados (x2)</span><span class="text-slate-900 dark:text-white">$11.98</span></div>
+                <div class="flex justify-between"><span>Artisanal Sourdough Loaf (x1)</span><span class="text-slate-900 dark:text-white">$4.50</span></div>
+                <div class="flex justify-between"><span>Cold-Chain Delivery Fee</span><span class="text-slate-900 dark:text-white">$4.99</span></div>
+                <div class="flex justify-between pt-3 border-t border-slate-200 dark:border-[#2D3E35] text-slate-900 dark:text-white font-extrabold text-sm"><span>Total Paid (TLS Secure)</span><span class="text-[#6A8071]">$24.38</span></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -300,10 +533,10 @@
       // Render Catalog in Dashboard
       const dashGrid = document.getElementById('dashboardCatalogGrid');
       if (dashGrid && window.FreshCartDB) {
-        dashGrid.innerHTML = FreshCartDB.products.map(p => `
-          <div class="market-card p-6 flex flex-col justify-between space-y-4">
+        dashGrid.innerHTML = FreshCartDB.products.map((p, i) => `
+          <div class="market-card p-6 flex flex-col justify-between space-y-4 stagger-item" style="animation-delay: ${0.05 + (i * 0.04)}s">
             <div class="aspect-[4/3] overflow-hidden border border-slate-200 dark:border-[#2D3E35]">
-              <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover">
+              <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
             </div>
             <div class="space-y-1">
               <span class="text-[0.55rem] font-bold uppercase tracking-[0.15em] text-[#6A8071]">${p.badge || 'Organic'}</span>
@@ -319,8 +552,8 @@
       const reordersGrid = document.getElementById('savedReordersGrid');
       if (reordersGrid && window.FreshCartDB) {
         const savedItems = FreshCartDB.products.slice(0, 2);
-        reordersGrid.innerHTML = savedItems.map(p => `
-          <div class="market-card p-6 flex items-center justify-between gap-4">
+        reordersGrid.innerHTML = savedItems.map((p, i) => `
+          <div class="market-card p-6 flex items-center justify-between gap-4 stagger-item" style="animation-delay: ${0.05 + (i * 0.06)}s">
             <div class="flex items-center gap-4">
               <img src="${p.image}" alt="${p.name}" class="w-16 h-16 object-cover border border-slate-200 dark:border-[#2D3E35]">
               <div>
@@ -332,6 +565,9 @@
           </div>
         `).join('');
       }
+
+      // Initialize Tab Indicator
+      updateTabIndicator('catalog');
 
       // Theme Toggle Handler
       document.getElementById('themeToggle').addEventListener('click', function() {
@@ -349,18 +585,100 @@
       });
     });
 
-    window.switchTab = (tabName) => {
-      document.querySelectorAll('.dash-tab').forEach(btn => {
-        btn.className = "dash-tab px-6 py-3.5 market-card hover:border-[#6A8071] transition-all";
-      });
-      document.getElementById(`tab-${tabName}`).className = "dash-tab px-6 py-3.5 bg-[#24302A] text-white dark:bg-white dark:text-[#24302A] transition-all shadow-md";
+    // ============================================
+    // MODERN SEAMLESS TAB SWITCHING
+    // ============================================
+    let isTransitioning = false;
 
-      document.querySelectorAll('.dash-content').forEach(content => {
-        content.classList.add('hidden');
+    window.switchTab = (tabName, event) => {
+      if (isTransitioning) return;
+      
+      const currentActive = document.querySelector('.dash-content.active');
+      const targetContent = document.getElementById(`content-${tabName}`);
+      const overlay = document.getElementById('transitionOverlay');
+      
+      if (!targetContent || currentActive === targetContent) return;
+      
+      isTransitioning = true;
+
+      // Update Tab Styles
+      document.querySelectorAll('.dash-tab').forEach(btn => {
+        btn.classList.remove('active');
       });
-      document.getElementById(`content-${tabName}`).classList.remove('hidden');
+      const activeTab = document.getElementById(`tab-${tabName}`);
+      if (activeTab) activeTab.classList.add('active');
+
+      // Update Indicator
+      updateTabIndicator(tabName);
+
+      // Show Overlay
+      if (overlay) overlay.classList.add('active');
+
+      // Exit Current Content
+      if (currentActive) {
+        currentActive.classList.remove('active');
+        currentActive.classList.add('exit');
+      }
+
+      // After exit animation, show new content
+      setTimeout(() => {
+        // Remove exit class from previous
+        if (currentActive) {
+          currentActive.classList.remove('exit');
+        }
+
+        // Show new content
+        targetContent.classList.add('active');
+
+        // Hide overlay after entrance
+        setTimeout(() => {
+          if (overlay) overlay.classList.remove('active');
+          isTransitioning = false;
+        }, 400);
+
+        // Scroll to top of content
+        const wrapper = document.getElementById('contentWrapper');
+        if (wrapper) {
+          wrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 400);
     };
 
+    // ============================================
+    // TAB INDICATOR UPDATE
+    // ============================================
+    function updateTabIndicator(tabName) {
+      const activeTab = document.getElementById(`tab-${tabName}`);
+      const indicator = document.getElementById('tabIndicator');
+      
+      if (activeTab && indicator) {
+        const tabRect = activeTab.getBoundingClientRect();
+        const containerRect = activeTab.parentElement.getBoundingClientRect();
+        
+        // Get the scroll offset of the tabs container
+        const scrollLeft = activeTab.parentElement.scrollLeft || 0;
+        
+        indicator.style.width = `${tabRect.width}px`;
+        indicator.style.transform = `translateX(${tabRect.left - containerRect.left + scrollLeft}px)`;
+      }
+    }
+
+    // Update indicator on resize
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        const activeTab = document.querySelector('.dash-tab.active');
+        if (activeTab) {
+          const tabId = activeTab.id.replace('tab-', '');
+          updateTabIndicator(tabId);
+        }
+      }, 200);
+    });
+
+    // ============================================
+    // REORDER FUNCTION
+    // ============================================
     window.reorderSavedList = () => {
       if (window.FreshCartDB) {
         FreshCartDB.addToCart('prod-1');
@@ -369,11 +687,17 @@
       }
     };
 
+    // ============================================
+    // LOGOUT
+    // ============================================
     window.logoutCustomer = () => {
       localStorage.removeItem('freshcart_user');
       window.location.href = 'index.html';
     };
 
+    // ============================================
+    // TOAST NOTIFICATION
+    // ============================================
     function showToast(message) {
       let container = document.getElementById('toast-container');
       if (!container) {

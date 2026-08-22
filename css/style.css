@@ -1,6 +1,27 @@
 /* ============================================
-   NIXON EXACT HEADER & FOOTER STYLES
+   COMPLETE NAVIGATION & LAYOUT FIXES
    ============================================ */
+
+/* ----- RESET & BASE ----- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}
 
 /* ----- HEADER ----- */
 .nixon-header {
@@ -8,7 +29,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1000;
+  z-index: 9999;
   background: rgba(255, 255, 255, 0.98);
   border-bottom: 1px solid #E5E5E5;
   backdrop-filter: blur(10px);
@@ -27,12 +48,13 @@
 .nixon-header-inner {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 20px;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   position: relative;
+  height: 100%;
 }
 
 /* Logo */
@@ -41,6 +63,23 @@
   align-items: center;
   text-decoration: none;
   flex-shrink: 0;
+  gap: 10px;
+}
+
+.nixon-logo .w-10 {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.nixon-logo .w-10 img {
+  width: 130%;
+  height: 130%;
+  object-fit: contain;
 }
 
 .nixon-logo-text {
@@ -50,6 +89,7 @@
   letter-spacing: -0.02em;
   color: #000000;
   transition: color 0.3s ease;
+  white-space: nowrap;
 }
 
 .dark .nixon-logo-text {
@@ -57,27 +97,28 @@
 }
 
 .nixon-red {
-  color: #E31837;
+  color: #6A8071;
 }
 
-/* Navigation */
+/* Navigation - Desktop */
 .nixon-nav {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 20px;
 }
 
 .nixon-nav-link {
   font-family: 'Helvetica Neue', Arial, sans-serif;
   text-transform: uppercase;
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   font-weight: 700;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.12em;
   color: #000000;
   text-decoration: none;
-  padding: 8px 0;
+  padding: 6px 0;
   position: relative;
   transition: color 0.2s ease;
+  white-space: nowrap;
 }
 
 .dark .nixon-nav-link {
@@ -91,7 +132,7 @@
   left: 0;
   width: 0;
   height: 2px;
-  background: #E31837;
+  background: #6A8071;
   transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -102,14 +143,14 @@
 
 .nixon-nav-link:hover,
 .nixon-nav-link.active {
-  color: #E31837;
+  color: #6A8071;
 }
 
 /* Right Actions */
 .nixon-actions {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   flex-shrink: 0;
 }
 
@@ -125,6 +166,7 @@
   justify-content: center;
   color: #000000;
   transition: all 0.2s ease;
+  flex-shrink: 0;
 }
 
 .dark .nixon-action-btn {
@@ -133,8 +175,8 @@
 }
 
 .nixon-action-btn:hover {
-  border-color: #E31837;
-  color: #E31837;
+  border-color: #6A8071;
+  color: #6A8071;
 }
 
 .nixon-icon-light {
@@ -158,6 +200,7 @@
   transition: color 0.2s ease;
   display: flex;
   align-items: center;
+  flex-shrink: 0;
 }
 
 .dark .nixon-cart-btn {
@@ -165,16 +208,16 @@
 }
 
 .nixon-cart-btn:hover {
-  color: #E31837;
+  color: #6A8071;
 }
 
 .nixon-cart-badge {
   position: absolute;
   top: -2px;
   right: -2px;
-  background: #E31837;
+  background: #6A8071;
   color: #FFFFFF;
-  font-size: 0.55rem;
+  font-size: 0.5rem;
   font-weight: 700;
   min-width: 18px;
   height: 18px;
@@ -189,17 +232,18 @@
 .nixon-auth-btn {
   font-family: 'Helvetica Neue', Arial, sans-serif;
   text-transform: uppercase;
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   color: #000000;
   text-decoration: none;
-  padding: 8px 16px;
+  padding: 8px 14px;
   border: 1px solid #E5E5E5;
   border-radius: 4px;
   transition: all 0.2s ease;
   background: transparent;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 .dark .nixon-auth-btn {
@@ -208,64 +252,21 @@
 }
 
 .nixon-auth-btn:hover {
-  border-color: #E31837;
-  color: #E31837;
+  border-color: #6A8071;
+  color: #6A8071;
 }
 
-/* Auth Dropdown */
-.nixon-auth-dropdown {
-  position: relative;
-}
-
-.nixon-auth-dropdown-menu {
-  display: none;
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background: #FFFFFF;
-  border: 1px solid #E5E5E5;
-  min-width: 160px;
-  padding: 8px 0;
-  margin-top: 4px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
-}
-
-.dark .nixon-auth-dropdown-menu {
-  background: #1A1A1A;
-  border-color: #333333;
-}
-
-.nixon-auth-dropdown:hover .nixon-auth-dropdown-menu {
-  display: block;
-}
-
-.nixon-auth-dropdown-menu a {
-  display: block;
-  padding: 8px 20px;
-  font-family: 'Helvetica Neue', Arial, sans-serif;
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: #000000;
-  text-decoration: none;
-  transition: all 0.2s ease;
-}
-
-.dark .nixon-auth-dropdown-menu a {
+.nixon-auth-btn.dashboard-btn {
+  background: #6A8071;
   color: #FFFFFF;
+  border-color: #6A8071;
 }
 
-.nixon-auth-dropdown-menu a:hover {
-  background: #F5F5F5;
-  color: #E31837;
+.nixon-auth-btn.dashboard-btn:hover {
+  background: #576B5D;
 }
 
-.dark .nixon-auth-dropdown-menu a:hover {
-  background: #2A2A2A;
-}
-
-/* Hamburger */
+/* Hamburger - Mobile */
 .nixon-hamburger {
   display: none;
   flex-direction: column;
@@ -275,14 +276,16 @@
   cursor: pointer;
   padding: 8px;
   flex-shrink: 0;
+  margin-left: 4px;
 }
 
 .nixon-hamburger span {
   display: block;
-  width: 22px;
-  height: 2px;
+  width: 24px;
+  height: 2.5px;
   background: #000000;
   transition: all 0.3s ease;
+  border-radius: 2px;
 }
 
 .dark .nixon-hamburger span {
@@ -290,7 +293,7 @@
 }
 
 .nixon-hamburger.active span:nth-child(1) {
-  transform: rotate(45deg) translate(4px, 4px);
+  transform: rotate(45deg) translate(5px, 5px);
 }
 
 .nixon-hamburger.active span:nth-child(2) {
@@ -298,499 +301,330 @@
 }
 
 .nixon-hamburger.active span:nth-child(3) {
-  transform: rotate(-45deg) translate(4px, -4px);
-}
-
-/* ----- FOOTER ----- */
-.nixon-footer {
-  background: #000000;
-  color: #FFFFFF;
-  padding: 60px 40px 40px;
-  border-top: 1px solid #222222;
-  margin-top: 60px;
-}
-
-.nixon-footer-inner {
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-.nixon-footer-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 40px;
-}
-
-.nixon-footer h4 {
-  font-family: 'Helvetica Neue', Arial, sans-serif;
-  text-transform: uppercase;
-  font-size: 0.6rem;
-  letter-spacing: 0.2em;
-  color: #FFFFFF;
-  font-weight: 700;
-  margin-bottom: 16px;
-}
-
-.nixon-footer ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.nixon-footer ul li {
-  margin-bottom: 8px;
-}
-
-.nixon-footer a {
-  color: #8A8A8A;
-  text-decoration: none;
-  font-family: 'Helvetica Neue', Arial, sans-serif;
-  text-transform: uppercase;
-  font-size: 0.6rem;
-  letter-spacing: 0.1em;
-  transition: color 0.2s ease;
-}
-
-.nixon-footer a:hover {
-  color: #FFFFFF;
-}
-
-.nixon-footer-bottom {
-  border-top: 1px solid #222222;
-  margin-top: 40px;
-  padding-top: 32px;
-  text-align: center;
-}
-
-.nixon-footer-bottom p {
-  color: #8A8A8A;
-  font-family: 'Helvetica Neue', Arial, sans-serif;
-  text-transform: uppercase;
-  font-size: 0.55rem;
-  letter-spacing: 0.15em;
+  transform: rotate(-45deg) translate(5px, -5px);
 }
 
 /* ============================================
-   DARK MODE FIXES FOR ALL CARDS
+   RESPONSIVE BREAKPOINTS
    ============================================ */
 
-/* Fix for stats cards */
-.stats-card {
-  background: #FFFFFF;
-  border: 1px solid #E5E5E5;
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.dark .stats-card {
-  background: #1A1A1A;
-  border-color: #333333;
-}
-
-.stats-card .stat-number {
-  color: #E31837;
-}
-
-.stats-card .text-slate-900 {
-  color: #000000;
-}
-
-.dark .stats-card .text-slate-900 {
-  color: #FFFFFF;
-}
-
-/* Fix for pillar cards */
-.pillar-card-3d .card-inner {
-  background: #FFFFFF;
-  border: 1px solid #E5E5E5;
-}
-
-.dark .pillar-card-3d .card-inner {
-  background: #1A1A1A;
-  border-color: #333333;
-}
-
-.pillar-card-3d .card-inner .nixon-body {
-  color: #666666;
-}
-
-.dark .pillar-card-3d .card-inner .nixon-body {
-  color: #8A8A8A;
-}
-
-.pillar-card-3d .card-inner h3 {
-  color: #000000;
-}
-
-.dark .pillar-card-3d .card-inner h3 {
-  color: #FFFFFF;
-}
-
-/* Fix for timeline cards */
-.timeline-card {
-  background: #FFFFFF;
-  border: 1px solid #E5E5E5;
-}
-
-.dark .timeline-card {
-  background: #1A1A1A;
-  border-color: #333333;
-}
-
-.timeline-card h3 {
-  color: #000000;
-}
-
-.dark .timeline-card h3 {
-  color: #FFFFFF;
-}
-
-.timeline-card .nixon-body {
-  color: #666666;
-}
-
-.dark .timeline-card .nixon-body {
-  color: #8A8A8A;
-}
-
-/* Fix for voxelo cards */
-.voxelo-card {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(15, 23, 42, 0.08);
-}
-
-.dark .voxelo-card {
-  background: rgba(13, 15, 23, 0.75);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-/* Fix for editorial border */
-.editorial-border {
-  border-color: rgba(15, 23, 42, 0.1);
-}
-
-.dark .editorial-border {
-  border-color: rgba(255, 255, 255, 0.08);
-}
-
-/* Fix for text colors */
-.text-slate-600 {
-  color: #475569;
-}
-
-.dark .text-slate-600 {
-  color: #94A3B8;
-}
-
-.text-slate-500 {
-  color: #64748B;
-}
-
-.dark .text-slate-500 {
-  color: #94A3B8;
-}
-
-.text-slate-900 {
-  color: #0F172A;
-}
-
-.dark .text-slate-900 {
-  color: #F1F5F9;
-}
-
-.text-slate-400 {
-  color: #94A3B8;
-}
-
-.dark .text-slate-400 {
-  color: #64748B;
-}
-
-/* Fix for border colors in dark mode */
-.border-slate-200 {
-  border-color: #E2E8F0;
-}
-
-.dark .border-slate-200 {
-  border-color: #334155;
-}
-
-.border-slate-300 {
-  border-color: #CBD5E1;
-}
-
-.dark .border-slate-300 {
-  border-color: #475569;
-}
-
-/* Fix for background colors */
-.bg-slate-50 {
-  background-color: #F8FAFC;
-}
-
-.dark .bg-slate-50 {
-  background-color: #0F172A;
-}
-
-.bg-white {
-  background-color: #FFFFFF;
-}
-
-.dark .bg-white {
-  background-color: #1E293B;
-}
-
-.bg-slate-100 {
-  background-color: #F1F5F9;
-}
-
-.dark .bg-slate-100 {
-  background-color: #1E293B;
-}
-
-/* Fix for card hover states in dark mode */
-.pillar-card-3d:hover .card-inner {
-  border-color: #E31837;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-}
-
-.timeline-card:hover {
-  border-color: #E31837;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-}
-
-.stats-card:hover {
-  border-color: #E31837;
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
-}
-
-/* Fix for CTA section in dark mode */
-.bg-black {
-  background-color: #000000;
-}
-
-.dark .bg-black {
-  background-color: #000000;
-}
-
-.border-y.border-\[E5E5E5\] {
-  border-color: #E5E5E5;
-}
-
-.dark .border-y.border-\[E5E5E5\] {
-  border-color: #222222;
-}
-
-/* Fix for section dividers */
-.border-t {
-  border-top-color: #E5E5E5;
-}
-
-.dark .border-t {
-  border-top-color: #222222;
-}
-
-/* Fix for section backgrounds */
-.bg-\[\#F5F5F5\] {
-  background-color: #F5F5F5;
-}
-
-.dark .bg-\[\#F5F5F5\] {
-  background-color: #111111;
-}
-
-/* Fix for reveal cards in dark mode */
-.reveal-on-scroll .nixon-body {
-  color: #666666;
-}
-
-.dark .reveal-on-scroll .nixon-body {
-  color: #8A8A8A;
-}
-
-/* Fix for hero text */
-.about-hero .nixon-body {
-  color: rgba(255, 255, 255, 0.6);
-}
-
-/* Fix for stats card labels */
-.stats-card .text-\[8A8A8A\] {
-  color: #8A8A8A;
-}
-
-.dark .stats-card .text-\[8A8A8A\] {
-  color: #94A3B8;
-}
-
-/* Fix for section subtitle */
-.nixon-subheading {
-  color: #8A8A8A;
-}
-
-.dark .nixon-subheading {
-  color: #8A8A8A;
-}
-
-.nixon-subheading.text-\[\#E31837\] {
-  color: #E31837;
-}
-
-/* Fix for scroll reveal animations */
-.reveal-on-scroll {
-  opacity: 0;
-  transform: translateY(50px);
-  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.reveal-on-scroll.is-revealed {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Fix for CTA button in dark mode */
-.bg-\[\#E31837\] {
-  background-color: #E31837;
-}
-
-.bg-\[\#E31837\]:hover {
-  background-color: #C41230;
-}
-
-/* Fix for border-white in dark mode */
-.border-white {
-  border-color: #FFFFFF;
-}
-
-.dark .border-white {
-  border-color: #FFFFFF;
-}
-
-/* Fix for hover states */
-.hover\:bg-\[\#C41230\]:hover {
-  background-color: #C41230;
-}
-
-.hover\:bg-white:hover {
-  background-color: #FFFFFF;
-}
-
-.dark .hover\:bg-white:hover {
-  background-color: #FFFFFF;
-}
-
-.hover\:text-black:hover {
-  color: #000000;
-}
-
-/* ----- RESPONSIVE ----- */
-@media (max-width: 1024px) {
-  .nixon-nav {
-    gap: 20px;
+/* ---------- TABLET & SMALL LAPTOP (1024px and below) ---------- */
+@media (max-width: 1100px) {
+  .nixon-header {
+    height: 65px;
   }
+  
   .nixon-header-inner {
-    padding: 0 24px;
+    padding: 0 16px;
+  }
+  
+  .nixon-nav {
+    display: none;
+    position: absolute;
+    top: 65px;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    flex-direction: column;
+    padding: 20px 24px;
+    gap: 4px;
+    border-bottom: 1px solid #E2E8F0;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    max-height: calc(100vh - 65px);
+    overflow-y: auto;
+    z-index: 999;
+    width: 100%;
+  }
+  
+  .dark .nixon-nav {
+    background: rgba(17, 24, 20, 0.98);
+    border-bottom: 1px solid #2D3E35;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  }
+  
+  .nixon-nav.open {
+    display: flex !important;
+  }
+  
+  .nixon-nav-link {
+    font-size: 0.7rem;
+    padding: 12px 16px;
+    width: 100%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    letter-spacing: 0.15em;
+    text-align: center;
+  }
+  
+  .dark .nixon-nav-link {
+    border-bottom-color: rgba(255, 255, 255, 0.06);
+  }
+  
+  .nixon-nav-link::after {
+    display: none;
+  }
+  
+  .nixon-nav-link.active {
+    color: #6A8071;
+  }
+  
+  .nixon-hamburger {
+    display: flex;
+  }
+  
+  .nixon-actions {
+    gap: 6px;
+  }
+  
+  .nixon-action-btn {
+    width: 34px;
+    height: 34px;
+  }
+  
+  .nixon-auth-btn {
+    padding: 6px 10px;
+    font-size: 0.5rem;
+  }
+  
+  .nixon-logo-text {
+    font-size: 1.1rem;
+  }
+  
+  .nixon-logo .w-10 {
+    width: 34px;
+    height: 34px;
   }
 }
 
+/* ---------- MOBILE (768px and below) ---------- */
 @media (max-width: 768px) {
   .nixon-header {
     height: 60px;
   }
-
-  .nixon-header-inner {
-    padding: 0 16px;
-  }
-
-  .nixon-nav {
-    display: none;
-    position: absolute;
-    top: 60px;
-    left: 0;
-    right: 0;
-    background: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(10px);
-    flex-direction: column;
-    padding: 20px;
-    gap: 16px;
-    border-bottom: 1px solid #E5E5E5;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-  }
-
-  .dark .nixon-nav {
-    background: rgba(0, 0, 0, 0.98);
-    border-bottom: 1px solid #222222;
-  }
-
-  .nixon-nav.open {
-    display: flex;
-  }
-
-  .nixon-hamburger {
-    display: flex;
-  }
-
-  .nixon-actions {
-    gap: 8px;
-  }
-
-  .nixon-auth-btn {
-    padding: 6px 12px;
-    font-size: 0.55rem;
-  }
-
-  .nixon-action-btn {
-    width: 32px;
-    height: 32px;
-  }
-
-  .nixon-footer-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-  }
-
-  .nixon-footer {
-    padding: 40px 20px 30px;
-  }
-
-  .nixon-logo-text {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .nixon-footer-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
+  
   .nixon-header-inner {
     padding: 0 12px;
   }
-
-  .nixon-logo-text {
-    font-size: 0.9rem;
+  
+  .nixon-nav {
+    top: 60px;
+    padding: 16px 20px;
   }
-
+  
+  .nixon-nav-link {
+    font-size: 0.65rem;
+    padding: 10px 14px;
+  }
+  
+  .nixon-logo-text {
+    font-size: 1rem;
+  }
+  
+  .nixon-logo .w-10 {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .nixon-actions {
+    gap: 4px;
+  }
+  
   .nixon-action-btn {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .nixon-action-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .nixon-auth-btn {
+    padding: 4px 8px;
+    font-size: 0.45rem;
+    letter-spacing: 0.08em;
+  }
+  
+  .nixon-cart-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .nixon-cart-badge {
+    min-width: 16px;
+    height: 16px;
+    font-size: 0.4rem;
+    top: -4px;
+    right: -4px;
+  }
+  
+  .nixon-hamburger span {
+    width: 20px;
+    height: 2px;
+  }
+  
+  .nixon-hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(4px, 4px);
+  }
+  
+  .nixon-hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(4px, -4px);
+  }
+}
+
+/* ---------- SMALL MOBILE (480px and below) ---------- */
+@media (max-width: 480px) {
+  .nixon-header {
+    height: 56px;
+  }
+  
+  .nixon-header-inner {
+    padding: 0 10px;
+  }
+  
+  .nixon-nav {
+    top: 56px;
+    padding: 12px 16px;
+  }
+  
+  .nixon-nav-link {
+    font-size: 0.55rem;
+    padding: 8px 12px;
+  }
+  
+  .nixon-logo-text {
+    font-size: 0.85rem;
+  }
+  
+  .nixon-logo .w-10 {
     width: 28px;
     height: 28px;
   }
-
+  
+  .nixon-logo {
+    gap: 6px;
+  }
+  
+  .nixon-actions {
+    gap: 3px;
+  }
+  
+  .nixon-action-btn {
+    width: 28px;
+    height: 28px;
+    border-width: 1px;
+  }
+  
   .nixon-action-btn svg {
     width: 14px;
     height: 14px;
   }
-
+  
+  .nixon-auth-btn {
+    padding: 3px 6px;
+    font-size: 0.4rem;
+    letter-spacing: 0.06em;
+  }
+  
+  .nixon-cart-btn {
+    padding: 4px;
+  }
+  
   .nixon-cart-btn svg {
     width: 16px;
     height: 16px;
   }
+  
+  .nixon-cart-badge {
+    min-width: 14px;
+    height: 14px;
+    font-size: 0.35rem;
+    top: -3px;
+    right: -3px;
+  }
+  
+  .nixon-hamburger {
+    padding: 6px;
+  }
+  
+  .nixon-hamburger span {
+    width: 18px;
+    height: 2px;
+  }
+  
+  .nixon-hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(3px, 3px);
+  }
+  
+  .nixon-hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(3px, -3px);
+  }
 }
 
-/* RTL Support */
+/* ============================================
+   TOUCH DEVICE OPTIMIZATIONS
+   ============================================ */
+@media (hover: none) and (pointer: coarse) {
+  .nixon-nav-link::after {
+    display: none;
+  }
+  
+  .nixon-nav-link:hover {
+    color: inherit;
+  }
+  
+  .nixon-action-btn:hover {
+    border-color: #E5E5E5;
+    color: #000000;
+  }
+  
+  .dark .nixon-action-btn:hover {
+    border-color: #333333;
+    color: #FFFFFF;
+  }
+  
+  .nixon-auth-btn:hover {
+    border-color: #E5E5E5;
+    color: #000000;
+  }
+  
+  .dark .nixon-auth-btn:hover {
+    border-color: #333333;
+    color: #FFFFFF;
+  }
+  
+  /* Increase touch targets for mobile */
+  .nixon-nav-link {
+    padding: 14px 0;
+  }
+  
+  .nixon-action-btn {
+    width: 44px;
+    height: 44px;
+  }
+  
+  .nixon-auth-btn {
+    padding: 10px 16px;
+  }
+  
+  .nixon-cart-btn {
+    padding: 8px;
+  }
+  
+  .nixon-hamburger {
+    padding: 12px;
+  }
+  
+  .nixon-hamburger span {
+    width: 26px;
+    height: 3px;
+  }
+}
+
+/* ============================================
+   RTL SUPPORT
+   ============================================ */
 [dir="rtl"] .nixon-nav-link::after {
   left: auto;
   right: 0;
@@ -811,26 +645,18 @@
 }
 
 /* ============================================
-   THEME ICON FIX
+   SAFE AREA SUPPORT (Notch phones)
    ============================================ */
-.nixon-icon-dark {
-  display: block;
-}
-
-.nixon-icon-light {
-  display: none;
-}
-
-.dark .nixon-icon-dark {
-  display: none;
-}
-
-.dark .nixon-icon-light {
-  display: block;
+@supports (padding: max(0px)) {
+  .nixon-header {
+    padding-top: env(safe-area-inset-top);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
 }
 
 /* ============================================
-   GLOBAL DARK MODE BASELINE FIX
+   GLOBAL DARK MODE
    ============================================ */
 .dark body {
   background-color: #0A0A0A !important;
@@ -841,129 +667,879 @@
   background-color: #0A0A0A !important;
 }
 
-/* Ensure secondary background sections respect dark mode */
-.dark section:not(.about-hero):not(.services-hero):not(.pricing-hero):not(.contact-hero):not(.blog-hero):not(.enterprise-hero) {
-  background-color: #0A0A0A;
+/* ============================================
+   PAGE TRANSITION FIX FOR MOBILE
+   ============================================ */
+@media (max-width: 768px) {
+  body.cinematic-exit {
+    transform: scale(0.95) translateZ(-150px) rotateX(-5deg);
+    transition-duration: 0.5s;
+  }
+  
+  @keyframes pageSpinZoomIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95) translateZ(-150px) rotateX(5deg);
+      filter: blur(5px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateZ(0px) rotateX(0deg);
+      filter: blur(0px);
+    }
+  }
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+@media print {
+  .nixon-header,
+  .nixon-footer {
+    display: none !important;
+  }
+  
+  body {
+    background: white !important;
+    color: black !important;
+  }
+}
+
+/* ============================================
+   FIX FOR OVERFLOW ISSUES
+   ============================================ */
+.nixon-header-inner,
+.nixon-footer-inner {
+  overflow: visible;
+}
+
+.nixon-nav.open {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Fix for small screens */
+@media (max-width: 480px) {
+  .nixon-actions .nixon-auth-btn {
+    font-size: 0.4rem;
+    padding: 3px 6px;
+  }
+  
+  .nixon-actions .nixon-action-btn {
+    width: 26px;
+    height: 26px;
+  }
+  
+  .nixon-actions .nixon-action-btn svg {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+/* Fix for very small screens */
+@media (max-width: 360px) {
+  .nixon-logo-text {
+    font-size: 0.7rem;
+  }
+  
+  .nixon-logo .w-10 {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .nixon-auth-btn {
+    font-size: 0.35rem;
+    padding: 2px 4px;
+  }
+  
+  .nixon-action-btn {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+
+/* ============================================
+   COMPLETE FOOTER STYLES
+   ============================================ */
+
+/* ----- FOOTER BASE ----- */
+.nixon-footer {
+  background: #24302A;
+  color: #FFFFFF;
+  padding: 60px 40px 40px;
+  border-top: 1px solid #2D3E35;
+  margin-top: 60px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.dark .nixon-footer {
+  background: #111814;
+  border-top-color: #1A1A1A;
+}
+
+.nixon-footer-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+}
+
+/* ----- FOOTER GRID ----- */
+.nixon-footer-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 0;
+}
+
+/* ----- FOOTER COLUMNS ----- */
+.nixon-footer-grid > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.nixon-footer-grid h4 {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  text-transform: uppercase;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: #8FA89B;
+  font-weight: 700;
+  margin-bottom: 16px;
+  position: relative;
+  padding-bottom: 8px;
+}
+
+.nixon-footer-grid h4::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 24px;
+  height: 2px;
+  background: #6A8071;
+}
+
+.nixon-footer-grid ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.nixon-footer-grid ul li {
+  margin: 0;
+  padding: 0;
+}
+
+.nixon-footer-grid ul li a {
+  color: #94A3B8;
+  text-decoration: none;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  text-transform: uppercase;
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  transition: all 0.3s ease;
+  display: inline-block;
+  padding: 4px 0;
+}
+
+.nixon-footer-grid ul li a:hover {
+  color: #FFFFFF;
+  transform: translateX(4px);
+}
+
+/* ----- BRAND COLUMN ----- */
+.nixon-footer-brand {
+  max-width: 300px;
+}
+
+.nixon-footer-brand .brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: #FFFFFF;
+  margin-bottom: 16px;
+}
+
+.nixon-footer-brand .brand-logo .logo-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.nixon-footer-brand .brand-logo .logo-icon img {
+  width: 130%;
+  height: 130%;
+  object-fit: contain;
+}
+
+.nixon-footer-brand .brand-logo .brand-name {
+  font-weight: 800;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+.nixon-footer-brand .brand-logo .brand-name .highlight {
+  color: #8FA89B;
+}
+
+.nixon-footer-brand .brand-description {
+  font-size: 0.8rem;
+  color: #94A3B8;
+  line-height: 1.6;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+/* ----- FOOTER BOTTOM ----- */
+.nixon-footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 32px;
+  margin-top: 0;
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #64748B;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.nixon-footer-bottom p {
+  margin: 0;
+  color: #64748B;
+  font-size: 0.5rem;
+  letter-spacing: 0.15em;
+}
+
+.nixon-footer-bottom .footer-legal {
+  display: flex;
+  gap: 24px;
+}
+
+.nixon-footer-bottom .footer-legal a {
+  color: #64748B;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-size: 0.5rem;
+  letter-spacing: 0.15em;
+}
+
+.nixon-footer-bottom .footer-legal a:hover {
   color: #FFFFFF;
 }
 
 /* ============================================
-   NIXON EDITORIAL RESPONSIVE MEDIA SYSTEM
+   FOOTER RESPONSIVE BREAKPOINTS
    ============================================ */
 
-/* 1. Large Desktops & Ultrawide (1440px and up) */
-@media (min-width: 1440px) {
-  .nixon-header-inner,
-  .nixon-footer-inner {
-    max-width: 1400px;
-  }
-}
-
-/* 2. Standard Laptops & Tablets Landscape (1024px to 1439px) */
+/* ---------- TABLET (1024px and below) ---------- */
 @media (max-width: 1024px) {
-  .nixon-nav {
-    gap: 24px;
+  .nixon-footer {
+    padding: 48px 24px 32px;
+    margin-top: 40px;
   }
-  .nixon-header-inner {
-    padding: 0 24px;
-  }
-}
 
-/* 3. Tablets Portrait & Large Mobile Devices (768px to 1023px) */
-@media (max-width: 1023px) {
-  .nixon-header {
-    height: 65px;
-  }
-  .nixon-header-inner {
-    padding: 0 20px;
-  }
-  .nixon-nav {
-    display: none;
-    position: absolute;
-    top: 65px;
-    left: 0;
-    right: 0;
-    background: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    flex-direction: column;
-    padding: 24px;
-    gap: 16px;
-    border-bottom: 1px solid #E5E5E5;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-  }
-  .dark .nixon-nav {
-    background: rgba(0, 0, 0, 0.98);
-    border-bottom: 1px solid #222222;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-  }
-  .nixon-nav.open {
-    display: flex;
-  }
-  .nixon-hamburger {
-    display: flex;
-  }
   .nixon-footer-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 32px;
+    padding-bottom: 36px;
+  }
+
+  .nixon-footer-brand {
+    max-width: 100%;
+    grid-column: 1 / -1;
+    margin-bottom: 8px;
+  }
+
+  .nixon-footer-brand .brand-description {
+    max-width: 400px;
   }
 }
 
-/* 4. Mobile Devices & Small Tablets (481px to 767px) */
-@media (max-width: 767px) {
-  .nixon-header {
-    height: 60px;
+/* ---------- MOBILE (768px and below) ---------- */
+@media (max-width: 768px) {
+  .nixon-footer {
+    padding: 40px 16px 24px;
+    margin-top: 32px;
   }
-  .nixon-header-inner {
-    padding: 0 16px;
+
+  .nixon-footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    padding-bottom: 28px;
   }
-  .nixon-nav {
-    top: 60px;
+
+  .nixon-footer-grid h4 {
+    font-size: 0.6rem;
+    margin-bottom: 12px;
   }
-  .auth-card {
-    padding: 36px 24px;
+
+  .nixon-footer-grid h4::after {
+    width: 20px;
   }
-  .nixon-heading {
-    font-size: 2.2rem !important;
+
+  .nixon-footer-grid ul li a {
+    font-size: 0.5rem;
+  }
+
+  .nixon-footer-brand .brand-logo .brand-name {
+    font-size: 1.1rem;
+  }
+
+  .nixon-footer-brand .brand-description {
+    font-size: 0.7rem;
+  }
+
+  .nixon-footer-bottom {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+    padding-top: 24px;
+  }
+
+  .nixon-footer-bottom .footer-legal {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
   }
 }
 
-/* 5. Compact Mobile Devices / Small Screens (Up to 480px) */
+/* ---------- SMALL MOBILE (480px and below) ---------- */
 @media (max-width: 480px) {
-  .nixon-header-inner {
-    padding: 0 12px;
+  .nixon-footer {
+    padding: 32px 12px 20px;
+    margin-top: 24px;
   }
-  .nixon-logo-text {
+
+  .nixon-footer-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding-bottom: 20px;
+  }
+
+  .nixon-footer-grid h4 {
+    font-size: 0.55rem;
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+  }
+
+  .nixon-footer-grid h4::after {
+    width: 16px;
+    height: 1.5px;
+  }
+
+  .nixon-footer-grid ul {
+    gap: 4px;
+  }
+
+  .nixon-footer-grid ul li a {
+    font-size: 0.45rem;
+    padding: 3px 0;
+  }
+
+  .nixon-footer-brand .brand-logo .brand-name {
     font-size: 1rem;
   }
-  .nixon-actions {
-    gap: 8px;
-  }
-  .nixon-action-btn {
+
+  .nixon-footer-brand .brand-logo .logo-icon {
     width: 32px;
     height: 32px;
   }
-  .auth-card {
-    padding: 28px 16px;
+
+  .nixon-footer-brand .brand-description {
+    font-size: 0.65rem;
   }
-  .nixon-footer-grid {
-    grid-template-columns: 1fr;
-    gap: 24px;
+
+  .nixon-footer-bottom {
+    padding-top: 16px;
+    gap: 8px;
   }
-  .nixon-footer {
-    padding: 40px 16px 24px;
+
+  .nixon-footer-bottom p,
+  .nixon-footer-bottom .footer-legal a {
+    font-size: 0.4rem;
+  }
+
+  .nixon-footer-bottom .footer-legal {
+    gap: 12px;
   }
 }
 
-/* 6. Landscape Orientation Optimizations for Mobile */
-@media (max-height: 550px) and (orientation: landscape) {
-  .auth-page {
-    padding: 20px 10px;
-    justify-content: flex-start;
-    overflow-y: auto;
+/* ---------- EXTRA SMALL (360px and below) ---------- */
+@media (max-width: 360px) {
+  .nixon-footer {
+    padding: 24px 8px 16px;
   }
-  .auth-card {
-    margin-top: 40px;
-    margin-bottom: 40px;
+
+  .nixon-footer-grid {
+    gap: 16px;
+    padding-bottom: 16px;
+  }
+
+  .nixon-footer-grid h4 {
+    font-size: 0.5rem;
+  }
+
+  .nixon-footer-grid ul li a {
+    font-size: 0.4rem;
+  }
+
+  .nixon-footer-brand .brand-logo .brand-name {
+    font-size: 0.85rem;
+  }
+
+  .nixon-footer-brand .brand-logo .logo-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .nixon-footer-brand .brand-description {
+    font-size: 0.55rem;
+  }
+
+  .nixon-footer-bottom p,
+  .nixon-footer-bottom .footer-legal a {
+    font-size: 0.35rem;
+  }
+}
+
+/* ============================================
+   RTL FOOTER SUPPORT
+   ============================================ */
+[dir="rtl"] .nixon-footer-grid h4::after {
+  left: auto;
+  right: 0;
+}
+
+[dir="rtl"] .nixon-footer-grid ul li a:hover {
+  transform: translateX(-4px);
+}
+
+[dir="rtl"] .nixon-footer-bottom .footer-legal {
+  flex-direction: row-reverse;
+}
+
+/* ============================================
+   DARK MODE FOOTER
+   ============================================ */
+.dark .nixon-footer {
+  background: #0A0A0A;
+  border-top-color: #1A1A1A;
+}
+
+.dark .nixon-footer-grid h4 {
+  color: #6A8071;
+}
+
+.dark .nixon-footer-grid h4::after {
+  background: #6A8071;
+}
+
+.dark .nixon-footer-grid ul li a {
+  color: #64748B;
+}
+
+.dark .nixon-footer-grid ul li a:hover {
+  color: #FFFFFF;
+}
+
+.dark .nixon-footer-brand .brand-description {
+  color: #64748B;
+}
+
+.dark .nixon-footer-bottom {
+  border-top-color: rgba(255, 255, 255, 0.05);
+}
+
+.dark .nixon-footer-bottom p,
+.dark .nixon-footer-bottom .footer-legal a {
+  color: #475569;
+}
+
+.dark .nixon-footer-bottom .footer-legal a:hover {
+  color: #FFFFFF;
+}
+
+/* ============================================
+   TOUCH DEVICE FOOTER OPTIMIZATIONS
+   ============================================ */
+@media (hover: none) and (pointer: coarse) {
+  .nixon-footer-grid ul li a {
+    padding: 8px 0;
+  }
+  
+  .nixon-footer-grid ul li a:hover {
+    transform: none;
+  }
+}
+
+/* ============================================
+   PRINT FOOTER STYLES
+   ============================================ */
+@media print {
+  .nixon-footer {
+    display: none !important;
+  }
+}
+/* ============================================
+   INCREASED TEXT SIZE FOR BETTER VISIBILITY
+   ============================================ */
+
+/* Navigation links - desktop */
+.nixon-nav-link {
+  font-size: 0.7rem !important; /* Increased from 0.6rem */
+  letter-spacing: 0.15em;
+}
+
+/* Navigation links - mobile */
+@media (max-width: 1024px) {
+  .nixon-nav-link {
+    font-size: 0.85rem !important; /* Increased from 0.7rem */
+    padding: 14px 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .nixon-nav-link {
+    font-size: 0.75rem !important;
+    padding: 12px 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nixon-nav-link {
+    font-size: 0.65rem !important;
+    padding: 10px 12px;
+  }
+}
+
+/* Auth button */
+.nixon-auth-btn {
+  font-size: 0.7rem !important; /* Increased from 0.6rem */
+  padding: 10px 18px;
+}
+
+@media (max-width: 768px) {
+  .nixon-auth-btn {
+    font-size: 0.55rem !important;
+    padding: 6px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nixon-auth-btn {
+    font-size: 0.5rem !important;
+    padding: 4px 10px;
+  }
+}
+
+/* Logo text */
+.nixon-logo-text {
+  font-size: 1.35rem !important; /* Increased from 1.25rem */
+}
+
+@media (max-width: 768px) {
+  .nixon-logo-text {
+    font-size: 1.1rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .nixon-logo-text {
+    font-size: 0.95rem !important;
+  }
+}
+
+/* Cart badge */
+.nixon-cart-badge {
+  font-size: 0.6rem !important; /* Increased from 0.5rem */
+  min-width: 20px;
+  height: 20px;
+}
+
+@media (max-width: 768px) {
+  .nixon-cart-badge {
+    font-size: 0.5rem !important;
+    min-width: 18px;
+    height: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nixon-cart-badge {
+    font-size: 0.45rem !important;
+    min-width: 16px;
+    height: 16px;
+  }
+}
+
+/* Footer headings */
+.nixon-footer-grid h4 {
+  font-size: 0.75rem !important; /* Increased from 0.6rem */
+}
+
+@media (max-width: 768px) {
+  .nixon-footer-grid h4 {
+    font-size: 0.65rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .nixon-footer-grid h4 {
+    font-size: 0.6rem !important;
+  }
+}
+
+/* Footer links */
+.nixon-footer-grid ul li a {
+  font-size: 0.65rem !important; /* Increased from 0.55rem */
+}
+
+@media (max-width: 768px) {
+  .nixon-footer-grid ul li a {
+    font-size: 0.55rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .nixon-footer-grid ul li a {
+    font-size: 0.5rem !important;
+  }
+}
+
+/* Brand description */
+.nixon-footer-brand .brand-description {
+  font-size: 0.85rem !important; /* Increased from 0.8rem */
+}
+
+@media (max-width: 768px) {
+  .nixon-footer-brand .brand-description {
+    font-size: 0.75rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .nixon-footer-brand .brand-description {
+    font-size: 0.65rem !important;
+  }
+}
+
+/* Footer bottom */
+.nixon-footer-bottom p {
+  font-size: 0.6rem !important; /* Increased from 0.5rem */
+}
+
+@media (max-width: 768px) {
+  .nixon-footer-bottom p {
+    font-size: 0.5rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .nixon-footer-bottom p {
+    font-size: 0.45rem !important;
+  }
+}
+
+/* Brand name in footer */
+.nixon-footer-brand .brand-logo .brand-name {
+  font-size: 1.35rem !important; /* Increased from 1.25rem */
+}
+
+@media (max-width: 768px) {
+  .nixon-footer-brand .brand-logo .brand-name {
+    font-size: 1.15rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .nixon-footer-brand .brand-logo .brand-name {
+    font-size: 1rem !important;
+  }
+}
+
+
+/* ============================================
+   SIGN OUT BUTTON STYLES
+   ============================================ */
+
+/* Sign out button in navigation (desktop dropdown) */
+.auth-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.auth-dropdown .auth-dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: #FFFFFF;
+  border: 1px solid #E5E5E5;
+  min-width: 180px;
+  padding: 8px 0;
+  margin-top: 4px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  border-radius: 0px;
+}
+
+.dark .auth-dropdown .auth-dropdown-menu {
+  background: #1A1A1A;
+  border-color: #333333;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.auth-dropdown:hover .auth-dropdown-menu,
+.auth-dropdown.active .auth-dropdown-menu {
+  display: block;
+}
+
+.auth-dropdown-menu a,
+.auth-dropdown-signout {
+  display: block;
+  padding: 10px 20px;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #000000;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  background: transparent;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+}
+
+.dark .auth-dropdown-menu a,
+.dark .auth-dropdown-signout {
+  color: #FFFFFF;
+}
+
+.auth-dropdown-menu a:hover,
+.auth-dropdown-signout:hover {
+  background: #F5F5F5;
+  color: #6A8071;
+}
+
+.dark .auth-dropdown-menu a:hover,
+.dark .auth-dropdown-signout:hover {
+  background: #2A2A2A;
+  color: #6A8071;
+}
+
+.auth-dropdown-signout {
+  border-top: 1px solid #E5E5E5;
+  color: #E31837 !important;
+}
+
+.dark .auth-dropdown-signout {
+  border-top-color: #333333;
+  color: #EF4444 !important;
+}
+
+.auth-dropdown-signout:hover {
+  color: #C41230 !important;
+  background: rgba(227, 24, 55, 0.05) !important;
+}
+
+.dark .auth-dropdown-signout:hover {
+  color: #EF4444 !important;
+  background: rgba(239, 68, 68, 0.1) !important;
+}
+
+/* Sign out button in mobile navigation */
+.nav-auth-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 8px;
+
+}
+
+.dark .nav-auth-section {
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+.nav-signout-btn {
+  display: block;
+  padding: 12px 16px;
+  background: transparent;
+  border: 1px solid #E31837;
+  color: #E31837;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  width: 100%;
+  border-radius: 0px;
+}
+
+.dark .nav-signout-btn {
+  border-color: #EF4444;
+  color: #EF4444;
+}
+
+.nav-signout-btn:hover {
+  background: #E31837;
+  color: #FFFFFF;
+}
+
+.dark .nav-signout-btn:hover {
+  background: #EF4444;
+  color: #FFFFFF;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .nav-auth-section {
+    padding-top: 12px;
+    margin-top: 8px;
+  }
+  
+  .nav-signout-btn {
+    font-size: 0.75rem;
+    padding: 14px 16px;
+  }
+  
+  .auth-dropdown .auth-dropdown-menu {
+    right: auto;
+    left: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-signout-btn {
+    font-size: 0.65rem;
+    padding: 12px 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-signout-btn {
+    font-size: 0.55rem;
+    padding: 10px 12px;
   }
 }

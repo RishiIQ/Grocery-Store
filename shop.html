@@ -16,6 +16,9 @@
     }
     const savedDir = localStorage.getItem('dir') || 'ltr';
     document.documentElement.setAttribute('dir', savedDir);
+    
+    // Disable page animation on shop
+    document.documentElement.style.animation = 'none';
   })();
 </script>
   <!-- Tailwind CSS -->
@@ -39,172 +42,368 @@
   
   <style>
     /* ============================================
-       SAGE & EARTH-TONE 3D COVERFLOW STAGE
+       COMPLETE SHOP PAGE STYLES
        ============================================ */
-    .tunnel-stage {
-      perspective: 1600px;
-      transform-style: preserve-3d;
-      background: #24302A;
-      overflow: hidden;
-      position: relative;
-      width: 100%;
-      height: 100vh;
+    
+    /* CRITICAL: Disable all page animations */
+    html, body {
+      animation: none !important;
+      transform: none !important;
+      opacity: 1 !important;
+      filter: none !important;
+      perspective: none !important;
+    }
+    
+    body {
+      animation: none !important;
+      transform: none !important;
+      opacity: 1 !important;
+      filter: none !important;
+      overflow-x: hidden;
+    }
+    
+    body.cinematic-exit {
+      display: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+    
+    /* ============================================
+       ZIGZAG PRODUCT DISPLAY
+       ============================================ */
+    .zigzag-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    
+    .zigzag-item {
       display: flex;
       align-items: center;
-      justify-content: center;
+      gap: 60px;
+      padding: 60px 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      opacity: 0;
+      transform: translateY(60px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
     
-    .dark .tunnel-stage {
-      background: #111814;
-    }
-
-    #tunnelStack {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 100%;
-      height: 100%;
-      transform: translate(-50%, -50%);
-      transform-style: preserve-3d;
-      pointer-events: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .dark .zigzag-item {
+      border-bottom-color: rgba(255, 255, 255, 0.06);
     }
     
-    .tunnel-card-wrapper {
-      position: absolute;
-      width: 420px;
-      max-width: 85vw;
-      transform-style: preserve-3d;
-      will-change: transform, opacity;
-      pointer-events: none;
+    .zigzag-item.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
     
-    .tunnel-card {
-      background: #FFFFFF;
-      border: 1px solid #E2E8F0;
-      border-radius: 0px;
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
-      transform-style: preserve-3d;
-      will-change: transform, opacity, filter;
-      pointer-events: auto;
-      cursor: pointer;
-      overflow: hidden;
+    .zigzag-item:nth-child(even) {
+      flex-direction: row-reverse;
     }
     
-    .dark .tunnel-card {
-      background: #18221D;
-      border-color: #2D3E35;
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+    .zigzag-item:last-child {
+      border-bottom: none;
     }
     
-    .tunnel-card-content {
-      display: flex;
-      flex-direction: column;
-      padding: 24px;
-      gap: 20px;
-      transform: translateZ(0);
-    }
-    
-    @media (max-width: 768px) {
-      .tunnel-card-wrapper {
-        width: 300px;
-      }
-      .tunnel-card-content {
-        padding: 16px;
-        gap: 12px;
-      }
-      .tunnel-stage {
-        perspective: 1000px;
-      }
-    }
-    
-    .tunnel-image-wrap {
-      width: 100%;
-      aspect-ratio: 1/1;
+    .zigzag-image {
+      flex: 0 0 45%;
+      aspect-ratio: 4/3;
       overflow: hidden;
       position: relative;
-      border-radius: 0px;
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
     }
     
-    .tunnel-image-wrap img {
+    .dark .zigzag-image {
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    }
+    
+    .zigzag-image img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
     
-    .tunnel-card:hover .tunnel-image-wrap img {
-      transform: scale(1.06);
+    .zigzag-item:hover .zigzag-image img {
+      transform: scale(1.05);
     }
     
-    .market-badge {
+    .zigzag-image .badge {
       position: absolute;
-      top: 12px;
-      left: 12px;
+      top: 16px;
+      left: 16px;
       background: #6A8071;
       color: #FFFFFF;
       font-size: 0.55rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      padding: 6px 14px;
-      border-radius: 0px;
+      padding: 6px 16px;
       z-index: 10;
     }
     
-    .tunnel-info h3 {
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: -0.02em;
-      line-height: 1.1;
-      font-size: 1.25rem;
-    }
-    
-    .glow-orb {
+    .zigzag-image .price-tag {
       position: absolute;
-      border-radius: 50%;
-      pointer-events: none;
-      filter: blur(100px);
-      will-change: transform, opacity;
+      bottom: 16px;
+      right: 16px;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      color: #FFFFFF;
+      font-weight: 800;
+      font-size: 1.4rem;
+      padding: 8px 20px;
+      z-index: 10;
     }
     
-    .orb-1 {
-      width: 500px;
-      height: 500px;
-      background: rgba(106, 128, 113, 0.15);
-      top: -100px;
-      right: -100px;
+    .dark .zigzag-image .price-tag {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
     }
     
-    .orb-2 {
-      width: 400px;
-      height: 400px;
-      background: rgba(106, 128, 113, 0.1);
-      bottom: -100px;
-      left: -100px;
+    .zigzag-image .price-tag .old {
+      font-size: 0.7rem;
+      text-decoration: line-through;
+      opacity: 0.5;
+      font-weight: 400;
+      margin-right: 8px;
     }
     
-    #tunnelProgressBar {
-      height: 4px;
-      background: #6A8071;
-      width: 0%;
-      position: fixed;
-      top: 70px;
-      left: 0;
-      z-index: 100;
-      box-shadow: 0 0 20px rgba(106, 128, 113, 0.3);
+    .zigzag-content {
+      flex: 1;
+      padding: 20px 0;
     }
     
-    .market-section-title {
+    .zigzag-content .category {
+      font-size: 0.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: #6A8071;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+    
+    .zigzag-content h2 {
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: -0.02em;
-      line-height: 1.05;
+      font-size: 1.8rem;
+      line-height: 1.1;
+      margin-bottom: 12px;
     }
     
-    .market-section-subtitle {
+    .dark .zigzag-content h2 {
+      color: #FFFFFF;
+    }
+    
+    .zigzag-content .description {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: #64748B;
+      margin-bottom: 20px;
+      max-width: 90%;
+    }
+    
+    .dark .zigzag-content .description {
+      color: #94A3B8;
+    }
+    
+    .zigzag-content .origin {
+      font-size: 0.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #94A3B8;
+      margin-bottom: 16px;
+    }
+    
+    .zigzag-content .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    
+    .btn-primary {
+      display: inline-block;
+      padding: 14px 32px;
+      background: #6A8071;
+      color: #FFFFFF;
+      text-transform: uppercase;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      border: none;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      text-decoration: none;
+      text-align: center;
+    }
+    
+    .btn-primary:hover {
+      background: #576B5D;
+      transform: scale(1.02);
+    }
+    
+    .btn-secondary {
+      display: inline-block;
+      padding: 14px 32px;
+      background: transparent;
+      color: #0F172A;
+      text-transform: uppercase;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      border: 1px solid #0F172A;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      text-decoration: none;
+      text-align: center;
+    }
+    
+    .dark .btn-secondary {
+      color: #FFFFFF;
+      border-color: #FFFFFF;
+    }
+    
+    .btn-secondary:hover {
+      background: #6A8071;
+      color: #FFFFFF;
+      border-color: #6A8071;
+      transform: scale(1.02);
+    }
+    
+    /* Stats Section */
+    .stats-section {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      padding: 60px 20px;
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      margin: 40px 0;
+    }
+    
+    .dark .stats-section {
+      border-color: rgba(255, 255, 255, 0.06);
+    }
+    
+    .stat-item {
+      text-align: center;
+    }
+    
+    .stat-item .number {
+      font-weight: 800;
+      font-size: 2.5rem;
+      color: #6A8071;
+      display: block;
+    }
+    
+    .stat-item .label {
+      font-size: 0.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #94A3B8;
+      margin-top: 4px;
+    }
+    
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .zigzag-item {
+        gap: 40px;
+        padding: 50px 0;
+      }
+      .zigzag-content h2 {
+        font-size: 1.5rem;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .zigzag-container {
+        padding: 20px 16px;
+      }
+      
+      .zigzag-item {
+        flex-direction: column !important;
+        gap: 24px;
+        padding: 40px 0;
+      }
+      
+      .zigzag-image {
+        flex: 0 0 100%;
+        width: 100%;
+        aspect-ratio: 4/3;
+      }
+      
+      .zigzag-content {
+        width: 100%;
+        padding: 0;
+      }
+      
+      .zigzag-content .description {
+        max-width: 100%;
+      }
+      
+      .zigzag-content h2 {
+        font-size: 1.3rem;
+      }
+      
+      .stats-section {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        padding: 40px 16px;
+      }
+      
+      .stat-item .number {
+        font-size: 2rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .zigzag-item {
+        padding: 30px 0;
+        gap: 16px;
+      }
+      
+      .zigzag-content h2 {
+        font-size: 1.1rem;
+      }
+      
+      .zigzag-content .description {
+        font-size: 0.85rem;
+      }
+      
+      .btn-primary,
+      .btn-secondary {
+        padding: 10px 20px;
+        font-size: 0.55rem;
+        width: 100%;
+        text-align: center;
+      }
+      
+      .zigzag-content .actions {
+        flex-direction: column;
+      }
+      
+      .stats-section {
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        padding: 30px 12px;
+      }
+      
+      .stat-item .number {
+        font-size: 1.6rem;
+      }
+    }
+    
+    /* Section Header */
+    .section-header {
+      text-align: center;
+      padding: 40px 20px 20px;
+    }
+    
+    .section-header .subtitle {
       text-transform: uppercase;
       font-size: 0.7rem;
       letter-spacing: 0.2em;
@@ -212,49 +411,47 @@
       font-weight: 700;
     }
     
-    .market-btn-small {
+    .section-header h1 {
+      font-weight: 800;
       text-transform: uppercase;
-      font-size: 0.6rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      padding: 10px 22px;
-      background: #24302A;
-      color: #FFFFFF;
-      border: none;
-      border-radius: 0px;
-      cursor: pointer;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      text-decoration: none;
-      display: inline-block;
-      text-align: center;
+      letter-spacing: -0.02em;
+      font-size: 3rem;
+      line-height: 1.05;
+      margin-top: 8px;
     }
     
-    .dark .market-btn-small {
-      background: #FFFFFF;
-      color: #24302A;
+    .dark .section-header h1 {
+      color: #FFFFFF;
     }
-
-    .market-btn-small:hover {
+    
+    .section-header .divider {
+      width: 60px;
+      height: 3px;
       background: #6A8071;
-      color: #FFFFFF;
-      transform: scale(1.03);
+      margin: 16px auto;
     }
     
-    .scroll-hint {
-      position: absolute;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      color: rgba(255, 255, 255, 0.6);
-      font-size: 0.65rem;
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      background: rgba(36, 48, 42, 0.8);
-      padding: 8px 16px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(8px);
-      z-index: 10;
-      pointer-events: none;
+    .section-header p {
+      color: #64748B;
+      max-width: 500px;
+      margin: 0 auto;
+      font-size: 0.95rem;
+    }
+    
+    .dark .section-header p {
+      color: #94A3B8;
+    }
+    
+    @media (max-width: 768px) {
+      .section-header h1 {
+        font-size: 2rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .section-header h1 {
+        font-size: 1.6rem;
+      }
     }
 
     .market-toast {
@@ -271,35 +468,42 @@
     }
   </style>
 </head>
-<body class="bg-cream-bg dark:bg-[#111814] text-slate-900 dark:text-slate-100 antialiased">
-
-  <div id="tunnelProgressBar"></div>
+<body>
 
   <main style="padding-top: 70px;">
 
-    <!-- PAGE HEADER -->
-    <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center border-b border-slate-200 dark:border-[#2D3E35]">
-      <p class="market-section-subtitle">🌿 Botanical Archive</p>
-      <h1 class="market-section-title text-4xl sm:text-5xl lg:text-6xl mt-2">Artisanal Harvest Showcase</h1>
-      <div class="w-12 h-1 bg-[#6A8071] mx-auto mt-4"></div>
-      <p class="text-slate-600 dark:text-slate-400 text-sm mt-4 max-w-xl mx-auto leading-relaxed">
-        Navigate our decentralized organic inventory across a horizontal 3D perspective row. Select any parcel to inspect direct farm-gate specifications.
-      </p>
-    </section>
+    <!-- SECTION HEADER -->
+    <div class="section-header">
+      <p class="subtitle">🌿 Botanical Archive</p>
+      <h1>Artisanal Harvest Collection</h1>
+      <div class="divider"></div>
+      <p>Explore our curated selection of premium organic provisions from around the world</p>
+    </div>
 
-    <!-- HORIZONTAL 3D COVERFLOW SECTION (ALL PRODUCTS) -->
-    <section id="tunnelScrollContainer" class="relative h-[900vh]">
-      <div class="sticky top-0 h-screen w-full overflow-hidden tunnel-stage" id="tunnelStage">
-        
-        <div class="glow-orb orb-1"></div>
-        <div class="glow-orb orb-2"></div>
-
-        <div id="tunnelStack"></div>
-
-        <div class="scroll-hint">↓ Scroll to explore botanical catalog ↓</div>
-
+    <!-- STATS SECTION -->
+    <div class="stats-section">
+      <div class="stat-item">
+        <span class="number">140+</span>
+        <span class="label">Farm Partners</span>
       </div>
-    </section>
+      <div class="stat-item">
+        <span class="number">450K</span>
+        <span class="label">Daily Dispatches</span>
+      </div>
+      <div class="stat-item">
+        <span class="number">73</span>
+        <span class="label">Micro-Hubs</span>
+      </div>
+      <div class="stat-item">
+        <span class="number">100%</span>
+        <span class="label">Carbon Neutral</span>
+      </div>
+    </div>
+
+    <!-- ZIGZAG PRODUCTS -->
+    <div class="zigzag-container" id="productsContainer">
+      <!-- Products injected by JavaScript -->
+    </div>
 
   </main>
 
@@ -307,113 +511,99 @@
   <script src="js/layout.js"></script>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const checkDB = setInterval(() => {
-        if (window.FreshCartDB && window.FreshCartDB.products) {
-          clearInterval(checkDB);
-          initShopCoverflow();
-        }
-      }, 50);
-
-      setTimeout(() => clearInterval(checkDB), 3000);
-
-      function initShopCoverflow() {
-        const tunnelStack = document.getElementById('tunnelStack');
-        const tunnelContainer = document.getElementById('tunnelScrollContainer');
-        const progressBar = document.getElementById('tunnelProgressBar');
-        
-        const products = window.FreshCartDB.products;
-
-        if (tunnelStack && products.length > 0) {
-          tunnelStack.innerHTML = products.map((p, i) => `
-            <div class="tunnel-card-wrapper" data-index="${i}">
-              <div class="tunnel-card" onclick="window.location.href='product-detail.html?id=${p.id}'">
-                <div class="tunnel-card-content">
-                  <div class="tunnel-image-wrap block">
-                    <span class="market-badge">${p.badge || 'Organic'}</span>
-                    <img src="${p.image}" alt="${p.name}" loading="lazy">
-                  </div>
-                  <div class="tunnel-info">
-                    <div>
-                      <span class="text-xs font-bold tracking-[0.2em] uppercase text-[#6A8071]">Parcel ${String(i + 1).padStart(2, '0')}</span>
-                      <h3 class="mt-1">${p.name}</h3>
-                      <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mt-1 line-clamp-2">${p.description}</p>
-                    </div>
-                    <div class="pt-3 border-t border-slate-200 dark:border-[#2D3E35] flex justify-between items-center gap-4">
-                      <span class="font-extrabold text-xl">$${p.price.toFixed(2)}</span>
-                      <div class="flex items-center gap-2">
-                        <a href="product-detail.html?id=${p.id}" class="market-btn-small" style="background: transparent; color: inherit; border: 1px solid currentColor;">Inspect</a>
-                        <button onclick="event.stopPropagation(); handleAddToCart('${p.id}')" class="market-btn-small">Add</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          `).join('');
-
-          const wrappers = tunnelStack.querySelectorAll('.tunnel-card-wrapper');
-          const cards = tunnelStack.querySelectorAll('.tunnel-card');
-
-          let ticking = false;
-
-          function updateTunnel() {
-            const rect = tunnelContainer.getBoundingClientRect();
-            const totalHeight = tunnelContainer.offsetHeight - window.innerHeight;
-            let progress = -rect.top / totalHeight;
-            progress = Math.max(0, Math.min(1, progress));
-
-            if (progressBar) {
-              progressBar.style.width = `${progress * 100}%`;
-            }
-
-            const totalCards = wrappers.length;
-            
-            wrappers.forEach((wrapper, index) => {
-              const card = cards[index];
-              if (!card) return;
-
-              const cardTargetProgress = index / Math.max(1, (totalCards - 1));
-              const distance = progress - cardTargetProgress;
-
-              const spacing = window.innerWidth <= 768 ? 220 : 380;
-              const translateX = distance * spacing * -1;
-              const translateZ = -Math.abs(distance) * 450;
-              const rotateY = distance * 60;
-              const scale = Math.max(0.55, 1 - Math.abs(distance) * 0.4);
-              const opacity = Math.max(0.1, 1 - Math.abs(distance) * 1.6);
-              const blurAmount = Math.abs(distance) * 12;
-              const zIndex = Math.round(100 - Math.abs(distance) * 10);
-
-              wrapper.style.transform = `translate3d(${translateX}px, 0, ${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`;
-              wrapper.style.zIndex = zIndex;
-              
-              card.style.opacity = opacity;
-              card.style.filter = `blur(${blurAmount}px)`;
-
-              if (Math.abs(distance) < 0.3) {
-                wrapper.style.pointerEvents = 'auto';
-                card.style.pointerEvents = 'auto';
-              } else {
-                wrapper.style.pointerEvents = 'none';
-                card.style.pointerEvents = 'none';
-              }
-            });
-
-            ticking = false;
-          }
-
-          window.addEventListener('scroll', () => {
-            if (!ticking) {
-              requestAnimationFrame(updateTunnel);
-              ticking = true;
-            }
-          }, { passive: true });
-
-          updateTunnel();
-        }
+    (function() {
+      'use strict';
+      
+      // Disable all animations on body
+      document.body.style.animation = 'none';
+      document.body.style.transform = 'none';
+      document.body.style.opacity = '1';
+      document.body.style.filter = 'none';
+      
+      var container = document.getElementById('productsContainer');
+      
+      if (!container) {
+        console.error('Products container not found');
+        return;
       }
 
+      // Wait for products to load
+      function checkAndInit() {
+        if (window.FreshCartDB && window.FreshCartDB.products && window.FreshCartDB.products.length > 0) {
+          renderProducts(window.FreshCartDB.products);
+          return;
+        }
+        setTimeout(checkAndInit, 100);
+      }
+
+      function renderProducts(products) {
+        var html = '';
+        
+        for (var i = 0; i < products.length; i++) {
+          var p = products[i];
+          var price = typeof p.price === 'number' ? p.price.toFixed(2) : '0.00';
+          var oldPrice = p.oldPrice ? p.oldPrice.toFixed(2) : null;
+          var badge = p.badge || 'Organic';
+          var name = p.name || 'Product';
+          var description = p.description || '';
+          var image = p.image || '';
+          var category = p.category || 'produce';
+          var origin = p.origin || 'Direct Farm';
+          var isEven = i % 2 === 1;
+          
+          var oldPriceHtml = oldPrice ? '<span class="old">$' + oldPrice + '</span>' : '';
+          
+          html += '<div class="zigzag-item" data-index="' + i + '">';
+          html += '  <div class="zigzag-image">';
+          html += '    <span class="badge">' + badge + '</span>';
+          html += '    <img src="' + image + '" alt="' + name + '" loading="lazy">';
+          html += '    <div class="price-tag">' + oldPriceHtml + '$' + price + '</div>';
+          html += '  </div>';
+          html += '  <div class="zigzag-content">';
+          html += '    <span class="category">' + category + '</span>';
+          html += '    <h2>' + name + '</h2>';
+          html += '    <p class="description">' + description + '</p>';
+          html += '    <p class="origin">🌍 Sourced from ' + origin + '</p>';
+          html += '    <div class="actions">';
+          html += '      <a href="product-detail.html?id=' + p.id + '" class="btn-secondary">View Details</a>';
+          html += '      <button onclick="handleAddToCart(\'' + p.id + '\')" class="btn-primary">Add to Bag</button>';
+          html += '    </div>';
+          html += '  </div>';
+          html += '</div>';
+        }
+        
+        container.innerHTML = html;
+
+        // Trigger scroll reveal animation
+        var items = container.querySelectorAll('.zigzag-item');
+        
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        }, {
+          threshold: 0.15,
+          rootMargin: '0px 0px -50px 0px'
+        });
+        
+        items.forEach(function(item, index) {
+          // Stagger the animation
+          setTimeout(function() {
+            observer.observe(item);
+          }, index * 100);
+        });
+
+        console.log('Rendered', products.length, 'products in zigzag layout');
+      }
+
+      // Start checking for products
+      checkAndInit();
+
+      // ============================================
+      // ADD TO CART HANDLER
+      // ============================================
       window.handleAddToCart = function(productId) {
         if (window.FreshCartDB) {
           window.FreshCartDB.addToCart(productId);
@@ -424,8 +614,11 @@
         }
       };
 
+      // ============================================
+      // TOAST NOTIFICATION
+      // ============================================
       function showToast(message) {
-        let container = document.getElementById('toast-container');
+        var container = document.getElementById('toast-container');
         if (!container) {
           container = document.createElement('div');
           container.id = 'toast-container';
@@ -433,18 +626,21 @@
           document.body.appendChild(container);
         }
         
-        const toast = document.createElement('div');
+        var toast = document.createElement('div');
         toast.className = 'market-toast pointer-events-auto transform translate-y-4 opacity-0 transition-all duration-300';
         toast.textContent = message;
         container.appendChild(toast);
         
-        requestAnimationFrame(() => toast.classList.remove('translate-y-4', 'opacity-0'));
-        setTimeout(() => {
+        requestAnimationFrame(function() {
+          toast.classList.remove('translate-y-4', 'opacity-0');
+        });
+        
+        setTimeout(function() {
           toast.classList.add('translate-y-4', 'opacity-0');
-          setTimeout(() => toast.remove(), 400);
+          setTimeout(function() { toast.remove(); }, 400);
         }, 2500);
       }
-    });
+    })();
   </script>
 
 </body>

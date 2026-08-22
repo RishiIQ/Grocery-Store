@@ -137,9 +137,7 @@
     .stats-card::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       height: 3px;
       background: #6A8071;
       transform: scaleX(0);
@@ -189,9 +187,7 @@
     .pillar-card-3d .card-inner::after {
       content: '';
       position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
+      bottom: 0; left: 0; right: 0;
       height: 3px;
       background: #6A8071;
       transform: scaleX(0);
@@ -243,9 +239,7 @@
     .timeline-card::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       height: 4px;
       background: #6A8071;
       transform: scaleX(0);
@@ -299,61 +293,23 @@
     .reveal-on-scroll.delay-3 { transition-delay: 0.3s; }
 
     .sage-btn {
-      display: inline-block;
-      padding: 16px 40px;
-      background: #6A8071;
-      color: #FFFFFF;
-      text-transform: uppercase;
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      border: none;
-      border-radius: 0px;
-      cursor: pointer;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      text-align: center;
-      text-decoration: none;
+      display: inline-block; padding: 16px 40px; background: #6A8071; color: #FFFFFF;
+      text-transform: uppercase; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em;
+      border: none; border-radius: 0px; cursor: pointer; transition: all 0.4s ease; text-decoration: none;
     }
-    
-    .sage-btn:hover {
-      background: #576B5D;
-      transform: scale(1.02);
-    }
+    .sage-btn:hover { background: #576B5D; transform: scale(1.02); }
     
     .sage-btn-outline {
-      display: inline-block;
-      padding: 15px 38px;
-      background: transparent;
-      color: #FFFFFF;
-      border: 2px solid #FFFFFF;
-      text-transform: uppercase;
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      border-radius: 0px;
-      cursor: pointer;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      text-align: center;
-      text-decoration: none;
+      display: inline-block; padding: 15px 38px; background: transparent; color: #FFFFFF;
+      border: 2px solid #FFFFFF; text-transform: uppercase; font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.15em; border-radius: 0px; cursor: pointer; transition: all 0.4s ease; text-decoration: none;
     }
-    
-    .sage-btn-outline:hover {
-      background: #FFFFFF;
-      color: #24302A;
-      transform: scale(1.02);
-    }
+    .sage-btn-outline:hover { background: #FFFFFF; color: #24302A; transform: scale(1.02); }
 
     .market-toast {
-      background: #24302A;
-      color: #FFFFFF;
-      padding: 14px 24px;
-      border-radius: 0px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-      border-left: 4px solid #6A8071;
+      background: #24302A; color: #FFFFFF; padding: 14px 24px; border-radius: 0px;
+      font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); border-left: 4px solid #6A8071;
     }
   </style>
 </head>
@@ -391,7 +347,7 @@
     </section>
 
     <!-- ========================================== -->
-    <!-- NARRATIVE & STATS -->
+    <!-- NARRATIVE & STATS WITH NUMBER ANIMATION -->
     <!-- ========================================== -->
     <section class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       
@@ -411,22 +367,22 @@
           </p>
         </div>
 
-        <!-- Stats Card -->
+        <!-- Stats Card with Animated Numbers -->
         <div class="lg:col-span-5 reveal-on-scroll delay-2">
           <div class="stats-card">
             <p class="text-xs font-bold tracking-[0.2em] uppercase text-[#6A8071]">Global Telemetry Stats</p>
             <div class="space-y-4 mt-4">
               <div class="flex justify-between items-center border-b border-slate-200 dark:border-[#2D3E35] pb-3">
                 <span class="text-xs font-bold tracking-[0.1em] uppercase text-slate-500">Active Micro-Hubs</span>
-                <span class="stats-number">73</span>
+                <span class="stats-number" data-target="73" data-suffix="">0</span>
               </div>
               <div class="flex justify-between items-center border-b border-slate-200 dark:border-[#2D3E35] pb-3">
                 <span class="text-xs font-bold tracking-[0.1em] uppercase text-slate-500">Partner Cooperatives</span>
-                <span class="stats-number">140+</span>
+                <span class="stats-number" data-target="140" data-suffix="+">0</span>
               </div>
               <div class="flex justify-between items-center border-b border-slate-200 dark:border-[#2D3E35] pb-3">
                 <span class="text-xs font-bold tracking-[0.1em] uppercase text-slate-500">Daily Dispatches</span>
-                <span class="stats-number">450K+</span>
+                <span class="stats-number" data-target="450" data-suffix="K+">0</span>
               </div>
               <div class="flex justify-between items-center">
                 <span class="text-xs font-bold tracking-[0.1em] uppercase text-slate-500">Carbon Offset</span>
@@ -631,6 +587,49 @@
       });
 
       timelineCards.forEach(card => timelineObserver.observe(card));
+
+      // 4. Trending Number Counter Animation
+      const statNumbers = document.querySelectorAll('.stats-number');
+      let counted = false;
+
+      const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !counted) {
+            counted = true;
+            statNumbers.forEach(numEl => {
+              const target = parseInt(numEl.getAttribute('data-target'));
+              const suffix = numEl.getAttribute('data-suffix') || '';
+              const duration = 2000; // 2 seconds
+              const startTime = performance.now();
+
+              function updateCount(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                // Ease out expo formula for sleek trending deceleration
+                const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+                const currentVal = Math.floor(easeProgress * target);
+
+                numEl.textContent = currentVal + suffix;
+
+                if (progress < 1) {
+                  requestAnimationFrame(updateCount);
+                } else {
+                  numEl.textContent = target + suffix;
+                }
+              }
+
+              requestAnimationFrame(updateCount);
+            });
+            statsObserver.disconnect();
+          }
+        });
+      }, { threshold: 0.3 });
+
+      const statsCardEl = document.querySelector('.stats-card');
+      if (statsCardEl) {
+        statsObserver.observe(statsCardEl);
+      }
     });
   </script>
 

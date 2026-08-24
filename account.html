@@ -37,9 +37,6 @@
   })();
 </script>
   <style>
-    /* ============================================
-       SAGE & EARTH-TONE AESTHETIC
-       ============================================ */
     .dashboard-heading {
       font-weight: 800;
       text-transform: uppercase;
@@ -107,7 +104,6 @@
       border-color: #6A8071;
       color: #6A8071;
     }
-
     .market-toast {
       background: #24302A;
       color: #FFFFFF;
@@ -120,18 +116,10 @@
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
       border-left: 4px solid #6A8071;
     }
-
-    /* ============================================
-       MODERN SEAMLESS NAVIGATION ANIMATIONS
-       ============================================ */
-    
-    /* Tab Container */
     .dash-tabs-container {
       position: relative;
       overflow: hidden;
     }
-
-    /* Individual Tab Buttons */
     .dash-tab {
       position: relative;
       cursor: pointer;
@@ -150,68 +138,29 @@
       border-color: #2D3E35;
       color: #94A3B8;
     }
-
-    /* Tab Hover Effect */
-    .dash-tab::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(106, 128, 113, 0.08), transparent);
-      transition: left 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .dash-tab:hover::before {
-      left: 100%;
-    }
-    .dash-tab:hover {
-      border-color: #6A8071;
-      color: #6A8071;
-      transform: translateY(-2px);
-    }
-    .dark .dash-tab:hover {
-      border-color: #6A8071;
-      color: #6A8071;
-    }
-
-    /* Active Tab State */
     .dash-tab.active {
       background: #24302A;
       color: #FFFFFF;
       border-color: #24302A;
-      transform: translateY(0);
-      box-shadow: 0 4px 20px rgba(36, 48, 42, 0.2);
     }
     .dark .dash-tab.active {
       background: #6A8071;
       color: #FFFFFF;
       border-color: #6A8071;
-      box-shadow: 0 4px 20px rgba(106, 128, 113, 0.3);
     }
-
-    /* Tab Sliding Indicator */
     .tab-indicator {
       position: absolute;
       bottom: 0;
       height: 3px;
       background: #6A8071;
-      border-radius: 0;
       transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
       width: 0;
     }
-    .dark .tab-indicator {
-      background: #6A8071;
-    }
-
-    /* Content Container */
     .dash-content-wrapper {
       position: relative;
       overflow: hidden;
       min-height: 400px;
     }
-
-    /* Individual Content Panels */
     .dash-content {
       position: absolute;
       top: 0;
@@ -231,8 +180,6 @@
       visibility: visible;
       position: relative;
     }
-
-    /* Exit Animation */
     .dash-content.exit {
       opacity: 0;
       transform: translateY(-20px) scale(0.96);
@@ -240,76 +187,6 @@
       visibility: hidden;
       position: absolute;
     }
-
-    /* Staggered Child Animations */
-    .dash-content.active .stagger-item {
-      opacity: 0;
-      transform: translateY(20px);
-      animation: staggerFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-    .dash-content.active .stagger-item:nth-child(1) { animation-delay: 0.05s; }
-    .dash-content.active .stagger-item:nth-child(2) { animation-delay: 0.10s; }
-    .dash-content.active .stagger-item:nth-child(3) { animation-delay: 0.15s; }
-    .dash-content.active .stagger-item:nth-child(4) { animation-delay: 0.20s; }
-    .dash-content.active .stagger-item:nth-child(5) { animation-delay: 0.25s; }
-    .dash-content.active .stagger-item:nth-child(6) { animation-delay: 0.30s; }
-
-    @keyframes staggerFadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* Content Transition Overlay */
-    .content-transition-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 10;
-      background: linear-gradient(180deg, rgba(106, 128, 113, 0.02) 0%, transparent 50%, rgba(106, 128, 113, 0.02) 100%);
-      opacity: 0;
-      transition: opacity 0.4s ease;
-    }
-    .content-transition-overlay.active {
-      opacity: 1;
-    }
-
-    /* Counter Animation */
-    .counter-value {
-      display: inline-block;
-      transition: all 0.3s ease;
-    }
-
-    /* Glow Pulse for Active Tab */
-    @keyframes tabGlowPulse {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(106, 128, 113, 0.2); }
-      50% { box-shadow: 0 0 20px 8px rgba(106, 128, 113, 0.1); }
-    }
-    .dash-tab.active {
-      animation: tabGlowPulse 2s ease-in-out infinite;
-    }
-
-    /* Smooth Scrollbar for Content */
-    .dash-content-wrapper::-webkit-scrollbar {
-      width: 4px;
-    }
-    .dash-content-wrapper::-webkit-scrollbar-track {
-      background: transparent;
-    }
-    .dash-content-wrapper::-webkit-scrollbar-thumb {
-      background: #6A8071;
-      border-radius: 2px;
-    }
-
-    /* Additional Tab Styles */
     .dash-tabs-scroll {
       display: flex;
       flex-wrap: nowrap;
@@ -317,46 +194,64 @@
       gap: 8px;
       padding: 4px 0 12px 0;
       scrollbar-width: none;
-      -ms-overflow-style: none;
     }
     .dash-tabs-scroll::-webkit-scrollbar {
       display: none;
-    }
-
-    @media (max-width: 640px) {
-      .dash-tab {
-        padding: 10px 16px;
-        font-size: 0.55rem;
-        white-space: nowrap;
-      }
-      .dash-content {
-        padding: 20px 0;
-      }
     }
   </style>
 </head>
 <body class="bg-cream-bg dark:bg-[#111814] text-slate-900 dark:text-slate-100 antialiased transition-colors duration-500 min-h-screen flex flex-col justify-between selection:bg-[#6A8071] selection:text-white">
 
-  <!-- Shared DB Script for Cart & Toast notifications -->
   <script src="js/db.js"></script>
 
-  <!-- Dedicated Dashboard Header Bar -->
+<!-- Dedicated Dashboard Header Bar -->
   <header class="fixed top-0 left-0 w-full z-50 bg-[#F7F6F2]/95 dark:bg-[#111814]/95 border-b border-slate-200 dark:border-[#2D3E35] backdrop-blur-md h-[70px] flex items-center px-6 lg:px-12">
     <div class="max-w-7xl mx-auto w-full flex items-center justify-between">
       
-      <!-- Brand Logo -->
-      <a href="index.html" class="font-extrabold text-lg uppercase tracking-tight text-slate-900 dark:text-white">
-        Fresh<span class="text-[#6A8071]">Cart</span>
+      <!-- Brand Logo with Image -->
+      <a href="index.html" class="flex items-center gap-2.5 font-extrabold text-lg uppercase tracking-tight text-slate-900 dark:text-white no-underline">
+        <div class="w-10 h-10 flex items-center justify-center overflow-hidden flex-shrink-0">
+          <img src="assets/images/grossary-logo.png" alt="FreshCart Logo" class="w-[130%] h-[130%] object-contain">
+        </div>
+        <span>Fresh<span class="text-[#6A8071]">Cart</span></span>
         <span class="text-[0.5rem] font-bold tracking-[0.15em] px-2 py-0.5 border border-slate-200 dark:border-[#2D3E35] ml-2 text-slate-500">PORTAL</span>
       </a>
 
-      <!-- Controls: Clean Text-Direction Icon, Theme Toggle, & Sign Out -->
+      <!-- Controls: Cart, RTL, Theme, & Sign Out -->
       <div class="flex items-center gap-3">
-        <button id="rtlToggle" class="theme-toggle-btn" title="Toggle Text Direction">
+        <!-- Shopping Cart Button with Badge -->
+        <a href="cart.html" class="theme-toggle-btn relative" title="Shopping Cart" aria-label="Shopping cart">
           <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path id="nixonRTLIconPath" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 6h12M6 12h8M6 18h10"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+          </svg>
+          <span class="absolute -top-1 -right-1 bg-[#6A8071] text-white text-[0.5rem] font-bold min-width-[16px] h-4 rounded-full flex items-center justify-center px-1" id="nixonCartBadge" style="display:none;">0</span>
+        </a>
+
+        <!-- RTL/LTR Direction Toggle -->
+        <button id="rtlToggle" class="theme-toggle-btn" title="Toggle Text Direction (LTR / RTL)">
+          <!-- LTR Icon -->
+          <svg id="ltrIcon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2">
+              <path stroke-dasharray="15" stroke-dashoffset="15" d="M4 5H17"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.2s" values="15;0"/></path>
+              <path stroke-dasharray="12" stroke-dashoffset="12" d="M4 10H14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.2s" dur="0.2s" values="12;0"/></path>
+              <path stroke-dasharray="18" stroke-dashoffset="18" d="M4 15H20"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.4s" dur="0.2s" values="18;0"/></path>
+              <path stroke-dasharray="15" stroke-dashoffset="15" d="M4 20H17"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="15;0"/></path>
+            </g>
+          </svg>
+          <!-- RTL Icon -->
+          <svg id="rtlIcon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="display:none;">
+            <g transform="translate(24 0) scale(-1 1)">
+              <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2">
+                <path stroke-dasharray="15" stroke-dashoffset="15" d="M4 5H17"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.2s" values="15;0"/></path>
+                <path stroke-dasharray="12" stroke-dashoffset="12" d="M4 10H14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.2s" dur="0.2s" values="12;0"/></path>
+                <path stroke-dasharray="18" stroke-dashoffset="18" d="M4 15H20"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.4s" dur="0.2s" values="18;0"/></path>
+                <path stroke-dasharray="15" stroke-dashoffset="15" d="M4 20H17"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="15;0"/></path>
+              </g>
+            </g>
           </svg>
         </button>
+
+        <!-- Theme Toggle -->
         <button id="themeToggle" class="theme-toggle-btn" title="Toggle Theme">
           <svg class="dark:hidden" width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
@@ -365,6 +260,8 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
           </svg>
         </button>
+
+        <!-- Sign Out Button -->
         <button onclick="logoutCustomer()" class="px-4 py-2 border border-slate-200 dark:border-[#2D3E35] text-[0.6rem] font-bold uppercase tracking-[0.15em] hover:border-[#6A8071] hover:text-[#6A8071] transition-all">
           Sign Out
         </button>
@@ -376,7 +273,6 @@
   <!-- Dashboard Main Container -->
   <main class="py-24 px-4 sm:px-6 lg:px-12 max-w-7xl mx-auto w-full space-y-12 flex-1" style="padding-top: 110px;">
     
-    <!-- Welcome Header & Quick Stats -->
     <div class="flex flex-col md:flex-row justify-between items-start md:items-end border-b border-slate-200 dark:border-[#2D3E35] pb-8 gap-6 pt-8 stagger-item">
       <div>
         <p class="dashboard-subheading">( Secure Client Portal )</p>
@@ -387,7 +283,7 @@
       </div>
     </div>
 
-    <!-- Dashboard Navigation Tabs with Modern Animation -->
+    <!-- Dashboard Navigation Tabs -->
     <div class="dash-tabs-container relative">
       <div class="dash-tabs-scroll">
         <button onclick="switchTab('catalog', event)" id="tab-catalog" class="dash-tab active">Market Catalog</button>
@@ -400,14 +296,12 @@
 
     <!-- Content Wrapper with Transitions -->
     <div class="dash-content-wrapper relative" id="contentWrapper">
-      
-      <!-- Transition Overlay -->
       <div class="content-transition-overlay" id="transitionOverlay"></div>
 
-      <!-- TAB CONTENT 1: MARKET CATALOG & ORDER PLACEMENT -->
+      <!-- TAB 1: MARKET CATALOG -->
       <div id="content-catalog" class="dash-content active">
         <div class="space-y-8">
-          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 stagger-item">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div>
               <p class="dashboard-subheading">Instant Fulfillment</p>
               <h2 class="dashboard-heading text-2xl sm:text-3xl mt-1">Browse &amp; Order Provisions</h2>
@@ -420,14 +314,14 @@
               </select>
             </div>
           </div>
-          <div id="dashboardCatalogGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 stagger-item"></div>
+          <div id="dashboardCatalogGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
         </div>
       </div>
 
-      <!-- TAB CONTENT 2: LIVE ORDER TRACKING -->
+      <!-- TAB 2: LIVE TELEMETRY TRACKING -->
       <div id="content-tracking" class="dash-content">
         <div class="space-y-8">
-          <div class="market-card p-8 lg:p-12 space-y-8 stagger-item">
+          <div class="market-card p-8 lg:p-12 space-y-8">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-200 dark:border-[#2D3E35] pb-6 gap-4">
               <div>
                 <span class="text-xs font-mono text-[#6A8071] uppercase tracking-widest">Order ID: #FC-8942-EU</span>
@@ -436,93 +330,77 @@
               <span class="px-4 py-1.5 bg-[#6A8071]/10 text-[#6A8071] text-xs uppercase font-bold tracking-[0.15em] border border-[#6A8071]/30 animate-pulse">Status: Out for Delivery</span>
             </div>
 
-            <!-- Progress Timeline Steps -->
-            <div class="grid grid-cols-1 sm:grid-cols-4 gap-6 text-xs uppercase tracking-[0.15em] stagger-item">
+            <div class="grid grid-cols-1 sm:grid-cols-4 gap-6 text-xs uppercase tracking-[0.15em]">
               <div class="p-6 bg-[#6A8071] text-white font-bold space-y-2 shadow-lg">
                 <span>01 / 04</span>
                 <p class="text-sm font-extrabold">Order Confirmed</p>
-                <p class="text-[10px] opacity-80">Verified &amp; paid</p>
               </div>
               <div class="p-6 bg-[#6A8071] text-white font-bold space-y-2 shadow-lg">
                 <span>02 / 04</span>
                 <p class="text-sm font-extrabold">Hub Packing</p>
-                <p class="text-[10px] opacity-80">Thermal sealed</p>
               </div>
               <div class="p-6 bg-[#6A8071] text-white font-bold space-y-2 shadow-lg animate-pulse">
                 <span>03 / 04</span>
                 <p class="text-sm font-extrabold">Out for Delivery</p>
-                <p class="text-[10px] opacity-80">GPS Electric Van #4</p>
               </div>
               <div class="p-6 market-card text-slate-400 space-y-2">
                 <span>04 / 04</span>
                 <p class="text-sm font-extrabold">Delivered</p>
-                <p class="text-[10px] opacity-50">Pending arrival</p>
               </div>
-            </div>
-
-            <div class="p-6 market-card flex flex-col sm:flex-row items-center justify-between text-xs font-bold uppercase tracking-[0.15em] gap-4 stagger-item">
-              <span>Estimated Arrival: <strong class="text-[#6A8071]">6 Minutes</strong></span>
-              <span>Courier: Marc V. (Zero-Emission Fleet)</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- TAB CONTENT 3: SAVED WEEKLY REORDERS -->
+      <!-- TAB 3: SAVED REORDERS -->
       <div id="content-reorders" class="dash-content">
         <div class="space-y-8">
-          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 stagger-item">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div>
               <p class="dashboard-subheading">Custom Allocations</p>
               <h2 class="dashboard-heading text-2xl sm:text-3xl mt-1">Saved Weekly Shopping List</h2>
             </div>
             <button onclick="reorderSavedList()" class="sage-btn">Add All to Bag →</button>
           </div>
-          <div id="savedReordersGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6 stagger-item"></div>
+          <div id="savedReordersGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
         </div>
       </div>
 
-      <!-- TAB CONTENT 4: PAST ORDER HISTORY & ITEMIZED BILLS -->
+      <!-- TAB 4: ORDER HISTORY & BILLS -->
       <div id="content-history" class="dash-content">
         <div class="space-y-8">
-          <div class="stagger-item">
+          <div>
             <p class="dashboard-subheading">Archive Ledger</p>
             <h2 class="dashboard-heading text-2xl sm:text-3xl mt-1">Past Orders &amp; Itemized Invoices</h2>
           </div>
-          <div class="space-y-6 stagger-item">
-            <div class="market-card p-8 space-y-6">
-              <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-200 dark:border-[#2D3E35] pb-4 gap-4">
-                <div>
-                  <span class="text-xs font-mono text-slate-500 uppercase">Order #FC-7102-FR • August 14, 2026</span>
-                  <h3 class="dashboard-heading text-xl mt-1">Home Delivery (Organic Produce &amp; Bakery)</h3>
-                </div>
-                <div class="text-right">
-                  <span class="font-extrabold text-xl">$24.38</span>
-                  <span class="block text-[10px] font-bold uppercase tracking-[0.15em] text-[#6A8071]">Fulfilled</span>
-                </div>
+          <div class="market-card p-8 space-y-6">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-200 dark:border-[#2D3E35] pb-4 gap-4">
+              <div>
+                <span class="text-xs font-mono text-slate-500 uppercase">Order #FC-7102-FR • August 14, 2026</span>
+                <h3 class="dashboard-heading text-xl mt-1">Home Delivery (Organic Produce &amp; Bakery)</h3>
               </div>
-              <div class="space-y-2 text-xs font-bold uppercase tracking-[0.1em] text-slate-500">
-                <div class="flex justify-between"><span>Organic Hass Avocados (x2)</span><span class="text-slate-900 dark:text-white">$11.98</span></div>
-                <div class="flex justify-between"><span>Artisanal Sourdough Loaf (x1)</span><span class="text-slate-900 dark:text-white">$4.50</span></div>
-                <div class="flex justify-between"><span>Cold-Chain Delivery Fee</span><span class="text-slate-900 dark:text-white">$4.99</span></div>
-                <div class="flex justify-between pt-3 border-t border-slate-200 dark:border-[#2D3E35] text-slate-900 dark:text-white font-extrabold text-sm"><span>Total Paid (TLS Secure)</span><span class="text-[#6A8071]">$24.38</span></div>
+              <div class="text-right">
+                <span class="font-extrabold text-xl">$24.38</span>
+                <span class="block text-[10px] font-bold uppercase tracking-[0.15em] text-[#6A8071]">Fulfilled</span>
               </div>
+            </div>
+            <div class="space-y-2 text-xs font-bold uppercase tracking-[0.1em] text-slate-500">
+              <div class="flex justify-between"><span>Organic Hass Avocados (x2)</span><span class="text-slate-900 dark:text-white">$11.98</span></div>
+              <div class="flex justify-between"><span>Artisanal Sourdough Loaf (x1)</span><span class="text-slate-900 dark:text-white">$4.50</span></div>
+              <div class="flex justify-between pt-3 border-t border-slate-200 dark:border-[#2D3E35] text-slate-900 dark:text-white font-extrabold text-sm"><span>Total Paid</span><span class="text-[#6A8071]">$24.38</span></div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
   </main>
 
-  <!-- Minimal Portal Footer -->
   <footer class="py-12 px-4 border-t border-slate-200 dark:border-[#2D3E35] text-center">
     <p class="text-[0.5rem] font-bold tracking-[0.2em] uppercase text-slate-500">
       🔒 Encrypted TLS 256-Bit Protocol • © 2026 FreshCart Botanical Portal
     </p>
   </footer>
 
-  <!-- Script Handlers -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const userSession = JSON.parse(localStorage.getItem('freshcart_user'));
@@ -530,13 +408,27 @@
         document.getElementById('welcomeUserTitle').innerText = `${userSession.name}'s Dashboard.`;
       }
 
-      // Render Catalog in Dashboard
+      // Initialize LTR/RTL icon display based on current direction
+      function updateDirIcons(dir) {
+        const ltrIcon = document.getElementById('ltrIcon');
+        const rtlIcon = document.getElementById('rtlIcon');
+        if (dir === 'rtl') {
+          if (ltrIcon) ltrIcon.style.display = 'none';
+          if (rtlIcon) rtlIcon.style.display = 'block';
+        } else {
+          if (ltrIcon) ltrIcon.style.display = 'block';
+          if (rtlIcon) rtlIcon.style.display = 'none';
+        }
+      }
+      updateDirIcons(document.documentElement.getAttribute('dir'));
+
+      // Render Dashboard Catalog Grid
       const dashGrid = document.getElementById('dashboardCatalogGrid');
       if (dashGrid && window.FreshCartDB) {
-        dashGrid.innerHTML = FreshCartDB.products.map((p, i) => `
-          <div class="market-card p-6 flex flex-col justify-between space-y-4 stagger-item" style="animation-delay: ${0.05 + (i * 0.04)}s">
+        dashGrid.innerHTML = FreshCartDB.products.map((p) => `
+          <div class="market-card p-6 flex flex-col justify-between space-y-4">
             <div class="aspect-[4/3] overflow-hidden border border-slate-200 dark:border-[#2D3E35]">
-              <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+              <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover">
             </div>
             <div class="space-y-1">
               <span class="text-[0.55rem] font-bold uppercase tracking-[0.15em] text-[#6A8071]">${p.badge || 'Organic'}</span>
@@ -552,8 +444,8 @@
       const reordersGrid = document.getElementById('savedReordersGrid');
       if (reordersGrid && window.FreshCartDB) {
         const savedItems = FreshCartDB.products.slice(0, 2);
-        reordersGrid.innerHTML = savedItems.map((p, i) => `
-          <div class="market-card p-6 flex items-center justify-between gap-4 stagger-item" style="animation-delay: ${0.05 + (i * 0.06)}s">
+        reordersGrid.innerHTML = savedItems.map((p) => `
+          <div class="market-card p-6 flex items-center justify-between gap-4">
             <div class="flex items-center gap-4">
               <img src="${p.image}" alt="${p.name}" class="w-16 h-16 object-cover border border-slate-200 dark:border-[#2D3E35]">
               <div>
@@ -566,7 +458,6 @@
         `).join('');
       }
 
-      // Initialize Tab Indicator
       updateTabIndicator('catalog');
 
       // Theme Toggle Handler
@@ -575,110 +466,56 @@
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
       });
 
-      // Standard Directional Toggle Handler
+      // Directional Toggle Handler
       const rtlBtn = document.getElementById('rtlToggle');
       rtlBtn.addEventListener('click', function() {
         const currentDir = document.documentElement.getAttribute('dir');
         const newDir = currentDir === 'rtl' ? 'ltr' : 'rtl';
         document.documentElement.setAttribute('dir', newDir);
         localStorage.setItem('dir', newDir);
+        updateDirIcons(newDir);
+        showToast(newDir === 'rtl' ? '📖 RTL layout enabled' : '📖 LTR layout enabled');
       });
     });
 
-    // ============================================
-    // MODERN SEAMLESS TAB SWITCHING
-    // ============================================
     let isTransitioning = false;
-
     window.switchTab = (tabName, event) => {
       if (isTransitioning) return;
-      
       const currentActive = document.querySelector('.dash-content.active');
       const targetContent = document.getElementById(`content-${tabName}`);
-      const overlay = document.getElementById('transitionOverlay');
-      
       if (!targetContent || currentActive === targetContent) return;
-      
       isTransitioning = true;
 
-      // Update Tab Styles
-      document.querySelectorAll('.dash-tab').forEach(btn => {
-        btn.classList.remove('active');
-      });
+      document.querySelectorAll('.dash-tab').forEach(btn => btn.classList.remove('active'));
       const activeTab = document.getElementById(`tab-${tabName}`);
       if (activeTab) activeTab.classList.add('active');
 
-      // Update Indicator
       updateTabIndicator(tabName);
 
-      // Show Overlay
-      if (overlay) overlay.classList.add('active');
-
-      // Exit Current Content
       if (currentActive) {
         currentActive.classList.remove('active');
         currentActive.classList.add('exit');
       }
 
-      // After exit animation, show new content
       setTimeout(() => {
-        // Remove exit class from previous
-        if (currentActive) {
-          currentActive.classList.remove('exit');
-        }
-
-        // Show new content
+        if (currentActive) currentActive.classList.remove('exit');
         targetContent.classList.add('active');
-
-        // Hide overlay after entrance
-        setTimeout(() => {
-          if (overlay) overlay.classList.remove('active');
-          isTransitioning = false;
-        }, 400);
-
-        // Scroll to top of content
-        const wrapper = document.getElementById('contentWrapper');
-        if (wrapper) {
-          wrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
+        isTransitioning = false;
       }, 400);
     };
 
-    // ============================================
-    // TAB INDICATOR UPDATE
-    // ============================================
     function updateTabIndicator(tabName) {
       const activeTab = document.getElementById(`tab-${tabName}`);
       const indicator = document.getElementById('tabIndicator');
-      
       if (activeTab && indicator) {
         const tabRect = activeTab.getBoundingClientRect();
         const containerRect = activeTab.parentElement.getBoundingClientRect();
-        
-        // Get the scroll offset of the tabs container
         const scrollLeft = activeTab.parentElement.scrollLeft || 0;
-        
         indicator.style.width = `${tabRect.width}px`;
         indicator.style.transform = `translateX(${tabRect.left - containerRect.left + scrollLeft}px)`;
       }
     }
 
-    // Update indicator on resize
-    let resizeTimeout;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(() => {
-        const activeTab = document.querySelector('.dash-tab.active');
-        if (activeTab) {
-          const tabId = activeTab.id.replace('tab-', '');
-          updateTabIndicator(tabId);
-        }
-      }, 200);
-    });
-
-    // ============================================
-    // REORDER FUNCTION
-    // ============================================
     window.reorderSavedList = () => {
       if (window.FreshCartDB) {
         FreshCartDB.addToCart('prod-1');
@@ -687,17 +524,11 @@
       }
     };
 
-    // ============================================
-    // LOGOUT
-    // ============================================
     window.logoutCustomer = () => {
       localStorage.removeItem('freshcart_user');
       window.location.href = 'index.html';
     };
 
-    // ============================================
-    // TOAST NOTIFICATION
-    // ============================================
     function showToast(message) {
       let container = document.getElementById('toast-container');
       if (!container) {
@@ -716,6 +547,22 @@
         setTimeout(() => toast.remove(), 400);
       }, 2500);
     }
+    // Update Cart Badge on Load and Listen for Changes
+    function updateCartBadge() {
+      const badge = document.getElementById('nixonCartBadge');
+      if (!badge) return;
+      try {
+        const cart = window.FreshCartDB ? FreshCartDB.getCart() : JSON.parse(localStorage.getItem('freshcart_cart')) || [];
+        const totalQty = cart.reduce((sum, item) => sum + (item.qty || 0), 0);
+        badge.textContent = totalQty;
+        badge.style.display = totalQty > 0 ? 'flex' : 'none';
+      } catch (e) {
+        badge.textContent = '0';
+        badge.style.display = 'none';
+      }
+    }
+    updateCartBadge();
+    window.addEventListener('cartUpdated', updateCartBadge);
   </script>
 </body>
 </html>

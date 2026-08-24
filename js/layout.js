@@ -43,11 +43,25 @@ document.addEventListener('DOMContentLoaded', () => {
           </button>
 
           <button id="nixonRTLToggle" class="nixon-action-btn" title="Toggle Text Direction" aria-label="Toggle text direction">
-            <svg class="nixon-icon-ltr" width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 6h12M6 12h8M6 18h10"/>
+            <!-- Custom LTR Icon -->
+            <svg class="nixon-icon-ltr" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2">
+                <path stroke-dasharray="15" stroke-dashoffset="15" d="M4 5H17"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.2s" values="15;0"/></path>
+                <path stroke-dasharray="12" stroke-dashoffset="12" d="M4 10H14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.2s" dur="0.2s" values="12;0"/></path>
+                <path stroke-dasharray="18" stroke-dashoffset="18" d="M4 15H20"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.4s" dur="0.2s" values="18;0"/></path>
+                <path stroke-dasharray="15" stroke-dashoffset="15" d="M4 20H17"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="15;0"/></path>
+              </g>
             </svg>
-            <svg class="nixon-icon-rtl" width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display:none;">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 6H6m12 6H10m12 6H8"/>
+            <!-- Custom RTL Icon -->
+            <svg class="nixon-icon-rtl" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="display:none;">
+              <g transform="translate(24 0) scale(-1 1)">
+                <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2">
+                  <path stroke-dasharray="15" stroke-dashoffset="15" d="M4 5H17"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.2s" values="15;0"/></path>
+                  <path stroke-dasharray="12" stroke-dashoffset="12" d="M4 10H14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.2s" dur="0.2s" values="12;0"/></path>
+                  <path stroke-dasharray="18" stroke-dashoffset="18" d="M4 15H20"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.4s" dur="0.2s" values="18;0"/></path>
+                  <path stroke-dasharray="15" stroke-dashoffset="15" d="M4 20H17"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="15;0"/></path>
+                </g>
+              </g>
             </svg>
           </button>
 
@@ -60,12 +74,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
           <div id="nixonAuthContainer">
             ${isLoggedIn ? `
-              <div class="auth-dropdown">
-                <button class="nixon-auth-btn dashboard-btn" id="authUserBtn">
+              <div class="auth-dropdown" id="authDropdown">
+                <button class="nixon-auth-btn dashboard-btn" id="authUserBtn" type="button" aria-expanded="false">
                   ${userSession.name || 'Account'}
-                 
                 </button>
-                <div class="auth-dropdown-menu">
+                <div class="auth-dropdown-menu" id="authDropdownMenu">
                   <a href="account.html">Dashboard</a>
                   <button id="signOutBtn" class="auth-dropdown-signout">Sign Out</button>
                 </div>
@@ -73,7 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
             ` : `
               <a href="login.html" class="nixon-auth-btn">Sign In</a>
             `}
-            
           </div>
         </div>
 
@@ -161,13 +173,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // ============================================
   function handleSignOut() {
     localStorage.removeItem('freshcart_user');
-    // Clear any other user data if needed
     window.location.reload();
   }
 
-  // Add sign out event listeners
   function initSignOutButtons() {
-    // Sign out button in desktop dropdown
     const signOutBtn = document.getElementById('signOutBtn');
     if (signOutBtn) {
       signOutBtn.addEventListener('click', function(e) {
@@ -176,7 +185,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    // Sign out button in mobile nav
     const navSignOutBtn = document.getElementById('navSignOutBtn');
     if (navSignOutBtn) {
       navSignOutBtn.addEventListener('click', function(e) {
@@ -184,6 +192,29 @@ document.addEventListener('DOMContentLoaded', () => {
         handleSignOut();
       });
     }
+  }
+
+  // ============================================
+  // AUTH DROPDOWN TOGGLE FIX (CLICK ONLY)
+  // ============================================
+  function initAuthDropdown() {
+    const dropdown = document.getElementById('authDropdown');
+    const authUserBtn = document.getElementById('authUserBtn');
+    
+    if (!dropdown || !authUserBtn) return;
+
+    authUserBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const isOpen = dropdown.classList.toggle('active');
+      authUserBtn.setAttribute('aria-expanded', isOpen);
+    });
+
+    document.addEventListener('click', function(e) {
+      if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove('active');
+        authUserBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
   }
 
   // ============================================
@@ -212,13 +243,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    // Hamburger click
     hamburger.addEventListener('click', function(e) {
       e.stopPropagation();
       toggleMenu();
     });
 
-    // Close on link click (except sign out)
     nav.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', function() {
         if (window.innerWidth <= 1024) {
@@ -227,7 +256,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // Close on outside click
     document.addEventListener('click', function(e) {
       if (nav.classList.contains('open')) {
         const isClickInside = nav.contains(e.target) || hamburger.contains(e.target);
@@ -237,14 +265,12 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Close on Escape
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape' && nav.classList.contains('open')) {
         toggleMenu(false);
       }
     });
 
-    // Handle resize
     let resizeTimeout;
     window.addEventListener('resize', function() {
       clearTimeout(resizeTimeout);
@@ -361,8 +387,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const container = document.getElementById('nixonAuthContainer');
     if (!container) return;
 
-    // Initialize sign out buttons after DOM update
-    setTimeout(initSignOutButtons, 100);
+    setTimeout(() => {
+      initSignOutButtons();
+      initAuthDropdown();
+    }, 100);
   }
   initAuthState();
 

@@ -1406,7 +1406,7 @@ body {
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
 }
 
-.auth-dropdown:hover .auth-dropdown-menu,
+.auth-dropdown-menu,
 .auth-dropdown.active .auth-dropdown-menu {
   display: block;
 }
@@ -1543,3 +1543,4 @@ body {
     padding: 10px 12px;
   }
 }
+

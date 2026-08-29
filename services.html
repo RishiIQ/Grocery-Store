@@ -35,32 +35,32 @@
       }
     }
   </script>
-  
+
   <!-- Styles -->
   <link rel="stylesheet" href="css/style.css">
-  
+
   <style>
     /* ============================================
        SAGE & EARTH-TONE SERVICES PAGE
        ============================================ */
-    
+
     .services-hero {
       background: #24302A;
       position: relative;
       overflow: hidden;
     }
-    
+
     .services-hero::before {
       content: '';
       position: absolute;
       inset: 0;
-      background-image: 
+      background-image:
         linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
       background-size: 50px 50px;
       pointer-events: none;
     }
-    
+
     /* Hero glow orbs */
     .hero-orb {
       position: absolute;
@@ -69,13 +69,13 @@
       pointer-events: none;
       will-change: transform, opacity;
     }
-    
+
     @keyframes orbFloatSlow {
       0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.2; }
       33% { transform: translate(50px, -30px) scale(1.1); opacity: 0.4; }
       66% { transform: translate(-30px, 40px) scale(0.9); opacity: 0.3; }
     }
-    
+
     .orb-services-1 {
       width: 600px;
       height: 600px;
@@ -84,7 +84,7 @@
       right: -200px;
       animation: orbFloatSlow 10s ease-in-out infinite;
     }
-    
+
     .orb-services-2 {
       width: 400px;
       height: 400px;
@@ -93,14 +93,14 @@
       left: -100px;
       animation: orbFloatSlow 12s ease-in-out infinite reverse;
     }
-    
+
     .services-heading {
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: -0.02em;
       line-height: 0.95;
     }
-    
+
     .services-subheading {
       text-transform: uppercase;
       font-size: 0.7rem;
@@ -108,23 +108,23 @@
       font-weight: 700;
       color: #6A8071;
     }
-    
+
     .services-body {
       font-size: 0.95rem;
       line-height: 1.8;
       color: #94A3B8;
     }
-    
+
     /* ============================================
        ENHANCED 3D FLIP CARDS
        ============================================ */
-    
+
     .service-flip-container {
       perspective: 1200px;
       height: 460px;
       cursor: pointer;
     }
-    
+
     .service-flip-inner {
       position: relative;
       width: 100%;
@@ -132,11 +132,11 @@
       transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
       transform-style: preserve-3d;
     }
-    
+
     .service-flip-container:hover .service-flip-inner {
       transform: rotateY(180deg);
     }
-    
+
     .service-flip-front,
     .service-flip-back {
       position: absolute;
@@ -147,7 +147,7 @@
       overflow: hidden;
       border-radius: 0px;
     }
-    
+
     .service-flip-front {
       background: #FFFFFF;
       border: 1px solid #E2E8F0;
@@ -157,16 +157,16 @@
       padding: 36px;
       transition: box-shadow 0.4s ease;
     }
-    
+
     .dark .service-flip-front {
       background: #18221D;
       border-color: #2D3E35;
     }
-    
+
     .service-flip-container:hover .service-flip-front {
       box-shadow: 0 20px 60px rgba(106, 128, 113, 0.15);
     }
-    
+
     .service-flip-front::before {
       content: '';
       position: absolute;
@@ -179,11 +179,11 @@
       transform-origin: left;
       transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    
+
     .service-flip-container:hover .service-flip-front::before {
       transform: scaleX(1);
     }
-    
+
     .service-flip-back {
       transform: rotateY(180deg);
       background: #18221D;
@@ -194,11 +194,11 @@
       justify-content: space-between;
       box-shadow: 0 20px 60px rgba(106, 128, 113, 0.2);
     }
-    
+
     .dark .service-flip-back {
       background: #111814;
     }
-    
+
     .card-number {
       font-weight: 800;
       font-size: 3.5rem;
@@ -207,11 +207,11 @@
       line-height: 1;
       transition: opacity 0.4s ease;
     }
-    
+
     .service-flip-container:hover .card-number {
       opacity: 0.5;
     }
-    
+
     .flip-indicator {
       font-size: 0.55rem;
       text-transform: uppercase;
@@ -219,11 +219,11 @@
       color: #94A3B8;
       transition: all 0.4s ease;
     }
-    
+
     .service-flip-container:hover .flip-indicator {
       color: #6A8071;
     }
-    
+
     .back-list-item {
       text-transform: uppercase;
       font-size: 0.7rem;
@@ -236,21 +236,21 @@
       align-items: center;
       gap: 12px;
     }
-    
+
     .back-list-item:hover {
       color: #FFFFFF;
       padding-left: 8px;
     }
-    
+
     .back-list-item .check {
       color: #6A8071;
       font-size: 1.2rem;
     }
-    
+
     /* ============================================
        EXTENDED ARCHITECTURE CARDS
        ============================================ */
-    
+
     .arch-card {
       background: #FFFFFF;
       border: 1px solid #E2E8F0;
@@ -260,12 +260,12 @@
       overflow: hidden;
       border-radius: 0px;
     }
-    
+
     .dark .arch-card {
       background: #18221D;
       border-color: #2D3E35;
     }
-    
+
     .arch-card::after {
       content: '';
       position: absolute;
@@ -278,28 +278,28 @@
       transform-origin: left;
       transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    
+
     .arch-card:hover::after {
       transform: scaleX(1);
     }
-    
+
     .arch-card:hover {
       transform: translateY(-6px);
       border-color: #6A8071;
       box-shadow: 0 16px 48px rgba(106, 128, 113, 0.15);
     }
-    
+
     .arch-number {
       font-weight: 800;
       font-size: 1.8rem;
       color: #6A8071;
       opacity: 0.3;
     }
-    
+
     /* ============================================
        CTA SECTION
        ============================================ */
-    
+
     .cta-section {
       background: #24302A;
       border-top: 1px solid #2D3E35;
@@ -307,7 +307,7 @@
       position: relative;
       overflow: hidden;
     }
-    
+
     .cta-section::before {
       content: '';
       position: absolute;
@@ -319,24 +319,24 @@
       border-radius: 50%;
       animation: orbFloatSlow 12s ease-in-out infinite;
     }
-    
+
     /* Scroll reveal */
     .reveal-on-scroll {
       opacity: 0;
       transform: translateY(50px);
       transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    
+
     .reveal-on-scroll.is-revealed {
       opacity: 1;
       transform: translateY(0);
     }
-    
+
     .reveal-on-scroll.delay-1 { transition-delay: 0.1s; }
     .reveal-on-scroll.delay-2 { transition-delay: 0.2s; }
     .reveal-on-scroll.delay-3 { transition-delay: 0.3s; }
     .reveal-on-scroll.delay-4 { transition-delay: 0.4s; }
-    
+
     .sage-btn {
       display: inline-block;
       padding: 16px 40px;
@@ -353,12 +353,12 @@
       text-align: center;
       text-decoration: none;
     }
-    
+
     .sage-btn:hover {
       background: #576B5D;
       transform: scale(1.02);
     }
-    
+
     .sage-btn-outline {
       display: inline-block;
       padding: 15px 38px;
@@ -375,7 +375,7 @@
       text-align: center;
       text-decoration: none;
     }
-    
+
     .sage-btn-outline:hover {
       background: #FFFFFF;
       color: #24302A;
@@ -407,7 +407,7 @@
     <!-- SERVICES HERO -->
     <!-- ========================================== -->
     <section class="services-hero min-h-[60vh] flex items-center relative text-white">
-      
+
       <!-- Glow Orbs -->
       <div class="hero-orb orb-services-1"></div>
       <div class="hero-orb orb-services-2"></div>
@@ -433,7 +433,7 @@
     <!-- 3D FLIP SERVICE CARDS -->
     <!-- ========================================== -->
     <section class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      
+
       <div class="text-center mb-16 reveal-on-scroll">
         <p class="services-subheading">Service Pillars</p>
         <h2 class="services-heading text-3xl sm:text-4xl lg:text-5xl mt-2">Our Infrastructure</h2>
@@ -442,7 +442,7 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        
+
         <!-- Service 1: Dispatch -->
         <div class="service-flip-container reveal-on-scroll delay-1">
           <div class="service-flip-inner">
@@ -472,7 +472,7 @@
               </div>
               <div class="pt-4 border-t border-white/10 flex justify-between items-center">
                 <span class="text-xs font-bold tracking-[0.1em] uppercase text-slate-400">SLA: 99.99%</span>
-                <a href="index-saas.html" class="text-xs font-bold tracking-[0.1em] uppercase text-[#8FA89B] hover:underline">Inspect API →</a>
+                <a href="index-saas.html#api" class="text-xs font-bold tracking-[0.1em] uppercase text-[#8FA89B] hover:underline">Inspect API →</a>
               </div>
             </div>
           </div>
@@ -507,7 +507,7 @@
               </div>
               <div class="pt-4 border-t border-white/10 flex justify-between items-center">
                 <span class="text-xs font-bold tracking-[0.1em] uppercase text-slate-400">Variance: 0.00%</span>
-                <a href="index-saas.html" class="text-xs font-bold tracking-[0.1em] uppercase text-[#8FA89B] hover:underline">View Webhooks →</a>
+                <a href="services-docs.html#webhooks" class="text-xs font-bold tracking-[0.1em] uppercase text-[#8FA89B] hover:underline">View Webhooks →</a>
               </div>
             </div>
           </div>
@@ -577,7 +577,7 @@
               </div>
               <div class="pt-4 border-t border-white/10 flex justify-between items-center">
                 <span class="text-xs font-bold tracking-[0.1em] uppercase text-slate-400">Latency: &lt;12ms</span>
-                <a href="index-saas.html" class="text-xs font-bold tracking-[0.1em] uppercase text-[#8FA89B] hover:underline">Read SDK Docs →</a>
+                <a href="services-docs.html" class="text-xs font-bold tracking-[0.1em] uppercase text-[#8FA89B] hover:underline">Read SDK Docs →</a>
               </div>
             </div>
           </div>
@@ -590,7 +590,7 @@
     <!-- EXTENDED ARCHITECTURE -->
     <!-- ========================================== -->
     <section class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-slate-200 dark:border-[#2D3E35]">
-      
+
       <div class="text-center mb-16 reveal-on-scroll">
         <p class="services-subheading">Architecture Overview</p>
         <h2 class="services-heading text-3xl sm:text-4xl lg:text-5xl mt-2">Enterprise Foundation</h2>
@@ -598,7 +598,7 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        
+
         <div class="arch-card reveal-on-scroll delay-1">
           <div class="arch-number">01</div>
           <p class="text-xs font-bold tracking-[0.2em] uppercase text-[#6A8071] mt-2">Security</p>
@@ -664,7 +664,7 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const revealElements = document.querySelectorAll('.reveal-on-scroll');
-      
+
       const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -687,16 +687,16 @@
         container.className = 'fixed bottom-8 right-8 z-50 flex flex-col gap-3 pointer-events-none';
         document.body.appendChild(container);
       }
-      
+
       const toast = document.createElement('div');
       toast.className = 'market-toast pointer-events-auto transform translate-y-4 opacity-0 transition-all duration-300';
       toast.textContent = message;
       container.appendChild(toast);
-      
+
       requestAnimationFrame(() => {
         toast.classList.remove('translate-y-4', 'opacity-0');
       });
-      
+
       setTimeout(() => {
         toast.classList.add('translate-y-4', 'opacity-0');
         setTimeout(() => toast.remove(), 400);

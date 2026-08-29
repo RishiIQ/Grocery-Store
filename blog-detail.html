@@ -35,35 +35,35 @@
       }
     }
   </script>
-  
+
   <!-- Styles -->
   <link rel="stylesheet" href="css/style.css">
-  
+
   <!-- Lenis Smooth Slow Scroll Library -->
   <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-  
+
   <style>
     /* ============================================
        SAGE & EARTH-TONE ARTICLE DETAIL
        ============================================ */
-    
+
     .article-hero {
       position: relative;
       overflow: hidden;
       background: #24302A;
     }
-    
+
     .article-hero::before {
       content: '';
       position: absolute;
       inset: 0;
-      background-image: 
+      background-image:
         linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
       background-size: 50px 50px;
       pointer-events: none;
     }
-    
+
     /* Hero glow orbs */
     .hero-orb {
       position: absolute;
@@ -72,13 +72,13 @@
       pointer-events: none;
       will-change: transform, opacity;
     }
-    
+
     @keyframes orbFloatSlow {
       0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.2; }
       33% { transform: translate(50px, -30px) scale(1.1); opacity: 0.4; }
       66% { transform: translate(-30px, 40px) scale(0.9); opacity: 0.3; }
     }
-    
+
     .orb-article-1 {
       width: 500px;
       height: 500px;
@@ -87,7 +87,7 @@
       right: -150px;
       animation: orbFloatSlow 10s ease-in-out infinite;
     }
-    
+
     .orb-article-2 {
       width: 350px;
       height: 350px;
@@ -96,14 +96,14 @@
       left: -100px;
       animation: orbFloatSlow 12s ease-in-out infinite reverse;
     }
-    
+
     .article-heading {
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: -0.02em;
       line-height: 0.95;
     }
-    
+
     .article-subheading {
       text-transform: uppercase;
       font-size: 0.7rem;
@@ -111,27 +111,27 @@
       font-weight: 700;
       color: #6A8071;
     }
-    
+
     .article-body {
       font-size: 1.05rem;
       line-height: 1.9;
       color: #334155;
     }
-    
+
     .dark .article-body {
       color: #94A3B8;
     }
-    
+
     .article-content {
       font-size: 1.05rem;
       line-height: 1.9;
       color: #334155;
     }
-    
+
     .dark .article-content {
       color: #94A3B8;
     }
-    
+
     .article-content h2 {
       font-weight: 800;
       text-transform: uppercase;
@@ -142,11 +142,11 @@
       margin-top: 2.5rem;
       margin-bottom: 1rem;
     }
-    
+
     .dark .article-content h2 {
       color: #F8FAFC;
     }
-    
+
     .article-content h3 {
       font-weight: 800;
       text-transform: uppercase;
@@ -156,15 +156,15 @@
       margin-top: 2rem;
       margin-bottom: 0.75rem;
     }
-    
+
     .dark .article-content h3 {
       color: #F8FAFC;
     }
-    
+
     .article-content p {
       margin-bottom: 1.25rem;
     }
-    
+
     .article-content .pull-quote {
       font-weight: 800;
       font-size: 1.5rem;
@@ -176,20 +176,20 @@
       padding-left: 1.5rem;
       margin: 2rem 0;
     }
-    
+
     .dark .article-content .pull-quote {
       color: #F8FAFC;
     }
-    
-    .article-content ul, 
+
+    .article-content ul,
     .article-content ol {
       margin: 1rem 0 1.5rem 1.5rem;
     }
-    
+
     .article-content li {
       margin-bottom: 0.5rem;
     }
-    
+
     .article-content .highlight-box {
       background: #FFFFFF;
       border: 1px solid #E2E8F0;
@@ -197,12 +197,12 @@
       margin: 2rem 0;
       border-radius: 0px;
     }
-    
+
     .dark .article-content .highlight-box {
       background: #18221D;
       border-color: #2D3E35;
     }
-    
+
     .article-content .highlight-box h4 {
       font-weight: 800;
       text-transform: uppercase;
@@ -210,7 +210,7 @@
       color: #6A8071;
       margin-bottom: 0.5rem;
     }
-    
+
     /* Image with caption */
     .article-image-wrap {
       position: relative;
@@ -218,16 +218,16 @@
       margin: 2rem 0;
       border-radius: 0px;
     }
-    
+
     .article-image-wrap img {
       width: 100%;
       transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    
+
     .article-image-wrap:hover img {
       transform: scale(1.02);
     }
-    
+
     .article-image-wrap .caption {
       font-size: 0.75rem;
       text-transform: uppercase;
@@ -237,11 +237,11 @@
       text-align: center;
       border-bottom: 1px solid #E2E8F0;
     }
-    
+
     .dark .article-image-wrap .caption {
       border-color: #2D3E35;
     }
-    
+
     /* Share buttons */
     .share-btn {
       display: inline-flex;
@@ -258,18 +258,18 @@
       text-decoration: none;
       border-radius: 0px;
     }
-    
+
     .dark .share-btn {
       color: #F8FAFC;
       border-color: #2D3E35;
     }
-    
+
     .share-btn:hover {
       border-color: #6A8071;
       color: #6A8071;
       transform: translateY(-2px);
     }
-    
+
     /* Navigation arrows */
     .nav-arrow {
       display: inline-flex;
@@ -284,16 +284,16 @@
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       padding: 12px 0;
     }
-    
+
     .dark .nav-arrow {
       color: #F8FAFC;
     }
-    
+
     .nav-arrow:hover {
       color: #6A8071;
       gap: 16px;
     }
-    
+
     /* Scroll progress bar */
     .scroll-progress {
       position: fixed;
@@ -306,7 +306,7 @@
       transition: width 0.05s linear;
       box-shadow: 0 0 20px rgba(106, 128, 113, 0.3);
     }
-    
+
     /* Reading time indicator */
     .reading-time {
       font-size: 0.6rem;
@@ -315,7 +315,7 @@
       letter-spacing: 0.15em;
       color: #94A3B8;
     }
-    
+
     /* Author bio */
     .author-bio {
       background: #FFFFFF;
@@ -324,12 +324,12 @@
       margin-top: 3rem;
       border-radius: 0px;
     }
-    
+
     .dark .author-bio {
       background: #18221D;
       border-color: #2D3E35;
     }
-    
+
     .author-bio .avatar {
       width: 64px;
       height: 64px;
@@ -342,7 +342,7 @@
       font-size: 1.5rem;
       color: #FFFFFF;
     }
-    
+
     /* Related articles */
     .related-card {
       border: 1px solid #E2E8F0;
@@ -353,18 +353,18 @@
       border-radius: 0px;
       background: #FFFFFF;
     }
-    
+
     .dark .related-card {
       background: #18221D;
       border-color: #2D3E35;
     }
-    
+
     .related-card:hover {
       border-color: #6A8071;
       transform: translateY(-4px);
       box-shadow: 0 12px 40px rgba(106, 128, 113, 0.15);
     }
-    
+
     .related-card h4 {
       font-weight: 800;
       text-transform: uppercase;
@@ -373,27 +373,27 @@
       color: #0F172A;
       transition: color 0.3s ease;
     }
-    
+
     .dark .related-card h4 {
       color: #F8FAFC;
     }
-    
+
     .related-card:hover h4 {
       color: #6A8071;
     }
-    
+
     /* Scroll reveal */
     .reveal-on-scroll {
       opacity: 0;
       transform: translateY(30px);
       transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    
+
     .reveal-on-scroll.is-revealed {
       opacity: 1;
       transform: translateY(0);
     }
-    
+
     .reveal-on-scroll.delay-1 { transition-delay: 0.1s; }
     .reveal-on-scroll.delay-2 { transition-delay: 0.2s; }
     .reveal-on-scroll.delay-3 { transition-delay: 0.3s; }
@@ -426,7 +426,7 @@
     <!-- ARTICLE HERO -->
     <!-- ========================================== -->
     <section id="articleHero" class="article-hero min-h-[50vh] flex items-center relative text-white">
-      
+
       <!-- Glow Orbs -->
       <div class="hero-orb orb-article-1"></div>
       <div class="hero-orb orb-article-2"></div>
@@ -452,9 +452,9 @@
     <!-- AUTHOR BIO & SHARE -->
     <!-- ========================================== -->
     <section class="py-8 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto border-t border-slate-200 dark:border-[#2D3E35]">
-      
+
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-        
+
         <!-- Author Bio -->
         <div class="author-bio reveal-on-scroll">
           <div class="flex items-start gap-4">
@@ -500,7 +500,7 @@
     <!-- RELATED ARTICLES -->
     <!-- ========================================== -->
     <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto border-t border-slate-200 dark:border-[#2D3E35]">
-      
+
       <div class="text-center mb-12">
         <p class="article-subheading">Related Reading</p>
         <h2 class="article-heading text-2xl sm:text-3xl mt-2">More From The Journal</h2>
@@ -556,7 +556,7 @@
       const headerContainer = document.getElementById('articleHeader');
       const bodyContainer = document.getElementById('articleBody');
       const relatedContainer = document.getElementById('relatedArticles');
-      
+
       if (!headerContainer || !bodyContainer || !window.FreshCartDB) return;
 
       const urlParams = new URLSearchParams(window.location.search);
@@ -601,34 +601,11 @@
         </div>
 
         <div class="reveal-on-scroll delay-2">
-          <p>
-            In modern metropolitan grocery distribution, maintaining strict thermal integrity from farm gate to consumer doorstep represents one of the most complex logistical challenges in supply chain engineering. Traditional wholesale pathways often suffer from multi-tiered transit delays, exposing perishable organic harvests to unmonitored thermal fluctuations.
-          </p>
-          
-          <h2>The 15-Minute Micro-Fulfillment Paradigm</h2>
-          <p>
-            By decentralizing inventory into neighborhood micro-fulfillment outposts equipped with IoT telemetry sensors, operators eliminate long-haul transit bottlenecks. Electric delivery vans equipped with continuous BLE temperature logging ensure that items like artisanal sourdoughs, heritage dairy, and wild-caught seafood never deviate outside strict 2.4°C thresholds.
-          </p>
-
-          <div class="highlight-box">
-            <h4>Key Insight</h4>
-            <p class="!mb-0">
-              Consumer demand is shifting toward absolute supply transparency and regenerative agricultural standards. Automated real-time telemetry protocols will form the mandatory backbone of all elite direct-to-table supermarket networks.
-            </p>
-          </div>
-
-          <h3>IoT Sensor Deployment</h3>
-          <p>
-            Our proprietary hardware stack includes BLE-enabled temperature loggers with sub-0.1°C accuracy, GPS tracking modules, and automated cloud synchronization. Each sensor packet is encrypted end-to-end and verified through blockchain-adjacent consensus protocols.
-          </p>
-
-          <h3>Regenerative Agriculture Integration</h3>
-          <p>
-            Partnering with over 140 regenerative cooperatives, we've established direct farm-to-node supply channels that bypass traditional wholesale markets. This ensures farmers receive 40% higher margins while consumers get superior quality produce at competitive prices.
-          </p>
+          ${post.content || '<p>Detailed insights coming soon.</p>'}
         </div>
       `;
 
+      // Filter out the current active post slug to prevent duplication in related reading section
       const relatedPosts = allPosts
         .filter(p => p.slug !== postSlug)
         .slice(0, 3);
@@ -645,7 +622,7 @@
       `).join('');
 
       const progressBar = document.getElementById('scrollProgress');
-      
+
       window.addEventListener('scroll', () => {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -654,7 +631,7 @@
       });
 
       const revealElements = document.querySelectorAll('.reveal-on-scroll');
-      
+
       const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -676,16 +653,16 @@
           container.className = 'fixed bottom-8 right-8 z-50 flex flex-col gap-3 pointer-events-none';
           document.body.appendChild(container);
         }
-        
+
         const toast = document.createElement('div');
         toast.className = 'market-toast pointer-events-auto transform translate-y-4 opacity-0 transition-all duration-300';
         toast.textContent = message;
         container.appendChild(toast);
-        
+
         requestAnimationFrame(() => {
           toast.classList.remove('translate-y-4', 'opacity-0');
         });
-        
+
         setTimeout(() => {
           toast.classList.add('translate-y-4', 'opacity-0');
           setTimeout(() => toast.remove(), 400);

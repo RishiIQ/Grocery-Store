@@ -313,11 +313,11 @@ body {
   .nixon-header {
     height: 65px;
   }
-  
+
   .nixon-header-inner {
     padding: 0 16px;
   }
-  
+
   .nixon-nav {
     display: none;
     position: absolute;
@@ -337,17 +337,17 @@ body {
     z-index: 999;
     width: 100%;
   }
-  
+
   .dark .nixon-nav {
     background: rgba(17, 24, 20, 0.98);
     border-bottom: 1px solid #2D3E35;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
   }
-  
+
   .nixon-nav.open {
     display: flex !important;
   }
-  
+
   .nixon-nav-link {
     font-size: 0.7rem;
     padding: 12px 16px;
@@ -356,41 +356,41 @@ body {
     letter-spacing: 0.15em;
     text-align: center;
   }
-  
+
   .dark .nixon-nav-link {
     border-bottom-color: rgba(255, 255, 255, 0.06);
   }
-  
+
   .nixon-nav-link::after {
     display: none;
   }
-  
+
   .nixon-nav-link.active {
     color: #6A8071;
   }
-  
+
   .nixon-hamburger {
     display: flex;
   }
-  
+
   .nixon-actions {
     gap: 6px;
   }
-  
+
   .nixon-action-btn {
     width: 34px;
     height: 34px;
   }
-  
+
   .nixon-auth-btn {
     padding: 6px 10px;
     font-size: 0.5rem;
   }
-  
+
   .nixon-logo-text {
     font-size: 1.1rem;
   }
-  
+
   .nixon-logo .w-10 {
     width: 34px;
     height: 34px;
@@ -402,55 +402,55 @@ body {
   .nixon-header {
     height: 60px;
   }
-  
+
   .nixon-header-inner {
     padding: 0 12px;
   }
-  
+
   .nixon-nav {
     top: 60px;
     padding: 16px 20px;
   }
-  
+
   .nixon-nav-link {
     font-size: 0.65rem;
     padding: 10px 14px;
   }
-  
+
   .nixon-logo-text {
     font-size: 1rem;
   }
-  
+
   .nixon-logo .w-10 {
     width: 30px;
     height: 30px;
   }
-  
+
   .nixon-actions {
     gap: 4px;
   }
-  
+
   .nixon-action-btn {
     width: 30px;
     height: 30px;
   }
-  
+
   .nixon-action-btn svg {
     width: 16px;
     height: 16px;
   }
-  
+
   .nixon-auth-btn {
     padding: 4px 8px;
     font-size: 0.45rem;
     letter-spacing: 0.08em;
   }
-  
+
   .nixon-cart-btn svg {
     width: 18px;
     height: 18px;
   }
-  
+
   .nixon-cart-badge {
     min-width: 16px;
     height: 16px;
@@ -458,16 +458,16 @@ body {
     top: -4px;
     right: -4px;
   }
-  
+
   .nixon-hamburger span {
     width: 20px;
     height: 2px;
   }
-  
+
   .nixon-hamburger.active span:nth-child(1) {
     transform: rotate(45deg) translate(4px, 4px);
   }
-  
+
   .nixon-hamburger.active span:nth-child(3) {
     transform: rotate(-45deg) translate(4px, -4px);
   }
@@ -478,64 +478,64 @@ body {
   .nixon-header {
     height: 56px;
   }
-  
+
   .nixon-header-inner {
     padding: 0 10px;
   }
-  
+
   .nixon-nav {
     top: 56px;
     padding: 12px 16px;
   }
-  
+
   .nixon-nav-link {
     font-size: 0.55rem;
     padding: 8px 12px;
   }
-  
+
   .nixon-logo-text {
     font-size: 0.85rem;
   }
-  
+
   .nixon-logo .w-10 {
     width: 28px;
     height: 28px;
   }
-  
+
   .nixon-logo {
     gap: 6px;
   }
-  
+
   .nixon-actions {
     gap: 3px;
   }
-  
+
   .nixon-action-btn {
     width: 28px;
     height: 28px;
     border-width: 1px;
   }
-  
+
   .nixon-action-btn svg {
     width: 14px;
     height: 14px;
   }
-  
+
   .nixon-auth-btn {
     padding: 3px 6px;
     font-size: 0.4rem;
     letter-spacing: 0.06em;
   }
-  
+
   .nixon-cart-btn {
     padding: 4px;
   }
-  
+
   .nixon-cart-btn svg {
     width: 16px;
     height: 16px;
   }
-  
+
   .nixon-cart-badge {
     min-width: 14px;
     height: 14px;
@@ -543,20 +543,20 @@ body {
     top: -3px;
     right: -3px;
   }
-  
+
   .nixon-hamburger {
     padding: 6px;
   }
-  
+
   .nixon-hamburger span {
     width: 18px;
     height: 2px;
   }
-  
+
   .nixon-hamburger.active span:nth-child(1) {
     transform: rotate(45deg) translate(3px, 3px);
   }
-  
+
   .nixon-hamburger.active span:nth-child(3) {
     transform: rotate(-45deg) translate(3px, -3px);
   }
@@ -569,53 +569,53 @@ body {
   .nixon-nav-link::after {
     display: none;
   }
-  
+
   .nixon-nav-link:hover {
     color: inherit;
   }
-  
+
   .nixon-action-btn:hover {
     border-color: #E5E5E5;
     color: #000000;
   }
-  
+
   .dark .nixon-action-btn:hover {
     border-color: #333333;
     color: #FFFFFF;
   }
-  
+
   .nixon-auth-btn:hover {
     border-color: #E5E5E5;
     color: #000000;
   }
-  
+
   .dark .nixon-auth-btn:hover {
     border-color: #333333;
     color: #FFFFFF;
   }
-  
+
   /* Increase touch targets for mobile */
   .nixon-nav-link {
     padding: 14px 0;
   }
-  
+
   .nixon-action-btn {
     width: 44px;
     height: 44px;
   }
-  
+
   .nixon-auth-btn {
     padding: 10px 16px;
   }
-  
+
   .nixon-cart-btn {
     padding: 8px;
   }
-  
+
   .nixon-hamburger {
     padding: 12px;
   }
-  
+
   .nixon-hamburger span {
     width: 26px;
     height: 3px;
@@ -675,7 +675,7 @@ body {
     transform: scale(0.95) translateZ(-150px) rotateX(-5deg);
     transition-duration: 0.5s;
   }
-  
+
   @keyframes pageSpinZoomIn {
     from {
       opacity: 0;
@@ -698,7 +698,7 @@ body {
   .nixon-footer {
     display: none !important;
   }
-  
+
   body {
     background: white !important;
     color: black !important;
@@ -724,12 +724,12 @@ body {
     font-size: 0.4rem;
     padding: 3px 6px;
   }
-  
+
   .nixon-actions .nixon-action-btn {
     width: 26px;
     height: 26px;
   }
-  
+
   .nixon-actions .nixon-action-btn svg {
     width: 12px;
     height: 12px;
@@ -741,17 +741,17 @@ body {
   .nixon-logo-text {
     font-size: 0.7rem;
   }
-  
+
   .nixon-logo .w-10 {
     width: 24px;
     height: 24px;
   }
-  
+
   .nixon-auth-btn {
     font-size: 0.35rem;
     padding: 2px 4px;
   }
-  
+
   .nixon-action-btn {
     width: 24px;
     height: 24px;
@@ -1183,7 +1183,7 @@ body {
   .nixon-footer-grid ul li a {
     padding: 8px 0;
   }
-  
+
   .nixon-footer-grid ul li a:hover {
     transform: none;
   }
@@ -1518,12 +1518,12 @@ body {
     padding-top: 12px;
     margin-top: 8px;
   }
-  
+
   .nav-signout-btn {
     font-size: 0.75rem;
     padding: 14px 16px;
   }
-  
+
   .auth-dropdown .auth-dropdown-menu {
     right: auto;
     left: 0;
@@ -1543,4 +1543,3 @@ body {
     padding: 10px 12px;
   }
 }
-

@@ -35,35 +35,35 @@
       }
     }
   </script>
-  
+
   <!-- Styles -->
   <link rel="stylesheet" href="css/style.css">
-  
+
   <!-- Lenis Smooth Slow Scroll Library -->
   <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-  
+
   <style>
     /* ============================================
        SAGE & EARTH-TONE BLOG PAGE
        ============================================ */
-    
+
     .blog-hero {
       background: #24302A;
       position: relative;
       overflow: hidden;
     }
-    
+
     .blog-hero::before {
       content: '';
       position: absolute;
       inset: 0;
-      background-image: 
+      background-image:
         linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
       background-size: 50px 50px;
       pointer-events: none;
     }
-    
+
     /* Hero glow orbs */
     .hero-orb {
       position: absolute;
@@ -72,13 +72,13 @@
       pointer-events: none;
       will-change: transform, opacity;
     }
-    
+
     @keyframes orbFloatSlow {
       0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.2; }
       33% { transform: translate(50px, -30px) scale(1.1); opacity: 0.4; }
       66% { transform: translate(-30px, 40px) scale(0.9); opacity: 0.3; }
     }
-    
+
     .orb-blog-1 {
       width: 600px;
       height: 600px;
@@ -87,7 +87,7 @@
       right: -200px;
       animation: orbFloatSlow 10s ease-in-out infinite;
     }
-    
+
     .orb-blog-2 {
       width: 400px;
       height: 400px;
@@ -96,14 +96,14 @@
       left: -100px;
       animation: orbFloatSlow 12s ease-in-out infinite reverse;
     }
-    
+
     .blog-heading {
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: -0.02em;
       line-height: 0.95;
     }
-    
+
     .blog-subheading {
       text-transform: uppercase;
       font-size: 0.7rem;
@@ -111,13 +111,13 @@
       font-weight: 700;
       color: #6A8071;
     }
-    
+
     .blog-body {
       font-size: 0.95rem;
       line-height: 1.8;
       color: #94A3B8;
     }
-    
+
     /* Featured Spotlight */
     .spotlight-card {
       background: #FFFFFF;
@@ -128,12 +128,12 @@
       cursor: pointer;
       border-radius: 0px;
     }
-    
+
     .dark .spotlight-card {
       background: #18221D;
       border-color: #2D3E35;
     }
-    
+
     .spotlight-card::before {
       content: '';
       position: absolute;
@@ -146,30 +146,30 @@
       transform-origin: left;
       transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    
+
     .spotlight-card:hover::before {
       transform: scaleX(1);
     }
-    
+
     .spotlight-card:hover {
       border-color: #6A8071;
       transform: translateY(-4px);
       box-shadow: 0 20px 60px rgba(106, 128, 113, 0.15);
     }
-    
+
     .spotlight-card .image-wrap {
       overflow: hidden;
       position: relative;
     }
-    
+
     .spotlight-card .image-wrap img {
       transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    
+
     .spotlight-card:hover .image-wrap img {
       transform: scale(1.06);
     }
-    
+
     .spotlight-card .spotlight-badge {
       position: absolute;
       top: 16px;
@@ -184,7 +184,7 @@
       z-index: 10;
       border-radius: 0px;
     }
-    
+
     /* Article Cards */
     .article-card {
       background: #FFFFFF;
@@ -196,17 +196,17 @@
       transform: translateY(40px);
       border-radius: 0px;
     }
-    
+
     .dark .article-card {
       background: #18221D;
       border-color: #2D3E35;
     }
-    
+
     .article-card.is-visible {
       opacity: 1;
       transform: translateY(0);
     }
-    
+
     .article-card::after {
       content: '';
       position: absolute;
@@ -219,34 +219,34 @@
       transform-origin: left;
       transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    
+
     .article-card:hover::after {
       transform: scaleX(1);
     }
-    
+
     .article-card:hover {
       border-color: #6A8071;
       transform: translateY(-6px);
       box-shadow: 0 16px 48px rgba(106, 128, 113, 0.15);
     }
-    
+
     .article-card .image-wrap {
       overflow: hidden;
       position: relative;
       aspect-ratio: 16/9;
     }
-    
+
     .article-card .image-wrap img {
       transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
-    
+
     .article-card:hover .image-wrap img {
       transform: scale(1.08);
     }
-    
+
     .article-card .category-tag {
       font-size: 0.55rem;
       font-weight: 700;
@@ -254,7 +254,7 @@
       letter-spacing: 0.15em;
       color: #6A8071;
     }
-    
+
     .article-card .date-tag {
       font-size: 0.55rem;
       font-weight: 700;
@@ -262,7 +262,7 @@
       letter-spacing: 0.1em;
       color: #94A3B8;
     }
-    
+
     .article-card .title-link {
       font-weight: 800;
       text-transform: uppercase;
@@ -273,21 +273,21 @@
       text-decoration: none;
       transition: color 0.3s ease;
     }
-    
+
     .dark .article-card .title-link {
       color: #F8FAFC;
     }
-    
+
     .article-card:hover .title-link {
       color: #6A8071;
     }
-    
+
     .article-card .excerpt {
       font-size: 0.85rem;
       line-height: 1.6;
       color: #64748B;
     }
-    
+
     .article-card .read-link {
       font-size: 0.6rem;
       font-weight: 700;
@@ -297,23 +297,23 @@
       text-decoration: none;
       transition: all 0.3s ease;
     }
-    
+
     .article-card .read-link:hover {
       letter-spacing: 0.2em;
     }
-    
+
     /* Scroll reveal */
     .reveal-on-scroll {
       opacity: 0;
       transform: translateY(50px);
       transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    
+
     .reveal-on-scroll.is-revealed {
       opacity: 1;
       transform: translateY(0);
     }
-    
+
     .reveal-on-scroll.delay-1 { transition-delay: 0.1s; }
     .reveal-on-scroll.delay-2 { transition-delay: 0.2s; }
     .reveal-on-scroll.delay-3 { transition-delay: 0.3s; }
@@ -334,12 +334,12 @@
       text-align: center;
       text-decoration: none;
     }
-    
+
     .dark .sage-btn-outline {
       color: #FFFFFF;
       border-color: #FFFFFF;
     }
-    
+
     .sage-btn-outline:hover {
       background: #6A8071;
       border-color: #6A8071;
@@ -372,7 +372,7 @@
     <!-- BLOG HERO -->
     <!-- ========================================== -->
     <section class="blog-hero min-h-[50vh] flex items-center relative text-white">
-      
+
       <!-- Glow Orbs -->
       <div class="hero-orb orb-blog-1"></div>
       <div class="hero-orb orb-blog-2"></div>
@@ -397,21 +397,21 @@
     <!-- FEATURED SPOTLIGHT -->
     <!-- ========================================== -->
     <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      
+
       <a href="blog-detail.html?slug=cold-chain-logistics" class="spotlight-card block">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-0">
-          
+
           <!-- Image -->
           <div class="lg:col-span-5 image-wrap relative">
-            <img 
-              src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=800" 
-              alt="Logistics Hub" 
+            <img
+              src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=800"
+              alt="Logistics Hub"
               class="w-full h-full object-cover min-h-[300px] lg:min-h-[400px]"
               loading="lazy"
             >
             <span class="spotlight-badge">Spotlight Feature</span>
           </div>
-          
+
           <!-- Content -->
           <div class="lg:col-span-7 p-8 lg:p-12 flex flex-col justify-center">
             <div class="flex items-center gap-4 text-xs font-bold tracking-[0.15em] uppercase">
@@ -439,7 +439,7 @@
     <!-- ARTICLES GRID -->
     <!-- ========================================== -->
     <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-slate-200 dark:border-[#2D3E35]">
-      
+
       <div class="text-center mb-16 reveal-on-scroll">
         <p class="blog-subheading">Latest Articles</p>
         <h2 class="blog-heading text-3xl sm:text-4xl lg:text-5xl mt-2">All Dispatches</h2>
@@ -485,7 +485,8 @@
       const grid = document.getElementById('blogGrid');
       if (!grid || !window.FreshCartDB) return;
 
-      const posts = window.FreshCartDB.blogPosts;
+      // Slice from index 1 to remove the first blog post (cold-chain-logistics) from the bottom grid
+      const posts = window.FreshCartDB.blogPosts.slice(1);
 
       grid.innerHTML = posts.map((post, index) => `
         <article class="article-card" data-index="${index}">
@@ -510,17 +511,17 @@
       `).join('');
 
       const articleCards = document.querySelectorAll('.article-card');
-      
+
       const articleObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             const index = parseInt(entry.target.dataset.index);
             const delay = Math.min(index * 100, 400);
-            
+
             setTimeout(() => {
               entry.target.classList.add('is-visible');
             }, delay);
-            
+
             articleObserver.unobserve(entry.target);
           }
         });
@@ -533,7 +534,7 @@
 
       const loadMoreBtn = document.querySelector('.sage-btn-outline');
       let currentCount = posts.length;
-      
+
       if (loadMoreBtn) {
         loadMoreBtn.addEventListener('click', function(e) {
           e.preventDefault();
@@ -566,16 +567,16 @@
         container.className = 'fixed bottom-8 right-8 z-50 flex flex-col gap-3 pointer-events-none';
         document.body.appendChild(container);
       }
-      
+
       const toast = document.createElement('div');
       toast.className = 'market-toast pointer-events-auto transform translate-y-4 opacity-0 transition-all duration-300';
       toast.textContent = message;
       container.appendChild(toast);
-      
+
       requestAnimationFrame(() => {
         toast.classList.remove('translate-y-4', 'opacity-0');
       });
-      
+
       setTimeout(() => {
         toast.classList.add('translate-y-4', 'opacity-0');
         setTimeout(() => toast.remove(), 400);

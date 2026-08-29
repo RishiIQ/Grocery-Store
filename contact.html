@@ -35,35 +35,35 @@
       }
     }
   </script>
-  
+
   <!-- Styles -->
   <link rel="stylesheet" href="css/style.css">
-  
+
   <!-- Lenis Smooth Slow Scroll Library -->
   <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-  
+
   <style>
     /* ============================================
        SAGE & EARTH-TONE CONTACT PAGE
        ============================================ */
-    
+
     .contact-hero {
       background: #24302A;
       position: relative;
       overflow: hidden;
     }
-    
+
     .contact-hero::before {
       content: '';
       position: absolute;
       inset: 0;
-      background-image: 
+      background-image:
         linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
       background-size: 50px 50px;
       pointer-events: none;
     }
-    
+
     /* Hero glow orbs */
     .hero-orb {
       position: absolute;
@@ -72,13 +72,13 @@
       pointer-events: none;
       will-change: transform, opacity;
     }
-    
+
     @keyframes orbFloatSlow {
       0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.2; }
       33% { transform: translate(50px, -30px) scale(1.1); opacity: 0.4; }
       66% { transform: translate(-30px, 40px) scale(0.9); opacity: 0.3; }
     }
-    
+
     .orb-contact-1 {
       width: 600px;
       height: 600px;
@@ -87,7 +87,7 @@
       right: -200px;
       animation: orbFloatSlow 10s ease-in-out infinite;
     }
-    
+
     .orb-contact-2 {
       width: 400px;
       height: 400px;
@@ -96,14 +96,14 @@
       left: -100px;
       animation: orbFloatSlow 12s ease-in-out infinite reverse;
     }
-    
+
     .contact-heading {
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: -0.02em;
       line-height: 0.95;
     }
-    
+
     .contact-subheading {
       text-transform: uppercase;
       font-size: 0.7rem;
@@ -111,13 +111,13 @@
       font-weight: 700;
       color: #6A8071;
     }
-    
+
     .contact-body {
       font-size: 0.95rem;
       line-height: 1.8;
       color: #94A3B8;
     }
-    
+
     /* Contact Form Wrapper */
     .contact-form-wrap {
       background: #FFFFFF;
@@ -128,12 +128,12 @@
       overflow: hidden;
       border-radius: 0px;
     }
-    
+
     .dark .contact-form-wrap {
       background: #18221D;
       border-color: #2D3E35;
     }
-    
+
     .contact-form-wrap::before {
       content: '';
       position: absolute;
@@ -146,11 +146,11 @@
       transform-origin: left;
       transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    
+
     .contact-form-wrap:hover::before {
       transform: scaleX(1);
     }
-    
+
     /* Form inputs */
     .market-input {
       width: 100%;
@@ -166,26 +166,26 @@
       outline: none;
       border-radius: 0px;
     }
-    
+
     .dark .market-input {
       border-color: #2D3E35;
       color: #F8FAFC;
     }
-    
+
     .market-input::placeholder {
       color: #94A3B8;
       font-weight: 400;
     }
-    
+
     .market-input:focus {
       border-color: #6A8071;
       box-shadow: 0 0 0 3px rgba(106, 128, 113, 0.15);
     }
-    
+
     .market-input.error {
       border-color: #EF4444;
     }
-    
+
     .market-label {
       display: block;
       font-size: 0.6rem;
@@ -195,7 +195,7 @@
       color: #64748B;
       margin-bottom: 6px;
     }
-    
+
     .market-select {
       width: 100%;
       padding: 16px 20px;
@@ -215,18 +215,18 @@
       background-repeat: no-repeat;
       background-position: right 16px center;
     }
-    
+
     .dark .market-select {
       border-color: #2D3E35;
       color: #F8FAFC;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2394A3B8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
     }
-    
+
     .market-select:focus {
       border-color: #6A8071;
       box-shadow: 0 0 0 3px rgba(106, 128, 113, 0.15);
     }
-    
+
     .market-textarea {
       width: 100%;
       padding: 16px 20px;
@@ -243,22 +243,22 @@
       min-height: 120px;
       border-radius: 0px;
     }
-    
+
     .dark .market-textarea {
       border-color: #2D3E35;
       color: #F8FAFC;
     }
-    
+
     .market-textarea::placeholder {
       color: #94A3B8;
       font-weight: 400;
     }
-    
+
     .market-textarea:focus {
       border-color: #6A8071;
       box-shadow: 0 0 0 3px rgba(106, 128, 113, 0.15);
     }
-    
+
     .sage-btn {
       display: inline-block;
       padding: 18px 48px;
@@ -278,12 +278,12 @@
       overflow: hidden;
       width: 100%;
     }
-    
+
     .sage-btn:hover {
       background: #576B5D;
       transform: scale(1.02);
     }
-    
+
     /* Hub Cards */
     .hub-card {
       background: #FFFFFF;
@@ -296,17 +296,17 @@
       transform: translateY(30px);
       border-radius: 0px;
     }
-    
+
     .dark .hub-card {
       background: #18221D;
       border-color: #2D3E35;
     }
-    
+
     .hub-card.is-visible {
       opacity: 1;
       transform: translateY(0);
     }
-    
+
     .hub-card::before {
       content: '';
       position: absolute;
@@ -319,17 +319,17 @@
       transform-origin: left;
       transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    
+
     .hub-card:hover::before {
       transform: scaleX(1);
     }
-    
+
     .hub-card:hover {
       border-color: #6A8071;
       transform: translateY(-4px);
       box-shadow: 0 16px 48px rgba(106, 128, 113, 0.15);
     }
-    
+
     .hub-card .hub-number {
       font-weight: 800;
       font-size: 2.5rem;
@@ -337,7 +337,7 @@
       opacity: 0.2;
       line-height: 1;
     }
-    
+
     .hub-card .hub-email {
       font-size: 0.8rem;
       font-weight: 700;
@@ -347,11 +347,11 @@
       transition: all 0.3s ease;
       display: inline-block;
     }
-    
+
     .hub-card .hub-email:hover {
       letter-spacing: 0.05em;
     }
-    
+
     /* Quick Contact Badges */
     .quick-contact {
       display: inline-flex;
@@ -369,24 +369,24 @@
       border-radius: 0px;
       background: #FFFFFF;
     }
-    
+
     .dark .quick-contact {
       background: #18221D;
       border-color: #2D3E35;
       color: #F8FAFC;
     }
-    
+
     .quick-contact:hover {
       border-color: #6A8071;
       color: #6A8071;
       transform: translateY(-2px);
     }
-    
+
     .quick-contact .icon {
       color: #6A8071;
       font-size: 1.2rem;
     }
-    
+
     /* Map Placeholder */
     .map-placeholder {
       background: #FFFFFF;
@@ -397,35 +397,35 @@
       overflow: hidden;
       border-radius: 0px;
     }
-    
+
     .dark .map-placeholder {
       background: #18221D;
       border-color: #2D3E35;
     }
-    
+
     .map-placeholder .map-pin {
       font-size: 3rem;
       animation: bounce 2s infinite;
     }
-    
+
     @keyframes bounce {
       0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
       40% { transform: translateY(-16px); }
       60% { transform: translateY(-8px); }
     }
-    
+
     /* Scroll reveal */
     .reveal-on-scroll {
       opacity: 0;
       transform: translateY(50px);
       transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    
+
     .reveal-on-scroll.is-revealed {
       opacity: 1;
       transform: translateY(0);
     }
-    
+
     .reveal-on-scroll.delay-1 { transition-delay: 0.1s; }
     .reveal-on-scroll.delay-2 { transition-delay: 0.2s; }
     .reveal-on-scroll.delay-3 { transition-delay: 0.3s; }
@@ -446,7 +446,7 @@
       text-align: center;
       text-decoration: none;
     }
-    
+
     .sage-btn-outline:hover {
       background: #FFFFFF;
       color: #24302A;
@@ -477,8 +477,8 @@
     <!-- ========================================== -->
     <!-- CONTACT HERO -->
     <!-- ========================================== -->
-    <section class="contact-hero min-h-[50vh] flex items-center relative text-white">
-      
+    <section class="contact-hero min-h-[50vh] flex items-center relative text-white" style="background-image: url('https://imgs.search.brave.com/m1dKezompTe3UZNIt_0xANPTe4TYM641Ss5Sr07ylQ8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvdGh1/bWJuYWlscy8wNjUv/NjM5Lzc5Mi9zbWFs/bC9jeWJlci1maW5n/ZXItZm9jdXMtb24t/dmlydHVhbC1jb250/cm9sLXBhbmVsLXRv/dWNoaW5nLWZpbmdl/cnByaW50LXJlY29n/bml0aW9uLWdyYXBo/aWNzLWluLW1vZGVy/bi10ZWNobm9sb2d5/LWVudmlyb25tZW50/LXBob3RvLmpwZw'); background-repeat: no-repeat; background-size: cover; background-position: center;">
+
       <!-- Glow Orbs -->
       <div class="hero-orb orb-contact-1"></div>
       <div class="hero-orb orb-contact-2"></div>
@@ -528,9 +528,9 @@
     <!-- CONTACT FORM & HUBS -->
     <!-- ========================================== -->
     <section class="py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      
+
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        
+
         <!-- Contact Form -->
         <div class="lg:col-span-7 reveal-on-scroll">
           <div class="contact-form-wrap">
@@ -544,11 +544,11 @@
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div class="space-y-2">
                   <label class="market-label" for="fullName">Full Name</label>
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     id="fullName"
-                    placeholder="JUSTIN MASON" 
-                    required 
+                    placeholder="JUSTIN MASON"
+                    required
                     class="market-input"
                     minlength="2"
                   >
@@ -556,11 +556,11 @@
                 </div>
                 <div class="space-y-2">
                   <label class="market-label" for="email">Email Address</label>
-                  <input 
-                    type="email" 
+                  <input
+                    type="email"
                     id="email"
-                    placeholder="JUSTIN@EXAMPLE.COM" 
-                    required 
+                    placeholder="JUSTIN@EXAMPLE.COM"
+                    required
                     class="market-input"
                   >
                   <span class="error-message text-[0.5rem] font-bold tracking-[0.1em] uppercase text-red-500 hidden">Please enter a valid email</span>
@@ -581,10 +581,10 @@
 
               <div class="space-y-2">
                 <label class="market-label" for="message">Message Content</label>
-                <textarea 
+                <textarea
                   id="message"
-                  placeholder="ENTER YOUR MESSAGE..." 
-                  required 
+                  placeholder="ENTER YOUR MESSAGE..."
+                  required
                   class="market-textarea"
                   minlength="10"
                 ></textarea>
@@ -613,39 +613,66 @@
           </div>
         </div>
 
-        <!-- Hub Cards -->
+        <!-- Hub Cards with Embedded Maps -->
         <div class="lg:col-span-5 space-y-6">
-          
-          <div class="hub-card" data-delay="0">
-            <div class="hub-number">01</div>
-            <p class="text-xs font-bold tracking-[0.2em] uppercase text-[#6A8071] mt-2">Europe Hub</p>
-            <h3 class="contact-heading text-xl mt-1">Paris Central</h3>
-            <p class="contact-body text-sm mt-2">42 Rue du Faubourg Saint-Honoré, 75008 Paris, France</p>
-            <a href="mailto:paris@freshcart.pro" class="hub-email mt-3">paris@freshcart.pro</a>
-            <div class="mt-3 pt-3 border-t border-slate-200 dark:border-[#2D3E35] flex items-center gap-2">
-              <span class="text-[0.5rem] font-bold tracking-[0.1em] uppercase text-slate-400">🕐 24/7 Operations</span>
+
+
+
+          <!-- Asia Pacific Hub -->
+          <div class="hub-card flex flex-col justify-between" data-delay="1">
+            <div>
+              <div class="flex justify-between items-start">
+                <div>
+                  <div class="hub-number">01</div>
+                  <p class="text-xs font-bold tracking-[0.2em] uppercase text-[#6A8071] mt-2">Asia Pacific Hub</p>
+                  <h3 class="contact-heading text-xl mt-1">Tokyo Metro</h3>
+                </div>
+                <span class="text-[0.6rem] font-bold uppercase tracking-wider px-2 py-1 bg-[#6A8071]/10 text-[#6A8071]">Active</span>
+              </div>
+              <p class="contact-body text-sm mt-2">6-10-1 Roppongi, Minato-ku, Tokyo 106-6108, Japan</p>
+            </div>
+            <div class="w-full h-40 mt-4 overflow-hidden border border-slate-200 dark:border-[#2D3E35] relative">
+              <iframe
+                title="Tokyo Hub Map"
+                class="w-full h-full border-0 grayscale contrast-125 dark:invert dark:hue-rotate-180"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=139.723%2C35.657%2C139.735%2C35.663&amp;layer=mapnik&amp;marker=35.6605%2C139.7291"
+                loading="lazy">
+              </iframe>
+            </div>
+            <div>
+              <a href="mailto:tokyo@freshcart.pro" class="hub-email mt-3 block">tokyo@freshcart.pro</a>
+              <div class="mt-3 pt-3 border-t border-slate-200 dark:border-[#2D3E35] flex items-center gap-2">
+                <span class="text-[0.5rem] font-bold tracking-[0.1em] uppercase text-slate-400">🕐 24/7 Operations</span>
+              </div>
             </div>
           </div>
 
-          <div class="hub-card" data-delay="1">
-            <div class="hub-number">02</div>
-            <p class="text-xs font-bold tracking-[0.2em] uppercase text-[#6A8071] mt-2">Asia Pacific Hub</p>
-            <h3 class="contact-heading text-xl mt-1">Tokyo Metro</h3>
-            <p class="contact-body text-sm mt-2">6-10-1 Roppongi, Minato-ku, Tokyo 106-6108, Japan</p>
-            <a href="mailto:tokyo@freshcart.pro" class="hub-email mt-3">tokyo@freshcart.pro</a>
-            <div class="mt-3 pt-3 border-t border-slate-200 dark:border-[#2D3E35] flex items-center gap-2">
-              <span class="text-[0.5rem] font-bold tracking-[0.1em] uppercase text-slate-400">🕐 24/7 Operations</span>
+          <!-- Americas Hub -->
+          <div class="hub-card flex flex-col justify-between" data-delay="2">
+            <div>
+              <div class="flex justify-between items-start">
+                <div>
+                  <div class="hub-number">02</div>
+                  <p class="text-xs font-bold tracking-[0.2em] uppercase text-[#6A8071] mt-2">Americas Hub</p>
+                  <h3 class="contact-heading text-xl mt-1">New York East</h3>
+                </div>
+                <span class="text-[0.6rem] font-bold uppercase tracking-wider px-2 py-1 bg-[#6A8071]/10 text-[#6A8071]">Active</span>
+              </div>
+              <p class="contact-body text-sm mt-2">350 Fifth Avenue, 59th Floor, New York, NY 10118, USA</p>
             </div>
-          </div>
-
-          <div class="hub-card" data-delay="2">
-            <div class="hub-number">03</div>
-            <p class="text-xs font-bold tracking-[0.2em] uppercase text-[#6A8071] mt-2">Americas Hub</p>
-            <h3 class="contact-heading text-xl mt-1">New York East</h3>
-            <p class="contact-body text-sm mt-2">350 Fifth Avenue, 59th Floor, New York, NY 10118, USA</p>
-            <a href="mailto:ny@freshcart.pro" class="hub-email mt-3">ny@freshcart.pro</a>
-            <div class="mt-3 pt-3 border-t border-slate-200 dark:border-[#2D3E35] flex items-center gap-2">
-              <span class="text-[0.5rem] font-bold tracking-[0.1em] uppercase text-slate-400">🕐 24/7 Operations</span>
+            <div class="w-full h-40 mt-4 overflow-hidden border border-slate-200 dark:border-[#2D3E35] relative">
+              <iframe
+                title="New York Hub Map"
+                class="w-full h-full border-0 grayscale contrast-125 dark:invert dark:hue-rotate-180"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=-73.987%2C40.745%2C-73.981%2C40.751&amp;layer=mapnik&amp;marker=40.7484%2C-73.9857"
+                loading="lazy">
+              </iframe>
+            </div>
+            <div>
+              <a href="mailto:ny@freshcart.pro" class="hub-email mt-3 block">ny@freshcart.pro</a>
+              <div class="mt-3 pt-3 border-t border-slate-200 dark:border-[#2D3E35] flex items-center gap-2">
+                <span class="text-[0.5rem] font-bold tracking-[0.1em] uppercase text-slate-400">🕐 24/7 Operations</span>
+              </div>
             </div>
           </div>
 
@@ -658,31 +685,40 @@
     <!-- MAP & OFFICE HOURS -->
     <!-- ========================================== -->
     <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-slate-200 dark:border-[#2D3E35]">
-      
+
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        
-        <!-- Map -->
+
+        <!-- Interactive Global Headquarters Map -->
         <div class="lg:col-span-2 reveal-on-scroll">
-          <div class="map-placeholder">
-            <div class="map-pin">📍</div>
-            <p class="contact-heading text-xl mt-4">Global Headquarters</p>
-            <p class="contact-body text-sm">Paris, France — 42 Rue du Faubourg Saint-Honoré</p>
-            <div class="mt-6 inline-block px-6 py-3 border border-slate-200 dark:border-[#2D3E35] text-xs font-bold tracking-[0.1em] uppercase text-slate-500">
-              Interactive Map Loading...
+          <div class="map-placeholder !p-0 overflow-hidden h-[450px] flex flex-col">
+            <div class="bg-[#24302A] px-6 py-4 flex justify-between items-center text-white border-b border-[#2D3E35]">
+              <div>
+                <p class="text-[0.6rem] font-bold tracking-[0.2em] uppercase text-[#8FA89B]">Global Headquarters</p>
+                <h3 class="contact-heading text-lg mt-0.5">Paris Central — 42 Rue du Faubourg Saint-Honoré</h3>
+              </div>
+              <span class="text-xs font-mono text-emerald-400">● LIVE FEED</span>
+            </div>
+            <div class="relative w-full flex-1 bg-slate-100 dark:bg-[#111814]">
+              <iframe
+                title="Paris Headquarters Map"
+                class="w-full h-full border-0 grayscale contrast-125 dark:invert dark:hue-rotate-180"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=2.315%2C48.868%2C2.325%2C48.874&amp;layer=mapnik&amp;marker=48.8711%2C2.3201"
+                loading="lazy">
+              </iframe>
             </div>
           </div>
         </div>
 
         <!-- Office Hours -->
         <div class="reveal-on-scroll delay-2">
-          <div class="border border-slate-200 dark:border-[#2D3E35] p-8 bg-white dark:bg-[#18221D]">
-            <h3 class="contact-heading text-xl">Office Hours</h3>
-            <div class="space-y-3 mt-4 text-slate-600 dark:text-slate-300">
-              <div class="flex justify-between text-sm">
-                <span class="font-bold tracking-[0.1em] uppercase text-slate-500">Sunday - Saturday</span>
-                <span class="font-bold">24 / 7</span>
-              </div>
-              
+          <div class="border border-slate-200 dark:border-[#2D3E35] p-8 bg-white dark:bg-[#18221D] h-full flex flex-col justify-between">
+            <div>
+              <h3 class="contact-heading text-xl">Office Hours</h3>
+              <div class="space-y-3 mt-4 text-slate-600 dark:text-slate-300">
+                <div class="flex justify-between text-sm">
+                  <span class="font-bold tracking-[0.1em] uppercase text-slate-500">Sunday - Saturday</span>
+                  <span class="font-bold">24 / 7</span>
+                </div>
               </div>
             </div>
             <div class="mt-6 pt-6 border-t border-slate-200 dark:border-[#2D3E35]">
@@ -744,7 +780,7 @@
       requestAnimationFrame(raf);
 
       const hubCards = document.querySelectorAll('.hub-card');
-      
+
       const hubObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -763,7 +799,7 @@
       hubCards.forEach(card => hubObserver.observe(card));
 
       const revealElements = document.querySelectorAll('.reveal-on-scroll');
-      
+
       const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -786,10 +822,10 @@
       if (form) {
         form.addEventListener('submit', function(e) {
           e.preventDefault();
-          
+
           let isValid = true;
           const inputs = form.querySelectorAll('.market-input, .market-textarea');
-          
+
           inputs.forEach(input => {
             const errorMsg = input.parentElement.querySelector('.error-message');
             if (input.hasAttribute('required') && !input.value.trim()) {
@@ -833,12 +869,12 @@
             btnText.classList.remove('hidden');
             btnLoading.classList.add('hidden');
             submitBtn.disabled = false;
-            
+
             form.classList.add('hidden');
             successMessage.classList.remove('hidden');
-            
+
             showToast('✓ Secure inquiry transmitted successfully!');
-            
+
             setTimeout(() => {
               form.reset();
               form.classList.remove('hidden');
@@ -868,16 +904,16 @@
           container.className = 'fixed bottom-8 right-8 z-50 flex flex-col gap-3 pointer-events-none';
           document.body.appendChild(container);
         }
-        
+
         const toast = document.createElement('div');
         toast.className = 'market-toast pointer-events-auto transform translate-y-4 opacity-0 transition-all duration-300';
         toast.textContent = message;
         container.appendChild(toast);
-        
+
         requestAnimationFrame(() => {
           toast.classList.remove('translate-y-4', 'opacity-0');
         });
-        
+
         setTimeout(() => {
           toast.classList.add('translate-y-4', 'opacity-0');
           setTimeout(() => toast.remove(), 400);

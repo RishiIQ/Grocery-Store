@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="assets/images/grossary-logo.png">
+  <title>Farmer Details & Registration — FreshCart</title>
+  <script>
+  (function() {
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+    const savedDir = localStorage.getItem('dir') || 'ltr';
+    document.documentElement.setAttribute('dir', savedDir);
+  })();
+</script>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'sage-accent': '#6A8071',
+            'sage-dark': '#24302A',
+            'cream-bg': '#F7F6F2',
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+</head>
+<body class="bg-cream-bg dark:bg-[#111814] text-slate-900 dark:text-slate-100 antialiased">
+
+  <main style="padding-top: 70px;">
+    <!-- Hero Section -->
+    <section class="bg-[#24302A] py-20 px-4 sm:px-6 lg:px-8 text-white relative overflow-hidden">
+      <div class="max-w-7xl mx-auto relative z-10 text-center">
+        <p class="text-xs font-bold tracking-[0.2em] uppercase text-[#6A8071]">Regenerative Cooperative</p>
+        <h1 class="text-4xl sm:text-5xl font-extrabold uppercase mt-2">Farmer Partner Portal</h1>
+        <p class="text-slate-300 mt-4 max-w-xl mx-auto text-sm leading-relaxed">
+          Register your agricultural cooperative or submit harvest provenance details directly into our supply chain network.
+        </p>
+      </div>
+    </section>
+
+    <!-- Form Section -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+      <div class="bg-white dark:bg-[#18221D] border border-slate-200 dark:border-[#2D3E35] p-8 sm:p-12">
+        <h2 class="text-2xl font-extrabold uppercase tracking-tight">Submit Farmer & Harvest Details</h2>
+        <p class="text-xs font-semibold tracking-wider uppercase text-slate-500 mt-1">Direct-to-Table Cooperative Registration</p>
+
+        <form id="farmerForm" class="space-y-6 mt-8">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Farmer / Cooperative Name</label>
+              <input type="text" id="farmerName" placeholder="LOIRE VALLEY FARMS" required class="w-full p-4 bg-transparent border border-slate-200 dark:border-[#2D3E35] text-xs uppercase font-medium outline-none focus:border-[#6A8071]">
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Primary Crop / Produce</label>
+              <input type="text" id="cropType" placeholder="HEIRLOOM CARROTS & AVOCADOS" required class="w-full p-4 bg-transparent border border-slate-200 dark:border-[#2D3E35] text-xs uppercase font-medium outline-none focus:border-[#6A8071]">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Farm Location / Region</label>
+              <input type="text" id="location" placeholder="MICHOACÁN VALLEY, MX" required class="w-full p-4 bg-transparent border border-slate-200 dark:border-[#2D3E35] text-xs uppercase font-medium outline-none focus:border-[#6A8071]">
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Contact Email</label>
+              <input type="email" id="farmerEmail" placeholder="PARTNER@EXAMPLE.COM" required class="w-full p-4 bg-transparent border border-slate-200 dark:border-[#2D3E35] text-xs uppercase font-medium outline-none focus:border-[#6A8071]">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Soil & Regenerative Practices</label>
+            <textarea id="practices" placeholder="DESCRIBE NO-TILL OR COVER CROPPING METHODS..." required class="w-full p-4 bg-transparent border border-slate-200 dark:border-[#2D3E35] text-xs uppercase font-medium outline-none focus:border-[#6A8071] min-h-[120px]"></textarea>
+          </div>
+
+          <button type="submit" class="w-full py-4 bg-[#6A8071] text-white text-xs font-bold uppercase tracking-widest hover:bg-[#576B5D] transition-all">
+            Submit Cooperative Credentials →
+          </button>
+        </form>
+
+        <div id="farmerSuccess" class="hidden mt-6 p-6 border border-[#6A8071] bg-[#6A8071]/10 text-center">
+          <p class="text-xl font-bold text-[#6A8071]">✓ Credentials Received</p>
+          <p class="text-xs text-slate-400 mt-1 uppercase tracking-wider">Your farm profile has been queued for our agricultural audit team.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/db.js"></script>
+  <script src="js/layout.js"></script>
+  <script>
+    document.getElementById('farmerForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      this.classList.add('hidden');
+      document.getElementById('farmerSuccess').classList.remove('hidden');
+    });
+  </script>
+</body>
+</html>

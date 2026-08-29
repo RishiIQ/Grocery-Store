@@ -21,7 +21,7 @@
       }
     }
   </script>
-  
+
   <script>
   (function() {
     const savedTheme = localStorage.getItem('theme');
@@ -35,10 +35,10 @@
     document.documentElement.setAttribute('dir', savedDir);
   })();
 </script>
-  
+
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-  
+
   <!-- Lenis Smooth Slow Scroll Library -->
   <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 
@@ -155,14 +155,14 @@
       padding: 5px 12px;
       z-index: 10;
     }
-    
+
     .section-title {
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: -0.02em;
       line-height: 1.05;
     }
-    
+
     .section-subtitle {
       text-transform: uppercase;
       font-size: 0.7rem;
@@ -170,7 +170,7 @@
       color: #6A8071;
       font-weight: 700;
     }
-    
+
     .category-pill {
       text-transform: uppercase;
       font-size: 0.65rem;
@@ -230,21 +230,21 @@
         <span class="w-2 h-2 bg-white animate-pulse"></span>
         <span class="text-xs font-bold tracking-[0.2em] uppercase">🌿 Certified Organic Harvest</span>
       </div>
-      
+
       <h1 class="text-white text-4xl sm:text-6xl lg:text-7xl font-extrabold uppercase leading-[0.95] tracking-[-0.02em]">
         Pure Provisions<br>
         <span class="text-[#8FA89B]">Direct To Door</span>
       </h1>
-      
+
       <p class="text-slate-200 text-sm sm:text-base max-w-xl mx-auto font-light leading-relaxed">
         Regenerative agriculture. Zero-fluctuation cold-chain logistics. Handpicked harvest delivered with absolute botanical integrity.
       </p>
-      
+
       <div class="flex flex-col sm:flex-row gap-4 justify-center pt-4">
         <a href="shop.html" class="inline-flex items-center justify-center px-8 py-4 bg-[#6A8071] text-white text-xs font-bold tracking-[0.15em] uppercase hover:bg-[#576B5D] transition-all">
           Explore Market →
         </a>
-        <a href="services.html" class="inline-flex items-center justify-center px-8 py-4 border-2 border-white/80 text-white text-xs font-bold tracking-[0.15em] uppercase hover:bg-white hover:text-slate-900 transition-all">
+        <a href="farmer-details.html" class="inline-flex items-center justify-center px-8 py-4 border-2 border-white/80 text-white text-xs font-bold tracking-[0.15em] uppercase hover:bg-white hover:text-slate-900 transition-all">
           Our Farmers
         </a>
       </div>
@@ -367,7 +367,7 @@
       function renderGrid(cat) {
         if (!standardGrid) return;
         const filtered = cat === 'all' ? products : products.filter(p => p.category === cat);
-        
+
         standardGrid.innerHTML = filtered.slice(0, 8).map(p => `
           <div class="motion-card p-5">
             <div class="relative aspect-square mb-4 overflow-hidden">

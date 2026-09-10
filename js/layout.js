@@ -44,24 +44,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
           <button id="nixonRTLToggle" class="nixon-action-btn" title="Toggle Text Direction" aria-label="Toggle text direction">
             <!-- Custom LTR Icon -->
-            <svg class="nixon-icon-ltr" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-              <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2">
-                <path stroke-dasharray="15" stroke-dashoffset="15" d="M4 5H17"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.2s" values="15;0"/></path>
-                <path stroke-dasharray="12" stroke-dashoffset="12" d="M4 10H14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.2s" dur="0.2s" values="12;0"/></path>
-                <path stroke-dasharray="18" stroke-dashoffset="18" d="M4 15H20"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.4s" dur="0.2s" values="18;0"/></path>
-                <path stroke-dasharray="15" stroke-dashoffset="15" d="M4 20H17"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="15;0"/></path>
-              </g>
+            <svg class="nixon-icon-ltr" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 4.75C6 4.33579 6.33579 4 6.75 4H14.25C14.6642 4 15 4.33579 15 4.75C15 5.16421 14.6642 5.5 14.25 5.5H6.75C6.33579 5.5 6 5.16421 6 4.75ZM6.75 9C6.33579 9 6 9.33579 6 9.75C6 10.1642 6.33579 10.5 6.75 10.5H17.25C17.6642 10.5 18 10.1642 18 9.75C18 9.33579 17.6642 9 17.25 9H6.75ZM6.75 14C6.33579 14 6 14.3358 6 14.75C6 15.1642 6.33579 15.5 6.75 15.5H12.25C12.6642 15.5 13 15.1642 13 14.75C13 14.3358 12.6642 14 12.25 14H6.75ZM3.46967 11.7803C3.76256 12.0732 4.23744 12.0732 4.53033 11.7803C4.82322 11.4874 4.82322 11.0126 4.53033 10.7197L3.56066 9.75L4.53033 8.78033C4.82322 8.48744 4.82322 8.01256 4.53033 7.71967C4.23744 7.42678 3.76256 7.42678 3.46967 7.71967L1.96967 9.21967C1.67678 9.51256 1.67678 9.98744 1.96967 10.2803L3.46967 11.7803Z" fill="currentColor"/>
             </svg>
             <!-- Custom RTL Icon -->
-            <svg class="nixon-icon-rtl" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="display:none;">
-              <g transform="translate(24 0) scale(-1 1)">
-                <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2">
-                  <path stroke-dasharray="15" stroke-dashoffset="15" d="M4 5H17"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.2s" values="15;0"/></path>
-                  <path stroke-dasharray="12" stroke-dashoffset="12" d="M4 10H14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.2s" dur="0.2s" values="12;0"/></path>
-                  <path stroke-dasharray="18" stroke-dashoffset="18" d="M4 15H20"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.4s" dur="0.2s" values="18;0"/></path>
-                  <path stroke-dasharray="15" stroke-dashoffset="15" d="M4 20H17"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="15;0"/></path>
-                </g>
-              </g>
+            <svg class="nixon-icon-rtl" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:none;">
+              <path d="M15 16H6.5C5.94772 16 5.5 16.4477 5.5 17C5.5 17.5128 5.88604 17.9355 6.38338 17.9933L6.5 18H15C15.5523 18 16 17.5523 16 17C16 16.4872 15.614 16.0645 15.1166 16.0067L15 16H6.5H15ZM21.7071 11.2929L19.7071 9.29289C19.3166 8.90237 18.6834 8.90237 18.2929 9.29289C17.9324 9.65338 17.9047 10.2206 18.2097 10.6129L18.2929 10.7071L19.5858 12L18.2929 13.2929C17.9024 13.6834 17.9024 14.3166 18.2929 14.7071C18.6534 15.0676 19.2206 15.0953 19.6129 14.7903L19.7071 14.7071L21.7071 12.7071C22.0676 12.3466 22.0953 11.7794 21.7903 11.3871L21.7071 11.2929L19.7071 9.29289L21.7071 11.2929ZM15.0001 11L3.50009 10.9989C2.94781 10.9989 2.5 11.4465 2.5 11.9988C2.5 12.5117 2.88596 12.9344 3.38329 12.9922L3.49991 12.9989L14.9999 13C15.5522 13.0001 16 12.5524 16 12.0001C16 11.4873 15.614 11.0646 15.1167 11.0067L15.0001 11L3.50009 10.9989L15.0001 11ZM15 6H6.5C5.94772 6 5.5 6.44772 5.5 7C5.5 7.51284 5.88604 7.93551 6.38338 7.99327L6.5 8H15C15.5523 8 16 7.55228 16 7C16 6.48716 15.614 6.06449 15.1166 6.00673L15 6H6.5H15Z" fill="currentColor"/>
             </svg>
           </button>
 
@@ -84,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
               </div>
             ` : `
-              <a href="login.html" class="nixon-auth-btn">Sign In</a>
+              <a href="login.html" class="nixon-auth-btn" style="background-color: #35ea11;">Sign In</a>
             `}
           </div>
         </div>
@@ -100,28 +88,30 @@ document.addEventListener('DOMContentLoaded', () => {
     </header>
   `;
 
-  // ============================================
+ // ============================================
   // SAGE-TONE FOOTER WITH BRAND LOGO & NAME
   // ============================================
   const footerHTML = `
     <footer class="nixon-footer" role="contentinfo">
       <div class="nixon-footer-inner">
         
-        <!-- Brand Column -->
-        <div class="nixon-footer-brand">
-          <a href="index.html" class="brand-logo">
-            <div class="logo-icon">
-              <img src="assets/images/grossary-logo.png" alt="FreshCart Logo">
-            </div>
-            <span class="brand-name">Fresh<span class="highlight">Cart</span></span>
-          </a>
-          <p class="brand-description">
-            Certified organic provisions and zero-fluctuation cold-chain telemetry delivered in 15 minutes.
-          </p>
-        </div>
-
-        <!-- Links Grid -->
+        <!-- Footer Grid Container -->
         <div class="nixon-footer-grid">
+          
+          <!-- Brand Column -->
+          <div class="nixon-footer-brand">
+            <a href="index.html" class="brand-logo">
+              <div class="logo-icon">
+                <img src="assets/images/grossary-logo.png" alt="FreshCart Logo">
+              </div>
+              <span class="brand-name">Fresh<span class="highlight">Cart</span></span>
+            </a>
+            <p class="brand-description">
+              Certified organic provisions and zero-fluctuation cold-chain telemetry delivered in 15 minutes.
+            </p>
+          </div>
+
+          <!-- Company Links -->
           <div>
             <h4>Company</h4>
             <ul>
@@ -130,6 +120,8 @@ document.addEventListener('DOMContentLoaded', () => {
               <li><a href="pricing.html">Pricing</a></li>
             </ul>
           </div>
+
+          <!-- Resources Links -->
           <div>
             <h4>Resources</h4>
             <ul>
@@ -138,27 +130,44 @@ document.addEventListener('DOMContentLoaded', () => {
               <li><a href="contact.html">Support</a></li>
             </ul>
           </div>
-          <div>
-            <h4>Legal</h4>
-            <ul>
-              <li><a href="privacy.html">Privacy</a></li>
-              <li><a href="terms.html">Terms</a></li>
-              <li><a href="cookies.html">Cookies</a></li>
+
+          <!-- Contact & Address Details -->
+          <div class="nixon-footer-contact">
+            <h4>Headquarters</h4>
+            <ul class="contact-details-list">
+              <li><span>124 Botanical Way, Suite 400</span></li>
+              <li><span>Coimbatore, Tamil Nadu 641001</span></li>
+              <li><a href="tel:+914225550199">+91 (422) 555-0199</a></li>
+              <li><a href="mailto:support@freshcart.example">support@freshcart.example</a></li>
             </ul>
           </div>
-          <div>
+
+          <!-- Social Icons Column -->
+          <div class="nixon-footer-social-col">
             <h4>Connect</h4>
-            <ul>
-              <li><a href="https://x.com/">Twitter</a></li>
-              <li><a href="https://in.linkedin.com/">LinkedIn</a></li>
-              <li><a href="https://github.com/">GitHub</a></li>
-            </ul>
+            <div class="nixon-social-icons">
+              <a href="https://x.com/" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              </a>
+              <a href="https://in.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              </a>
+              <a href="https://github.com/" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              </a>
+            </div>
           </div>
+
         </div>
 
         <!-- Footer Bottom -->
         <div class="nixon-footer-bottom">
           <p>© 2026 FreshCart Marketplace. All rights reserved.</p>
+          <div class="footer-legal">
+            <a href="privacy.html">Privacy</a>
+            <a href="terms.html">Terms</a>
+            <a href="cookies.html">Cookies</a>
+          </div>
         </div>
 
       </div>

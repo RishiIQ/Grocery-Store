@@ -63,15 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
           <div id="nixonAuthContainer">
             ${isLoggedIn ? `
-              <div class="auth-dropdown" id="authDropdown">
-                <button class="nixon-auth-btn dashboard-btn" id="authUserBtn" type="button" aria-expanded="false">
-                  ${userSession.name || 'Account'}
-                </button>
-                <div class="auth-dropdown-menu" id="authDropdownMenu">
-                  <a href="account.html">Dashboard</a>
-                  <button id="signOutBtn" class="auth-dropdown-signout">Sign Out</button>
-                </div>
-              </div>
+              <a href="login.html" class="nixon-auth-btn" style="background-color: #35ea11;">Sign In</a>
             ` : `
               <a href="login.html" class="nixon-auth-btn" style="background-color: #35ea11;">Sign In</a>
             `}

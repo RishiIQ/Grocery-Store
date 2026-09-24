@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <a href="blog.html" class="nixon-nav-link ${currentPath === 'blog.html' || currentPath === 'blog-detail.html' ? 'active' : ''}">Journal</a>
           <a href="pricing.html" class="nixon-nav-link ${currentPath === 'pricing.html' ? 'active' : ''}">Pricing</a>
           <a href="contact.html" class="nixon-nav-link ${currentPath === 'contact.html' ? 'active' : ''}">Contact</a>
+          <a href="account.html" class="nixon-nav-link ${currentPath === 'account.html' ? 'active' : ''}">Dashboard</a>
         </nav>
 
         <!-- Right Actions -->
